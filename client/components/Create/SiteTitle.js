@@ -1,29 +1,34 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateAboutText } from "../../store/create";
+import { updateTitleData } from "../../store/auth";
 import { useEffect } from "react";
-export default function SiteTitle() {
+export default function SiteTitle(props) {
   let dispatch = useDispatch();
 
-  let text = "";
+  let title = "";
 
   let changeHandler = (evt) => {
     evt.preventDefault();
-    text = evt.target.value;
+    title = evt.target.value;
   };
 
   let submitHandler = (evt) => {
     evt.preventDefault();
-    console.log("text", text);
+    console.log("text", title);
 
-    dispatch(updateAboutText(props.user.id, { text }));
-    text = "";
+    dispatch(updateTitleData(props.user.id, { title }));
+    title = "";
   };
   return (
     <div>
-      <form className="space-x-5">
+      <form className="space-x-5" onSubmit={submitHandler}>
         <label htmlFor="title">Site Title</label>
-        <input className="border-2" name="title" type="text"></input>
+        <input
+          className="border-2"
+          name="title"
+          type="text"
+          onChange={changeHandler}
+        ></input>
         <button type="submit">Submit</button>
       </form>
     </div>

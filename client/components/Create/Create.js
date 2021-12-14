@@ -1,5 +1,6 @@
 import React from "react";
 import me from "../../store/auth";
+import SiteTitle from "./SiteTitle";
 import About from "./About";
 import CV from "./CV";
 import Contact from "./Contact";
@@ -17,7 +18,7 @@ export const Create = () => {
       </div>
       <div className="flex row-start-1 flex-col row-span-6 col-start-3 col-span-10">
         <section className="m-5 h-2/6">
-          <SiteTitle />
+          <SiteTitle user={user} />
         </section>
         <section className="m-5 h-2/6">
           <form className="space-x-5">

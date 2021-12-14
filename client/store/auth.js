@@ -7,12 +7,15 @@ const TOKEN = "token";
  * ACTION TYPES
  */
 const SET_AUTH = "SET_AUTH";
-
+const TITLE = "TITLE";
 /**
  * ACTION CREATORS
  */
 const setAuth = (auth) => ({ type: SET_AUTH, auth });
 
+const updateTitle = (titleData) => {
+  return { type: TITLE, titleData };
+};
 /**
  * THUNK CREATORS
  */
@@ -46,6 +49,17 @@ export const authenticate =
     }
   };
 
+export const updateTitleData = (userId, titleData) =>
+  async function (dispatch) {
+    try {
+      console.log("title store", titleData);
+      let { data } = await axios.put(`/auth/${userId}`, titleData);
+      dispatch(updateTitle(data));
+    } catch (err) {
+      return err;
+    }
+  };
+
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);
   history.push("/login");
@@ -62,6 +76,11 @@ export default function (state = {}, action) {
   switch (action.type) {
     case SET_AUTH:
       return action.auth;
+    case TITLE: {
+      let newState = state;
+      newState.username = action.titleData;
+      return newState;
+    }
     default:
       return state;
   }
