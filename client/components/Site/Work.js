@@ -12,7 +12,7 @@ export const Work = (props) => {
     }
     fetchData();
   }, []);
-  console.log("work props", user);
+
   return (
     <div>
       <Navbar data={props} user={user} />
