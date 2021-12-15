@@ -4,15 +4,15 @@ import { fetchUserData } from "../../store/user";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 export const Work = (props) => {
+  let user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  let user = {};
-
   useEffect(() => {
-    console.log("props.match.params.username", props.match.params.username);
-    user = dispatch(fetchUserData(props.match.params.username));
-    console.log(user);
+    async function fetchData() {
+      user = await dispatch(fetchUserData(props.match.params.username));
+    }
+    fetchData();
   }, []);
-
+  console.log("work props", user);
   return (
     <div>
       <Navbar data={props} user={user} />
