@@ -34,7 +34,6 @@ const CV = (props) => {
   return (
     <div>
       <form className="space-x-5" onSubmit={submitHandler}>
-        <label>C/V</label>
         <label htmlFor="header">Header</label>
         <input
           className="border-2"

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { authenticate } from "../store";
-
+import Navbar from "./Navbar";
 /**
  * COMPONENT
  */
@@ -9,43 +9,46 @@ const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
   console.log(displayName);
   return (
-    <form onSubmit={handleSubmit} name={name}>
-      <div>
-        <label htmlFor="username">
-          <small>Username</small>
-        </label>
-        <input name="username" type="text" />
-      </div>
-      <div>
-        <label htmlFor="password">
-          <small>Password</small>
-        </label>
-        <input name="password" type="password" />
-      </div>
-      {displayName === "Sign Up" ? (
+    <>
+      <Navbar />
+      <form onSubmit={handleSubmit} name={name}>
         <div>
-          <label htmlFor="email">
-            <small>Email</small>
+          <label htmlFor="username">
+            <small>Username</small>
           </label>
-          <input name="email" type="text" />
-          <label htmlFor="firstName">
-            <small>First Name</small>
-          </label>
-          <input name="firstName" type="text" />
-
-          <div>
-            <label htmlFor="lastName">
-              <small>Last Name</small>
-            </label>
-            <input name="lastName" type="text" />
-          </div>
+          <input name="username" type="text" />
         </div>
-      ) : null}
-      <div>
-        <button type="submit">{displayName}</button>
-        {error && error.response && <div> {error.response.data} </div>}
-      </div>
-    </form>
+        <div>
+          <label htmlFor="password">
+            <small>Password</small>
+          </label>
+          <input name="password" type="password" />
+        </div>
+        {displayName === "Sign Up" ? (
+          <div>
+            <label htmlFor="email">
+              <small>Email</small>
+            </label>
+            <input name="email" type="text" />
+            <label htmlFor="firstName">
+              <small>First Name</small>
+            </label>
+            <input name="firstName" type="text" />
+
+            <div>
+              <label htmlFor="lastName">
+                <small>Last Name</small>
+              </label>
+              <input name="lastName" type="text" />
+            </div>
+          </div>
+        ) : null}
+        <div>
+          <button type="submit">{displayName}</button>
+          {error && error.response && <div> {error.response.data} </div>}
+        </div>
+      </form>
+    </>
   );
 };
 

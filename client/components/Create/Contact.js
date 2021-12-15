@@ -29,7 +29,6 @@ export default function Contact(props) {
   return (
     <div>
       <form className="space-x-5" onSubmit={submitHandler}>
-        <label>Contact</label>
         <label htmlFor="text">Text</label>
         <input
           className="border-2"

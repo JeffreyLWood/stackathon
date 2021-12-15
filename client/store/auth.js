@@ -8,6 +8,7 @@ const TOKEN = "token";
  */
 const SET_AUTH = "SET_AUTH";
 const TITLE = "TITLE";
+
 /**
  * ACTION CREATORS
  */

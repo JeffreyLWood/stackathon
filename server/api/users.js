@@ -71,3 +71,28 @@ router.post("/:userId/contact", async (req, res, next) => {
     next(err);
   }
 });
+
+// Get User Data
+router.get("/:username", async (req, res, next) => {
+  try {
+    let allData = await User.findOne({
+      where: { username: req.params.username },
+      include: { all: true, nested: true },
+    });
+    let userData = {
+      id: allData.dataValues.id,
+      userName: allData.dataValues.username,
+      email: allData.dataValues.email,
+      firstName: allData.dataValues.firstName,
+      lastName: allData.dataValues.lastName,
+      about: allData.dataValues.about,
+      contact: allData.dataValues.contact,
+      cv: allData.dataValues.cv,
+      works: allData.dataValues.works,
+    };
+    console.log("USERDATA", userData);
+    res.status(200).send(userData);
+  } catch (err) {
+    next(err);
+  }
+});

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-
+import Navbar from "./Navbar";
 /**
  * COMPONENT
  */
@@ -9,6 +9,8 @@ export const Home = (props) => {
   console.log(props);
   return (
     <div>
+      <Navbar />
+
       <h3>Welcome, {username}</h3>
     </div>
   );

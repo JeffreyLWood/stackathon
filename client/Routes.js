@@ -6,6 +6,11 @@ import Home from "./components/Home";
 import { me } from "./store";
 import { Create } from "./components/Create/Create";
 
+import { About } from "./components/Site/About";
+import { Work } from "./components/Site/Work";
+import { Contact } from "./components/Site/Contact";
+import { CV } from "./components/Site/CV";
+
 /**
  * COMPONENT
  */
@@ -16,20 +21,25 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
-    console.log("this.props routes", this.props);
+    // console.log("this.props routes", this.props);
     return (
       <div>
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
-            {/* <Redirect to="/home" /> */}
-            <Route exact path="/create" component={Create} />
+            <Route exact path="/" component={Create} />
+            <Route path="/:username" component={Work} />
           </Switch>
         ) : (
           <Switch>
             <Route path="/" exact component={Login} />
-            <Route path="/login" component={Login} />
+            <Route exact path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route exact path="/:username" component={Work} data={this.props} />
+            <Route path="/:username/work" component={Work} />
+            <Route exact path="/:username/about" component={About} />
+            <Route path="/:username/cv" component={CV} />
+            <Route path="/:username/contact" component={Contact} />
           </Switch>
         )}
       </div>

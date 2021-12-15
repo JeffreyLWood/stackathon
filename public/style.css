@@ -544,12 +544,28 @@ Ensure the default browser behavior of the `hidden` attribute.
   grid-column-start: 3;
 }
 
-.row-span-6 {
-  grid-row: span 6 / span 6;
+.row-span-1 {
+  grid-row: span 1 / span 1;
 }
 
 .row-start-1 {
   grid-row-start: 1;
+}
+
+.row-start-2 {
+  grid-row-start: 2;
+}
+
+.row-start-3 {
+  grid-row-start: 3;
+}
+
+.row-start-4 {
+  grid-row-start: 4;
+}
+
+.row-start-5 {
+  grid-row-start: 5;
 }
 
 .m-5 {
@@ -588,8 +604,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 33.333333%;
 }
 
+.h-1\/6 {
+  height: 16.666667%;
+}
+
 .w-3\/6 {
   width: 50%;
+}
+
+.w-full {
+  width: 100%;
 }
 
 .shrink {
@@ -612,12 +636,20 @@ Ensure the default browser behavior of the `hidden` attribute.
   grid-template-rows: repeat(6, minmax(0, 1fr));
 }
 
+.flex-row {
+  flex-direction: row;
+}
+
 .flex-col {
   flex-direction: column;
 }
 
-.justify-center {
-  justify-content: center;
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-between {
+  justify-content: space-between;
 }
 
 .space-x-5 > :not([hidden]) ~ :not([hidden]) {
@@ -626,12 +658,35 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-left: calc(1.25rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
+.space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.rounded-md {
+  border-radius: 0.375rem;
+}
+
 .border-2 {
   border-width: 2px;
 }
 
 .border {
   border-width: 1px;
+}
+
+.border-black {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+}
+
+.p-5 {
+  padding: 1.25rem;
+}
+
+.p-1 {
+  padding: 0.25rem;
 }
 
 .uppercase {

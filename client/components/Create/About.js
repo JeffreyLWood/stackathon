@@ -24,7 +24,6 @@ const About = (props) => {
   return (
     <div>
       <form className="space-x-5" onSubmit={submitHandler}>
-        <label htmlFor="about">About</label>
         <input
           className="border-2 w-3/6"
           name="about"
