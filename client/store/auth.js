@@ -28,6 +28,7 @@ export const me = () => async (dispatch) => {
         authorization: token,
       },
     });
+    history.push("/home");
     return dispatch(setAuth(res.data));
   }
 };
