@@ -16,7 +16,16 @@ router.post("/upload", async (req, res) => {
   }
 });
 
-router.get("/images/", async (req, res) => {});
+router.get("/images", async (req, res) => {
+  const { resources } = await cloudinary.search
+    .expression("folder:stackathonImgs")
+    .sort_by("public_id", "desc")
+    .max_results(30)
+    .execute();
+  console.log("resources", resources);
+  const publicIds = resources.map((file) => file.public_id);
+  res.send(publicIds);
+});
 
 router.use((req, res, next) => {
   const error = new Error("Not Found");
