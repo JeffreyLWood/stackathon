@@ -5,7 +5,7 @@ import { fetchUserData } from "../../store/user";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 export const Contact = (props) => {
-  let user = useSelector((state) => state.user);
+  let user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
     async function fetchData() {

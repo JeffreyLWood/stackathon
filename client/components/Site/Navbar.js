@@ -5,22 +5,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 export const Navbar = (props) => {
   let siteTitle = `${props.user.firstName} ${props.user.lastName}`;
+  console.log("navbar", props);
   return (
     <nav className="flex flex-row justify-between h-1/6 p-5">
-      <div className="uppercase font-bold tracking-wide text-3xl text-light">
-        {siteTitle}
+      <div className="siteTitle">
+        <Link to={`/${props.user.username}`}>{siteTitle}</Link>
       </div>
       <div className="flex flex-row space-x-2">
-        <Link to={`/${props.user.userName}/work`}>
+        <Link to={`/${props.user.username}/work`}>
           <div>Work</div>
         </Link>
-        <Link to={`/${props.user.userName}/about`}>
+        <Link to={`/${props.user.username}/about`}>
           <div>About</div>
         </Link>
-        <Link to={`/${props.user.userName}/cv`}>
+        <Link to={`/${props.user.username}/cv`}>
           <div>CV</div>
         </Link>
-        <Link to={`/${props.user.userName}/contact`}>
+        <Link to={`/${props.user.username}/contact`}>
           <div>Contact</div>
         </Link>
       </div>
