@@ -21,29 +21,29 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
-    // console.log("this.props routes", this.props);
+
     return (
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path="/home" component={Create} />
             <Route exact path="/" component={Create} />
-            <Route path="/:username" component={Work} />
-            <Route path="/:username/work" component={Work} />
+            <Route exact path="/home" component={Create} />
+            <Route exact path="/:username" component={Work} data={this.props} />
+            <Route exact path="/:username/work" component={Work} />
             <Route exact path="/:username/about" component={About} />
-            <Route path="/:username/cv" component={CV} />
-            <Route path="/:username/contact" component={Contact} />
+            <Route exact path="/:username/cv" component={CV} />
+            <Route exact path="/:username/contact" component={Contact} />
           </Switch>
         ) : (
           <Switch>
-            <Route path="/" exact component={Login} />
+            <Route exact path="/" component={Login} />
             <Route exact path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
+            <Route exact path="/signup" component={Signup} />
             <Route exact path="/:username" component={Work} data={this.props} />
-            <Route path="/:username/work" component={Work} />
+            <Route exact path="/:username/work" component={Work} />
             <Route exact path="/:username/about" component={About} />
-            <Route path="/:username/cv" component={CV} />
-            <Route path="/:username/contact" component={Contact} />
+            <Route exact path="/:username/cv" component={CV} />
+            <Route exact path="/:username/contact" component={Contact} />
           </Switch>
         )}
       </div>

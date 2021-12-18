@@ -28,7 +28,7 @@ export const me = () => async (dispatch) => {
         authorization: token,
       },
     });
-    history.push("/home");
+    history.push("/");
     return dispatch(setAuth(res.data));
   }
 };

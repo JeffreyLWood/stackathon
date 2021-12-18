@@ -20,7 +20,6 @@ router.get("/", async (req, res, next) => {
 
 router.post("/:userId/about", async (req, res, next) => {
   try {
-    console.log("req.body", req.body);
     await About.create({
       text: req.body.text,
       userId: req.params.userId,
@@ -36,7 +35,6 @@ router.post("/:userId/about", async (req, res, next) => {
 
 router.post("/:userId/cv", async (req, res, next) => {
   try {
-    console.log("req.body", req.body);
     await CV.create({
       header: req.body.header,
       title: req.body.title,
@@ -56,7 +54,6 @@ router.post("/:userId/cv", async (req, res, next) => {
 
 router.post("/:userId/contact", async (req, res, next) => {
   try {
-    console.log("req.body", req.body);
     await Contact.create({
       text: req.body.text,
       email: req.body.email,
@@ -90,7 +87,7 @@ router.get("/:username", async (req, res, next) => {
       cv: allData.dataValues.cv,
       works: allData.dataValues.works,
     };
-    console.log("USERDATA", userData);
+
     res.status(200).send(userData);
   } catch (err) {
     next(err);

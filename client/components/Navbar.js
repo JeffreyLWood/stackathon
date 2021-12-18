@@ -3,15 +3,16 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
 import Create from "./Create/Create";
-const Navbar = ({ handleClick, isLoggedIn, username }) => (
+const Navbar = ({ handleClick, isLoggedIn, user }) => (
   <div className="flex">
     {isLoggedIn ? (
       <div className="p-5 flex w-full justify-between space-x-5">
         {/* The navbar will show these links after you log in */}
+        <div>
+          {user.firstName} {user.lastName}
+        </div>
         <div className="flex space-x-5">
-          <Link to="/create">Edit</Link>
-          <Link to={`/${username}`}>
-            {console.log(this)}
+          <Link to={`/${user.username}`}>
             <button
               type="button"
               className="p-1 border-2 rounded-md border-black"
@@ -19,9 +20,7 @@ const Navbar = ({ handleClick, isLoggedIn, username }) => (
               View Site
             </button>
           </Link>
-        </div>
-        <div>
-          <a href="#" onClick={handleClick}>
+          <a href="#" className="p-1" onClick={handleClick}>
             Logout
           </a>
         </div>

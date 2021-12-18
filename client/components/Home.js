@@ -6,7 +6,7 @@ import Navbar from "./Navbar";
  */
 export const Home = (props) => {
   const { username } = props;
-  console.log(props);
+
   return (
     <div>
       <Navbar />

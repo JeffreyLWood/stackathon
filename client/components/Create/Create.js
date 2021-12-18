@@ -10,6 +10,9 @@ import { useSelector, useDispatch } from "react-redux";
 import Navbar from "../Navbar";
 import { Image } from "cloudinary-react";
 export const Create = () => {
+  const user = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
   const [imageIds, setImageIds] = useState();
 
   const loadImages = async () => {
@@ -17,7 +20,6 @@ export const Create = () => {
       const res = await fetch("/api/images");
       const data = await res.json();
       setImageIds(data);
-      console.log("data", data);
     } catch (error) {
       console.log(error);
     }
@@ -27,13 +29,9 @@ export const Create = () => {
     loadImages();
   }, []);
 
-  const user = useSelector((state) => state.auth);
-  console.log("user", user);
-  const dispatch = useDispatch();
-
   return (
     <>
-      <Navbar />
+      <Navbar user={user} />
       <div className="grid grid-cols-12 grid-rows-6 h-screen">
         <div className="flex justify-end row-start-1 row-span-1 col-start-1 col-span-2">
           <section className="m-5 h-2/6">Site Title</section>

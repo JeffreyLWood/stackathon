@@ -4,7 +4,7 @@ import { updateTitleData } from "../../store/auth";
 import { useEffect } from "react";
 export default function SiteTitle(props) {
   let dispatch = useDispatch();
-  console.log("site title props", props.user.username);
+
   let title = props.user.username;
 
   let changeHandler = (evt) => {

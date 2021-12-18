@@ -9,7 +9,7 @@ router.post("/upload", async (req, res) => {
     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
       upload_preset: "stackathon",
     });
-    console.log("backend", uploadedResponse);
+
     res.status(200).send();
   } catch (error) {
     console.log(error);
@@ -22,7 +22,7 @@ router.get("/images", async (req, res) => {
     .sort_by("public_id", "desc")
     .max_results(30)
     .execute();
-  console.log("resources", resources);
+
   const publicIds = resources.map((file) => file.public_id);
   res.send(publicIds);
 });

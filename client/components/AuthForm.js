@@ -6,9 +6,8 @@ import Navbar from "./Navbar";
  * COMPONENT
  */
 const AuthForm = (props) => {
-  console.log("authform", props);
   const { name, displayName, handleSubmit, error } = props;
-  console.log(displayName);
+
   return (
     <>
       <Navbar />
