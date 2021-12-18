@@ -29,6 +29,9 @@ const User = db.define("user", {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  siteTitle: {
+    type: Sequelize.STRING,
+  },
 });
 
 module.exports = User;

@@ -536,12 +536,20 @@ Ensure the default browser behavior of the `hidden` attribute.
   grid-column: span 10 / span 10;
 }
 
+.col-span-9 {
+  grid-column: span 9 / span 9;
+}
+
 .col-start-1 {
   grid-column-start: 1;
 }
 
 .col-start-3 {
   grid-column-start: 3;
+}
+
+.col-start-4 {
+  grid-column-start: 4;
 }
 
 .col-end-10 {
@@ -578,6 +586,24 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .m-5 {
   margin: 1.25rem;
+}
+
+.m-1 {
+  margin: 0.25rem;
+}
+
+.m-2 {
+  margin: 0.5rem;
+}
+
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .block {
@@ -626,6 +652,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-full {
   width: 100%;
+}
+
+.w-2\/6 {
+  width: 33.333333%;
+}
+
+.w-1\/6 {
+  width: 16.666667%;
 }
 
 .shrink {
@@ -705,13 +739,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding: 0.25rem;
 }
 
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
-
-.font-bold {
-  font-weight: 700;
+.p-2 {
+  padding: 0.5rem;
 }
 
 .uppercase {
@@ -724,10 +753,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .capitalize {
   text-transform: capitalize;
-}
-
-.tracking-wide {
-  letter-spacing: 0.025em;
 }
 
 .outline {
@@ -760,6 +785,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .siteTitle {
   font-size: x-large;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.subHeader {
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 0.1em;

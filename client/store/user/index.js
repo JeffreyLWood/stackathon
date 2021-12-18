@@ -13,6 +13,7 @@ export const fetchUserData = (username) =>
   async function (dispatch) {
     try {
       let { data } = await axios.get(`/api/users/${username}`);
+      console.log("store data", data);
       dispatch(loadUserData(data));
     } catch (err) {
       return err;
@@ -23,7 +24,8 @@ export const fetchUserData = (username) =>
 export default function (state = {}, action) {
   switch (action.type) {
     case GET_USER_DATA: {
-      return action.userData;
+      let newState = action.userData;
+      return newState;
     }
     default:
       return state;

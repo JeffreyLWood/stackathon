@@ -8,9 +8,7 @@ const Navbar = ({ handleClick, isLoggedIn, user }) => (
     {isLoggedIn ? (
       <div className="p-5 flex w-full justify-between space-x-5">
         {/* The navbar will show these links after you log in */}
-        <div className="siteTitle">
-          {user.firstName} {user.lastName}
-        </div>
+        <div className="siteTitle">{user.siteTitle}</div>
         <div className="flex space-x-5">
           <Link to={`/${user.username}`}>
             <button

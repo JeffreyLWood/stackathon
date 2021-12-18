@@ -6,17 +6,11 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 export const Contact = (props) => {
   let user = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    async function fetchData() {
-      user = await dispatch(fetchUserData(props.match.params.username));
-    }
-    fetchData();
-  }, []);
-  console.log("user", user);
-  let text = user.contact && user.contact.text;
-  let email = user.contact && user.contact.email;
-  let socialMedia = user.contact && user.contact.socialMedia;
+  let contact = useSelector((state) => state.user.contact);
+
+  let text = contact && contact.text;
+  let email = contact && contact.email;
+  let socialMedia = contact && contact.socialMedia;
   return (
     <div>
       <Navbar data={props} user={user} />

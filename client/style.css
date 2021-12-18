@@ -10,3 +10,9 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
+
+.subHeader {
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}

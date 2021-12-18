@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 export const CV = (props) => {
   let user = useSelector((state) => state.auth);
+
   const dispatch = useDispatch();
   useEffect(() => {
     async function fetchData() {

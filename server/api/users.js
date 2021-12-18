@@ -18,6 +18,19 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+//change a user's site title
+router.put("/:userId/title", async (req, res, next) => {
+  try {
+    let user = await User.findByPk(req.params.userId);
+    console.log("req.body", req.body);
+    await user.update({ siteTitle: req.body.title });
+    await user.save();
+    res.status(200).send(user);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.post("/:userId/about", async (req, res, next) => {
   try {
     await About.create({

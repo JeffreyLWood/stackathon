@@ -4,7 +4,7 @@ import axios from "axios";
 const ABOUT = "ABOUT";
 const CV = "CV";
 const CONTACT = "CONTACT";
-// const TITLE = "TITLE";
+const TITLE = "TITLE";
 
 //action creators
 const updateAbout = (aboutData) => {
@@ -19,11 +19,22 @@ const updateContact = (contactData) => {
   return { type: CONTACT, contactData };
 };
 
-// const updateTitle = (titleData) => {
-//   return { type: TITLE, titleData };
-// };
+const updateTitle = (titleData) => {
+  return { type: TITLE, titleData };
+};
 
 //thunk creators
+export const updateTitleData = (userId, titleData) =>
+  async function (dispatch) {
+    try {
+      console.log("title store", titleData);
+      let { data } = await axios.put(`/api/users/${userId}/title`, titleData);
+      dispatch(updateTitle(data));
+    } catch (err) {
+      return err;
+    }
+  };
+
 export const updateAboutText = (userId, textData) =>
   async function (dispatch) {
     try {
@@ -58,20 +69,14 @@ export const updateContactData = (userId, contactData) =>
     }
   };
 
-// export const updateTitleData = (userId, titleData) =>
-//   async function (dispatch) {
-//     try {
-//       console.log("title store", titleData);
-//       let { data } = await axios.put(`/api/users/${userId}`, titleData);
-//       dispatch(updateTitle(data));
-//     } catch (err) {
-//       return err;
-//     }
-//   };
-
 //reducer
 export default function (state = {}, action) {
   switch (action.type) {
+    case TITLE: {
+      let newState = state;
+      newState.siteTitle = action.titleData;
+      return newState;
+    }
     case ABOUT: {
       let newState = state;
       newState.about = action.aboutData;
@@ -87,7 +92,6 @@ export default function (state = {}, action) {
       newState.contact = action.contactData;
       return newState;
     }
-
     default:
       return state;
   }
