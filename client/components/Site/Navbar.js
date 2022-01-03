@@ -11,16 +11,16 @@ export const Navbar = (props) => {
         <Link to={`/${props.user.username}`}>{siteTitle}</Link>
       </div>
       <div className="flex flex-row space-x-2">
-        <Link to={`/${props.user.username}/work`}>
+        <Link to={`/${props.user.username}/work`} className="subHeader">
           <div>Work</div>
         </Link>
-        <Link to={`/${props.user.username}/about`}>
+        <Link to={`/${props.user.username}/about`} className="subHeader">
           <div>About</div>
         </Link>
-        <Link to={`/${props.user.username}/cv`}>
+        <Link to={`/${props.user.username}/cv`} className="subHeader">
           <div>CV</div>
         </Link>
-        <Link to={`/${props.user.username}/contact`}>
+        <Link to={`/${props.user.username}/contact`} className="subHeader">
           <div>Contact</div>
         </Link>
       </div>
