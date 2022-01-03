@@ -6,13 +6,24 @@ import { useSelector, useDispatch } from "react-redux";
 import { Image } from "cloudinary-react";
 export const Work = (props) => {
   let user = useSelector((state) => state.auth);
-  const [imageIds, setImageIds] = useState();
 
+  console.log(props);
+  const dispatch = useDispatch();
+  const [imageIds, setImageIds] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      user = await dispatch(fetchUserData(props.match.params.username));
+    }
+    fetchData();
+  }, []);
+
+  console.log("user", user);
   const loadImages = async () => {
     try {
       const res = await fetch("/api/images");
-      const data = await res.json();
-      setImageIds(data);
+      let data = await res.json();
+      setImageIds(["data"]);
     } catch (error) {
       console.log(error);
     }
@@ -20,14 +31,6 @@ export const Work = (props) => {
 
   useEffect(() => {
     loadImages();
-  }, []);
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    async function fetchData() {
-      user = await dispatch(fetchUserData(props.match.params.username));
-    }
-    fetchData();
   }, []);
 
   return (

@@ -19,12 +19,9 @@ const Work = db.define("work", {
   status: {
     type: Sequelize.STRING,
   },
-  imgUrl: {
-    type: Sequelize.STRING,
+  imgId: {
+    type: Sequelize.STRING(10000),
     allowNull: false,
-    validate: {
-      isUrl: true,
-    },
   },
 });
 
