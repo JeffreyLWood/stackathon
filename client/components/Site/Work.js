@@ -6,40 +6,38 @@ import { useSelector, useDispatch } from "react-redux";
 import { Image } from "cloudinary-react";
 export const Work = (props) => {
   let user = useSelector((state) => state.auth);
+  let worksData = useSelector((state) => state.user.works);
 
-  console.log(props);
   const dispatch = useDispatch();
-  const [imageIds, setImageIds] = useState([]);
+  let [works, setWorks] = useState(worksData);
 
   useEffect(() => {
-    async function fetchData() {
-      user = await dispatch(fetchUserData(props.match.params.username));
-    }
-    fetchData();
+    user = dispatch(fetchUserData(props.match.params.username));
   }, []);
 
-  console.log("user", user);
-  const loadImages = async () => {
-    try {
-      const res = await fetch("/api/images");
-      let data = await res.json();
-      setImageIds(["data"]);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    loadImages();
-  }, []);
-
+  console.log("works", works);
+  //from tutorial
+  // const loadImages = async () => {
+  //   try {
+  //     const res = await fetch("/api/images");
+  //     let data = await res.json();
+  //     console.log("data", data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // loadImages();
   return (
     <div>
       <Navbar data={props} user={user} />
       <div>
-        {imageIds &&
-          imageIds.map((imageId, index) => {
-            <Image key={index} cloudName="jeffreywood" publicId={imageId} />;
+        {works &&
+          works.map((work, index) => {
+            <Image
+              key={index}
+              cloudName="jeffreywood"
+              publicId={work.imageId}
+            />;
           })}
       </div>
     </div>

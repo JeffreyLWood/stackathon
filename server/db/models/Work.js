@@ -20,7 +20,7 @@ const Work = db.define("work", {
     type: Sequelize.STRING,
   },
   imgId: {
-    type: Sequelize.STRING(10000),
+    type: Sequelize.STRING,
     allowNull: false,
   },
 });
