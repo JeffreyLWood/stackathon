@@ -33,11 +33,13 @@ export const Work = (props) => {
       <div>
         {works &&
           works.map((work, index) => {
-            <Image
-              key={index}
-              cloudName="jeffreywood"
-              publicId={work.imageId}
-            />;
+            return (
+              <Image
+                key={index}
+                cloudName="jeffreywood"
+                publicId={work.imgId}
+              />
+            );
           })}
       </div>
     </div>
