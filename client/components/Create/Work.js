@@ -4,6 +4,7 @@ import { updateAboutText } from "../../store/create";
 import { useEffect, useState } from "react";
 
 export default function Work(props) {
+  let user = useSelector((state) => state.auth);
   let dispatch = useDispatch();
   const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
@@ -30,12 +31,12 @@ export default function Work(props) {
 
     uploadImage(previewSource);
   };
-
+  console.log("user", user.id);
   const uploadImage = async (base64EncodedImage) => {
     try {
       await fetch("/api/upload", {
         method: "POST",
-        body: JSON.stringify({ data: base64EncodedImage }),
+        body: JSON.stringify({ data: base64EncodedImage, userId: user.id }),
         headers: { "Content-type": "application/json" },
       });
     } catch (error) {

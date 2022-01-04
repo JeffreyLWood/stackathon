@@ -3,40 +3,26 @@ import { Navbar } from "./Navbar";
 import { fetchUserData } from "../../store/user";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Image } from "cloudinary-react";
+
+import Artwork from "./Artwork";
 export const Work = (props) => {
   let user = useSelector((state) => state.auth);
-  const [imageIds, setImageIds] = useState();
-
-  const loadImages = async () => {
-    try {
-      const res = await fetch("/api/images");
-      const data = await res.json();
-      setImageIds(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    loadImages();
-  }, []);
+  let worksData = useSelector((state) => state.user.works);
 
   const dispatch = useDispatch();
+  let [works, setWorks] = useState(worksData);
+
   useEffect(() => {
-    async function fetchData() {
-      user = await dispatch(fetchUserData(props.match.params.username));
-    }
-    fetchData();
+    user = dispatch(fetchUserData(props.match.params.username));
   }, []);
 
   return (
     <div>
       <Navbar data={props} user={user} />
-      <div>
-        {imageIds &&
-          imageIds.map((imageId, index) => {
-            <Image key={index} cloudName="jeffreywood" publicId={imageId} />;
+      <div className="flex justify-center w-full">
+        {works &&
+          works.map((work, index) => {
+            return <Artwork key={index} data={work} />;
           })}
       </div>
     </div>

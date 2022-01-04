@@ -629,6 +629,38 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 16.666667%;
 }
 
+.h-8 {
+  height: 2rem;
+}
+
+.h-2 {
+  height: 0.5rem;
+}
+
+.h-6 {
+  height: 1.5rem;
+}
+
+.max-h-16 {
+  max-height: 4rem;
+}
+
+.max-h-8 {
+  max-height: 2rem;
+}
+
+.max-h-6 {
+  max-height: 1.5rem;
+}
+
+.max-h-24 {
+  max-height: 6rem;
+}
+
+.max-h-44 {
+  max-height: 11rem;
+}
+
 .w-3\/6 {
   width: 50%;
 }
@@ -639,6 +671,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-full {
   width: 100%;
+}
+
+.w-screen {
+  width: 100vw;
 }
 
 .shrink {
@@ -673,8 +709,24 @@ Ensure the default browser behavior of the `hidden` attribute.
   flex-direction: column;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+.items-baseline {
+  align-items: baseline;
+}
+
 .justify-end {
   justify-content: flex-end;
+}
+
+.justify-center {
+  justify-content: center;
 }
 
 .justify-between {
@@ -724,6 +776,24 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .p-5 {
   padding: 1.25rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.align-baseline {
+  vertical-align: baseline;
 }
 
 .uppercase {

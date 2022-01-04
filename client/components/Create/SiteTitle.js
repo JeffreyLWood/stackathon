@@ -6,8 +6,7 @@ import { fetchUserData } from "../../store/user";
 export default function SiteTitle(props) {
   let dispatch = useDispatch();
   let title = useSelector((state) => state.auth.siteTitle);
-  // let title = `${props.user.siteTitle}`;
-  console.log("test", title);
+
   let changeHandler = (evt) => {
     evt.preventDefault();
     title = evt.target.value;

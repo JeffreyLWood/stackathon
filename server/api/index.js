@@ -1,5 +1,6 @@
 const router = require("express").Router();
 module.exports = router;
+const Work = require("../db/models/Work");
 const { cloudinary } = require("../utils/cloudinary");
 router.use("/users", require("./users"));
 
@@ -9,7 +10,12 @@ router.post("/upload", async (req, res) => {
     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
       upload_preset: "stackathon",
     });
-
+    console.log("uploadedResponse", uploadedResponse);
+    // let user = await user.findByPk(req.body.userId);
+    await Work.create({
+      imgId: uploadedResponse.public_id,
+      userId: req.body.userId,
+    });
     res.status(200).send();
   } catch (error) {
     console.log(error);
