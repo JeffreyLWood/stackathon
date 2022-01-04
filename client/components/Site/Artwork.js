@@ -3,7 +3,7 @@ import { Image } from "cloudinary-react";
 export default function Artwork(props) {
   console.log("artworkprops", props);
   return (
-    <div className="p-4 flex flex-col">
+    <div className="p-4 flex flex-col flex-wrap">
       <div>
         <Image
           cloudName="jeffreywood"
