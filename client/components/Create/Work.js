@@ -2,10 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAboutText } from "../../store/create";
 import { useEffect, useState } from "react";
-
+import Snapshot from "./Snapshot";
 export default function Work(props) {
-  let user = useSelector((state) => state.auth);
-  let dispatch = useDispatch();
   const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
   const [previewSource, setPreviewSource] = useState("");
@@ -31,7 +29,7 @@ export default function Work(props) {
 
     uploadImage(previewSource);
   };
-  console.log("user", user.id);
+
   const uploadImage = async (base64EncodedImage) => {
     try {
       await fetch("/api/upload", {
@@ -45,7 +43,8 @@ export default function Work(props) {
   };
   return (
     <div>
-      <form className="space-x-5" onSubmit={submitHandler}>
+      {/* Should be a modal 
+         <form className="space-x-5" onSubmit={submitHandler}>
         <input
           className="border-2"
           name="image"
@@ -58,7 +57,8 @@ export default function Work(props) {
         {previewSource && (
           <img src={previewSource} alt="chosen" className="h-24" />
         )}
-      </form>
+      </form> */}
+      <Snapshot user={props.user} works={props.works} />
     </div>
   );
 }

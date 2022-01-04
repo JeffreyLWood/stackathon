@@ -9,10 +9,17 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Navbar from "../Navbar";
 import { Image } from "cloudinary-react";
+import { fetchUserData } from "../../store/user";
 export const Create = () => {
-  const user = useSelector((state) => state.auth);
+  let user = useSelector((state) => state.auth);
+  let worksData = useSelector((state) => state.user.works);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    user = dispatch(fetchUserData(user.username));
+  }, []);
+
   const [imageIds, setImageIds] = useState();
 
   const loadImages = async () => {
@@ -46,7 +53,7 @@ export const Create = () => {
         </div>
         <div className="flex row-start-2 flex-col row-span-1 col-start-4 col-span-9">
           <section className="m-5 h-2/6 subHeader">
-            <Work />
+            <Work user={user} works={worksData} />
           </section>
         </div>
         <div className="flex justify-end row-start-3 row-span-1 col-start-1 col-span-2">

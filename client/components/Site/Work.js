@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import Artwork from "./Artwork";
 export const Work = (props) => {
+  //should load data from req.params not from store, for other users to view
   let user = useSelector((state) => state.auth);
   let worksData = useSelector((state) => state.user.works);
 
