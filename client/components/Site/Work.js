@@ -16,22 +16,10 @@ export const Work = (props) => {
     user = dispatch(fetchUserData(props.match.params.username));
   }, []);
 
-  console.log("works", works);
-  //from tutorial
-  // const loadImages = async () => {
-  //   try {
-  //     const res = await fetch("/api/images");
-  //     let data = await res.json();
-  //     console.log("data", data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  // loadImages();
   return (
     <div>
       <Navbar data={props} user={user} />
-      <div>
+      <div className="flex justify-center w-full">
         {works &&
           works.map((work, index) => {
             return <Artwork key={index} data={work} />;
