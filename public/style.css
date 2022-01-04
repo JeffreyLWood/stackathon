@@ -726,6 +726,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding: 1.25rem;
 }
 
+.p-4 {
+  padding: 1rem;
+}
+
 .uppercase {
   text-transform: uppercase;
 }
