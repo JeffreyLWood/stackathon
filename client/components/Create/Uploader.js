@@ -2,9 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAboutText } from "../../store/create";
 import { useEffect, useState } from "react";
-import Snapshot from "./Snapshot";
-import Uploader from "./Uploader";
-export default function Work(props) {
+export default function Uploader(props) {
   const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
   const [previewSource, setPreviewSource] = useState("");
@@ -35,15 +33,44 @@ export default function Work(props) {
     try {
       await fetch("/api/upload", {
         method: "POST",
-        body: JSON.stringify({ data: base64EncodedImage, userId: user.id }),
+        body: JSON.stringify({
+          data: base64EncodedImage,
+          userId: props.user.id,
+        }),
         headers: { "Content-type": "application/json" },
       });
     } catch (error) {
       console.log(error);
     }
   };
-  {
-    /* <Uploader user={props.user} /> */
-  }
-  return <Snapshot user={props.user} works={props.works} />;
+
+  return (
+    <div className="">
+      <form className="bg-red-100" onSubmit={submitHandler}>
+        <input
+          id="image"
+          className="border-2"
+          name="image"
+          type="file"
+          onChange={changeHandler}
+          value={fileInputState}
+          style={{ display: "none" }}
+        />
+        <label htmlFor="image">
+          {previewSource ? (
+            <img src={previewSource} alt="chosen" className="h-24" />
+          ) : (
+            <img src="placeholderadd.png"></img>
+          )}
+        </label>
+
+        <button
+          type="submit"
+          className="bg-black text-white text-uppercase p-1"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  );
 }
