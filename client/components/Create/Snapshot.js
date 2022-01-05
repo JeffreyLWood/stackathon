@@ -11,7 +11,7 @@ export default function Snapshot(props) {
     <div className="w-full flex flex-row">
       {/* //add a work modal  */}
       {/* //snapshot of works on view */}
-      <div className="border-2 w-4/6 border-gray-300 flex flex-wrap justify-between mx-2">
+      <div className="border-2 w-4/6 border-gray-300 flex flex-wrap justify-around mx-2">
         {props.works &&
           props.works.map((work, index) => {
             return (
