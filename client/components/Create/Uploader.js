@@ -55,36 +55,45 @@ export default function Uploader(props) {
         <div className="modal-header">
           <h2>Add a Work</h2>
         </div>
-        <div className="h-full flex">
-          <form className="bg-red-100 h-full" onSubmit={submitHandler}>
-            <input
-              id="image"
-              className="border-2"
-              name="image"
-              type="file"
-              onChange={changeHandler}
-              value={fileInputState}
-              style={{ display: "none" }}
-            />
-            <label htmlFor="image">
-              {previewSource ? (
-                <img src={previewSource} alt="chosen" className="h-24" />
-              ) : (
-                <img src="placeholderadd.png"></img>
-              )}
-            </label>
-            <input type="text" placeholder="Title" />
-            <input type="text" placeholder="Year" />
-            <input type="text" placeholder="Medium" />
-            <input type="text" placeholder="Height" />
-            <input type="text" placeholder="Width" />
-
-            <button
-              type="submit"
-              className="bg-black text-white text-uppercase p-1"
-            >
-              Submit
-            </button>
+        {/* Modal Boday */}
+        <div className="h-full">
+          <form
+            className="bg-red-100 h-full flex justify-around items-center"
+            onSubmit={submitHandler}
+          >
+            <div>
+              <input
+                id="image"
+                className="border-2"
+                name="image"
+                type="file"
+                onChange={changeHandler}
+                value={fileInputState}
+                style={{ display: "none" }}
+              />
+              <label htmlFor="image">
+                {previewSource ? (
+                  <img src={previewSource} alt="chosen" className="h-48" />
+                ) : (
+                  <img src="placeholderadd.png"></img>
+                )}
+              </label>
+            </div>
+            <div className="flex flex-col">
+              <input type="text" placeholder="Title" />
+              <input type="text" placeholder="Year" />
+              <input type="text" placeholder="Medium" />
+              <input type="text" placeholder="Height" />
+              <input type="text" placeholder="Width" />
+              <label htmlFor="hidden">Set to Hidden</label>
+              <input type="checkbox" id="hidden" />
+              <button
+                type="submit"
+                className="bg-black text-white text-uppercase p-1"
+              >
+                Submit
+              </button>
+            </div>
           </form>
         </div>
       </div>
