@@ -1,7 +1,7 @@
 {
-  "name": "stackathon",
+  "name": "ArtGen",
   "version": "2.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "Artist website generator",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
@@ -18,7 +18,7 @@
     "test:dev:models": "npm run test:dev -- --grep=model",
     "test:dev:routes": "npm run test:dev -- --grep=route"
   },
-  "author": "Fullstack Academy of Code",
+  "author": "Jeffrey Wood",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.21.1",
@@ -32,6 +32,7 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
     "pg": "^8.5.1",
+    "react-beautiful-dnd": "^13.1.0",
     "sequelize": "^6.3.5"
   },
   "devDependencies": {
