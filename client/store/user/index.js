@@ -13,6 +13,7 @@ export const fetchUserData = (username) =>
   async function (dispatch) {
     try {
       let { data } = await axios.get(`/api/users/${username}`);
+
       dispatch(loadUserData(data));
     } catch (err) {
       return err;

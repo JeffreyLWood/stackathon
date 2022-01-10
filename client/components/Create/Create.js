@@ -8,11 +8,19 @@ import Contact from "./Contact";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Navbar from "../Navbar";
+import Snapshot from "./Snapshot";
 import { Image } from "cloudinary-react";
+import { fetchUserData } from "../../store/user";
 export const Create = () => {
-  const user = useSelector((state) => state.auth);
+  let user = useSelector((state) => state.auth);
+  let worksData = useSelector((state) => state.user.works);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    user = dispatch(fetchUserData(user.username));
+  }, []);
+
   const [imageIds, setImageIds] = useState();
 
   const loadImages = async () => {
@@ -32,45 +40,35 @@ export const Create = () => {
   return (
     <>
       <Navbar user={user} />
-      <div className="grid grid-cols-12 grid-rows-6 gap-4">
-        <div className="flex justify-end row-start-1 row-span-1 col-start-1 col-span-2">
-          <section className="m-5 h-2/6 subHeader">Site Title</section>
-        </div>
-        <div className="flex flex-col row-start-1 row-span-1 col-start-4 col-span-9">
-          <section className="m-5 h-2/6 subHeader">
+      <div className="flex flex-col w-full">
+        <div className="flex flex-row w-full">
+          <section className="m-5 w-1/6 subHeader">Site Title</section>
+          <section className="m-5 w-5/6">
             <SiteTitle user={user} />
           </section>
         </div>
-        <div className="flex justify-end row-start-2 row-span-1 col-start-1 col-span-2">
-          <section className="m-5 h-2/6 subHeader">Work</section>
-        </div>
-        <div className="flex row-start-2 flex-col row-span-1 col-start-4 col-span-9">
-          <section className="m-5 h-2/6 subHeader">
-            <Work />
+        <div className="flex flex-row w-full">
+          <section className="m-5 w-1/6 subHeader">Work</section>
+          <section className="m-5 w-5/6">
+            <Snapshot user={user} works={worksData} />
           </section>
         </div>
-        <div className="flex justify-end row-start-3 row-span-1 col-start-1 col-span-2">
-          <section className="m-5 h-2/6 subHeader">About</section>
-        </div>
-        <div className="flex row-start-3 flex-col row-span-1 col-start-4 col-span-9">
-          <section className="m-5 h-2/6 subHeader">
-            <About user={user} />
+        <div className="flex flex-row w-full">
+          <section className="m-5 w-1/6 subHeader">About</section>
+          <section className="m-5 w-5/6">
+            <About user={user} works={worksData} />
           </section>
         </div>
-        <div className="flex justify-end row-start-4 row-span-1 col-start-1 col-span-2">
-          <section className="m-5 h-2/6 subHeader">CV</section>
-        </div>
-        <div className="flex row-start-4 flex-col row-span-1 col-start-4 col-span-9">
-          <section className="m-5 h-2/6 subHeader">
-            <CV user={user} />
+        <div className="flex flex-row w-full">
+          <section className="m-5 w-1/6 subHeader">CV</section>
+          <section className="m-5 w-5/6">
+            <CV user={user} works={worksData} />
           </section>
         </div>
-        <div className="flex justify-end row-start-5 row-span-1 col-start-1 col-span-2">
-          <section className="m-5 h-2/6 subHeader">Contact</section>
-        </div>
-        <div className="flex row-start-5 flex-col row-span-1 col-start-4 col-span-9">
-          <section className="m-5 h-2/6 subHeader">
-            <Contact user={user} />
+        <div className="flex flex-row w-full">
+          <section className="m-5 w-1/6 subHeader">Contact</section>
+          <section className="m-5 w-5/6">
+            <Contact user={user} works={worksData} />
           </section>
         </div>
       </div>

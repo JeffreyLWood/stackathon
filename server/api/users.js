@@ -100,7 +100,6 @@ router.get("/:username", async (req, res, next) => {
       cv: allData.dataValues.cv,
       works: allData.dataValues.works,
     };
-    console.log("allData", userData.works);
 
     res.status(200).send(userData);
   } catch (err) {
