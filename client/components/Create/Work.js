@@ -25,9 +25,7 @@ export default function Work(props) {
 
   let submitHandler = (evt) => {
     evt.preventDefault();
-
     if (!previewSource) return;
-
     uploadImage(previewSource);
   };
 
@@ -35,7 +33,10 @@ export default function Work(props) {
     try {
       await fetch("/api/upload", {
         method: "POST",
-        body: JSON.stringify({ data: base64EncodedImage, userId: user.id }),
+        body: JSON.stringify({
+          data: base64EncodedImage,
+          userId: props.user.id,
+        }),
         headers: { "Content-type": "application/json" },
       });
     } catch (error) {

@@ -5,7 +5,7 @@ import { fetchUserData } from "../../store/user";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 export const CV = (props) => {
-  let user = useSelector((state) => state.auth);
+  let user = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   useEffect(() => {
