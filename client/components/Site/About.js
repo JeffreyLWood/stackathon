@@ -5,16 +5,21 @@ import { fetchUserData } from "../../store/user";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 export const About = (props) => {
-  let user = useSelector((state) => state.auth);
-  let about = useSelector((state) => state.user.about);
+  let user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    async function loadUserData() {
+      let data = await dispatch(fetchUserData(props.match.params.username));
+      return data;
+    }
+    loadUserData();
+  }, []);
   return (
     <div>
       <Navbar data={props} user={user} />
       <div className="grid grid-cols-12 grid-rows-6">
         <div className="row-start-3 row-span-6 col-start-3 col-end-10">
-          {about && about.text}
+          {user.about && user.about.text}
         </div>
       </div>
     </div>
