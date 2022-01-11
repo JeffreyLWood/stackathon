@@ -10,12 +10,20 @@ router.post("/upload", async (req, res) => {
     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
       upload_preset: "stackathon",
     });
-    console.log("uploadedResponse", uploadedResponse);
+    // console.log("uploadedResponse", uploadedResponse);
+    console.log("req.body", req.body);
     // let user = await user.findByPk(req.body.userId);
     await Work.create({
       imgId: uploadedResponse.public_id,
       userId: req.body.userId,
+      title: req.body.title,
+      year: req.body.year,
+      height: req.body.height,
+      width: req.body.width,
+      medium: req.body.medium,
+      hidden: req.body.hidden,
     });
+
     res.status(200).send();
   } catch (error) {
     console.log(error);

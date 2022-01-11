@@ -23,6 +23,10 @@ const Work = db.define("work", {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  hidden: {
+    type: Sequelize.STRING,
+    defaultVal: "off",
+  },
 });
 
 module.exports = Work;

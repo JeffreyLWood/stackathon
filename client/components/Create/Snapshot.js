@@ -59,7 +59,7 @@ export default function Snapshot(props) {
         Add a Work
       </button>
 
-      <Uploader show={show} user={props.user} />
+      <Uploader show={show} setShow={setShow} user={props.user} />
     </div>
   );
 }
