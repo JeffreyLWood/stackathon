@@ -14,7 +14,7 @@ export default function Uploader(props) {
     height: 0,
     width: 0,
     medium: "",
-    hidden: "off",
+    hidden: "",
   };
 
   let changeHandler = (evt) => {

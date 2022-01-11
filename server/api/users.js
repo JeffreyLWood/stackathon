@@ -92,6 +92,7 @@ router.get("/:username", async (req, res, next) => {
     let userData = {
       id: allData.dataValues.id,
       userName: allData.dataValues.username,
+      siteTitle: allData.dataValues.siteTitle,
       email: allData.dataValues.email,
       firstName: allData.dataValues.firstName,
       lastName: allData.dataValues.lastName,

@@ -17,9 +17,8 @@ export default function Snapshot(props) {
   return (
     <div>
       <div className="w-full flex flex-row">
-        {/* //add a work modal  */}
         {/* //snapshot of works on view */}
-        <div className="border-2 w-4/6 border-gray-300 flex flex-wrap justify-around mx-2">
+        <div className="snapshot border-2 w-4/6 border-gray-300 flex flex-wrap justify-around mx-2 p-1">
           {props.works &&
             props.works.map((work, index) => {
               return (
@@ -27,13 +26,10 @@ export default function Snapshot(props) {
                   key={index}
                   cloudName="jeffreywood"
                   publicId={work.imgId}
-                  className="h-36 m-4"
+                  className="h-32 m-1"
                 />
               );
             })}
-          <div className="h-36 w-24 m-4 bg-gray-200 border-2 border-gray-300 justify-center items-center">
-            <img src="public/placeholderadd.png"></img>
-          </div>
         </div>
         {/* //snapshot of hidden works */}
         <div className="border-2 w-2/6 border-gray-300 bg-gray-200 flex mx-2">

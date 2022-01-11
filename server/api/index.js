@@ -23,7 +23,6 @@ router.post("/upload", async (req, res) => {
       medium: req.body.medium,
       hidden: req.body.hidden,
     });
-
     res.status(200).send();
   } catch (error) {
     console.log(error);
