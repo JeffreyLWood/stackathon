@@ -55,10 +55,10 @@ export default function Uploader(props) {
         <div className="modal-header">
           <h2>Add a Work</h2>
         </div>
-        {/* Modal Boday */}
+        {/* Modal Body */}
         <div className="h-full">
           <form
-            className="bg-red-100 h-full flex justify-around items-center"
+            className="h-full flex justify-around items-center"
             onSubmit={submitHandler}
           >
             <div>
@@ -73,29 +73,54 @@ export default function Uploader(props) {
               />
               <label htmlFor="image">
                 {previewSource ? (
-                  <img src={previewSource} alt="chosen" className="h-48" />
+                  <img src={previewSource} alt="chosen" className="h-52" />
                 ) : (
                   <img src="placeholderadd.png"></img>
                 )}
               </label>
             </div>
-            <div className="flex flex-col">
-              <input type="text" placeholder="Title" />
-              <input type="text" placeholder="Year" />
-              <input type="text" placeholder="Medium" />
-              <input type="text" placeholder="Height" />
-              <input type="text" placeholder="Width" />
-              <label htmlFor="hidden">Set to Hidden</label>
-              <input type="checkbox" id="hidden" />
+            <div className="flex flex-col justify-around">
+              <input
+                type="text"
+                className="my-1 border-b-2"
+                placeholder="Title"
+              />
+              <input
+                type="text"
+                className="my-1 border-b-2"
+                placeholder="Year"
+              />
+              <input
+                type="text"
+                className="my-1 border-b-2"
+                placeholder="Medium"
+              />
+              <input
+                type="text"
+                className="my-1 border-b-2"
+                placeholder="Height"
+              />
+              <input
+                type="text"
+                className="my-1 border-b-2"
+                placeholder="Width"
+              />
+              <label htmlFor="hidden" className="my-1">
+                Set to Hidden
+                <input type="checkbox" id="hidden" className="m-1" />
+              </label>
+
               <button
                 type="submit"
-                className="bg-black text-white text-uppercase p-1"
+                className="bg-black text-white text-uppercase p-1 my-1"
               >
                 Submit
               </button>
             </div>
           </form>
         </div>
+        {/* Modal Footer */}
+        <div className="modal-footer">test</div>
       </div>
     </div>
   );
