@@ -91,7 +91,6 @@ const hashPassword = async (user) => {
 // Sets default images upon creation of an account
 const defaultImages = async (user) => {
   try {
-    console.log("work magic methods");
     let default0 = await Work.create({
       title: "A Brewery in Brooklyn",
       imgId: "stackathonImgs/d2ncnihvslo8hlcttyqx",
@@ -150,22 +149,22 @@ const defaultImages = async (user) => {
       hidden: "off",
     });
     let default7 = await Work.create({
-      title: "Gowanus Canal",
-      imgId: "stackathonImgs/IMG_7125_vygflu",
-      height: 4,
-      width: 5,
+      title: "Street 1",
+      imgId: "stackathonImgs/IMG_7170_ripehb",
+      height: 5,
+      width: 4,
       status: "available",
       hidden: "off",
     });
     let default8 = await Work.create({
-      title: "Evening",
-      imgId: "stackathonImgs/IMG_6904_ouepmn",
-      height: 4,
-      width: 5,
+      title: "Street 2",
+      imgId: "stackathonImgs/IMG_7147_nyupzz",
+      height: 5,
+      width: 4,
       status: "available",
       hidden: "off",
     });
-
+    // Put defaults into array for mapping
     let array = [
       default0,
       default1,
@@ -177,7 +176,8 @@ const defaultImages = async (user) => {
       default7,
       default8,
     ];
-
+    // Map over works array and setUser to the new user.
+    // Sets default images in the user's database and displays them on their new site.
     array.map(async (work) => await work.setUser(user));
   } catch (error) {
     console.log(error);
