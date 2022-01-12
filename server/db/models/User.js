@@ -88,6 +88,7 @@ const hashPassword = async (user) => {
   }
 };
 
+// Sets default images upon creation of an account
 const defaultImages = async (user) => {
   try {
     console.log("work magic methods");
@@ -176,7 +177,7 @@ const defaultImages = async (user) => {
       default7,
       default8,
     ];
-    //not able to set user to default images
+
     array.map(async (work) => await work.setUser(user));
   } catch (error) {
     console.log(error);
@@ -186,4 +187,4 @@ const defaultImages = async (user) => {
 User.beforeCreate(hashPassword);
 User.beforeUpdate(hashPassword);
 User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));
-User.beforeCreate(defaultImages);
+User.afterCreate(defaultImages);
