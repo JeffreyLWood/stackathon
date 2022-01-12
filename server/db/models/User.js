@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
 
+const Work = require("./Work");
+
 const SALT_ROUNDS = 5;
 
 const User = db.define("user", {
@@ -86,6 +88,102 @@ const hashPassword = async (user) => {
   }
 };
 
+const defaultImages = async (user) => {
+  try {
+    console.log("work magic methods");
+    let default0 = await Work.create({
+      title: "A Brewery in Brooklyn",
+      imgId: "stackathonImgs/d2ncnihvslo8hlcttyqx",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: "off",
+    });
+
+    let default1 = await Work.create({
+      title: "Capote's House",
+      imgId: "stackathonImgs/xv4pownj9m3mtx7ljjzc",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: "off",
+    });
+    let default2 = await Work.create({
+      title: "Ice Cream",
+      imgId: "stackathonImgs/zgxhhmgkfdqn1kwzqyiw",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: "off",
+    });
+    let default3 = await Work.create({
+      title: "Brooklyn Heights",
+      imgId: "stackathonImgs/veolqujeugdq34z8g8rq",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: "off",
+    });
+    let default4 = await Work.create({
+      title: "Sidewalk",
+      imgId: "stackathonImgs/y9zvgvli3a3yhtih9etu",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: "off",
+    });
+    let default5 = await Work.create({
+      title: "Corner",
+      imgId: "stackathonImgs/hxsibu6aszagkpjkevhz",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: "off",
+    });
+    let default6 = await Work.create({
+      title: "A Street in Brooklyn",
+      imgId: "stackathonImgs/xv4pownj9m3mtx7ljjzc",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: "off",
+    });
+    let default7 = await Work.create({
+      title: "Gowanus Canal",
+      imgId: "stackathonImgs/IMG_7125_vygflu",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: "off",
+    });
+    let default8 = await Work.create({
+      title: "Evening",
+      imgId: "stackathonImgs/IMG_6904_ouepmn",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: "off",
+    });
+
+    let array = [
+      default0,
+      default1,
+      default2,
+      default3,
+      default4,
+      default5,
+      default6,
+      default7,
+      default8,
+    ];
+    //not able to set user to default images
+    array.map(async (work) => await work.setUser(user));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 User.beforeCreate(hashPassword);
 User.beforeUpdate(hashPassword);
 User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));
+User.beforeCreate(defaultImages);
