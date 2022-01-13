@@ -4,7 +4,7 @@ import { updateAboutText } from "../../store/create";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Image } from "cloudinary-react";
-import { fetchSingleWork } from "../../store/create";
+import { fetchSingleWork, destroyWork } from "../../store/create";
 
 const Modal = (props) => {
   let work = useSelector((state) => state.create);
@@ -47,9 +47,11 @@ const Modal = (props) => {
     loadImageData();
   }, [props.show]);
 
-  useEffect(() => {}, [state]);
-
-  console.log("state", state, "work", work);
+  const destroyHandler = (userId, imgId) => {
+    imgId = imgId.split("/").slice(-1).join();
+    dispatch(destroyWork(userId, imgId));
+    props.setShow(false);
+  };
 
   let changeHandler = (evt) => {
     evt.preventDefault();
@@ -130,7 +132,7 @@ const Modal = (props) => {
       console.log(props, error);
     }
   };
-  console.log("previewSource", previewSource);
+
   if (!props.show) {
     return null;
   }
@@ -266,11 +268,19 @@ const Modal = (props) => {
               >
                 Submit
               </button>
+              {work ? (
+                <button
+                  className="border-2 text-uppercase p-1"
+                  onClick={() => destroyHandler(props.user.id, work.imgId)}
+                >
+                  Delete
+                </button>
+              ) : null}
             </div>
           </form>
         </div>
         {/* Modal Footer */}
-        <div className="modal-footer"></div>
+        <div className="modal-footer">test</div>
       </div>
     </div>
   );

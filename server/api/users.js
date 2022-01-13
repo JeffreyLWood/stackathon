@@ -123,3 +123,19 @@ router.get("/:userId/:imgId", async (req, res, next) => {
     next(err);
   }
 });
+
+// Delete a work by a user
+router.delete("/:userId/:imgId", async (req, res, next) => {
+  try {
+    let prefix = "stackathonImgs";
+    await Work.destroy({
+      where: {
+        imgId: `${prefix}/${req.params.imgId}`,
+        userId: req.params.userId,
+      },
+    });
+    res.status(200).send();
+  } catch (err) {
+    next(err);
+  }
+});

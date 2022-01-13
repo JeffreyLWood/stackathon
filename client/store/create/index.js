@@ -6,6 +6,7 @@ const CV = "CV";
 const CONTACT = "CONTACT";
 const TITLE = "TITLE";
 const GET_SINGLE_WORK = "GET_SINGLE_WORK";
+const DELETE_WORK = "DELETE_WORK";
 
 //action creators
 const updateAbout = (aboutData) => {
@@ -26,6 +27,10 @@ const updateTitle = (titleData) => {
 
 const getSingleWork = (data) => {
   return { type: GET_SINGLE_WORK, data };
+};
+
+const deleteWork = (data) => {
+  return { type: DELETE_WORK, data };
 };
 
 //thunk creators
@@ -87,6 +92,16 @@ export const fetchSingleWork = (userId, imgId) =>
     }
   };
 
+export const destroyWork = (userId, imgId) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.delete(`/api/users/${userId}/${imgId}`);
+      dispatch(deleteWork(data));
+    } catch (err) {
+      return err;
+    }
+  };
+
 //reducer
 export default function (state = {}, action) {
   switch (action.type) {
@@ -111,6 +126,10 @@ export default function (state = {}, action) {
       return newState;
     }
     case GET_SINGLE_WORK: {
+      let newState = action.data;
+      return newState;
+    }
+    case DELETE_WORK: {
       let newState = action.data;
       return newState;
     }
