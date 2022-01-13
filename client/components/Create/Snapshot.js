@@ -4,13 +4,24 @@ import { updateAboutText } from "../../store/create";
 import { useEffect, useState } from "react";
 import { fetchUserData } from "../../store/user";
 import { Image } from "cloudinary-react";
-import Uploader from "./Uploader";
+import { Uploader } from "./Uploader";
 export default function Snapshot(props) {
   const dispatch = useDispatch();
   let [show, setShow] = useState(false);
+  let [displayName, setDisplayName] = useState("");
+  let [imgId, setImgId] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
+    setDisplayName(e.target.value);
+    setShow(true);
+  };
+
+  const clickHandler = (e) => {
+    e.preventDefault();
+    setDisplayName("Edit Work");
+    let imgId = e.target.src.split("/").slice(-1).join();
+    setImgId(imgId);
     setShow(true);
   };
 
@@ -27,6 +38,7 @@ export default function Snapshot(props) {
                   cloudName="jeffreywood"
                   publicId={work.imgId}
                   className="h-32 m-1"
+                  onClick={(e) => clickHandler(e)}
                 />
               );
             })}
@@ -51,11 +63,18 @@ export default function Snapshot(props) {
         type="submit"
         onClick={(event) => submitHandler(event)}
         className="btn bg-black my-5 text-white w-18 h-8 p-2 rounded-md"
+        value="Add a Work"
       >
         Add a Work
       </button>
 
-      <Uploader show={show} setShow={setShow} user={props.user} />
+      <Uploader
+        displayName={displayName}
+        show={show}
+        setShow={setShow}
+        imgId={imgId}
+        user={props.user}
+      />
     </div>
   );
 }

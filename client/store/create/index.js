@@ -5,6 +5,7 @@ const ABOUT = "ABOUT";
 const CV = "CV";
 const CONTACT = "CONTACT";
 const TITLE = "TITLE";
+const GET_SINGLE_WORK = "GET_SINGLE_WORK";
 
 //action creators
 const updateAbout = (aboutData) => {
@@ -21,6 +22,10 @@ const updateContact = (contactData) => {
 
 const updateTitle = (titleData) => {
   return { type: TITLE, titleData };
+};
+
+const getSingleWork = (data) => {
+  return { type: GET_SINGLE_WORK, data };
 };
 
 //thunk creators
@@ -68,6 +73,15 @@ export const updateContactData = (userId, contactData) =>
       return err;
     }
   };
+export const fetchSingleWork = (userId, imgId) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.get(`/api/users/${userId}/${imgId}`);
+      dispatch(getSingleWork(data));
+    } catch (err) {
+      return err;
+    }
+  };
 
 //reducer
 export default function (state = {}, action) {
@@ -90,6 +104,10 @@ export default function (state = {}, action) {
     case CONTACT: {
       let newState = state;
       newState.contact = action.contactData;
+      return newState;
+    }
+    case GET_SINGLE_WORK: {
+      let newState = action.data;
       return newState;
     }
     default:

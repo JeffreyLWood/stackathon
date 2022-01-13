@@ -3,30 +3,52 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateAboutText } from "../../store/create";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-export default function Uploader(props) {
+import { fetchSingleWork } from "../../store/create";
+
+const Modal = (props) => {
+  const work = useSelector((state) => state.create);
   const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
   const [previewSource, setPreviewSource] = useState("");
+  const dispatch = useDispatch();
 
-  let data = {
+  const [state, setState] = useState({
     title: "",
-    year: 0,
-    height: 0,
-    width: 0,
+    year: "",
+    height: "",
+    width: "",
     medium: "",
     hidden: "",
-  };
+  });
+
+  useEffect(() => {
+    async function loadImageData() {
+      if (props.displayName === "Edit Work") {
+        await dispatch(fetchSingleWork(props.user.id, props.imgId));
+      }
+      setState({
+        title: work.title,
+        year: work.year,
+        height: work.height,
+        width: work.width,
+        medium: work.medium,
+        hidden: work.hidden,
+      });
+    }
+    loadImageData();
+  }, [props.show]);
+
+  console.log("state", state);
 
   let changeHandler = (evt) => {
     evt.preventDefault();
-    //if event target name is in data, change data to value
-    data[evt.target.name] = evt.target.value;
-
-    console.log("data[evt.target.name]", data[evt.target.name]);
     //if evt target is files, we are dealing with the img file
     if (evt.target.files) {
       const file = evt.target.files[0];
       previewFile(file);
+    } else {
+      //if event target name is in data, change data to value
+      setState({ ...state, [evt.target.name]: evt.target.value });
     }
   };
 
@@ -46,21 +68,21 @@ export default function Uploader(props) {
 
   const uploadImage = async (base64EncodedImage) => {
     try {
-      console.log("data", data);
       await fetch("/api/upload", {
         method: "POST",
         body: JSON.stringify({
           data: base64EncodedImage,
           userId: props.user.id,
-          title: data.title,
-          year: data.year,
-          height: data.height,
-          width: data.width,
-          medium: data.medium,
-          hidden: data.hidden,
+          title: state.title,
+          year: state.year,
+          height: state.height,
+          width: state.width,
+          medium: state.medium,
+          hidden: state.hidden,
         }),
         headers: { "Content-type": "application/json" },
       });
+      console.log("state", state);
     } catch (error) {
       console.log(props, error);
     }
@@ -74,7 +96,7 @@ export default function Uploader(props) {
     <div className="modal">
       <div className="modal-content">
         <div className="modal-header flex justify-between">
-          <h2>Add a Work</h2>
+          <h2>{props.displayName}</h2>
           <h2 onClick={() => props.setShow(false)}>
             <img src="/icons8-close-16.png"></img>
           </h2>
@@ -109,6 +131,7 @@ export default function Uploader(props) {
                 className="my-1 border-b-2"
                 placeholder="Title"
                 onChange={changeHandler}
+                value={state.title}
               />
               <input
                 type="text"
@@ -116,6 +139,7 @@ export default function Uploader(props) {
                 className="my-1 border-b-2"
                 placeholder="Year"
                 onChange={changeHandler}
+                value={state.year}
               />
               <input
                 type="text"
@@ -123,6 +147,7 @@ export default function Uploader(props) {
                 className="my-1 border-b-2"
                 placeholder="Medium"
                 onChange={changeHandler}
+                value={state.medium}
               />
               <div className="flex flex-row">
                 <input
@@ -131,6 +156,7 @@ export default function Uploader(props) {
                   className="my-1 border-b-2"
                   placeholder="Height"
                   onChange={changeHandler}
+                  value={state.height}
                 />
                 <input
                   type="text"
@@ -138,6 +164,7 @@ export default function Uploader(props) {
                   className="my-1 border-b-2"
                   placeholder="Width"
                   onChange={changeHandler}
+                  value={state.width}
                 />
               </div>
               <label htmlFor="hidden" className="my-1">
@@ -148,6 +175,7 @@ export default function Uploader(props) {
                   id="hidden"
                   onChange={changeHandler}
                   className="m-1"
+                  value={state.hidden}
                 />
               </label>
 
@@ -165,4 +193,6 @@ export default function Uploader(props) {
       </div>
     </div>
   );
-}
+};
+
+export const Uploader = Modal;

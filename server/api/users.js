@@ -102,8 +102,23 @@ router.get("/:username", async (req, res, next) => {
       cv: allData.dataValues.cv,
       works: allData.dataValues.works,
     };
-
     res.status(200).send(userData);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Get single work by a user
+router.get("/:userId/:imgId", async (req, res, next) => {
+  try {
+    let prefix = "stackathonImgs";
+    let workData = await Work.findOne({
+      where: {
+        imgId: `${prefix}/${req.params.imgId}`,
+        userId: req.params.userId,
+      },
+    });
+    res.status(200).send(workData);
   } catch (err) {
     next(err);
   }
