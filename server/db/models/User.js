@@ -93,6 +93,8 @@ const defaultImages = async (user) => {
   try {
     let default0 = await Work.create({
       title: "A Brewery in Brooklyn",
+      year: 2021,
+      medium: "oil on panel",
       imgId: "stackathonImgs/d2ncnihvslo8hlcttyqx",
       height: 4,
       width: 5,
@@ -102,6 +104,8 @@ const defaultImages = async (user) => {
 
     let default1 = await Work.create({
       title: "Capote's House",
+      medium: "oil on panel",
+      year: 2021,
       imgId: "stackathonImgs/xv4pownj9m3mtx7ljjzc",
       height: 4,
       width: 5,
@@ -110,6 +114,8 @@ const defaultImages = async (user) => {
     });
     let default2 = await Work.create({
       title: "Ice Cream",
+      medium: "oil on panel",
+      year: 2021,
       imgId: "stackathonImgs/zgxhhmgkfdqn1kwzqyiw",
       height: 4,
       width: 5,
@@ -118,6 +124,8 @@ const defaultImages = async (user) => {
     });
     let default3 = await Work.create({
       title: "Brooklyn Heights",
+      medium: "oil on panel",
+      year: 2021,
       imgId: "stackathonImgs/veolqujeugdq34z8g8rq",
       height: 4,
       width: 5,
@@ -126,6 +134,8 @@ const defaultImages = async (user) => {
     });
     let default4 = await Work.create({
       title: "Sidewalk",
+      medium: "oil on panel",
+      year: 2021,
       imgId: "stackathonImgs/y9zvgvli3a3yhtih9etu",
       height: 4,
       width: 5,
@@ -134,6 +144,8 @@ const defaultImages = async (user) => {
     });
     let default5 = await Work.create({
       title: "Corner",
+      medium: "oil on panel",
+      year: 2021,
       imgId: "stackathonImgs/hxsibu6aszagkpjkevhz",
       height: 4,
       width: 5,
@@ -142,6 +154,8 @@ const defaultImages = async (user) => {
     });
     let default6 = await Work.create({
       title: "A Street in Brooklyn",
+      medium: "oil on panel",
+      year: 2021,
       imgId: "stackathonImgs/xv4pownj9m3mtx7ljjzc",
       height: 4,
       width: 5,
@@ -150,6 +164,8 @@ const defaultImages = async (user) => {
     });
     let default7 = await Work.create({
       title: "Street 1",
+      medium: "oil on panel",
+      year: 2021,
       imgId: "stackathonImgs/IMG_7170_ripehb",
       height: 5,
       width: 4,
@@ -158,6 +174,8 @@ const defaultImages = async (user) => {
     });
     let default8 = await Work.create({
       title: "Street 2",
+      medium: "oil on panel",
+      year: 2021,
       imgId: "stackathonImgs/IMG_7147_nyupzz",
       height: 5,
       width: 4,

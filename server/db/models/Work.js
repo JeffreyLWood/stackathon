@@ -10,8 +10,15 @@ const Work = db.define("work", {
   title: {
     type: Sequelize.STRING,
   },
+  year: {
+    type: Sequelize.INTEGER,
+  },
+
   height: {
     type: Sequelize.INTEGER,
+  },
+  medium: {
+    type: Sequelize.STRING,
   },
   width: {
     type: Sequelize.INTEGER,
