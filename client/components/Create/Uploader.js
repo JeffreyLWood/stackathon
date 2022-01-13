@@ -10,8 +10,8 @@ const Modal = (props) => {
   let work = useSelector((state) => state.create);
 
   const [fileInputState, setFileInputState] = useState("");
-  const [selectedFile, setSelectedFile] = useState("");
   const [previewSource, setPreviewSource] = useState("");
+
   const dispatch = useDispatch();
 
   const [state, setState] = useState({
@@ -75,13 +75,16 @@ const Modal = (props) => {
   let submitHandler = (evt) => {
     evt.preventDefault();
     if (props.displayName === "Edit Work") {
-      console.log("firing");
+      //if edit work and preview source, post new image, put data, if no preview source and edit, do code, then next code as normal
+      console.log("Edit");
       updateData(previewSource);
     } else if (!previewSource) return;
     else if (props.displayName === "Add a Work") {
+      console.log("Add");
       uploadImage(previewSource);
     }
   };
+  // if preview source => then new image
 
   const uploadImage = async (base64EncodedImage) => {
     try {
@@ -106,10 +109,12 @@ const Modal = (props) => {
 
   const updateData = async (base64EncodedImage) => {
     try {
+      console.log("updateData base64EncodedImage", base64EncodedImage.length);
       await fetch("/api/update", {
         method: "POST",
         body: JSON.stringify({
           data: base64EncodedImage,
+          newImage: previewSource ? true : false,
           imgId: state.imgId ? state.imgId : work.imgId,
           userId: props.user.id,
           title: state.title.length ? state.title : work.title,
@@ -125,7 +130,7 @@ const Modal = (props) => {
       console.log(props, error);
     }
   };
-
+  console.log("previewSource", previewSource);
   if (!props.show) {
     return null;
   }
