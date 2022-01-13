@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateAboutText } from "../../store/create";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Image } from "cloudinary-react";
 import { fetchSingleWork } from "../../store/create";
 
 const Modal = (props) => {
-  const work = useSelector((state) => state.create);
+  let work = useSelector((state) => state.create);
+
   const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
   const [previewSource, setPreviewSource] = useState("");
@@ -20,25 +22,33 @@ const Modal = (props) => {
     medium: "",
     hidden: "",
   });
+  console.log("state1", state, "work1", work);
 
   useEffect(() => {
     async function loadImageData() {
+      if (props.displayName === "Add a Work") {
+        // clears state
+        await dispatch(fetchSingleWork(null, null));
+        // clears preview image in case modal was closed and add a work was opened
+        setPreviewSource("");
+        setState({
+          title: "",
+          year: "",
+          height: "",
+          width: "",
+          medium: "",
+          hidden: "",
+        });
+      }
       if (props.displayName === "Edit Work") {
         await dispatch(fetchSingleWork(props.user.id, props.imgId));
       }
-      setState({
-        title: work.title,
-        year: work.year,
-        height: work.height,
-        width: work.width,
-        medium: work.medium,
-        hidden: work.hidden,
-      });
     }
     loadImageData();
   }, [props.show]);
 
-  console.log("state", state);
+  // setState(work);
+  console.log("state", state, "work", work);
 
   let changeHandler = (evt) => {
     evt.preventDefault();
@@ -119,6 +129,12 @@ const Modal = (props) => {
               <label htmlFor="image">
                 {previewSource ? (
                   <img src={previewSource} alt="chosen" className="h-56" />
+                ) : work ? (
+                  <Image
+                    cloudName={"jeffreywood"}
+                    publicId={work.imgId}
+                    className="h-56"
+                  />
                 ) : (
                   <img src="placeholderadd.png"></img>
                 )}
@@ -131,7 +147,7 @@ const Modal = (props) => {
                 className="my-1 border-b-2"
                 placeholder="Title"
                 onChange={changeHandler}
-                value={state.title}
+                value={work ? work.title : state.title}
               />
               <input
                 type="text"

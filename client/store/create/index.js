@@ -76,6 +76,10 @@ export const updateContactData = (userId, contactData) =>
 export const fetchSingleWork = (userId, imgId) =>
   async function (dispatch) {
     try {
+      if (userId === null) {
+        dispatch(getSingleWork(null));
+        return;
+      }
       let { data } = await axios.get(`/api/users/${userId}/${imgId}`);
       dispatch(getSingleWork(data));
     } catch (err) {
