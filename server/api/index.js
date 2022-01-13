@@ -31,13 +31,11 @@ router.post("/upload", async (req, res) => {
 
 router.post("/update", async (req, res) => {
   try {
-    // const fileStr = req.body.data;
-    // const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
-    //   upload_preset: "stackathon",
-    // });
-    // // console.log("uploadedResponse", uploadedResponse);
-    // console.log("req.body", req.body);
-    // // let user = await user.findByPk(req.body.userId);
+    const fileStr = req.body.data;
+    const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
+      upload_preset: "stackathon",
+    });
+
     let work = await Work.findOne({
       where: {
         imgId: req.body.imgId,
@@ -45,7 +43,7 @@ router.post("/update", async (req, res) => {
       },
     });
     await work.update({
-      // imgId: uploadedResponse.public_id,
+      imgId: uploadedResponse.public_id,
       userId: req.body.userId,
       title: req.body.title,
       year: req.body.year,
