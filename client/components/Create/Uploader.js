@@ -74,8 +74,13 @@ const Modal = (props) => {
 
   let submitHandler = (evt) => {
     evt.preventDefault();
-    if (!previewSource) return;
-    uploadImage(previewSource);
+    if (props.displayName === "Edit Work") {
+      console.log("firing");
+      updateData(previewSource);
+    } else if (!previewSource) return;
+    else if (props.displayName === "Add a Work") {
+      uploadImage(previewSource);
+    }
   };
 
   const uploadImage = async (base64EncodedImage) => {
@@ -94,7 +99,28 @@ const Modal = (props) => {
         }),
         headers: { "Content-type": "application/json" },
       });
-      console.log("state", state);
+    } catch (error) {
+      console.log(props, error);
+    }
+  };
+
+  const updateData = async (base64EncodedImage) => {
+    try {
+      await fetch("/api/update", {
+        method: "POST",
+        body: JSON.stringify({
+          data: base64EncodedImage,
+          imgId: state.imgId ? state.imgId : work.imgId,
+          userId: props.user.id,
+          title: state.title.length ? state.title : work.title,
+          year: state.year.length ? state.year : work.year,
+          height: state.height.length ? state.height : work.Height,
+          width: state.width.length ? state.width : work.width,
+          medium: state.medium.length ? state.medium : work.Medium,
+          hidden: state.hidden.length ? state.hidden : work.Hidden,
+        }),
+        headers: { "Content-type": "application/json" },
+      });
     } catch (error) {
       console.log(props, error);
     }

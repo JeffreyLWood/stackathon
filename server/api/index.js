@@ -29,6 +29,37 @@ router.post("/upload", async (req, res) => {
   }
 });
 
+router.post("/update", async (req, res) => {
+  try {
+    // const fileStr = req.body.data;
+    // const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
+    //   upload_preset: "stackathon",
+    // });
+    // // console.log("uploadedResponse", uploadedResponse);
+    // console.log("req.body", req.body);
+    // // let user = await user.findByPk(req.body.userId);
+    let work = await Work.findOne({
+      where: {
+        imgId: req.body.imgId,
+        userId: req.body.userId,
+      },
+    });
+    await work.update({
+      // imgId: uploadedResponse.public_id,
+      userId: req.body.userId,
+      title: req.body.title,
+      year: req.body.year,
+      height: req.body.height,
+      width: req.body.width,
+      medium: req.body.medium,
+      hidden: req.body.hidden,
+    });
+    res.status(200).send();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.get("/images", async (req, res) => {
   const { resources } = await cloudinary.search
     .expression("folder:stackathonImgs")
