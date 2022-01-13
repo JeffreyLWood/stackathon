@@ -47,7 +47,8 @@ const Modal = (props) => {
     loadImageData();
   }, [props.show]);
 
-  // setState(work);
+  useEffect(() => {}, [state]);
+
   console.log("state", state, "work", work);
 
   let changeHandler = (evt) => {
@@ -59,6 +60,7 @@ const Modal = (props) => {
     } else {
       //if event target name is in data, change data to value
       setState({ ...state, [evt.target.name]: evt.target.value });
+      work = { ...work, [evt.target.name]: evt.target.value };
     }
   };
 
@@ -147,7 +149,13 @@ const Modal = (props) => {
                 className="my-1 border-b-2"
                 placeholder="Title"
                 onChange={changeHandler}
-                value={work ? work.title : state.title}
+                value={
+                  state.title.length
+                    ? state.title
+                    : work
+                    ? work.title
+                    : state.title
+                }
               />
               <input
                 type="text"
@@ -155,7 +163,9 @@ const Modal = (props) => {
                 className="my-1 border-b-2"
                 placeholder="Year"
                 onChange={changeHandler}
-                value={work ? work.year : state.year}
+                value={
+                  state.year.length ? state.year : work ? work.year : state.year
+                }
               />
               <input
                 type="text"
@@ -163,7 +173,13 @@ const Modal = (props) => {
                 className="my-1 border-b-2"
                 placeholder="Medium"
                 onChange={changeHandler}
-                value={work ? work.medium : state.medium}
+                value={
+                  state.medium.length
+                    ? state.medium
+                    : work
+                    ? work.medium
+                    : state.medium
+                }
               />
               <div className="flex flex-row">
                 <input
@@ -172,7 +188,13 @@ const Modal = (props) => {
                   className="my-1 border-b-2"
                   placeholder="Height"
                   onChange={changeHandler}
-                  value={work ? work.height : state.height}
+                  value={
+                    state.height.length
+                      ? state.length
+                      : work
+                      ? work.height
+                      : state.height
+                  }
                 />
                 <input
                   type="text"
@@ -180,7 +202,13 @@ const Modal = (props) => {
                   className="my-1 border-b-2"
                   placeholder="Width"
                   onChange={changeHandler}
-                  value={work ? work.width : state.width}
+                  value={
+                    state.width.length
+                      ? state.length
+                      : work
+                      ? work.width
+                      : state.width
+                  }
                 />
               </div>
               <label htmlFor="hidden" className="my-1">
@@ -191,7 +219,13 @@ const Modal = (props) => {
                   id="hidden"
                   onChange={changeHandler}
                   className="m-1"
-                  value={work ? work.hidden : state.hidden}
+                  value={
+                    state.hidden.length
+                      ? state.hidden
+                      : work
+                      ? work.hidden
+                      : state.hidden
+                  }
                 />
               </label>
 
