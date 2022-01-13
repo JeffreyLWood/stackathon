@@ -6,6 +6,7 @@ import { fetchUserData } from "../../store/user";
 import { Image } from "cloudinary-react";
 import { Uploader } from "./Uploader";
 export default function Snapshot(props) {
+  let user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   let [show, setShow] = useState(false);
   let [displayName, setDisplayName] = useState("");
@@ -16,6 +17,10 @@ export default function Snapshot(props) {
     setDisplayName(e.target.value);
     setShow(true);
   };
+
+  useEffect(() => {
+    dispatch(fetchUserData(user.userName));
+  }, [show]);
 
   const clickHandler = (e) => {
     e.preventDefault();

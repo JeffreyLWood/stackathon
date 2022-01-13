@@ -22,7 +22,6 @@ const Modal = (props) => {
     medium: "",
     hidden: "",
   });
-  console.log("state1", state, "work1", work);
 
   useEffect(() => {
     async function loadImageData() {
@@ -76,15 +75,14 @@ const Modal = (props) => {
 
   let submitHandler = (evt) => {
     evt.preventDefault();
+
     if (props.displayName === "Edit Work") {
-      //if edit work and preview source, post new image, put data, if no preview source and edit, do code, then next code as normal
-      console.log("Edit");
       updateData(previewSource);
     } else if (!previewSource) return;
     else if (props.displayName === "Add a Work") {
-      console.log("Add");
       uploadImage(previewSource);
     }
+    props.setShow(false);
   };
   // if preview source => then new image
 
