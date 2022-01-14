@@ -5,23 +5,28 @@ import { useEffect, useState } from "react";
 import { fetchUserData } from "../../store/user";
 import { Image } from "cloudinary-react";
 import { Uploader } from "./Uploader";
+import { fetchAllWork } from "../../store/create";
 export default function Snapshot(props) {
-  let user = useSelector((state) => state.user);
-
+  // still not triggering refresh when a user changes an image of a work or adds a new work
+  let user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   let [show, setShow] = useState(false);
   let [displayName, setDisplayName] = useState("");
   let [imgId, setImgId] = useState("");
+  console.log("propsuser", user);
+
+  useEffect(() => {
+    async function loadUserData() {
+      dispatch(fetchUserData(user.username));
+    }
+    loadUserData();
+  }, [show]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     setDisplayName(e.target.value);
     setShow(true);
   };
-
-  useEffect(() => {
-    dispatch(fetchUserData(user.userName));
-  }, [show]);
 
   const clickHandler = (e) => {
     e.preventDefault();

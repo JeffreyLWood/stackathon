@@ -6,6 +6,7 @@ const CV = "CV";
 const CONTACT = "CONTACT";
 const TITLE = "TITLE";
 const GET_SINGLE_WORK = "GET_SINGLE_WORK";
+const GET_ALL_WORK = "GET_ALL_WORK";
 const DELETE_WORK = "DELETE_WORK";
 
 //action creators
@@ -23,6 +24,10 @@ const updateContact = (contactData) => {
 
 const updateTitle = (titleData) => {
   return { type: TITLE, titleData };
+};
+
+const getAllWork = (data) => {
+  return { type: GET_ALL_WORK, data };
 };
 
 const getSingleWork = (data) => {
@@ -78,6 +83,15 @@ export const updateContactData = (userId, contactData) =>
       return err;
     }
   };
+export const fetchAllWork = (userId) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.get(`/api/users/${userId}`);
+      dispatch(getAllWork(data));
+    } catch (err) {
+      return err;
+    }
+  };
 export const fetchSingleWork = (userId, imgId) =>
   async function (dispatch) {
     try {
@@ -123,6 +137,10 @@ export default function (state = {}, action) {
     case CONTACT: {
       let newState = state;
       newState.contact = action.contactData;
+      return newState;
+    }
+    case GET_ALL_WORK: {
+      let newState = { ...state, works: action.data };
       return newState;
     }
     case GET_SINGLE_WORK: {

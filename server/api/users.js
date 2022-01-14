@@ -108,6 +108,21 @@ router.get("/:username", async (req, res, next) => {
   }
 });
 
+//Get all work by a user
+router.get("/:userId", async (req, res, next) => {
+  try {
+    console.log("req.params.userId", req.params.userId);
+    let workData = await Work.findAll({
+      where: {
+        userId: req.params.userId,
+      },
+    });
+    res.status(200).send(workData);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // Get single work by a user
 router.get("/:userId/:imgId", async (req, res, next) => {
   try {
