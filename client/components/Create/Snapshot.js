@@ -7,6 +7,7 @@ import { Image } from "cloudinary-react";
 import { Uploader } from "./Uploader";
 export default function Snapshot(props) {
   let user = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
   let [show, setShow] = useState(false);
   let [displayName, setDisplayName] = useState("");

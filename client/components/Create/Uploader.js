@@ -73,7 +73,7 @@ const Modal = (props) => {
     };
   };
 
-  let submitHandler = (evt) => {
+  let submitHandler = async (evt) => {
     evt.preventDefault();
 
     if (props.displayName === "Edit Work") {
@@ -82,6 +82,15 @@ const Modal = (props) => {
     else if (props.displayName === "Add a Work") {
       uploadImage(previewSource);
     }
+    await dispatch(fetchSingleWork(null, null));
+    setState({
+      title: "",
+      year: "",
+      height: "",
+      width: "",
+      medium: "",
+      hidden: "",
+    });
     props.setShow(false);
   };
   // if preview source => then new image
@@ -126,9 +135,22 @@ const Modal = (props) => {
         }),
         headers: { "Content-type": "application/json" },
       });
+      setPreviewSource("");
     } catch (error) {
       console.log(props, error);
     }
+  };
+
+  const closeHandler = () => {
+    props.setShow(false);
+    setState({
+      title: "",
+      year: "",
+      height: "",
+      width: "",
+      medium: "",
+      hidden: "",
+    });
   };
 
   if (!props.show) {
@@ -140,7 +162,7 @@ const Modal = (props) => {
       <div className="modal-content">
         <div className="modal-header flex justify-between">
           <h2>{props.displayName}</h2>
-          <h2 onClick={() => props.setShow(false)}>
+          <h2 onClick={closeHandler}>
             <img src="/icons8-close-16.png"></img>
           </h2>
         </div>
