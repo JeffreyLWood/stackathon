@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
 
+const Work = require("./Work");
+
 const SALT_ROUNDS = 5;
 
 const User = db.define("user", {
@@ -86,6 +88,121 @@ const hashPassword = async (user) => {
   }
 };
 
+// Sets default images upon creation of an account
+const defaultImages = async (user) => {
+  try {
+    let default0 = await Work.create({
+      title: "A Brewery in Brooklyn",
+      year: 2021,
+      medium: "oil on panel",
+      imgId: "stackathonImgs/d2ncnihvslo8hlcttyqx",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: "off",
+    });
+
+    let default1 = await Work.create({
+      title: "Capote's House",
+      medium: "oil on panel",
+      year: 2021,
+      imgId: "stackathonImgs/xv4pownj9m3mtx7ljjzc",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: "off",
+    });
+    let default2 = await Work.create({
+      title: "Ice Cream",
+      medium: "oil on panel",
+      year: 2021,
+      imgId: "stackathonImgs/zgxhhmgkfdqn1kwzqyiw",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: "off",
+    });
+    let default3 = await Work.create({
+      title: "Brooklyn Heights",
+      medium: "oil on panel",
+      year: 2021,
+      imgId: "stackathonImgs/veolqujeugdq34z8g8rq",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: "off",
+    });
+    let default4 = await Work.create({
+      title: "Sidewalk",
+      medium: "oil on panel",
+      year: 2021,
+      imgId: "stackathonImgs/y9zvgvli3a3yhtih9etu",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: "off",
+    });
+    let default5 = await Work.create({
+      title: "Corner",
+      medium: "oil on panel",
+      year: 2021,
+      imgId: "stackathonImgs/hxsibu6aszagkpjkevhz",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: "off",
+    });
+    let default6 = await Work.create({
+      title: "A Street in Brooklyn",
+      medium: "oil on panel",
+      year: 2021,
+      imgId: "stackathonImgs/xv4pownj9m3mtx7ljjzc",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: "off",
+    });
+    let default7 = await Work.create({
+      title: "Street 1",
+      medium: "oil on panel",
+      year: 2021,
+      imgId: "stackathonImgs/IMG_7170_ripehb",
+      height: 5,
+      width: 4,
+      status: "available",
+      hidden: "off",
+    });
+    let default8 = await Work.create({
+      title: "Street 2",
+      medium: "oil on panel",
+      year: 2021,
+      imgId: "stackathonImgs/IMG_7147_nyupzz",
+      height: 5,
+      width: 4,
+      status: "available",
+      hidden: "off",
+    });
+    // Put defaults into array for mapping
+    let array = [
+      default0,
+      default1,
+      default2,
+      default3,
+      default4,
+      default5,
+      default6,
+      default7,
+      default8,
+    ];
+    // Map over works array and setUser to the new user.
+    // Sets default images in the user's database and displays them on their new site.
+    array.map(async (work) => await work.setUser(user));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 User.beforeCreate(hashPassword);
 User.beforeUpdate(hashPassword);
 User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));
+User.afterCreate(defaultImages);
