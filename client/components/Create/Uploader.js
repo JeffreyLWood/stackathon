@@ -118,7 +118,6 @@ const Modal = (props) => {
 
   const updateData = async (base64EncodedImage) => {
     try {
-      console.log("updateData base64EncodedImage", base64EncodedImage.length);
       await fetch("/api/update", {
         method: "POST",
         body: JSON.stringify({
@@ -300,7 +299,7 @@ const Modal = (props) => {
           </form>
         </div>
         {/* Modal Footer */}
-        <div className="modal-footer">test</div>
+        <div className="modal-footer"></div>
       </div>
     </div>
   );

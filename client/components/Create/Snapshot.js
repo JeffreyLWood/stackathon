@@ -13,7 +13,6 @@ export default function Snapshot(props) {
   let [show, setShow] = useState(false);
   let [displayName, setDisplayName] = useState("");
   let [imgId, setImgId] = useState("");
-  console.log("propsuser", user);
 
   useEffect(() => {
     async function loadUserData() {
