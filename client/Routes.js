@@ -17,7 +17,6 @@ import { CV } from "./components/Site/CV";
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
-    console.log("props", this.props);
   }
 
   render() {

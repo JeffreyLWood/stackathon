@@ -22,7 +22,6 @@ export const Work = (props) => {
   console.log("user", user);
   return (
     <div>
-      <Navbar data={props} user={user} />
       <div className="flex justify-center flex-wrap w-full">
         {user.works &&
           user.works.map((work, index) => {

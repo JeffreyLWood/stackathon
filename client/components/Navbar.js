@@ -3,21 +3,43 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
 import Create from "./Create/Create";
+import SiteTitle from "./Create/SiteTitle";
+
 const Navbar = ({ handleClick, isLoggedIn, user }) => (
-  <div className="flex">
+  <>
+    {console.log("user", user)},
     {isLoggedIn ? (
-      <div className="p-5 flex w-full justify-between space-x-5">
+      <div className="grid mb-5">
         {/* The navbar will show these links after you log in */}
-        <div className="siteTitle">{user.siteTitle}</div>
-        <div className="flex space-x-5">
+
+        <div className="justify-self-end pt-2">
           <Link to={`/${user.username}`}>
-            <button type="button" className="pill">
+            <button type="button" className="pillDark mx-2">
               View Site
             </button>
           </Link>
-          <a href="#" className="p-1" onClick={handleClick}>
+          <a href="#" className="pill mx-2" onClick={handleClick}>
             Logout
           </a>
+        </div>
+
+        <div className="w-full p-3 flex justify-between items-baseline">
+          <SiteTitle user={user} />
+
+          <div className="flex flex-row space-x-5">
+            <Link to={`/${user.username}`} className="subHeader">
+              <div>Work</div>
+            </Link>
+            <Link to={`/${user.username}/about`} className="subHeader">
+              <div>About</div>
+            </Link>
+            <Link to={`/${user.username}/cv`} className="subHeader">
+              <div>CV</div>
+            </Link>
+            <Link to={`/${user.username}/contact`} className="subHeader">
+              <div>Contact</div>
+            </Link>
+          </div>
         </div>
       </div>
     ) : (
@@ -27,7 +49,7 @@ const Navbar = ({ handleClick, isLoggedIn, user }) => (
         <Link to="/signup">Sign Up</Link>
       </div>
     )}
-  </div>
+  </>
 );
 
 /**

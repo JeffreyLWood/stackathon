@@ -74,11 +74,42 @@
 }
 
 .pill {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  border-width: 2px;
+  padding-left: 0.7rem;
+  padding-right: 0.7rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  border-width: 1px;
   border-radius: 9999px;
   border-color: black;
+}
+
+.pill:hover {
+  padding-left: 0.7rem;
+  padding-right: 0.7rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  border-width: 1px;
+  border-radius: 9999px;
+  border-color: black;
+  background-color: black;
+  color: white;
+}
+
+.pillDark {
+  padding-left: 0.7rem;
+  padding-right: 0.7rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  border-radius: 9999px;
+  background-color: black;
+  color: white;
+}
+
+input {
+  outline-width: 2px;
+  outline-style: hidden;
+}
+
+input:focus {
+  outline: none;
 }

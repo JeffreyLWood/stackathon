@@ -15,9 +15,5 @@ export const CV = (props) => {
     fetchData();
   }, []);
 
-  return (
-    <div>
-      <Navbar data={props} user={user} />
-    </div>
-  );
+  return <div>cv here</div>;
 };

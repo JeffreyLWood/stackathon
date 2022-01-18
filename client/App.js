@@ -9,6 +9,7 @@ const App = () => {
 
   return (
     <div>
+      <Navbar user={user} />
       <Routes user={user} />
     </div>
   );
