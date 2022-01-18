@@ -72,3 +72,13 @@
   overflow: scroll;
   scrollbar-width: 0;
 }
+
+.pill {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  border-width: 2px;
+  border-radius: 9999px;
+  border-color: black;
+}

@@ -11,10 +11,7 @@ const Navbar = ({ handleClick, isLoggedIn, user }) => (
         <div className="siteTitle">{user.siteTitle}</div>
         <div className="flex space-x-5">
           <Link to={`/${user.username}`}>
-            <button
-              type="button"
-              className="p-1 border-2 rounded-md border-black"
-            >
+            <button type="button" className="pill">
               View Site
             </button>
           </Link>

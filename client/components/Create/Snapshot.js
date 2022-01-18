@@ -72,7 +72,7 @@ export default function Snapshot(props) {
       <button
         type="submit"
         onClick={(event) => submitHandler(event)}
-        className="btn bg-black my-5 text-white w-18 h-8 p-2 rounded-md"
+        className="pill m-2"
         value="Add a Work"
       >
         Add a Work
