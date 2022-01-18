@@ -51,17 +51,6 @@ export const authenticate =
     }
   };
 
-// export const updateTitleData = (userId, titleData) =>
-//   async function (dispatch) {
-//     try {
-//       console.log("title store", titleData);
-//       let { data } = await axios.put(`/auth/${userId}`, titleData);
-//       dispatch(updateTitle(data));
-//     } catch (err) {
-//       return err;
-//     }
-//   };
-
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);
   history.push("/login");

@@ -14,6 +14,7 @@ export const About = (props) => {
     }
     loadUserData();
   }, []);
+
   return (
     <div>
       <div className="grid grid-cols-12 grid-rows-6">
