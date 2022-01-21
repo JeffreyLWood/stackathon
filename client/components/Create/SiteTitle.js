@@ -6,10 +6,9 @@ import { fetchUserData } from "../../store/user";
 
 export default function SiteTitle(props) {
   let dispatch = useDispatch();
-  let titleData = useSelector((state) => state.auth.siteTitle);
-  let userData = useSelector((state) => state.user);
+  let titleData = useSelector((state) => state.user.siteTitle);
   let [user, setUser] = useState(props.user);
-  let [title, setTitle] = useState(titleData);
+  let [title, setTitle] = useState(props.user.siteTitle);
 
   let changeHandler = (evt) => {
     evt.preventDefault();
@@ -18,7 +17,7 @@ export default function SiteTitle(props) {
 
   useEffect(() => {
     dispatch(fetchUserData(props.user.username));
-  }, [user]);
+  }, [title]);
 
   let submitHandler = (evt) => {
     evt.preventDefault();

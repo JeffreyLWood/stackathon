@@ -8,10 +8,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 export const Navbar = (props) => {
-  let user = useSelector((state) => state.user);
+  let user = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-  console.log(props);
+  console.log("user", user);
 
   const handleClick = () => {
     dispatch(logout());
@@ -53,7 +53,7 @@ export const Navbar = (props) => {
         </div>
       </div>
     );
-  } else if (!isLoggedIn) {
+  } else if (!user) {
     return (
       <div className="grid mb-5">
         <div className="justify-self-end pt-2"></div>
