@@ -15,30 +15,30 @@ const AuthForm = (props) => {
           <label htmlFor="username">
             <small>Username</small>
           </label>
-          <input name="username" type="text" />
+          <input name="username" type="text" className="border-b-2 mx-2" />
         </div>
         <div>
           <label htmlFor="password">
             <small>Password</small>
           </label>
-          <input name="password" type="password" />
+          <input name="password" type="password" className="border-b-2 mx-2" />
         </div>
         {displayName === "Sign Up" ? (
           <div>
             <label htmlFor="email">
               <small>Email</small>
             </label>
-            <input name="email" type="text" />
+            <input name="email" type="text" className="border-b-2 mx-2" />
             <label htmlFor="firstName">
               <small>First Name</small>
             </label>
-            <input name="firstName" type="text" />
+            <input name="firstName" type="text" className="border-b-2 mx-2" />
 
             <div>
               <label htmlFor="lastName">
                 <small>Last Name</small>
               </label>
-              <input name="lastName" type="text" />
+              <input name="lastName" type="text" className="border-b-2 mx-2" />
             </div>
           </div>
         ) : null}

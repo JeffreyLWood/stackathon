@@ -40,9 +40,9 @@ const Routes = () => {
         </Switch>
       ) : (
         <Switch>
-          <Route exact path="/" component={Login} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/" component={Login} displayName="login" />
+          <Route exact path="/login" component={Login} displayName="login" />
+          <Route exact path="/signup" component={Signup} displayName="signup" />
           <Route exact path="/:username" component={Work} data={user} />
           <Route exact path="/:username/work" component={Work} />
           <Route exact path="/:username/about" component={About} />

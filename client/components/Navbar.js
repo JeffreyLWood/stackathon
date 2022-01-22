@@ -56,7 +56,11 @@ export const Navbar = (props) => {
       </div>
     );
     // If not logged in and at the login page
-  } else if (props.history.location.pathname === "/login") {
+  } else if (
+    props.history.location.pathname === "/" ||
+    props.history.location.pathname === "/login" ||
+    props.history.location.pathname === "/signup"
+  ) {
     return (
       <div className="grid mb-5">
         <div className="justify-self-end pt-2"></div>
