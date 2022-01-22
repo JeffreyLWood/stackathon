@@ -11,13 +11,16 @@ export const Navbar = (props) => {
   let user = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-  console.log("user", user);
+  console.log(
+    "props.history.location.pathname",
+    props.history.location.pathname
+  );
 
   const handleClick = () => {
     dispatch(logout());
   };
 
-  if (user) {
+  if (user.username) {
     return (
       <div className="grid mb-5">
         {/* The navbar will show these links after you log in */}
@@ -34,8 +37,7 @@ export const Navbar = (props) => {
         </div>
 
         <div className="w-full p-3 flex justify-between items-baseline">
-          <SiteTitle user={user} />
-
+          <div className="siteTitle">{user.siteTitle}</div>
           <div className="flex flex-row space-x-5">
             <Link to={`/${user.username}`} className="subHeader">
               <div>Work</div>
@@ -53,16 +55,17 @@ export const Navbar = (props) => {
         </div>
       </div>
     );
-  } else if (!user) {
+    // If not logged in and at the login page
+  } else if (props.history.location.pathname === "/login") {
     return (
       <div className="grid mb-5">
         <div className="justify-self-end pt-2"></div>
 
-        <div className="w-full p-3 flex justify-between items-baseline">
-          <SiteTitle user={user} />
-
+        <div className="w-full p-3 flex items-baseline">
+          <span className="siteTitle">Artist Website Maker</span>
+          <img src="/favicon.ico" className="mx-4" />
           <div className="flex flex-row space-x-5">
-            <Link to={`/${user.username}`} className="subHeader">
+            {/* <Link to={`/${user.username}`} className="subHeader">
               <div>Work</div>
             </Link>
             <Link to={`/${user.username}/about`} className="subHeader">
@@ -73,7 +76,7 @@ export const Navbar = (props) => {
             </Link>
             <Link to={`/${user.username}/contact`} className="subHeader">
               <div>Contact</div>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

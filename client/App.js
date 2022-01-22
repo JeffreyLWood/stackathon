@@ -4,12 +4,12 @@ import { Navbar } from "./components/Navbar";
 import Routes from "./Routes";
 import { useSelector } from "react-redux";
 
-const App = () => {
+const App = (props) => {
   let user = useSelector((state) => state.auth);
 
   return (
     <div>
-      <Navbar user={user} />
+      <Navbar user={user} history={props.history} />
       <Routes user={user} />
     </div>
   );
