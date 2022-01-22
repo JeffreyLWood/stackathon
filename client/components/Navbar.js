@@ -5,26 +5,23 @@ import { logout } from "../store";
 import Create from "./Create/Create";
 import SiteTitle from "./Create/SiteTitle";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { fetchUserData } from "../store/user";
 
 export const Navbar = (props) => {
+  // Logged in user data
   let user = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-  console.log(
-    "props.history.location.pathname",
-    props.history.location.pathname
-  );
 
   const handleClick = () => {
     dispatch(logout());
   };
 
+  // If logged in, you can view the view site and logout buttons
   if (user.username) {
     return (
       <div className="grid mb-5">
-        {/* The navbar will show these links after you log in */}
-
         <div className="justify-self-end pt-2">
           <Link to={`/${user.username}`}>
             <button type="button" className="pillDark mx-2">
@@ -81,6 +78,41 @@ export const Navbar = (props) => {
             <Link to={`/${user.username}/contact`} className="subHeader">
               <div>Contact</div>
             </Link> */}
+          </div>
+        </div>
+      </div>
+    );
+    // Not logged in and at a user's site, view the regular navbar without auth or view buttons
+  } else if (!user.userName && props.history.location.pathname !== "/login") {
+    return (
+      <div>
+        <div className="w-full p-3 flex justify-between items-baseline">
+          <div className="siteTitle">{user.siteTitle}</div>
+          <div className="flex flex-row space-x-5">
+            <Link
+              to={`/${props.history.location.pathname.split("/")[1]}`}
+              className="subHeader"
+            >
+              <div>Work</div>
+            </Link>
+            <Link
+              to={`/${props.history.location.pathname.split("/")[1]}/about`}
+              className="subHeader"
+            >
+              <div>About</div>
+            </Link>
+            <Link
+              to={`/${props.history.location.pathname.split("/")[1]}/cv`}
+              className="subHeader"
+            >
+              <div>CV</div>
+            </Link>
+            <Link
+              to={`/${props.history.location.pathname.split("/")[1]}/contact`}
+              className="subHeader"
+            >
+              <div>Contact</div>
+            </Link>
           </div>
         </div>
       </div>

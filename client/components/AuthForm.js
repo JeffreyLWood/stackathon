@@ -2,14 +2,19 @@ import React from "react";
 import { connect } from "react-redux";
 import { authenticate } from "../store";
 import Navbar from "./Navbar";
+import { useState } from "react";
 /**
  * COMPONENT
  */
 const AuthForm = (props) => {
-  const { name, displayName, handleSubmit, error } = props;
-
+  let { name, displayName, handleSubmit, error } = props;
+  let [curDisplayName, setDisplayName] = useState(displayName);
   return (
     <>
+      <button
+        onClick={(e) => setDisplayName(e.target.value)}
+        value={displayName === "Login" ? "Sign Up" : "Login"}
+      />
       <form onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="username">
