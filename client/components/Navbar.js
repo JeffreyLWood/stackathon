@@ -11,15 +11,21 @@ import { fetchUserData } from "../store/user";
 export const Navbar = (props) => {
   // Logged in user data
   let user = useSelector((state) => state.auth);
+  // If logged out, site title is fetched like this:
   let siteTitle = useSelector((state) => state.user.siteTitle);
 
+  // Used for loading user's data based on the url for logged out viewing
   useEffect(() => {
     async function load() {
       await fetchUserData(props.history.location.pathname.split("/")[1]);
     }
-
     load();
-  }, []);
+    // Not re rendering
+  }, [props.history.location.pathname]);
+
+  // useEffect (()=> {
+
+  // }, [props.history.location.pathname])
 
   const dispatch = useDispatch();
 
@@ -43,8 +49,11 @@ export const Navbar = (props) => {
         </div>
 
         <div className="w-full p-3 flex justify-between items-baseline">
-          <span className="siteTitle">Artist Website Maker</span>
-          <img src="/favicon.ico" className="mx-4" />
+          {/* Should load AWS instead of siteTitle on Create view. */}
+          {/* <span className="siteTitle">Artist Website Maker</span>
+          <img src="/favicon.ico" className="mx-4" /> */}
+
+          <div className="siteTitle">{user.siteTitle}</div>
           <div className="flex flex-row space-x-5">
             <Link to={`/${user.username}`} className="subHeader">
               <div>Work</div>
@@ -62,7 +71,7 @@ export const Navbar = (props) => {
         </div>
       </div>
     );
-  } else if (user.username) {
+  } else if (user.username && props.history.location.pathname !== "/home") {
     <div className="grid mb-5">
       <div className="justify-self-end pt-2">
         <Link to={`/${user.username}`}>
