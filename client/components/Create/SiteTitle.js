@@ -15,8 +15,6 @@ export default function SiteTitle(props) {
 
   let submitHandler = (evt) => {
     evt.preventDefault();
-    console.log("text", title);
-
     dispatch(updateTitleData(props.user.id, { title }));
     dispatch(fetchUserData(props.user.username));
   };
@@ -33,10 +31,7 @@ export default function SiteTitle(props) {
           />
         </div>
         <div>
-          <button
-            type="submit"
-            className="my-4 p-2 border-2 rounded-md subHeader"
-          >
+          <button type="submit" className="pill my-2">
             Submit
           </button>
         </div>

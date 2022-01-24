@@ -12,7 +12,7 @@ import Snapshot from "./Snapshot";
 import { Image } from "cloudinary-react";
 import { fetchUserData } from "../../store/user";
 export const Create = () => {
-  let user = useSelector((state) => state.auth);
+  let user = useSelector((state) => state.user);
   let worksData = useSelector((state) => state.user.works);
 
   const dispatch = useDispatch();
