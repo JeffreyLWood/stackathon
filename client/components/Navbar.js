@@ -49,7 +49,7 @@ export const Navbar = (props) => {
         </div>
 
         <div className="w-full p-3 flex justify-between items-baseline">
-          {/* Should load AWS instead of siteTitle on Create view. */}
+          {/* Should load AWS* instead of siteTitle on Create view. */}
           {/* <span className="siteTitle">Artist Website Maker</span>
           <img src="/favicon.ico" className="mx-4" /> */}
 
