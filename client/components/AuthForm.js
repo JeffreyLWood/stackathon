@@ -3,18 +3,24 @@ import { connect } from "react-redux";
 import { authenticate } from "../store";
 import Navbar from "./Navbar";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 /**
  * COMPONENT
  */
 const AuthForm = (props) => {
   let { name, displayName, handleSubmit, error } = props;
-  let [curDisplayName, setDisplayName] = useState(displayName);
+
   return (
     <>
-      <button
-        onClick={(e) => setDisplayName(e.target.value)}
-        value={displayName === "Login" ? "Sign Up" : "Login"}
-      />
+      {displayName === "Sign Up" ? (
+        <Link to="/login">
+          <button type="button">Login</button>
+        </Link>
+      ) : (
+        <Link to="/signup">
+          <button type="button">SignUp</button>
+        </Link>
+      )}
       <form onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="username">
