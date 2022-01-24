@@ -28,7 +28,7 @@ export const me = () => async (dispatch) => {
         authorization: token,
       },
     });
-    history.push("/");
+    history.push("/home");
     return dispatch(setAuth(res.data));
   }
 };
@@ -50,17 +50,6 @@ export const authenticate =
       return dispatch(setAuth({ error: authError }));
     }
   };
-
-// export const updateTitleData = (userId, titleData) =>
-//   async function (dispatch) {
-//     try {
-//       console.log("title store", titleData);
-//       let { data } = await axios.put(`/auth/${userId}`, titleData);
-//       dispatch(updateTitle(data));
-//     } catch (err) {
-//       return err;
-//     }
-//   };
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);

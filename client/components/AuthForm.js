@@ -2,44 +2,54 @@ import React from "react";
 import { connect } from "react-redux";
 import { authenticate } from "../store";
 import Navbar from "./Navbar";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 /**
  * COMPONENT
  */
 const AuthForm = (props) => {
-  const { name, displayName, handleSubmit, error } = props;
+  let { name, displayName, handleSubmit, error } = props;
 
   return (
     <>
-      <Navbar />
+      {displayName === "Sign Up" ? (
+        <Link to="/login">
+          <button type="button">Login</button>
+        </Link>
+      ) : (
+        <Link to="/signup">
+          <button type="button">SignUp</button>
+        </Link>
+      )}
       <form onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="username">
             <small>Username</small>
           </label>
-          <input name="username" type="text" />
+          <input name="username" type="text" className="border-b-2 mx-2" />
         </div>
         <div>
           <label htmlFor="password">
             <small>Password</small>
           </label>
-          <input name="password" type="password" />
+          <input name="password" type="password" className="border-b-2 mx-2" />
         </div>
         {displayName === "Sign Up" ? (
           <div>
             <label htmlFor="email">
               <small>Email</small>
             </label>
-            <input name="email" type="text" />
+            <input name="email" type="text" className="border-b-2 mx-2" />
             <label htmlFor="firstName">
               <small>First Name</small>
             </label>
-            <input name="firstName" type="text" />
+            <input name="firstName" type="text" className="border-b-2 mx-2" />
 
             <div>
               <label htmlFor="lastName">
                 <small>Last Name</small>
               </label>
-              <input name="lastName" type="text" />
+              <input name="lastName" type="text" className="border-b-2 mx-2" />
             </div>
           </div>
         ) : null}

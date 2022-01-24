@@ -39,7 +39,6 @@ export const Create = () => {
 
   return (
     <>
-      <Navbar user={user} />
       <div className="flex flex-col w-full">
         <div className="flex flex-row w-full">
           <section className="m-5 w-1/6 subHeader">Site Title</section>
