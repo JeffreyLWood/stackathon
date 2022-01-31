@@ -22,7 +22,7 @@ export const Work = (props) => {
 
   return (
     <div>
-      <div className="flex justify-center flex-wrap w-full">
+      <div className="flex justify-between  flex-wrap w-full">
         {user.works &&
           user.works.map((work, index) => {
             return <Artwork key={index} data={work} />;

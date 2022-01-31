@@ -17,9 +17,9 @@ export const Create = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    user = dispatch(fetchUserData(user.userName));
-  }, []);
+  // if (user) {
+  //   user = dispatch(fetchUserData(user.userName));
+  // }
 
   const [imageIds, setImageIds] = useState();
 

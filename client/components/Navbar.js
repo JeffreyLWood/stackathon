@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { logout } from "../store";
 import Create from "./Create/Create";
 import SiteTitle from "./Create/SiteTitle";
@@ -13,6 +14,8 @@ export const Navbar = (props) => {
   let user = useSelector((state) => state.auth);
   // If logged out, site title is fetched like this:
   let siteTitle = useSelector((state) => state.user.siteTitle);
+  let [path, setPath] = useState(window.location.pathname);
+  const dispatch = useDispatch();
 
   // Used for loading user's data based on the url for logged out viewing
   useEffect(() => {
@@ -20,23 +23,26 @@ export const Navbar = (props) => {
       await fetchUserData(props.history.location.pathname.split("/")[1]);
     }
     load();
-    //   // Not re rendering
-  }, [props.history.location.pathname]);
-
-  // useEffect (()=> {
-
-  // }, [props.history.location.pathname])
-
-  const dispatch = useDispatch();
+    // Not re rendering
+  }, []);
 
   const handleClick = () => {
     dispatch(logout());
   };
 
+  useEffect(() => {
+    console.log("path", path);
+  }, [path]);
+
+  const linkHandler = () => {
+    setPath(`/${user.username}`);
+  };
+
   // If logged in, you can view the view site and logout buttons
-  if (props.history.location.pathname === "/home") {
+  // if (props.history.location.pathname === "/home") {
+  if (props) {
     return (
-      <div className="grid mb-5">
+      <div className="grid mb-5 px-10">
         <div className="justify-self-end pt-2">
           <Link to={`/${user.username}`}>
             <button type="button" className="pillDark mx-2">
@@ -55,7 +61,11 @@ export const Navbar = (props) => {
 
           <div className="siteTitle">{user.siteTitle}</div>
           <div className="flex flex-row space-x-5">
-            <Link to={`/${user.username}`} className="subHeader">
+            <Link
+              to={`/${user.username}`}
+              className="subHeader"
+              onClick={linkHandler}
+            >
               <div>Work</div>
             </Link>
             <Link to={`/${user.username}/about`} className="subHeader">
