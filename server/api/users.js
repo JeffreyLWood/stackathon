@@ -6,7 +6,6 @@ module.exports = router;
 
 router.get("/", async (req, res, next) => {
   try {
-    console.log("work", Object(Work.prototype));
     const users = await User.findAll({
       // explicitly select only the id and username fields - even though
       // users' passwords are encrypted, it won't help if we just
@@ -23,7 +22,7 @@ router.get("/", async (req, res, next) => {
 router.put("/:userId/title", async (req, res, next) => {
   try {
     let user = await User.findByPk(req.params.userId);
-    console.log("req.body", req.body);
+
     await user.update({ siteTitle: req.body.title });
     await user.save();
     res.status(200).send(user);
@@ -34,13 +33,15 @@ router.put("/:userId/title", async (req, res, next) => {
 
 router.post("/:userId/about", async (req, res, next) => {
   try {
-    await About.create({
-      text: req.body.text,
-      userId: req.params.userId,
-    });
-    let newAbout = await About.findOne({
+    await About.destroy({
       where: { userId: req.params.userId },
     });
+
+    let newAbout = await About.create({
+      text: req.body.aboutText,
+      userId: req.params.userId,
+    });
+
     res.status(200).send(newAbout);
   } catch (err) {
     next(err);
@@ -111,7 +112,6 @@ router.get("/:username", async (req, res, next) => {
 //Get all work by a user
 router.get("/:userId", async (req, res, next) => {
   try {
-    console.log("req.params.userId", req.params.userId);
     let workData = await Work.findAll({
       where: {
         userId: req.params.userId,

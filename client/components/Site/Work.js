@@ -19,7 +19,7 @@ export const Work = (props) => {
     }
     loadUserData();
   }, []);
-  console.log("user", user);
+
   return (
     <div>
       <div className="flex justify-center flex-wrap w-full">

@@ -629,6 +629,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   max-height: 11rem;
 }
 
+.w-4\/6 {
+  width: 66.666667%;
+}
+
 .w-full {
   width: 100%;
 }
@@ -643,10 +647,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-2\/6 {
   width: 33.333333%;
-}
-
-.w-4\/6 {
-  width: 66.666667%;
 }
 
 .shrink {
@@ -760,6 +760,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
+.p-2 {
+  padding: 0.5rem;
 }
 
 .p-1 {

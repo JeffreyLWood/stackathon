@@ -10,8 +10,7 @@ router.post("/upload", async (req, res) => {
     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
       upload_preset: "stackathon",
     });
-    // console.log("uploadedResponse", uploadedResponse);
-    console.log("req.body", req.body);
+
     // let user = await user.findByPk(req.body.userId);
     await Work.create({
       imgId: uploadedResponse.public_id,
@@ -37,7 +36,7 @@ router.post("/update", async (req, res) => {
     //   "req.body.imgId",
     //   req.body.imgId
     // );
-    console.log("req.body.imgId", req.body.imgId);
+
     let work = await Work.findOne({
       where: {
         imgId: req.body.imgId,
@@ -47,12 +46,11 @@ router.post("/update", async (req, res) => {
 
     // if req.body.data, then there is a new image, else, skip the image update and just update the data
     if (req.body.newImage) {
-      console.log("new image", req.body.newImage);
       const fileStr = req.body.data;
       const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
         upload_preset: "stackathon",
       });
-      console.log("uploadedResponse.publicId", uploadedResponse.public_id);
+
       await work.update({
         imgId: uploadedResponse.public_id,
         userId: req.body.userId,
@@ -64,7 +62,6 @@ router.post("/update", async (req, res) => {
         hidden: req.body.hidden,
       });
     } else {
-      console.log("old image");
       await work.update({
         userId: req.body.userId,
         title: req.body.title,

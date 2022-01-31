@@ -20,7 +20,7 @@ export const Navbar = (props) => {
       await fetchUserData(props.history.location.pathname.split("/")[1]);
     }
     load();
-    // Not re rendering
+    //   // Not re rendering
   }, [props.history.location.pathname]);
 
   // useEffect (()=> {

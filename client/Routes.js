@@ -21,7 +21,7 @@ const Routes = () => {
   //   this.props.loadInitialData();
   // }
   let user = useSelector((state) => state.auth);
-  console.log("state.auth", user);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(me());

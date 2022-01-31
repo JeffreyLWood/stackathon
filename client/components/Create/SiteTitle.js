@@ -16,7 +16,6 @@ export default function SiteTitle(props) {
   let submitHandler = (evt) => {
     evt.preventDefault();
     dispatch(updateTitleData(props.user.id, { title }));
-    dispatch(fetchUserData(props.user.username));
   };
   return (
     <div className="h-full">

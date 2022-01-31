@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAboutText } from "../../store/create";
 import { useEffect, useState } from "react";
-
+import { fetchUserData } from "../../store/user";
 const About = (props) => {
   let aboutData = props.user.about;
 
@@ -14,7 +14,7 @@ const About = (props) => {
 
   useEffect(() => {
     setAboutText(text);
-  }, text);
+  }, [text]);
 
   let changeHandler = (evt) => {
     evt.preventDefault();
@@ -23,16 +23,17 @@ const About = (props) => {
 
   let submitHandler = (evt) => {
     evt.preventDefault();
-    dispatch(updateAboutText(props.user.id, aboutText));
+    dispatch(updateAboutText(props.user.id, { aboutText }));
+    dispatch(fetchUserData(props.user.userName));
   };
 
   return (
     <form className="space-x-5" onSubmit={submitHandler}>
       <div>
         <textarea
-          rows="5"
+          rows="15"
           cols="50"
-          className="border-2 w-4/6"
+          className="border-2 w-4/6 p-2"
           name="about"
           type="text"
           onChange={changeHandler}
