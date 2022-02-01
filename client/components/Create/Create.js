@@ -7,19 +7,18 @@ import CV from "./CV";
 import Contact from "./Contact";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Navbar from "../Navbar";
+import { Navbar } from "../Navbar";
 import Snapshot from "./Snapshot";
 import { Image } from "cloudinary-react";
 import { fetchUserData } from "../../store/user";
-export const Create = () => {
+
+export const Create = (props) => {
   let user = useSelector((state) => state.user);
   let worksData = useSelector((state) => state.user.works);
 
   const dispatch = useDispatch();
 
-  // if (user) {
-  //   user = dispatch(fetchUserData(user.userName));
-  // }
+  // user = dispatch(fetchUserData(props.user.username));
 
   const [imageIds, setImageIds] = useState();
 
@@ -39,6 +38,7 @@ export const Create = () => {
 
   return (
     <>
+      <Navbar user={user} />
       <div className="flex flex-col w-full">
         <div className="flex flex-row w-full">
           <section className="m-5 w-1/6 subHeader">Site Title</section>

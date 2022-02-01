@@ -4,6 +4,7 @@ import { Navbar } from "./Navbar";
 import { fetchUserData } from "../../store/user";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Footer from "./Footer";
 export const CV = (props) => {
   let user = useSelector((state) => state.user);
 
@@ -15,5 +16,11 @@ export const CV = (props) => {
     fetchData();
   }, []);
 
-  return <div>cv here</div>;
+  return (
+    <>
+      <Navbar user={user} />
+      <div>cv here</div>
+      <Footer />
+    </>
+  );
 };

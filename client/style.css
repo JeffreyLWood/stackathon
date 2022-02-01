@@ -11,6 +11,14 @@
   letter-spacing: 0.1em;
 }
 
+.onView {
+  font-size: x-large;
+  font-weight: 300;
+  display: flex;
+  align-items: flex-end;
+  letter-spacing: 0.1em;
+}
+
 .subHeader {
   font-weight: 300;
   text-transform: uppercase;

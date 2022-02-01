@@ -9,7 +9,7 @@ const App = (props) => {
   let user = useSelector((state) => state.auth);
   return (
     <div>
-      <Navbar user={user} history={props.history} />
+      {/* <Navbar user={user} history={props.history} /> */}
       <Routes user={user} />
     </div>
   );

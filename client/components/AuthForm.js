@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { authenticate } from "../store";
-import Navbar from "./Navbar";
+import { Navbar } from "./Navbar";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 /**
@@ -12,6 +12,7 @@ const AuthForm = (props) => {
 
   return (
     <>
+      <Navbar />
       {displayName === "Sign Up" ? (
         <Link to="/login">
           <button type="button">Login</button>

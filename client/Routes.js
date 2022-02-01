@@ -30,7 +30,7 @@ const Routes = () => {
     <div>
       {user.username ? (
         <Switch>
-          <Route exact path="/" component={Create} />
+          <Route exact path="/" component={Create} user={user} />
           <Route exact path="/home" component={Create} />
           <Route exact path="/:username" component={Work} data={user} />
           <Route exact path="/:username/work" component={Work} />

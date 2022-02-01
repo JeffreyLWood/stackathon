@@ -7,7 +7,7 @@ export const Navbar = (props) => {
   let siteTitle = `${props.user.siteTitle}`;
 
   return (
-    <nav className="flex flex-row justify-between h-1/6 p-5">
+    <nav className="flex flex-row justify-between h-18 items-end mx-10 mt-10">
       <div className="siteTitle">
         <Link to={`/${props.user.userName}`}>{siteTitle}</Link>
       </div>

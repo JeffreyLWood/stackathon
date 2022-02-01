@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateAboutText } from "../../store/create";
 import { useEffect, useState } from "react";
 import { fetchUserData } from "../../store/user";
+
 const About = (props) => {
   let aboutData = props.user.about;
 
