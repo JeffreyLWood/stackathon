@@ -141,17 +141,15 @@ input:focus {
   height: 100%;
 }
 
-.workModalBody img {
-  /* height: 32rem; */
-  height: 100%;
-}
-
-.workModalContainer {
+.workModalImgContainer {
   width: 50%;
   height: 70%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.workModalImgContainer img {
+  object-fit: contain;
 }
 
 .workModalTextContainer {
@@ -184,23 +182,27 @@ input:focus {
     padding-top: 5rem;
   }
 
-  .workModalBody img {
+  .workModalImgContainer {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: contain;
+  }
+  .workModalImgContainer img {
     padding-left: 2rem;
     padding-right: 2rem;
     min-height: 25rem;
     object-fit: contain;
     margin: 0rem;
   }
-  .workModalContainer {
-    width: 100%;
-    align-items: center;
-  }
   .workModalContainer ul {
     padding-left: 4rem;
   }
   .workModalTextContainer {
     width: 100%;
-    height: 70%;
+
     display: flex;
     justify-content: flex-start;
     align-items: center;
