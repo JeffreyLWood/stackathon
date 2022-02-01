@@ -23,6 +23,7 @@ export default function Artwork(props) {
       <ArtworkModal
         show={show}
         setShow={setShow}
+        user={props.user}
         cloudName="jeffreywood"
         publicId={props.data.imgId}
         data={props.data}

@@ -11,24 +11,24 @@ export const Work = (props) => {
   let user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   // let [user, setUser] = useState({});
-
+  let data;
   useEffect(() => {
     async function loadUserData() {
-      let data = await dispatch(fetchUserData(props.match.params.username));
+      data = await dispatch(fetchUserData(props.match.params.username));
 
       // setUser(data);
       return data;
     }
     loadUserData();
   }, []);
-
+  console.log("user", user);
   return (
     <>
       <Navbar user={user} />
       <div className="flex justify-between flex-wrap w-full">
         {user.works &&
           user.works.map((work, index) => {
-            return <Artwork key={index} data={work} />;
+            return <Artwork key={index} data={work} user={user} />;
           })}
       </div>
 

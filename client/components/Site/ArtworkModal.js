@@ -1,9 +1,12 @@
 import React from "react";
 import { Image } from "cloudinary-react";
+
 export default function ArtworkModal(props) {
+  console.log("console.log(props.user.siteTitle)", props.user);
   if (!props.show) {
     return null;
   }
+
   return (
     <div className="workModal">
       <div
@@ -18,7 +21,9 @@ export default function ArtworkModal(props) {
         </div>
         <div className="workModalTextContainer">
           <ul>
-            <li className="uppercase italic font-light text-large mb-6"></li>
+            <li className="uppercase tracking-widest text-gray-400 font-light text-large mb-2">
+              {props.user.siteTitle}
+            </li>
             <li className="uppercase italic font-light text-large mb-6 tracking-widest">
               {props.data.title}
             </li>

@@ -19,7 +19,7 @@ export const CV = (props) => {
   return (
     <>
       <Navbar user={user} />
-      <div>cv here</div>
+      <div className="h-screen">cv here</div>
       <Footer />
     </>
   );

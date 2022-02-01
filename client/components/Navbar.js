@@ -31,7 +31,7 @@ export const Navbar = (props) => {
 
   return (
     <div className="flex justify-between items-end mb-5 px-10 h-16">
-      <span className="onView">OnView</span>
+      <span className="onView">SlctdWork</span>
 
       <div className="">
         {user.username ? (
