@@ -556,14 +556,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin: 0.5rem;
 }
 
-.my-4 {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+}
+
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .my-1 {
@@ -576,13 +576,35 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 0.75rem;
 }
 
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .mx-4 {
   margin-left: 1rem;
   margin-right: 1rem;
 }
 
+.mx-10 {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+}
+
 .mb-5 {
   margin-bottom: 1.25rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.mt-8 {
+  margin-top: 2rem;
+}
+
+.mt-10 {
+  margin-top: 2.5rem;
 }
 
 .block {
@@ -621,16 +643,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 14rem;
 }
 
-.h-1\/6 {
-  height: 16.666667%;
+.h-2\/6 {
+  height: 33.333333%;
 }
 
-.max-h-44 {
-  max-height: 11rem;
+.h-16 {
+  height: 4rem;
 }
 
-.w-3\/6 {
-  width: 50%;
+.w-4\/6 {
+  width: 66.666667%;
 }
 
 .w-full {
@@ -649,10 +671,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 33.333333%;
 }
 
-.w-4\/6 {
-  width: 66.666667%;
-}
-
 .shrink {
   flex-shrink: 1;
 }
@@ -663,6 +681,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .transform {
   transform: var(--tw-transform);
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .resize {
@@ -689,16 +711,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   flex-wrap: wrap;
 }
 
+.items-end {
+  align-items: flex-end;
+}
+
 .items-center {
   align-items: center;
 }
 
 .items-baseline {
   align-items: baseline;
-}
-
-.justify-center {
-  justify-content: center;
 }
 
 .justify-between {
@@ -725,10 +747,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   justify-self: end;
 }
 
-.rounded-md {
-  border-radius: 0.375rem;
-}
-
 .border-2 {
   border-width: 2px;
 }
@@ -745,14 +763,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-style: hidden;
 }
 
-.border-gray-300 {
-  --tw-border-opacity: 1;
-  border-color: rgb(209 213 219 / var(--tw-border-opacity));
-}
-
 .border-blue-300 {
   --tw-border-opacity: 1;
   border-color: rgb(147 197 253 / var(--tw-border-opacity));
+}
+
+.border-gray-300 {
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
 .bg-gray-200 {
@@ -770,33 +788,62 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
-.p-1 {
-  padding: 0.25rem;
+.bg-red-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 226 226 / var(--tw-bg-opacity));
+}
+
+.bg-neutral-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 245 245 / var(--tw-bg-opacity));
 }
 
 .p-2 {
   padding: 0.5rem;
 }
 
-.p-5 {
-  padding: 1.25rem;
-}
-
-.p-4 {
-  padding: 1rem;
+.p-1 {
+  padding: 0.25rem;
 }
 
 .p-3 {
   padding: 0.75rem;
 }
 
-.py-3 {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.py-16 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
 }
 
 .pt-2 {
   padding-top: 0.5rem;
+}
+
+.pt-10 {
+  padding-top: 2.5rem;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.font-light {
+  font-weight: 300;
 }
 
 .uppercase {
@@ -811,9 +858,22 @@ Ensure the default browser behavior of the `hidden` attribute.
   text-transform: capitalize;
 }
 
+.italic {
+  font-style: italic;
+}
+
+.tracking-widest {
+  letter-spacing: 0.1em;
+}
+
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-gray-400 {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 
 .outline {
@@ -848,6 +908,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: x-large;
   font-weight: 300;
   text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.onView {
+  font-size: x-large;
+  font-weight: 300;
+  display: flex;
+  align-items: flex-end;
   letter-spacing: 0.1em;
 }
 
@@ -955,6 +1023,132 @@ input:focus {
   outline: none;
 } */
 
+.workModal {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  position: fixed;
+  background-color: #fff;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.workModalHeader {
+  top: 2rem;
+  right: 4rem;
+  position: absolute;
+}
+
+.workModalBody {
+  display: flex;
+  align-items: center;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  height: 100%;
+}
+
+.workModalImgContainer {
+  width: 50%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.workModalImgContainer img {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.workModalTextContainer {
+  width: 50%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer {
+  height: 50vh;
+  display: flex;
+  padding: 5rem;
+}
+
+.footer ul {
+  padding-right: 4rem;
+}
+
+.footer li {
+  padding-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .workModalBody {
+    flex-direction: column;
+    padding-left: 0rem;
+    padding-right: 0rem;
+    padding-top: 5rem;
+  }
+
+  .workModalImgContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -o-object-fit: contain;
+       object-fit: contain;
+  }
+
+  .workModalImgContainer img {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    min-height: 25rem;
+    -o-object-fit: contain;
+       object-fit: contain;
+    margin: 0rem;
+  }
+
+  .workModalContainer ul {
+    padding-left: 4rem;
+  }
+
+  .workModalTextContainer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 4rem;
+  }
+
+  .workModalContainer ul {
+  }
+
+  .workModalContainer li {
+    margin: 0rem;
+    padding: 0rem;
+  }
+}
+
 .hover\:border-solid:hover {
   border-style: solid;
+}
+
+@media (min-width: 768px) {
+  .md\:mx-0 {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  .md\:h-56 {
+    height: 14rem;
+  }
+
+  .md\:px-10 {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
 }

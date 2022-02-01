@@ -42,7 +42,6 @@ const deleteWork = (data) => {
 export const updateTitleData = (userId, titleData) =>
   async function (dispatch) {
     try {
-      console.log("title store", titleData);
       let { data } = await axios.put(`/api/users/${userId}/title`, titleData);
       dispatch(updateTitle(data));
     } catch (err) {
@@ -53,7 +52,6 @@ export const updateTitleData = (userId, titleData) =>
 export const updateAboutText = (userId, textData) =>
   async function (dispatch) {
     try {
-      console.log("text store", textData);
       let { data } = await axios.post(`/api/users/${userId}/about`, textData);
       dispatch(updateAbout(data));
     } catch (err) {

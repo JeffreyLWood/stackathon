@@ -11,6 +11,14 @@
   letter-spacing: 0.1em;
 }
 
+.onView {
+  font-size: x-large;
+  font-weight: 300;
+  display: flex;
+  align-items: flex-end;
+  letter-spacing: 0.1em;
+}
+
 .subHeader {
   font-weight: 300;
   text-transform: uppercase;
@@ -113,3 +121,105 @@ input {
 input:focus {
   outline: none;
 } */
+
+.workModal {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  position: fixed;
+  background-color: #fff;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.workModalHeader {
+  top: 2rem;
+  right: 4rem;
+  position: absolute;
+}
+
+.workModalBody {
+  display: flex;
+  align-items: center;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  height: 100%;
+}
+
+.workModalImgContainer {
+  width: 50%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.workModalImgContainer img {
+  object-fit: contain;
+}
+
+.workModalTextContainer {
+  width: 50%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer {
+  height: 50vh;
+  display: flex;
+  padding: 5rem;
+}
+
+.footer ul {
+  padding-right: 4rem;
+}
+
+.footer li {
+  padding-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .workModalBody {
+    flex-direction: column;
+    padding-left: 0rem;
+    padding-right: 0rem;
+    padding-top: 5rem;
+  }
+
+  .workModalImgContainer {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: contain;
+  }
+  .workModalImgContainer img {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    min-height: 25rem;
+    object-fit: contain;
+    margin: 0rem;
+  }
+  .workModalContainer ul {
+    padding-left: 4rem;
+  }
+  .workModalTextContainer {
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 4rem;
+  }
+  .workModalContainer ul {
+  }
+  .workModalContainer li {
+    margin: 0rem;
+    padding: 0rem;
+  }
+}

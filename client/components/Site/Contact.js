@@ -4,6 +4,7 @@ import { Navbar } from "./Navbar";
 import { fetchUserData } from "../../store/user";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Footer from "./Footer";
 export const Contact = (props) => {
   let user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -18,14 +19,18 @@ export const Contact = (props) => {
   let email = user.contact && user.contact.email;
   let socialMedia = user.contact && user.contact.socialMedia;
   return (
-    <div>
-      <div className="grid grid-cols-12 grid-rows-6">
-        <div className="row-start-3 row-span-6 col-start-3 col-end-10">
-          {text}
-          {email}
-          {socialMedia}
+    <>
+      <Navbar user={user} />
+      <div>
+        <div className="grid grid-cols-12 grid-rows-6">
+          <div className="row-start-3 row-span-6 col-start-3 col-end-10">
+            {text}
+            {email}
+            {socialMedia}
+          </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
