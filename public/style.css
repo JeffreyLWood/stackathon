@@ -581,6 +581,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 1rem;
 }
 
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .mb-5 {
   margin-bottom: 1.25rem;
 }
@@ -627,6 +632,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-1\/6 {
   height: 16.666667%;
+}
+
+.h-64 {
+  height: 16rem;
 }
 
 .w-4\/6 {
@@ -695,6 +704,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .items-baseline {
   align-items: baseline;
+}
+
+.justify-center {
+  justify-content: center;
 }
 
 .justify-between {
@@ -801,6 +814,16 @@ Ensure the default browser behavior of the `hidden` attribute.
 .py-10 {
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 .pt-2 {
@@ -1105,4 +1128,48 @@ input:focus {
 
 .hover\:border-solid:hover {
   border-style: solid;
+}
+
+@media (min-width: 640px) {
+  .sm\:h-56 {
+    height: 14rem;
+  }
+
+  .sm\:h-64 {
+    height: 16rem;
+  }
+
+  .sm\:justify-center {
+    justify-content: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:h-32 {
+    height: 8rem;
+  }
+
+  .md\:h-56 {
+    height: 14rem;
+  }
+
+  .md\:w-3\/6 {
+    width: 50%;
+  }
+
+  .md\:px-10 {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:h-56 {
+    height: 14rem;
+  }
+
+  .lg\:px-10 {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
 }
