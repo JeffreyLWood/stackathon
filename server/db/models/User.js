@@ -2,8 +2,6 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const axios = require("axios");
-
 const Work = require("./Work");
 
 const SALT_ROUNDS = 5;
