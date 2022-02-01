@@ -119,29 +119,70 @@ input:focus {
   bottom: 0;
   left: 0;
   right: 0;
-  width: 100%;
-  height: 100vh;
-  position: absolute;
+  width: 100vw;
+  position: fixed;
   background-color: #fff;
   z-index: 1;
   display: flex;
   flex-direction: column;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 .workModalHeader {
-  padding: 2rem;
-  height: 2rem;
-  display: flex;
-  justify-content: end;
+  top: 2rem;
+  right: 4rem;
+  position: absolute;
 }
 
 .workModalBody {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  padding: 4rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  height: 100%;
 }
 
 .workModalBody img {
   height: 30rem;
+  width: auto;
+}
+
+.workModalContainer {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.footer {
+  height: 50vh;
+  display: flex;
+  padding: 5rem;
+}
+
+.footer ul {
+  padding-right: 4rem;
+}
+
+.footer li {
+  padding-bottom: 2rem;
+}
+
+@media (max-width: 1190px) {
+  .workModalBody {
+    flex-direction: column;
+    padding-left: 0rem;
+    padding-right: 0rem;
+    padding-top: 5rem;
+  }
+
+  .workModalBody img {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .workModalContainer {
+    justify-content: flex-start;
+    width: 100%;
+  }
+  .workModalContainer ul {
+    padding-left: 4rem;
+  }
 }
