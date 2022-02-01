@@ -762,14 +762,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
-.bg-red-100 {
+.bg-neutral-100 {
   --tw-bg-opacity: 1;
-  background-color: rgb(254 226 226 / var(--tw-bg-opacity));
-}
-
-.bg-green-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(220 252 231 / var(--tw-bg-opacity));
+  background-color: rgb(245 245 245 / var(--tw-bg-opacity));
 }
 
 .p-2 {
@@ -1022,14 +1017,24 @@ input:focus {
 }
 
 .workModalBody img {
-  height: 30rem;
-  width: auto;
+  /* height: 32rem; */
+  height: 100%;
 }
 
 .workModalContainer {
   width: 50%;
+  height: 70%;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.workModalTextContainer {
+  width: 50%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .footer {
@@ -1046,7 +1051,7 @@ input:focus {
   padding-bottom: 2rem;
 }
 
-@media (max-width: 1190px) {
+@media (max-width: 768px) {
   .workModalBody {
     flex-direction: column;
     padding-left: 0rem;
@@ -1057,15 +1062,36 @@ input:focus {
   .workModalBody img {
     padding-left: 2rem;
     padding-right: 2rem;
+    min-height: 25rem;
+    -o-object-fit: contain;
+       object-fit: contain;
+    margin: 0rem;
   }
 
   .workModalContainer {
-    justify-content: flex-start;
     width: 100%;
+    align-items: center;
   }
 
   .workModalContainer ul {
     padding-left: 4rem;
+  }
+
+  .workModalTextContainer {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 4rem;
+  }
+
+  .workModalContainer ul {
+  }
+
+  .workModalContainer li {
+    margin: 0rem;
+    padding: 0rem;
   }
 }
 

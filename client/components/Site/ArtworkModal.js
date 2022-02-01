@@ -13,10 +13,10 @@ export default function ArtworkModal(props) {
         <img src="/icons8-close-16.png"></img>
       </div>
       <div className="workModalBody">
-        <div className="bg-red-100 workModalContainer">
+        <div className="workModalContainer">
           <Image cloudName="jeffreywood" publicId={props.data.imgId} />
         </div>
-        <div className="bg-green-100 workModalContainer">
+        <div className="workModalTextContainer">
           <ul>
             <li className="uppercase italic font-light text-large mb-6"></li>
             <li className="uppercase italic font-light text-large mb-6 tracking-widest">
