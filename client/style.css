@@ -184,13 +184,14 @@ input:focus {
   padding-bottom: 2rem;
 }
 
-.aboutText {
+.aboutText textarea {
   height: auto;
   border: none;
   outline: none;
 }
 .aboutText:focus {
-  outline-style: hidden;
+  outline: none;
+  border: none;
 }
 
 @media (max-width: 768px) {

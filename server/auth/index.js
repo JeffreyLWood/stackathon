@@ -33,14 +33,15 @@ router.get("/me", async (req, res, next) => {
   }
 });
 
+//change username
 router.put("/:userId", async (req, res, next) => {
   try {
     let user = await User.findByPk(req.params.userId);
-    console.log("req.body.titleData", req.body.title);
+
     await user.update({
       username: req.body.title,
     });
-    console.log("user.username", user.username);
+
     res.status(200).send(user.username);
   } catch (err) {
     next(err);

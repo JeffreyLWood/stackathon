@@ -27,13 +27,13 @@ export const About = (props) => {
         <div>
           <Image cloudName="jeffreywood" publicId={imgId} />
         </div>
-        <div>
+        <div className="h-auto bg-red-100 flex">
           <textarea
-            className="aboutText"
-            type="readonly"
+            className="aboutText h-auto"
+            type="readOnly"
             cols="80"
             style={{ resize: "none" }}
-            value={text}
+            defaultValue={text}
           />
         </div>
       </div>
