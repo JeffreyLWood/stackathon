@@ -19,7 +19,6 @@ export const Navbar = (props) => {
   useEffect(() => {
     async function load() {
       // await fetchUserData(props.history.location.pathname.split("/")[1]);
-      console.log("props from create navbar", props);
     }
     load();
     // Not re rendering

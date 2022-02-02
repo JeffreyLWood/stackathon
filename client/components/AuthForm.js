@@ -14,11 +14,11 @@ const AuthForm = (props) => {
     <>
       <Navbar />
       {displayName === "Sign Up" ? (
-        <Link to="/login">
+        <Link to="/login/in">
           <button type="button">Login</button>
         </Link>
       ) : (
-        <Link to="/signup">
+        <Link to="/signup/in">
           <button type="button">SignUp</button>
         </Link>
       )}

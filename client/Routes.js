@@ -30,8 +30,8 @@ const Routes = () => {
     <div>
       {user.username ? (
         <Switch>
-          <Route exact path="/" component={Create} user={user} />
-          <Route exact path="/home" component={Create} />
+          <Route exact path="/create/in" component={Create} user={user} />
+          {/* <Route exact path="/create/home" component={Create} /> */}
           <Route exact path="/:username" component={Work} data={user} />
           <Route exact path="/:username/work" component={Work} />
           <Route exact path="/:username/about" component={About} />
@@ -41,8 +41,13 @@ const Routes = () => {
       ) : (
         <Switch>
           <Route exact path="/" component={Login} displayName="login" />
-          <Route exact path="/login" component={Login} displayName="login" />
-          <Route exact path="/signup" component={Signup} displayName="signup" />
+          <Route exact path="/login/in" component={Login} displayName="login" />
+          <Route
+            exact
+            path="/signup/in"
+            component={Signup}
+            displayName="signup"
+          />
           <Route exact path="/:username" component={Work} data={user} />
           <Route exact path="/:username/work" component={Work} />
           <Route exact path="/:username/about" component={About} />

@@ -12,18 +12,17 @@ export const Work = (props) => {
   const dispatch = useDispatch();
   // let [user, setUser] = useState({});
   let data;
-  console.log("work props", props);
+
   useEffect(() => {
     async function loadUserData() {
-      if (user.username) {
-        data = await dispatch(fetchUserData(props.match.params.username));
-      }
+      data = await dispatch(fetchUserData(props.match.params.username));
+
       // setUser(data);
       return data;
     }
     loadUserData();
   }, []);
-  console.log("user", user);
+
   return (
     <>
       <Navbar user={user} />

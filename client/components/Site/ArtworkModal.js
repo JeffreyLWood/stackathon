@@ -2,7 +2,6 @@ import React from "react";
 import { Image } from "cloudinary-react";
 
 export default function ArtworkModal(props) {
-  console.log("console.log(props.user.siteTitle)", props.user);
   if (!props.show) {
     return null;
   }
