@@ -20,7 +20,7 @@ export const CV = (props) => {
     <>
       <Navbar user={user} />
       <div className="h-screen">cv here</div>
-      <Footer />
+      <Footer user={user} />
     </>
   );
 };

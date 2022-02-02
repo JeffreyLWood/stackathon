@@ -34,7 +34,7 @@ export const Work = (props) => {
           })}
       </div>
 
-      <Footer />
+      <Footer user={user} />
     </>
   );
 };

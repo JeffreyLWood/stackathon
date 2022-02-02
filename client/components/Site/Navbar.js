@@ -11,7 +11,7 @@ export const Navbar = (props) => {
       <div className="siteTitle">
         <Link to={`/${props.user.userName}`}>{siteTitle}</Link>
       </div>
-      <div className="flex flex-row space-x-2">
+      <div className="flex flex-row space-x-3 text-sm pe-5">
         <Link to={`/${props.user.userName}`} className="subHeader">
           <div>Work</div>
         </Link>

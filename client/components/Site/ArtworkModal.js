@@ -21,10 +21,10 @@ export default function ArtworkModal(props) {
         </div>
         <div className="workModalTextContainer">
           <ul>
-            <li className="uppercase tracking-widest text-gray-400 font-light text-large mb-2">
+            <li className="uppercase tracking-widest text-gray-400 font-light text-large md:mb-2">
               {props.user.siteTitle}
             </li>
-            <li className="uppercase italic font-light text-large mb-6 tracking-widest">
+            <li className="uppercase italic font-light text-large mb-2 md:mb-6 tracking-widest">
               {props.data.title}
             </li>
             <li className="text-large text-gray-400">{props.data.year}</li>
@@ -32,7 +32,7 @@ export default function ArtworkModal(props) {
             <li className="font-light text-large">
               {props.data.height} x {props.data.width} "
             </li>
-            <li className="py-10">
+            <li className="md:py-10">
               <button type="button" className="border-2 p-2 ">
                 Enquire
               </button>

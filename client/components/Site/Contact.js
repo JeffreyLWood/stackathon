@@ -30,7 +30,7 @@ export const Contact = (props) => {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer user={user} />
     </>
   );
 };

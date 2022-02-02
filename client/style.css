@@ -189,16 +189,15 @@ input:focus {
     flex-direction: column;
     padding-left: 0rem;
     padding-right: 0rem;
-    padding-top: 5rem;
+    padding-top: 2rem;
   }
 
   .workModalImgContainer {
     width: 100%;
-
+    height: 70%;
     display: flex;
     justify-content: center;
     align-items: center;
-    object-fit: contain;
   }
   .workModalImgContainer img {
     padding-left: 2rem;
@@ -207,21 +206,23 @@ input:focus {
     object-fit: contain;
     margin: 0rem;
   }
+  .workModalTextContainer {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 2rem;
+  }
+
   .workModalContainer ul {
     padding-left: 4rem;
   }
-  .workModalTextContainer {
-    width: 100%;
 
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding-left: 4rem;
-  }
   .workModalContainer ul {
   }
   .workModalContainer li {
-    margin: 0rem;
+    margin-bottom: 0rem;
     padding: 0rem;
   }
 }

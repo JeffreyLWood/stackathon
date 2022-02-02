@@ -26,7 +26,7 @@ export const About = (props) => {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer user={user} />
     </>
   );
 };
