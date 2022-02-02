@@ -17,6 +17,7 @@ export default function SiteTitle(props) {
     evt.preventDefault();
     dispatch(updateTitleData(props.user.id, { title }));
   };
+  console.log("site title", props.user.id);
   return (
     <div className="h-full">
       <form className="flex flex-col" onSubmit={submitHandler}>
