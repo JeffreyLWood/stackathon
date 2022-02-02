@@ -1,6 +1,7 @@
 const router = require("express").Router();
 module.exports = router;
 const Work = require("../db/models/Work");
+const About = require("../db/models/About");
 const { cloudinary } = require("../utils/cloudinary");
 router.use("/users", require("./users"));
 
@@ -10,18 +11,34 @@ router.post("/upload", async (req, res) => {
     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
       upload_preset: "stackathon",
     });
-
-    // let user = await user.findByPk(req.body.userId);
-    await Work.create({
-      imgId: uploadedResponse.public_id,
-      userId: req.body.userId,
-      title: req.body.title,
-      year: req.body.year,
-      height: req.body.height,
-      width: req.body.width,
-      medium: req.body.medium,
-      hidden: req.body.hidden,
-    });
+    console.log("req.body.type", req.body.type);
+    //if req.body.type === about, send it to about table instead of work
+    if (req.body.type === "about") {
+      try {
+        await About.update(
+          {
+            imgId: uploadedResponse.public_id,
+          },
+          {
+            where: { userId: req.body.userId },
+          }
+        );
+      } catch (error) {
+        console.log(error, "about error");
+      }
+    } else {
+      // let user = await user.findByPk(req.body.userId);
+      await Work.create({
+        imgId: uploadedResponse.public_id,
+        userId: req.body.userId,
+        title: req.body.title,
+        year: req.body.year,
+        height: req.body.height,
+        width: req.body.width,
+        medium: req.body.medium,
+        hidden: req.body.hidden,
+      });
+    }
     res.status(200).send();
   } catch (error) {
     console.log(error);

@@ -21,15 +21,15 @@ export const Contact = (props) => {
   return (
     <>
       <Navbar user={user} />
-      <div>
-        <div className="grid grid-cols-12 grid-rows-6">
-          <div className="row-start-3 row-span-6 col-start-3 col-end-10">
-            {text}
-            {email}
-            {socialMedia}
-          </div>
+
+      <div className="grid grid-cols-12 grid-rows-6 h-90vh">
+        <div className="row-start-3 row-span-6 col-start-3 col-end-10">
+          {text}
+          {email}
+          {socialMedia}
         </div>
       </div>
+
       <Footer user={user} />
     </>
   );

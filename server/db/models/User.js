@@ -3,6 +3,9 @@ const db = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const Work = require("./Work");
+const CV = require("./CV");
+const About = require("./About");
+const Contact = require("./Contact");
 
 const SALT_ROUNDS = 5;
 
@@ -200,7 +203,28 @@ const defaultImages = async (user) => {
   }
 };
 
+const defaultVals = async (user) => {
+  try {
+    let about = await About.create({
+      text: null,
+      imgId: null,
+    });
+    let cv = await CV.create({
+      header: "Exhibition",
+    });
+    let contact = await Contact.create({
+      text: null,
+    });
+    await about.setUser(user);
+    await cv.setUser(user);
+    await contact.setUser(user);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 User.beforeCreate(hashPassword);
 User.beforeUpdate(hashPassword);
 User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));
 User.afterCreate(defaultImages);
+User.afterCreate(defaultVals);

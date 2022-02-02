@@ -561,6 +561,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 0.5rem;
 }
 
+.my-3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -569,11 +574,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .my-1 {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
-}
-
-.my-3 {
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
 }
 
 .mx-auto {
@@ -622,6 +622,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
+.h-56 {
+  height: 14rem;
+}
+
 .h-full {
   height: 100%;
 }
@@ -630,16 +634,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 8rem;
 }
 
-.h-56 {
-  height: 14rem;
-}
-
 .h-16 {
   height: 4rem;
-}
-
-.h-screen {
-  height: 100vh;
 }
 
 .w-4\/6 {
@@ -710,6 +706,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   align-items: center;
 }
 
+.justify-center {
+  justify-content: center;
+}
+
 .justify-between {
   justify-content: space-between;
 }
@@ -756,6 +756,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
 .bg-gray-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
@@ -764,11 +769,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .bg-red-100 {
@@ -781,12 +781,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(245 245 245 / var(--tw-bg-opacity));
 }
 
+.p-1 {
+  padding: 0.25rem;
+}
+
 .p-2 {
   padding: 0.5rem;
 }
 
-.p-1 {
-  padding: 0.25rem;
+.p-10 {
+  padding: 2.5rem;
 }
 
 .px-10 {
@@ -1058,6 +1062,16 @@ input:focus {
 
 .footer li {
   padding-bottom: 2rem;
+}
+
+.aboutText {
+  height: auto;
+  border: none;
+  outline: none;
+}
+
+.aboutText:focus {
+  outline-style: hidden;
 }
 
 @media (max-width: 768px) {

@@ -5,7 +5,6 @@ const db = require("../db");
 const Contact = db.define("contact", {
   text: {
     type: Sequelize.STRING(2000),
-    allowNull: false,
   },
   email: {
     type: Sequelize.STRING,

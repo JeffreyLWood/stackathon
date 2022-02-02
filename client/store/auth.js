@@ -48,6 +48,7 @@ export const authenticate =
       history.push("/create/in");
       dispatch(me());
     } catch (authError) {
+      history.push("/login/in"); //?
       return dispatch(setAuth({ error: authError }));
     }
   };

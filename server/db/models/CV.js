@@ -9,7 +9,6 @@ const CV = db.define("cv", {
   },
   title: {
     type: Sequelize.STRING,
-    allowNull: false,
   },
   description: {
     type: Sequelize.STRING,

@@ -184,6 +184,15 @@ input:focus {
   padding-bottom: 2rem;
 }
 
+.aboutText {
+  height: auto;
+  border: none;
+  outline: none;
+}
+.aboutText:focus {
+  outline-style: hidden;
+}
+
 @media (max-width: 768px) {
   .workModalBody {
     flex-direction: column;

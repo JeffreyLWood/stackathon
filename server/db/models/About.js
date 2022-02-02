@@ -7,6 +7,10 @@ const About = db.define("about", {
     type: Sequelize.STRING(2000),
     allowNull: true,
   },
+  imgId: {
+    type: Sequelize.STRING(2000),
+    allowNull: true,
+  },
 });
 
 module.exports = About;

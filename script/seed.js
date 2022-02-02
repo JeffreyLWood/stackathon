@@ -14,31 +14,36 @@ async function seed() {
   console.log("db synced!");
 
   // Creating Users
-  const users = await Promise.all([
-    User.create({
-      username: "cody",
-      email: "cody@gmail.com",
-      password: "123",
-      firstName: "cody",
-      lastName: "george",
-    }),
-    User.create({
-      username: "murphy",
-      email: "murphy@gmail.com",
-      password: "123",
-      firstName: "murphy",
-      lastName: "baggins",
-    }),
-  ]);
+  try {
+    const users = await Promise.all([
+      User.create({
+        username: "cody",
+        email: "cody@gmail.com",
+        password: "123",
+        firstName: "cody",
+        lastName: "george",
+      }),
+      User.create({
+        username: "murphy",
+        email: "murphy@gmail.com",
+        password: "123",
+        firstName: "murphy",
+        lastName: "baggins",
+      }),
+    ]);
 
-  console.log(`seeded ${users.length} users`);
-  console.log(`seeded successfully`);
-  return {
-    users: {
-      cody: users[0],
-      murphy: users[1],
-    },
-  };
+    console.log(`seeded ${users.length} users`);
+    console.log(`seeded successfully`);
+    return {
+      users: {
+        cody: users[0],
+        murphy: users[1],
+      },
+    };
+  } catch (error) {
+    console.log(error);
+    return "Seed Issue";
+  }
 }
 
 /*

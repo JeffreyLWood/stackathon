@@ -16,15 +16,21 @@ export const About = (props) => {
     loadUserData();
   }, []);
 
+  let text = user.about && user.about.text;
+  // .text.split("\n");
+
+  console.log(text);
   return (
     <>
       <Navbar user={user} />
-      <div className="h-90vh">
-        <div className="grid grid-cols-12 grid-rows-6">
-          <div className="row-start-3 row-span-6 col-start-3 col-end-10">
-            {user.about && user.about.text}
-          </div>
-        </div>
+      <div className="h-90vh flex p-10 justify-center">
+        <textarea
+          className="aboutText"
+          type="readonly"
+          cols="80"
+          style={{ resize: "none" }}
+          value={text}
+        />
       </div>
       <Footer user={user} />
     </>
