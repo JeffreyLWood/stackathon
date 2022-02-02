@@ -18,7 +18,11 @@ export default function Snapshot(props) {
     async function loadUserData() {
       dispatch(fetchUserData(user.username));
     }
-    loadUserData();
+    try {
+      loadUserData();
+    } catch (error) {
+      console.log("snapshot.js", error);
+    }
   }, [show]);
 
   const submitHandler = (e) => {

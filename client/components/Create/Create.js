@@ -28,7 +28,7 @@ export const Create = (props) => {
       const data = await res.json();
       setImageIds(data);
     } catch (error) {
-      console.log(error);
+      console.log("create.js line 25", error);
     }
   };
 

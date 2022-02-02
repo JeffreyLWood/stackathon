@@ -96,14 +96,18 @@ router.post("/update", async (req, res) => {
 });
 
 router.get("/images", async (req, res) => {
-  const { resources } = await cloudinary.search
-    .expression("folder:stackathonImgs")
-    .sort_by("public_id", "desc")
-    .max_results(30)
-    .execute();
+  try {
+    const { resources } = await cloudinary.search
+      .expression("folder:stackathonImgs")
+      .sort_by("public_id", "desc")
+      .max_results(30)
+      .execute();
 
-  const publicIds = resources.map((file) => file.public_id);
-  res.send(publicIds);
+    const publicIds = resources.map((file) => file.public_id);
+    res.send(publicIds);
+  } catch (error) {
+    console.log("/api/index.js line 100", error);
+  }
 });
 
 router.use((req, res, next) => {
