@@ -20,7 +20,6 @@ export const About = (props) => {
   let text = user.about && user.about.text;
 
   let imgId = user.about && user.about.imgId;
-
   return (
     <>
       <Navbar user={user} />
