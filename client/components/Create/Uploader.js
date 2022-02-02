@@ -190,7 +190,7 @@ const Modal = (props) => {
                     className="h-56"
                   />
                 ) : (
-                  <img src="placeholderadd.png"></img>
+                  <img src="../placeholderadd.png"></img>
                 )}
               </label>
             </div>

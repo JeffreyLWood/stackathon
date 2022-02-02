@@ -18,9 +18,9 @@ export const About = (props) => {
   }, []);
 
   let text = user.about && user.about.text;
-  // .text.split("\n");
+
   let imgId = user.about && user.about.imgId;
-  console.log(text);
+
   return (
     <>
       <Navbar user={user} />
