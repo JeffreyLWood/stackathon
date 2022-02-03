@@ -114,15 +114,16 @@
   background-color: black;
   color: white;
 }
-/* 
-input {
-  outline-width: 2px;
-  outline-style: hidden;
-}
 
-input:focus {
-  outline: none;
-} */
+.contact input,
+textarea {
+  outline-width: 1px;
+  outline-color: #ccc;
+  outline-style: solid;
+  display: block;
+
+  margin: 0.2rem 0 2rem 0;
+}
 
 .workModal {
   top: 0;
