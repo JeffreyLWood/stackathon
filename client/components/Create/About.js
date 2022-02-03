@@ -94,10 +94,7 @@ const About = (props) => {
             )}
           </label>
         </div>
-        <button
-          type="submit"
-          className="bg-black text-white text-uppercase p-1 my-3"
-        >
+        <button type="submit" className="pill">
           Submit
         </button>
       </form>
@@ -116,7 +113,7 @@ const About = (props) => {
         </div>
         <div>
           <button className="pill my-2" id="about" type="submit">
-            Submit
+            Save Changes
           </button>
         </div>
       </form>

@@ -31,15 +31,15 @@ export const About = (props) => {
   return (
     <>
       <Navbar user={user} />
-      <div className="font-light h-full md:h-90vh m-10 flex flex-col items-start justify-center sm:p-10 sm:flex-row md:justify-start">
-        <div className="w-full flex justify-center sm:w-2/6">
+      <div className="font-light h-full md:h-90vh m-10 flex flex-col items-start justify-center sm:py-10 sm:flex-row md:justify-start">
+        <div className="w-full flex justify-center sm:w-3/6 bg-red-100">
           <Image
             cloudName="jeffreywood"
             publicId={imgId}
             className="object-contain my-10 md:my-0 sm:mx-10"
           />
         </div>
-        <div className="w-full h-full flex flex-col  sm:w-4/6 sm:pr-10 sm:pl-10">
+        <div className="w-full h-full flex flex-col sm:w-3/6 sm:pr-10 sm:pl-10">
           {newText}
         </div>
       </div>

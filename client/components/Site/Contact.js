@@ -23,8 +23,8 @@ export const Contact = (props) => {
     <>
       <Navbar user={user} />
       <div className="font-light h-full m-10 flex flex-col items-start justify-center sm:p-10 sm:flex-row md:h-90vh md:justify-start">
-        <div className="w-full flex flex-col mb-5 sm:w-2/6">
-          <span className="siteTitle mb-5 mr-5">Get in Touch</span>
+        <div className="w-full flex flex-col mb-5 pr-4 sm:w-2/6">
+          <span className="siteTitle mb-5">Get in Touch</span>
           <p>{text}</p>
           <ul className="mt-2 space-y-2">
             <li>
