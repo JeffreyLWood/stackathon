@@ -17,13 +17,16 @@ export default function SiteTitle(props) {
     evt.preventDefault();
     dispatch(updateTitleData(props.user.id, { title }));
   };
-  console.log("site title", props.user.id);
+
   return (
     <div className="h-full">
       <form className="flex flex-col" onSubmit={submitHandler}>
+        <label htmlFor="name">
+          Your full name as it will appear on your site
+        </label>
         <div>
           <input
-            className="p-1 border-2 w-2/6 subHeader"
+            className="p-1 border-2 w-2/6"
             name="title"
             type="text"
             onChange={changeHandler}

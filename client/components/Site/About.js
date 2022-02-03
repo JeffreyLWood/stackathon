@@ -36,10 +36,12 @@ export const About = (props) => {
           <Image
             cloudName="jeffreywood"
             publicId={imgId}
-            className="object-contain my-5 sm:my-0 sm:mx-10"
+            className="object-contain my-5 md:my-0 sm:mx-10"
           />
         </div>
-        <div className="w-full h-full md:pr-10 sm:w-4/6">{newText}</div>
+        <div className="w-full h-full sm:w-4/6 sm:pr-10 sm:pl-10 ">
+          {newText}
+        </div>
       </div>
       <Footer user={user} />
     </>

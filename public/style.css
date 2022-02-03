@@ -1255,6 +1255,14 @@ input:focus {
     padding: 1.25rem;
   }
 
+  .sm\:pr-10 {
+    padding-right: 2.5rem;
+  }
+
+  .sm\:pl-10 {
+    padding-left: 2.5rem;
+  }
+
   .sm\:h-90vh {
     min-height: 90vh;
   }
@@ -1264,6 +1272,11 @@ input:focus {
   .md\:mx-0 {
     margin-left: 0px;
     margin-right: 0px;
+  }
+
+  .md\:my-0 {
+    margin-top: 0px;
+    margin-bottom: 0px;
   }
 
   .md\:mb-2 {
@@ -1302,6 +1315,14 @@ input:focus {
 
   .md\:pr-10 {
     padding-right: 2.5rem;
+  }
+
+  .md\:pl-5 {
+    padding-left: 1.25rem;
+  }
+
+  .md\:pl-10 {
+    padding-left: 2.5rem;
   }
 
   .md\:h-90vh {

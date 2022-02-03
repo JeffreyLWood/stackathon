@@ -86,7 +86,7 @@ const About = (props) => {
             ) : image ? (
               <Image
                 cloudName={"jeffreywood"}
-                publicId={image.imgId}
+                publicId={null}
                 className="h-56"
               />
             ) : (
