@@ -109,6 +109,7 @@ const About = (props) => {
             className="border-2 w-4/6 p-2"
             name="about"
             type="text"
+            style={{ resize: "none" }}
             onChange={changeHandler}
             value={aboutText}
           />

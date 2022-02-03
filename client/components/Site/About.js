@@ -31,7 +31,7 @@ export const About = (props) => {
   return (
     <>
       <Navbar user={user} />
-      <div className="h-full md:h-90vh m-10 flex flex-col items-start justify-center sm:p-10 sm:flex-row md:justify-start">
+      <div className="font-light h-full md:h-90vh m-10 flex flex-col items-start justify-center sm:p-10 sm:flex-row md:justify-start">
         <div className="w-full flex justify-center sm:w-2/6">
           <Image
             cloudName="jeffreywood"
