@@ -749,6 +749,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   align-items: center;
 }
 
+.justify-start {
+  justify-content: flex-start;
+}
+
 .justify-center {
   justify-content: center;
 }
@@ -1210,6 +1214,11 @@ input:focus {
     margin-bottom: 0px;
   }
 
+  .sm\:mx-0 {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
   .sm\:h-auto {
     height: auto;
   }
@@ -1220,6 +1229,10 @@ input:focus {
 
   .sm\:w-4\/6 {
     width: 66.666667%;
+  }
+
+  .sm\:w-3\/6 {
+    width: 50%;
   }
 
   .sm\:items-start {
@@ -1263,6 +1276,10 @@ input:focus {
 
   .md\:justify-start {
     justify-content: flex-start;
+  }
+
+  .md\:justify-center {
+    justify-content: center;
   }
 
   .md\:px-10 {
