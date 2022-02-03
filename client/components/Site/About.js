@@ -23,19 +23,15 @@ export const About = (props) => {
   return (
     <>
       <Navbar user={user} />
-      <div className="h-90vh flex p-10 justify-center">
-        <div>
-          <Image cloudName="jeffreywood" publicId={imgId} />
-        </div>
-        <div className="h-auto bg-red-100 flex">
-          <textarea
-            className="aboutText h-auto"
-            type="readOnly"
-            cols="80"
-            style={{ resize: "none" }}
-            defaultValue={text}
+      <div className="h-90vh sm:p-10 m-10 flex flex-wrap justify-center md:justify-start bg-slate-200">
+        <div className="h-3/6 sm:w-2/6 w-full bg-red-100 flex justify-center">
+          <Image
+            cloudName="jeffreywood"
+            publicId={imgId}
+            className="object-contain my-5 sm:my-0 sm:mx-5"
           />
         </div>
+        <div className="w-full h-full sm:w-4/6 bg-green-100">{text}</div>
       </div>
       <Footer user={user} />
     </>

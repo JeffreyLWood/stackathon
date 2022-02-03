@@ -185,7 +185,7 @@ input:focus {
 }
 
 .aboutText textarea {
-  height: auto;
+  overflow-y: visible;
   border: none;
   outline: none;
 }
