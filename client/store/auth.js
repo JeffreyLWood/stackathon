@@ -28,7 +28,7 @@ export const me = () => async (dispatch) => {
         authorization: token,
       },
     });
-    // history.push("/create/in");
+    history.push("/create/in");
     return dispatch(setAuth(res.data));
   }
 };
