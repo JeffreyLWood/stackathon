@@ -741,6 +741,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   flex-wrap: wrap;
 }
 
+.content-start {
+  align-content: flex-start;
+}
+
+.items-start {
+  align-items: flex-start;
+}
+
 .items-end {
   align-items: flex-end;
 }
@@ -1227,6 +1235,11 @@ input:focus {
     margin-right: 0px;
   }
 
+  .sm\:my-5 {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
   .sm\:h-auto {
     height: auto;
   }
@@ -1241,6 +1254,10 @@ input:focus {
 
   .sm\:w-3\/6 {
     width: 50%;
+  }
+
+  .sm\:flex-row {
+    flex-direction: row;
   }
 
   .sm\:items-start {
@@ -1326,6 +1343,12 @@ input:focus {
   }
 
   .md\:h-90vh {
+    min-height: 90vh;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:h-90vh {
     min-height: 90vh;
   }
 }
