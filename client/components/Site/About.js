@@ -36,7 +36,7 @@ export const About = (props) => {
           <Image
             cloudName="jeffreywood"
             publicId={imgId}
-            className="my-5 md:my-0 sm:mx-10"
+            className="object-contain my-10 md:my-0 sm:mx-10"
           />
         </div>
         <div className="w-full h-full flex flex-col  sm:w-4/6 sm:pr-10 sm:pl-10">
