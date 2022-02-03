@@ -18,7 +18,15 @@ export const About = (props) => {
   }, []);
 
   let text = user.about && user.about.text;
-
+  let json = JSON.stringify(text);
+  const newText =
+    text &&
+    text.split("\n").map((str, idx) => (
+      <p key={idx}>
+        {str}
+        <br />
+      </p>
+    ));
   let imgId = user.about && user.about.imgId;
   return (
     <>
@@ -31,7 +39,7 @@ export const About = (props) => {
             className="object-contain my-5 sm:my-0 sm:mx-10"
           />
         </div>
-        <div className="w-full h-full sm:w-4/6">{text}</div>
+        <div className="w-full h-full md:pr-10 sm:w-4/6">{newText}</div>
       </div>
       <Footer user={user} />
     </>

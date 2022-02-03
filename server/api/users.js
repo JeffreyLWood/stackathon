@@ -91,6 +91,7 @@ router.get("/:username", async (req, res, next) => {
       where: { username: req.params.username },
       include: { all: true, nested: true },
     });
+    console.log("allData.dataValues", allData.dataValues);
     let userData = {
       id: allData.dataValues.id,
       userName: allData.dataValues.username,
