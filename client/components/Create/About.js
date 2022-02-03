@@ -10,7 +10,7 @@ const About = (props) => {
   let dispatch = useDispatch();
 
   let text = aboutData && aboutData.text;
-
+  // let imgId = aboutData && aboutData.imgId;
   let [aboutText, setAboutText] = useState("");
   let image;
   useEffect(() => {

@@ -33,16 +33,14 @@ router.put("/:userId/title", async (req, res, next) => {
 
 router.post("/:userId/about", async (req, res, next) => {
   try {
-    await About.destroy({
-      where: { userId: req.params.userId },
-    });
-
-    let newAbout = await About.create({
-      text: req.body.aboutText,
-      userId: req.params.userId,
-    });
-
-    res.status(200).send(newAbout);
+    await About.update(
+      {
+        text: req.body.aboutText,
+        userId: req.params.userId,
+      },
+      { where: { userId: req.params.userId } }
+    );
+    res.status(200).send();
   } catch (err) {
     next(err);
   }
