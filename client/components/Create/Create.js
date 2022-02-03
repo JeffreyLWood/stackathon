@@ -58,12 +58,12 @@ export const Create = (props) => {
             <About user={user} works={worksData} />
           </section>
         </div>
-        <div className="flex flex-row w-full">
+        {/* <div className="flex flex-row w-full">
           <section className="m-5 w-1/6 subHeader">CV</section>
           <section className="m-5 w-5/6">
             <CV user={user} works={worksData} />
           </section>
-        </div>
+        </div> */}
         <div className="flex flex-row w-full">
           <section className="m-5 w-1/6 subHeader">Contact</section>
           <section className="m-5 w-5/6">
