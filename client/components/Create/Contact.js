@@ -29,7 +29,7 @@ export default function Contact(props) {
     return (
       <div className="pb-10 w-full pr-10">
         <form
-          className="contact space-x-5 flex flex-col justify-start md:w-3/6"
+          className="contact flex flex-col justify-start md:w-3/6"
           onSubmit={submitHandler}
         >
           <label htmlFor="text">Text:</label>
@@ -56,7 +56,7 @@ export default function Contact(props) {
           <input
             className="border-2"
             name="phone"
-            type="number"
+            type="tel"
             onChange={changeHandler}
             value={state.phone}
           ></input>
@@ -64,7 +64,7 @@ export default function Contact(props) {
           <input
             className="border-2"
             name="address"
-            type="number"
+            type="text"
             onChange={changeHandler}
             value={state.address}
           ></input>
@@ -86,6 +86,14 @@ export default function Contact(props) {
             type="url"
             onChange={changeHandler}
             value={state.facebook}
+          ></input>
+          <label htmlFor="twitter">Twitter</label>
+          <input
+            className="border-2"
+            name="twitter"
+            type="url"
+            onChange={changeHandler}
+            value={state.twitter}
           ></input>
           <label htmlFor="linkedin">LinkedIn</label>
           <input
@@ -111,7 +119,11 @@ export default function Contact(props) {
             onChange={changeHandler}
             value={state.tiktok}
           ></input>
-          <button type="submit">Submit</button>
+          <div>
+            <button type="submit" className="pill">
+              Save Changes
+            </button>
+          </div>
         </form>
       </div>
     );

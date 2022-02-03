@@ -24,7 +24,7 @@ export const Contact = (props) => {
       <Navbar user={user} />
       <div className="font-light h-full m-10 flex flex-col items-start justify-center sm:p-10 sm:flex-row md:h-90vh md:justify-start">
         <div className="w-full flex flex-col mb-5 sm:w-2/6">
-          <span className="siteTitle mb-5">Get in Touch</span>
+          <span className="siteTitle mb-5 mr-5">Get in Touch</span>
           <p>{text}</p>
           <ul className="mt-2 space-y-2">
             <li>
@@ -37,13 +37,13 @@ export const Contact = (props) => {
         </div>
         <div className="w-full flex flex-col space-y-2 sm:w-4/6 sm:pr-10 sm:pl-10">
           <form className="contact block">
-            <label htmlFor="name">Name:</label>
-            <input className="w-3/6" name="name" type="text" />
-            <label htmlFor="email">Email:</label>
-            <input className="w-3/6" name="email" type="email" />
-            <label htmlFor="subject">Subject:</label>
-            <input className="w-3/6" name="subject" type="text" />
-            <label htmlFor="message">Message:</label>
+            <label htmlFor="name">Name: *</label>
+            <input required className="w-3/6" name="name" type="text" />
+            <label htmlFor="email">Email: *</label>
+            <input required className="w-3/6" name="email" type="email" />
+            <label htmlFor="subject">Subject: *</label>
+            <input required className="w-3/6" name="subject" type="text" />
+            <label htmlFor="message">Message: *</label>
             <textarea
               rows="5"
               style={{ resize: "none" }}
