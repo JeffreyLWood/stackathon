@@ -16,7 +16,8 @@ export const Contact = (props) => {
     }
     loadUserData();
   }, []);
-
+  let defaultEmail = user.email;
+  console.log(defaultEmail);
   let text = user.contact && user.contact.text;
   let email = user.contact && user.contact.email;
   let instagram = user.contact && user.contact.instagram;
@@ -58,14 +59,18 @@ export const Contact = (props) => {
   return (
     <>
       <Navbar user={user} />
-      <div className="font-light text-sm leading-8 h-full m-10 flex flex-col items-start justify-center sm:px-10 sm:py-5git  sm:flex-row md:h-90vh md:justify-start">
+      <div className="font-light text-sm leading-8 h-full m-10 flex flex-col items-start justify-center sm:px-10 sm:py-5git sm:flex-row md:h-90vh md:pt-10 md:px-10 md:justify-start">
         <div className="w-full flex flex-col mb-5 pr-4 sm:w-2/6">
           <span className="siteTitle mb-5">Get in Touch</span>
           {text ? <p>{text}</p> : null}
           <ul className="mt-2 space-y-2">
             <li>
               <span className="font-medium mr-2">Email</span>
-              <a href={{ mailto: { email } }}>{email}</a>
+              {email ? (
+                <a href={{ mailto: { email } }}>{email}</a>
+              ) : (
+                <a href={{ mailto: { defaultEmail } }}>{defaultEmail}</a>
+              )}
             </li>
             {phone ? (
               <li>

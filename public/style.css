@@ -1181,9 +1181,6 @@ textarea {
     padding-left: 4rem;
   }
 
-  .workModalContainer ul {
-  }
-
   .workModalContainer li {
     margin-bottom: 0rem;
     padding: 0rem;
@@ -1278,6 +1275,14 @@ textarea {
   .md\:py-10 {
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
+  }
+
+  .md\:pt-20 {
+    padding-top: 5rem;
+  }
+
+  .md\:pt-10 {
+    padding-top: 2.5rem;
   }
 
   .md\:h-90vh {
