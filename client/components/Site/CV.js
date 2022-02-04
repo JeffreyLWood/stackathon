@@ -20,7 +20,7 @@ export const CV = (props) => {
     <>
       <Navbar user={user} />
       <div className="h-90vh">cv here</div>
-      <Footer user={user} />
+      <Footer user={user} userName={props.match.params.username} />
     </>
   );
 };

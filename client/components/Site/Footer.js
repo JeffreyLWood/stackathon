@@ -10,7 +10,7 @@ export default function Footer(props) {
   console.log("footer props", props);
   useEffect(() => {
     async function loadUserData() {
-      await dispatch(fetchUserData(props.user.userName));
+      await dispatch(fetchUserData(props.userName));
     }
     loadUserData();
   }, []);
@@ -27,10 +27,11 @@ export default function Footer(props) {
   let etsy = user.contact && user.contact.etsy;
   let tiktok = user.contact && user.contact.tiktok;
   return (
-    <div className="footer flex-row bg-neutral-100 font-light">
+    <div className="footer flex-row bg-neutral-100 font-light text-sm">
       <div>
-        <ul className="">
-          <li>{user.siteTitle}</li>
+        <ul>
+          <li className="uppercase tracking-wider text-lg">{user.siteTitle}</li>
+          {address ? <li className="font-medium">{address}</li> : null}
           <li>
             <span className="font-medium mr-2">Email</span>
             <a href={{ mailto: { email } }}>{email}</a>
@@ -40,17 +41,15 @@ export default function Footer(props) {
               <span className="font-medium mr-2">Tel</span> {phone}
             </li>
           ) : null}
-          {address ? (
-            <li>
-              <span className="font-medium mr-2">Location</span> {address}{" "}
-            </li>
-          ) : null}
+          <li>All Work and Images Copyright 2022</li>
         </ul>
       </div>
-      <div className="pt-4 social flex flex-wrap">
+
+      <div className="w-full items-start flex flex-wrap md:w-1/6 lg:social ">
         {instagram ? (
           <a href={instagram} target="_blank">
             <img
+              className="w-8 mx-1"
               src="../social/instagram.png"
               label="instagram"
               alt="instagrram"
@@ -60,6 +59,7 @@ export default function Footer(props) {
         {facebook ? (
           <a href={facebook} target="_blank">
             <img
+              className="w-8 mx-1"
               src="../social/facebook.png"
               label="facebook"
               alt="faceboook"
@@ -68,32 +68,58 @@ export default function Footer(props) {
         ) : null}
         {twitter ? (
           <a href={twitter} target="_blank">
-            <img src="../social/twitter.png" label="twitter" alt="twitter" />
+            <img
+              className="w-8 mx-1"
+              src="../social/twitter.png"
+              label="twitter"
+              alt="twitter"
+            />
           </a>
         ) : null}
         {email ? (
           <a href={`mailto:${email} `}>
-            <img src="../social/email.png" alt="email" alt="email" />
+            <img
+              className="w-8 mx-1"
+              src="../social/email.png"
+              alt="email"
+              alt="email"
+            />
           </a>
         ) : null}
         {youtube ? (
           <a href={youtube} target="_blank">
-            <img src="../social/youtube.png" label="youtube" alt="youtube" />
+            <img
+              className="w-8 mx-1"
+              src="../social/youtube.png"
+              label="youtube"
+              alt="youtube"
+            />
           </a>
         ) : null}
         {linkedin ? (
           <a href={linkedin} target="_blank">
-            <img src="../social/linkedin.png" label="linkedin" alt="linkedin" />
+            <img
+              className="w-8 mx-1"
+              src="../social/linkedin.png"
+              label="linkedin"
+              alt="linkedin"
+            />
           </a>
         ) : null}
         {etsy ? (
           <a href={etsy} target="_blank">
-            <img src="../social/etsy.png" alt="etsy" alt="etsy" />
+            <img
+              className="w-8 mx-1"
+              src="../social/etsy.png"
+              alt="etsy"
+              alt="etsy"
+            />
           </a>
         ) : null}
         {pinterest ? (
           <a href={pinterest} target="_blank">
             <img
+              className="w-8 mx-1"
               src="../social/pinterest.png"
               alt="pinterest"
               label="pinterest"
@@ -102,13 +128,15 @@ export default function Footer(props) {
         ) : null}
         {tiktok ? (
           <a href={tiktok} target="_blank">
-            <img src="../social/tiktok.png" alt="tiktok" label="tiktok" />
+            <img
+              className="w-8 mx-1"
+              src="../social/tiktok.png"
+              alt="tiktok"
+              label="tiktok"
+            />
           </a>
         ) : null}
       </div>
-      <ul>
-        <li>All Work and Images Copyright 2022</li>
-      </ul>
     </div>
   );
 }

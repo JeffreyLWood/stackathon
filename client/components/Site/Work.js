@@ -33,7 +33,7 @@ export const Work = (props) => {
           })}
       </div>
 
-      <Footer user={user} />
+      <Footer user={user} userName={props.match.params.username} />
     </>
   );
 };
