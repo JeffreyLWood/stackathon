@@ -554,6 +554,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 0.5rem;
 }
 
+.mx-1 {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+
+.my-10 {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
 .my-1 {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
@@ -564,19 +574,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 0.75rem;
 }
 
-.my-10 {
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
-}
-
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
-}
-
-.mx-1 {
-  margin-left: 0.25rem;
-  margin-right: 0.25rem;
 }
 
 .mx-10 {
@@ -656,6 +656,26 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 100%;
 }
 
+.w-6 {
+  width: 1.5rem;
+}
+
+.w-1\/12 {
+  width: 8.333333%;
+}
+
+.w-3\/12 {
+  width: 25%;
+}
+
+.w-4\/12 {
+  width: 33.333333%;
+}
+
+.w-2\/12 {
+  width: 16.666667%;
+}
+
 .w-1\/6 {
   width: 16.666667%;
 }
@@ -670,10 +690,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-3\/6 {
   width: 50%;
-}
-
-.w-8 {
-  width: 2rem;
 }
 
 .shrink {
@@ -967,7 +983,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .social img {
-  width: 3.5rem;
+  width: 3rem;
   height: auto;
   margin: 0.5rem 0.3rem 0 0;
 }
@@ -1129,7 +1145,7 @@ textarea {
 }
 
 .footer li {
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
 }
 
 .aboutText textarea {
@@ -1277,23 +1293,11 @@ textarea {
     padding-bottom: 2.5rem;
   }
 
-  .md\:pt-20 {
-    padding-top: 5rem;
-  }
-
   .md\:pt-10 {
     padding-top: 2.5rem;
   }
 
   .md\:h-90vh {
     min-height: 82vh;
-  }
-}
-
-@media (min-width: 1024px) {
-  .lg\:social img {
-    width: 3.5rem;
-    height: auto;
-    margin: 0.5rem 0.3rem 0 0;
   }
 }

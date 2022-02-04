@@ -41,101 +41,102 @@ export default function Footer(props) {
               <span className="font-medium mr-2">Tel</span> {phone}
             </li>
           ) : null}
+          <li>
+            <div className="w-full items-start flex flex-row">
+              {instagram ? (
+                <a href={instagram} target="_blank">
+                  <img
+                    className="w-6 mx-1"
+                    src="../social/instagram.png"
+                    label="instagram"
+                    alt="instagrram"
+                  />
+                </a>
+              ) : null}
+              {facebook ? (
+                <a href={facebook} target="_blank">
+                  <img
+                    className="w-6 mx-1"
+                    src="../social/facebook.png"
+                    label="facebook"
+                    alt="faceboook"
+                  />
+                </a>
+              ) : null}
+              {twitter ? (
+                <a href={twitter} target="_blank">
+                  <img
+                    className="w-6 mx-1"
+                    src="../social/twitter.png"
+                    label="twitter"
+                    alt="twitter"
+                  />
+                </a>
+              ) : null}
+              {email ? (
+                <a href={`mailto:${email} `}>
+                  <img
+                    className="w-6 mx-1"
+                    src="../social/email.png"
+                    alt="email"
+                    alt="email"
+                  />
+                </a>
+              ) : null}
+              {youtube ? (
+                <a href={youtube} target="_blank">
+                  <img
+                    className="w-6 mx-1"
+                    src="../social/youtube.png"
+                    label="youtube"
+                    alt="youtube"
+                  />
+                </a>
+              ) : null}
+              {linkedin ? (
+                <a href={linkedin} target="_blank">
+                  <img
+                    className="w-6 mx-1"
+                    src="../social/linkedin.png"
+                    label="linkedin"
+                    alt="linkedin"
+                  />
+                </a>
+              ) : null}
+              {etsy ? (
+                <a href={etsy} target="_blank">
+                  <img
+                    className="w-6 mx-1"
+                    src="../social/etsy.png"
+                    alt="etsy"
+                    alt="etsy"
+                  />
+                </a>
+              ) : null}
+              {pinterest ? (
+                <a href={pinterest} target="_blank">
+                  <img
+                    className="w-6 mx-1"
+                    src="../social/pinterest.png"
+                    alt="pinterest"
+                    label="pinterest"
+                  />
+                </a>
+              ) : null}
+              {tiktok ? (
+                <a href={tiktok} target="_blank">
+                  <img
+                    className="w-6 mx-1"
+                    src="../social/tiktok.png"
+                    alt="tiktok"
+                    label="tiktok"
+                  />
+                </a>
+              ) : null}
+            </div>
+          </li>
           <li>All Work and Images Copyright 2022</li>
         </ul>
-      </div>
-
-      <div className="w-full items-start flex flex-wrap md:w-1/6 lg:social ">
-        {instagram ? (
-          <a href={instagram} target="_blank">
-            <img
-              className="w-8 mx-1"
-              src="../social/instagram.png"
-              label="instagram"
-              alt="instagrram"
-            />
-          </a>
-        ) : null}
-        {facebook ? (
-          <a href={facebook} target="_blank">
-            <img
-              className="w-8 mx-1"
-              src="../social/facebook.png"
-              label="facebook"
-              alt="faceboook"
-            />
-          </a>
-        ) : null}
-        {twitter ? (
-          <a href={twitter} target="_blank">
-            <img
-              className="w-8 mx-1"
-              src="../social/twitter.png"
-              label="twitter"
-              alt="twitter"
-            />
-          </a>
-        ) : null}
-        {email ? (
-          <a href={`mailto:${email} `}>
-            <img
-              className="w-8 mx-1"
-              src="../social/email.png"
-              alt="email"
-              alt="email"
-            />
-          </a>
-        ) : null}
-        {youtube ? (
-          <a href={youtube} target="_blank">
-            <img
-              className="w-8 mx-1"
-              src="../social/youtube.png"
-              label="youtube"
-              alt="youtube"
-            />
-          </a>
-        ) : null}
-        {linkedin ? (
-          <a href={linkedin} target="_blank">
-            <img
-              className="w-8 mx-1"
-              src="../social/linkedin.png"
-              label="linkedin"
-              alt="linkedin"
-            />
-          </a>
-        ) : null}
-        {etsy ? (
-          <a href={etsy} target="_blank">
-            <img
-              className="w-8 mx-1"
-              src="../social/etsy.png"
-              alt="etsy"
-              alt="etsy"
-            />
-          </a>
-        ) : null}
-        {pinterest ? (
-          <a href={pinterest} target="_blank">
-            <img
-              className="w-8 mx-1"
-              src="../social/pinterest.png"
-              alt="pinterest"
-              label="pinterest"
-            />
-          </a>
-        ) : null}
-        {tiktok ? (
-          <a href={tiktok} target="_blank">
-            <img
-              className="w-8 mx-1"
-              src="../social/tiktok.png"
-              alt="tiktok"
-              label="tiktok"
-            />
-          </a>
-        ) : null}
       </div>
     </div>
   );

@@ -28,7 +28,7 @@
 }
 
 .social img {
-  width: 3.5rem;
+  width: 3rem;
   height: auto;
   margin: 0.5rem 0.3rem 0 0;
 }
@@ -188,7 +188,7 @@ textarea {
 }
 
 .footer li {
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
 }
 
 .aboutText textarea {
