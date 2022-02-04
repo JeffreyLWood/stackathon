@@ -27,6 +27,12 @@
   letter-spacing: 0.1em;
 }
 
+.social img {
+  width: 3.5rem;
+  height: auto;
+  margin: 0.4rem 0.2rem 0 0;
+}
+
 .modal {
   position: fixed;
   left: 0;

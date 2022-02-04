@@ -67,12 +67,22 @@ router.post("/:userId/cv", async (req, res, next) => {
 
 router.post("/:userId/contact", async (req, res, next) => {
   try {
-    await Contact.create({
-      text: req.body.text,
-      email: req.body.email,
-      socialMedia: req.body.socialMedia,
-      userId: req.params.userId,
-    });
+    await Contact.update(
+      {
+        text: req.body.text,
+        email: req.body.email,
+        phone: req.body.phone,
+        address: req.body.address,
+        instagram: req.body.instagram,
+        facebook: req.body.facebook,
+        twitter: req.body.twitter,
+        linkedin: req.body.linkedin,
+        etsy: req.body.etsy,
+        pinterest: req.body.pinterest,
+        tiktok: req.body.tiktok,
+      },
+      { where: { userId: req.params.userId } }
+    );
     let contactData = await Contact.findAll({
       where: { userId: req.params.userId },
     });
@@ -89,7 +99,7 @@ router.get("/:username", async (req, res, next) => {
       where: { username: req.params.username },
       include: { all: true, nested: true },
     });
-    console.log("allData.dataValues", allData.dataValues);
+
     let userData = {
       id: allData.dataValues.id,
       userName: allData.dataValues.username,

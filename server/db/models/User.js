@@ -153,16 +153,16 @@ const defaultImages = async (user) => {
       status: "available",
       hidden: "off",
     });
-    let default6 = await Work.create({
-      title: "A Street in Brooklyn",
-      medium: "oil on panel",
-      year: 2021,
-      imgId: "stackathonImgs/xv4pownj9m3mtx7ljjzc",
-      height: 4,
-      width: 5,
-      status: "available",
-      hidden: "off",
-    });
+    // let default6 = await Work.create({
+    //   title: "A Street in Brooklyn",
+    //   medium: "oil on panel",
+    //   year: 2021,
+    //   imgId: "stackathonImgs/xv4pownj9m3mtx7ljjzc",
+    //   height: 4,
+    //   width: 5,
+    //   status: "available",
+    //   hidden: "off",
+    // });
     let default7 = await Work.create({
       title: "Street 1",
       medium: "oil on panel",
@@ -191,7 +191,7 @@ const defaultImages = async (user) => {
       default3,
       default4,
       default5,
-      default6,
+      // default6,
       default7,
       default8,
     ];
@@ -213,7 +213,7 @@ const defaultVals = async (user) => {
       header: "Exhibition",
     });
     let contact = await Contact.create({
-      text: null,
+      text: "Reach out to me at one of the following:",
     });
     await about.setUser(user);
     await cv.setUser(user);

@@ -4,7 +4,7 @@ const db = require("../db");
 
 const Contact = db.define("contact", {
   text: {
-    type: Sequelize.STRING(2000),
+    type: Sequelize.STRING(200),
   },
   email: {
     type: Sequelize.STRING,
@@ -14,15 +14,9 @@ const Contact = db.define("contact", {
   },
   phone: {
     type: Sequelize.STRING,
-    validate: {
-      isUrl: true,
-    },
   },
   address: {
     type: Sequelize.STRING,
-    validate: {
-      isUrl: true,
-    },
   },
   instagram: {
     type: Sequelize.STRING,
@@ -41,11 +35,18 @@ const Contact = db.define("contact", {
     validate: {
       isUrl: true,
     },
-    linkedin: {
-      type: Sequelize.STRING,
-      validate: {
-        isUrl: true,
-      },
+  },
+  linkedin: {
+    type: Sequelize.STRING,
+    validate: {
+      isUrl: true,
+    },
+  },
+
+  etsy: {
+    type: Sequelize.STRING,
+    validate: {
+      isUrl: true,
     },
   },
   pinterest: {

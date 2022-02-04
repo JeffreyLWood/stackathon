@@ -103,18 +103,26 @@ export default function Contact(props) {
             onChange={changeHandler}
             value={state.linkedin}
           ></input>
-          <label htmlFor="pintrest">Pintrest</label>
+          <label htmlFor="etsy">Etsy</label>
           <input
             className="border-2"
-            name="pintrest"
+            name="etsy"
             type="url"
             onChange={changeHandler}
-            value={state.pintrest}
+            value={state.etsy}
+          ></input>
+          <label htmlFor="pinterest">Pinterest</label>
+          <input
+            className="border-2"
+            name="pinterest"
+            type="url"
+            onChange={changeHandler}
+            value={state.pinterest}
           ></input>
           <label htmlFor="tiktok">TikTok</label>
           <input
             className="border-2"
-            name="TikTok"
+            name="tiktok"
             type="url"
             onChange={changeHandler}
             value={state.tiktok}

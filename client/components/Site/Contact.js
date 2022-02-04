@@ -1,6 +1,5 @@
 import React from "react";
 import { Navbar } from "./Navbar";
-
 import { fetchUserData } from "../../store/user";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,32 +7,119 @@ import Footer from "./Footer";
 export const Contact = (props) => {
   let user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  // let [userData, setUser] = useState(user);
+
   useEffect(() => {
     async function loadUserData() {
-      let data = await dispatch(fetchUserData(props.match.params.username));
-      return data;
+      await dispatch(fetchUserData(props.match.params.username));
+
+      console.log("props.match.params.username", props.match.params.username);
     }
     loadUserData();
   }, []);
+
+  console.log("user", user);
   let text = user.contact && user.contact.text;
   let email = user.contact && user.contact.email;
-  let socialMedia = user.contact && user.contact.socialMedia;
-  let imgId = user.contact && user.contact.imgId;
+  let instagram = user.contact && user.contact.instagram;
+  let address = user.contact && user.contact.address;
+  let phone = user.contact && user.contact.phone;
+  let facebook = user.contact && user.contact.facebook;
+  let twitter = user.contact && user.contact.twitter;
+  let pinterest = user.contact && user.contact.pinterest;
+  let linkedin = user.contact && user.contact.linkedin;
+  let etsy = user.contact && user.contact.etsy;
+  let tiktok = user.contact && user.contact.tiktok;
+
   return (
     <>
       <Navbar user={user} />
-      <div className="font-light text-sm leading-8 h-full m-10 flex flex-col items-start justify-center sm:px-10 sm:py-5 sm:flex-row md:h-90vh md:justify-start">
+      <div className="font-light text-sm leading-8 h-full m-10 flex flex-col items-start justify-center sm:px-10 sm:py-5git  sm:flex-row md:h-90vh md:justify-start">
         <div className="w-full flex flex-col mb-5 pr-4 sm:w-2/6">
           <span className="siteTitle mb-5">Get in Touch</span>
-          <p>{text}</p>
+          {text ? <p>{text}</p> : null}
           <ul className="mt-2 space-y-2">
             <li>
-              <a href={{ mailto: { email } }}>{email}</a>
+              <a href={{ mailto: { email } }}>
+                <span className="font-medium mr-2">Email</span> {email}
+              </a>
+              {phone ? (
+                <li>
+                  <span className="font-medium mr-2">Tel</span> {phone}
+                </li>
+              ) : null}
             </li>
-            <li>
-              <a href={socialMedia}>{socialMedia}</a>
-            </li>
+
+            {address ? (
+              <li>
+                <p>
+                  <span className="font-medium mr-2">Location</span> {address}{" "}
+                </p>
+              </li>
+            ) : null}
           </ul>
+          <div className="pt-4 social flex flex-wrap">
+            {instagram ? (
+              <a href={instagram} target="_blank">
+                <img
+                  src="../social/instagram.png"
+                  label="instagram"
+                  alt="instagrram"
+                />
+              </a>
+            ) : null}
+            {facebook ? (
+              <a href={facebook} target="_blank">
+                <img
+                  src="../social/facebook.png"
+                  label="facebook"
+                  alt="faceboook"
+                />
+              </a>
+            ) : null}
+            {twitter ? (
+              <a href={twitter} target="_blank">
+                <img
+                  src="../social/twitter.png"
+                  label="twitter"
+                  alt="twitter"
+                />
+              </a>
+            ) : null}
+            {email ? (
+              <a href={`mailto:${email} `}>
+                <img src="../social/email.png" alt="email" alt="email" />
+              </a>
+            ) : null}
+            {linkedin ? (
+              <a href={linkedin} target="_blank">
+                <img
+                  src="../social/linkedin.png"
+                  label="linked"
+                  alt="linkedin"
+                />
+              </a>
+            ) : null}
+            {etsy ? (
+              <a href={etsy} target="_blank">
+                <img src="../social/etsy.png" alt="etsy" alt="etsy" />
+              </a>
+            ) : null}
+            {pinterest ? (
+              <a href={pinterest} target="_blank">
+                <img
+                  src="../social/pinterest.png"
+                  alt="pinterest"
+                  alt="pinterest"
+                />
+              </a>
+            ) : null}
+            {tiktok ? (
+              <a href={tiktok} target="_blank">
+                <img src="../social/tiktok.png" alt="tiktok" alt="tiktok" />
+              </a>
+            ) : null}
+          </div>
         </div>
         <div className="w-full flex flex-col space-y-2 sm:w-4/6 sm:pr-10 sm:pl-10">
           <form className="contact block">
