@@ -12,7 +12,7 @@ router.post("/upload", async (req, res) => {
       upload_preset: "stackathon",
     });
     console.log("req.body.type", req.body.type);
-    //if req.body.type === about, send it to about table instead of work
+
     if (req.body.type === "about") {
       try {
         await About.update(

@@ -32,7 +32,6 @@ export const Contact = (props) => {
 
   const sendEmail = (e) => {
     e.preventDefault();
-    console.log(e.target);
     emailjs
       .send(
         "service_wmtm7u2",
