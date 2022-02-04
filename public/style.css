@@ -574,14 +574,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: auto;
 }
 
-.mx-10 {
-  margin-left: 2.5rem;
-  margin-right: 2.5rem;
-}
-
 .mx-1 {
   margin-left: 0.25rem;
   margin-right: 0.25rem;
+}
+
+.mx-10 {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
 }
 
 .mb-1 {
@@ -672,14 +672,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 50%;
 }
 
-.w-2 {
-  width: 0.5rem;
-}
-
-.w-6 {
-  width: 1.5rem;
-}
-
 .w-8 {
   width: 2rem;
 }
@@ -760,18 +752,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-space-x-reverse: 0;
   margin-right: calc(0.75rem * var(--tw-space-x-reverse));
   margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
-.space-x-10 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(2.5rem * var(--tw-space-x-reverse));
-  margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
-.space-x-20 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(5rem * var(--tw-space-x-reverse));
-  margin-left: calc(5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .border-2 {
@@ -1220,11 +1200,6 @@ textarea {
     margin-right: 2.5rem;
   }
 
-  .sm\:mx-1 {
-    margin-left: 0.25rem;
-    margin-right: 0.25rem;
-  }
-
   .sm\:w-3\/6 {
     width: 50%;
   }
@@ -1235,14 +1210,6 @@ textarea {
 
   .sm\:w-4\/6 {
     width: 66.666667%;
-  }
-
-  .sm\:w-1\/6 {
-    width: 16.666667%;
-  }
-
-  .sm\:w-auto {
-    width: auto;
   }
 
   .sm\:flex-row {
@@ -1265,12 +1232,6 @@ textarea {
 
   .sm\:pl-10 {
     padding-left: 2.5rem;
-  }
-
-  .sm\:social img {
-    width: 3.5rem;
-    height: auto;
-    margin: 0.5rem 0.3rem 0 0;
   }
 }
 
@@ -1305,10 +1266,6 @@ textarea {
     width: 16.666667%;
   }
 
-  .md\:items-start {
-    align-items: flex-start;
-  }
-
   .md\:justify-start {
     justify-content: flex-start;
   }
@@ -1325,12 +1282,6 @@ textarea {
 
   .md\:h-90vh {
     min-height: 82vh;
-  }
-
-  .md\:social img {
-    width: 3.5rem;
-    height: auto;
-    margin: 0.5rem 0.3rem 0 0;
   }
 }
 
