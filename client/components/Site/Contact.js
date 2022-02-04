@@ -9,16 +9,14 @@ export const Contact = (props) => {
   const dispatch = useDispatch();
   // let [userData, setUser] = useState(user);
 
+  console.log("contact props", props);
   useEffect(() => {
     async function loadUserData() {
       await dispatch(fetchUserData(props.match.params.username));
-
-      console.log("props.match.params.username", props.match.params.username);
     }
     loadUserData();
   }, []);
 
-  console.log("user", user);
   let text = user.contact && user.contact.text;
   let email = user.contact && user.contact.email;
   let instagram = user.contact && user.contact.instagram;
@@ -41,16 +39,14 @@ export const Contact = (props) => {
           {text ? <p>{text}</p> : null}
           <ul className="mt-2 space-y-2">
             <li>
-              <a href={{ mailto: { email } }}>
-                <span className="font-medium mr-2">Email</span> {email}
-              </a>
-              {phone ? (
-                <li>
-                  <span className="font-medium mr-2">Tel</span> {phone}
-                </li>
-              ) : null}
+              <span className="font-medium mr-2">Email</span>
+              <a href={{ mailto: { email } }}>{email}</a>
             </li>
-
+            {phone ? (
+              <li>
+                <span className="font-medium mr-2">Tel</span> {phone}
+              </li>
+            ) : null}
             {address ? (
               <li>
                 <p>

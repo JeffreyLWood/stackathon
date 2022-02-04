@@ -36,6 +36,12 @@ const Contact = db.define("contact", {
       isUrl: true,
     },
   },
+  youtube: {
+    type: Sequelize.STRING,
+    validate: {
+      isUrl: true,
+    },
+  },
   linkedin: {
     type: Sequelize.STRING,
     validate: {

@@ -15,7 +15,7 @@ export const CV = (props) => {
     }
     fetchData();
   }, []);
-
+  console.log("cv", props);
   return (
     <>
       <Navbar user={user} />

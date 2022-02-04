@@ -50,7 +50,7 @@ export default function Contact(props) {
             name="email"
             type="text"
             onChange={changeHandler}
-            value={state.email}
+            value={state.email ? state.email : props.user.email}
           ></input>
           <label htmlFor="email">Phone</label>
           <input
@@ -59,8 +59,9 @@ export default function Contact(props) {
             type="tel"
             onChange={changeHandler}
             value={state.phone}
+            placeHolder={"000 123 4567"}
           ></input>
-          <label htmlFor="email">Address</label>
+          <label htmlFor="email">Location</label>
           <input
             className="border-2"
             name="address"
@@ -78,6 +79,7 @@ export default function Contact(props) {
             type="url"
             onChange={changeHandler}
             value={state.instagram}
+            placeHolder="https://wwww.instagram.com/"
           ></input>
           <label htmlFor="facebook">Facebook</label>
           <input
@@ -85,6 +87,7 @@ export default function Contact(props) {
             name="facebook"
             type="url"
             onChange={changeHandler}
+            placeHolder="https://wwww.facebook.com/"
             value={state.facebook}
           ></input>
           <label htmlFor="twitter">Twitter</label>
@@ -93,6 +96,7 @@ export default function Contact(props) {
             name="twitter"
             type="url"
             onChange={changeHandler}
+            placeHolder="https://wwww.twitter.com/"
             value={state.twitter}
           ></input>
           <label htmlFor="youtube">Youtube</label>
@@ -101,6 +105,7 @@ export default function Contact(props) {
             name="youtube"
             type="url"
             onChange={changeHandler}
+            placeHolder="https://wwww.youtube.com/"
             value={state.youtube}
           ></input>
           <label htmlFor="linkedin">LinkedIn</label>
@@ -109,6 +114,7 @@ export default function Contact(props) {
             name="linkedin"
             type="url"
             onChange={changeHandler}
+            placeHolder="https://wwww.linkedin.com/"
             value={state.linkedin}
           ></input>
           <label htmlFor="etsy">Etsy</label>
@@ -117,6 +123,7 @@ export default function Contact(props) {
             name="etsy"
             type="url"
             onChange={changeHandler}
+            placeHolder="https://wwww.etsy.com/"
             value={state.etsy}
           ></input>
           <label htmlFor="pinterest">Pinterest</label>
@@ -125,6 +132,7 @@ export default function Contact(props) {
             name="pinterest"
             type="url"
             onChange={changeHandler}
+            placeHolder="https://wwww.pinterest.com/"
             value={state.pinterest}
           ></input>
           <label htmlFor="tiktok">TikTok</label>
@@ -133,6 +141,7 @@ export default function Contact(props) {
             name="tiktok"
             type="url"
             onChange={changeHandler}
+            placeHolder="https://wwww.tiktok.com/"
             value={state.tiktok}
           ></input>
           <div>
