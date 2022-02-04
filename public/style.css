@@ -860,13 +860,34 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-style: italic;
 }
 
+.leading-3 {
+  line-height: .75rem;
+}
+
+.leading-8 {
+  line-height: 2rem;
+}
+
+.leading-6 {
+  line-height: 1.5rem;
+}
+
 .tracking-widest {
   letter-spacing: 0.1em;
+}
+
+.tracking-wider {
+  letter-spacing: 0.05em;
 }
 
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-neutral-400 {
+  --tw-text-opacity: 1;
+  color: rgb(163 163 163 / var(--tw-text-opacity));
 }
 
 .text-gray-400 {
@@ -918,7 +939,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .h-90vh {
-  min-height: 90vh;
+  min-height: 82vh;
 }
 
 .subHeader {
@@ -1180,6 +1201,16 @@ textarea {
     padding-bottom: 2.5rem;
   }
 
+  .sm\:px-10 {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .sm\:py-5 {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+
   .sm\:pr-10 {
     padding-right: 2.5rem;
   }
@@ -1231,6 +1262,6 @@ textarea {
   }
 
   .md\:h-90vh {
-    min-height: 90vh;
+    min-height: 82vh;
   }
 }

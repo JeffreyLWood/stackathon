@@ -39,7 +39,7 @@ export const About = (props) => {
             className="object-contain my-10 md:my-0 sm:mx-10"
           />
         </div>
-        <div className="w-full h-full flex flex-col sm:w-3/6 sm:pr-10 sm:pl-10">
+        <div className="w-full h-full flex flex-col text-sm leading-8 sm:w-3/6 sm:pr-10">
           {newText}
         </div>
       </div>

@@ -27,9 +27,9 @@ export default function Contact(props) {
     return null;
   } else {
     return (
-      <div className="pb-10 w-full pr-10">
+      <div className="pb-10  w-full pr-10">
         <form
-          className="contact flex flex-col justify-start md:w-3/6"
+          className="contact flex flex-col  justify-start md:w-3/6"
           onSubmit={submitHandler}
         >
           <label htmlFor="text">Text:</label>
