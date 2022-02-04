@@ -25,6 +25,7 @@ export const Contact = (props) => {
   let address = user.contact && user.contact.address;
   let phone = user.contact && user.contact.phone;
   let facebook = user.contact && user.contact.facebook;
+  let youtube = user.contact && user.contact.youtube;
   let twitter = user.contact && user.contact.twitter;
   let pinterest = user.contact && user.contact.pinterest;
   let linkedin = user.contact && user.contact.linkedin;
@@ -91,11 +92,20 @@ export const Contact = (props) => {
                 <img src="../social/email.png" alt="email" alt="email" />
               </a>
             ) : null}
+            {youtube ? (
+              <a href={youtube} target="_blank">
+                <img
+                  src="../social/youtube.png"
+                  label="youtube"
+                  alt="youtube"
+                />
+              </a>
+            ) : null}
             {linkedin ? (
               <a href={linkedin} target="_blank">
                 <img
                   src="../social/linkedin.png"
-                  label="linked"
+                  label="linkedin"
                   alt="linkedin"
                 />
               </a>
@@ -110,13 +120,13 @@ export const Contact = (props) => {
                 <img
                   src="../social/pinterest.png"
                   alt="pinterest"
-                  alt="pinterest"
+                  label="pinterest"
                 />
               </a>
             ) : null}
             {tiktok ? (
               <a href={tiktok} target="_blank">
-                <img src="../social/tiktok.png" alt="tiktok" alt="tiktok" />
+                <img src="../social/tiktok.png" alt="tiktok" label="tiktok" />
               </a>
             ) : null}
           </div>

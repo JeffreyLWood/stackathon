@@ -95,6 +95,14 @@ export default function Contact(props) {
             onChange={changeHandler}
             value={state.twitter}
           ></input>
+          <label htmlFor="youtube">Youtube</label>
+          <input
+            className="border-2"
+            name="youtube"
+            type="url"
+            onChange={changeHandler}
+            value={state.youtube}
+          ></input>
           <label htmlFor="linkedin">LinkedIn</label>
           <input
             className="border-2"
