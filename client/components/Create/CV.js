@@ -16,14 +16,15 @@ const CV = (props) => {
   // }, []);
 
   // cv && setText(cv[header]);
-  let [header, setHeader] = useState("");
+  let [header, setHeader] = useState("Education");
 
-  let changeHandler = (evt) => {
+  let changeHandler = async (evt) => {
     evt.preventDefault();
-    // setHeader(evt.target.value);
-    setText(cv[evt.target.value.toLowerCase()]);
-    // [evt.target.name] = evt.target.value;
     setHeader(evt.target.value);
+
+    setText(cv[evt.target.value]);
+    [evt.target.name] = evt.target.value;
+
     console.log(evt.target.value, header);
   };
 
@@ -36,7 +37,7 @@ const CV = (props) => {
     evt.preventDefault();
     console.log(props.user.id, header, text);
 
-    dispatch(updateCVText(props.user.id, header.toLowerCase(), text));
+    dispatch(updateCVText(props.user.id, header, text));
   };
 
   return (
@@ -51,13 +52,16 @@ const CV = (props) => {
             onChange={changeHandler}
           >
             <option>Education</option>
-            <option>Solo Exhibitions</option>
-            <option>Exhibition</option>
-            <option>Teaching</option>
-            <option>Related Experience</option>
-            <option>Grants / Awards</option>
-            <option>Residencies</option>
-            <option>Press / Publication</option>
+            <option value="soloExhibition">Solo Exhibition</option>
+            <option value="groupExhibition">Group Exhibition</option>
+            <option value="experience">Related Experience</option>
+            <option value="teaching">Teaching</option>
+            <option value="awards">Awards</option>
+            <option value="press">Press</option>
+            <option value="publication">Publication</option>
+            <option value="residencies">Residencies</option>
+            <option value="advocacy">Advocacy</option>
+            <option value="communityInvolvement">Community Involvement</option>
           </select>
         </div>
         <label htmlFor="cv">
