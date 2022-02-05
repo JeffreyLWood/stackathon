@@ -604,6 +604,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 0.5rem;
 }
 
+.mr-10 {
+  margin-right: 2.5rem;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
 }
@@ -1135,7 +1139,7 @@ textarea {
 }
 
 .footer {
-  height: 50vh;
+  min-height: 50vh;
   display: flex;
   padding: 5rem;
 }
@@ -1200,6 +1204,10 @@ textarea {
   .workModalContainer li {
     margin-bottom: 0rem;
     padding: 0rem;
+  }
+
+  .footer {
+    padding: 2rem;
   }
 }
 
@@ -1275,8 +1283,8 @@ textarea {
     width: 50%;
   }
 
-  .md\:w-1\/6 {
-    width: 16.666667%;
+  .md\:flex-row {
+    flex-direction: row;
   }
 
   .md\:justify-start {

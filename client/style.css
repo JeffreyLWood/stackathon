@@ -178,7 +178,7 @@ textarea {
 }
 
 .footer {
-  height: 50vh;
+  min-height: 50vh;
   display: flex;
   padding: 5rem;
 }
@@ -239,5 +239,8 @@ textarea {
   .workModalContainer li {
     margin-bottom: 0rem;
     padding: 0rem;
+  }
+  .footer {
+    padding: 2rem;
   }
 }

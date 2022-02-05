@@ -27,10 +27,27 @@ export default function Footer(props) {
   let etsy = user.contact && user.contact.etsy;
   let tiktok = user.contact && user.contact.tiktok;
   return (
-    <div className="footer flex-row bg-neutral-100 font-light text-sm">
-      <div>
+    <div className="footer flex-col md:flex-row bg-neutral-100 font-light text-sm">
+      <div className="mr-10">
         <ul>
           <li className="uppercase tracking-wider text-lg">{user.siteTitle}</li>
+          <li>
+            <a href={`/${props.userName}`}>Work</a>
+          </li>
+          <li>
+            <a href={`/${props.userName}/about`}>About</a>
+          </li>
+          <li>
+            <a href={`/${props.userName}/contact`}>Contact</a>
+          </li>
+          <li>
+            <a href={`/${props.userName}/cv`}>CV</a>
+          </li>
+          <li>All Work and Images Copyright 2022</li>
+        </ul>
+      </div>
+      <div>
+        <ul>
           {address ? <li className="font-medium">{address}</li> : null}
           <li>
             <span className="font-medium mr-2">Email</span>
@@ -135,7 +152,6 @@ export default function Footer(props) {
               ) : null}
             </div>
           </li>
-          <li>All Work and Images Copyright 2022</li>
         </ul>
       </div>
     </div>
