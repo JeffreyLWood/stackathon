@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { text } = require("express");
 const {
   models: { User, About, Contact, CV, Work },
 } = require("../db");
@@ -50,10 +51,7 @@ router.post("/:userId/cv", async (req, res, next) => {
   try {
     await CV.create({
       header: req.body.header,
-      title: req.body.title,
-      description: req.body.description,
-      from: req.body.from,
-      to: req.body.to,
+      text: text,
       userId: req.params.userId,
     });
     let cvData = await CV.findAll({

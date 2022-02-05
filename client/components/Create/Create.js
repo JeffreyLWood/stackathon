@@ -61,7 +61,7 @@ export const Create = (props) => {
         <div className="flex h-90vh my-10 flex-row w-full">
           <section className="m-5 w-1/6 subHeader">CV</section>
           <section className="m-5 w-5/6">
-            <CV user={user} works={worksData} />
+            <CV user={user} />
           </section>
         </div>
         <div className="flex my-10 flex-row w-full">

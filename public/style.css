@@ -937,6 +937,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   outline-style: solid;
 }
 
+.outline-hidden {
+  outline-style: hidden;
+}
+
 .blur {
   --tw-blur: blur(8px);
   filter: var(--tw-filter);

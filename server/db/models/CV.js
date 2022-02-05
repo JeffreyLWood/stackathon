@@ -7,17 +7,8 @@ const CV = db.define("cv", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  title: {
-    type: Sequelize.STRING,
-  },
-  description: {
-    type: Sequelize.STRING,
-  },
-  from: {
-    type: Sequelize.DATE,
-  },
-  to: {
-    type: Sequelize.DATE,
+  text: {
+    type: Sequelize.TEXT,
   },
 });
 
