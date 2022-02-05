@@ -47,14 +47,15 @@ router.post("/:userId/about", async (req, res, next) => {
   }
 });
 
-router.post("/:userId/cv", async (req, res, next) => {
+router.put("/:userId/cv", async (req, res, next) => {
   try {
-    await CV.create({
-      header: req.body.header,
-      text: text,
-      userId: req.params.userId,
-    });
-    let cvData = await CV.findAll({
+    await CV.update(
+      {
+        [req.body.header]: req.body.text,
+      },
+      { where: { userId: req.params.userId } }
+    );
+    let cvData = await CV.findOne({
       where: { userId: req.params.userId },
     });
     res.status(200).send(cvData);
@@ -110,6 +111,7 @@ router.get("/:username", async (req, res, next) => {
       cv: allData.dataValues.cv,
       works: allData.dataValues.works,
     };
+    console.log(allData.dataValues);
     res.status(200).send(userData);
   } catch (err) {
     next(err);

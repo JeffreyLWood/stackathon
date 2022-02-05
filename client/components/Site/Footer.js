@@ -7,7 +7,7 @@ export default function Footer(props) {
   let user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   // let [userData, setUser] = useState(user);
-  console.log("footer props", props);
+
   useEffect(() => {
     async function loadUserData() {
       await dispatch(fetchUserData(props.userName));

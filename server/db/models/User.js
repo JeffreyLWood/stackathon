@@ -209,14 +209,20 @@ const defaultVals = async (user) => {
       text: null,
       imgId: null,
     });
-    let cv = await CV.create({
+    let exhibition = await CV.create({
       header: "Exhibition",
+      text: null,
+    });
+    let education = await CV.create({
+      header: "Education",
+      text: null,
     });
     let contact = await Contact.create({
       text: "Reach out to me at one of the following:",
     });
     await about.setUser(user);
-    await cv.setUser(user);
+    await exhibition.setUser(user);
+    await education.setUser(user);
     await contact.setUser(user);
   } catch (error) {
     console.log(error);

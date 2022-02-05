@@ -59,10 +59,14 @@ export const updateAboutText = (userId, textData) =>
     }
   };
 
-export const updateCVText = (userId, cvData) =>
+export const updateCVText = (userId, header, text) =>
   async function (dispatch) {
+    let putBody = {
+      header,
+      text,
+    };
     try {
-      let { data } = await axios.post(`/api/users/${userId}/cv`, cvData);
+      let { data } = await axios.put(`/api/users/${userId}/cv`, putBody);
       dispatch(updateCV(data));
     } catch (err) {
       return err;
