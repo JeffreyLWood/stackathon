@@ -51,7 +51,7 @@ const CV = (props) => {
             value={header}
             onChange={changeHandler}
           >
-            <option>Education</option>
+            <option value="education">Education</option>
             <option value="soloExhibition">Solo Exhibition</option>
             <option value="groupExhibition">Group Exhibition</option>
             <option value="experience">Related Experience</option>

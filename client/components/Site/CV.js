@@ -20,7 +20,7 @@ export const CV = (props) => {
 
   let cv = user && user.cv;
 
-  let education = cv && cv.education.split("\n");
+  let education = cv && cv.education ? cv.education.split("\n") : null;
   let soloExhibition =
     cv && cv.soloExhibition ? cv.soloExhibition.split("\n") : null;
   let groupExhibition =
