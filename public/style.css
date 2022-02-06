@@ -540,6 +540,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   grid-column: span 3 / span 3;
 }
 
+.col-span-1 {
+  grid-column: span 1 / span 1;
+}
+
+.col-span-8 {
+  grid-column: span 8 / span 8;
+}
+
 .col-start-3 {
   grid-column-start: 3;
 }
@@ -1354,6 +1362,14 @@ textarea {
     width: 50%;
   }
 
+  .md\:w-5\/6 {
+    width: 83.333333%;
+  }
+
+  .md\:w-4\/6 {
+    width: 66.666667%;
+  }
+
   .md\:flex-row {
     flex-direction: row;
   }
@@ -1405,5 +1421,9 @@ textarea {
 
   .lg\:w-3\/6 {
     width: 50%;
+  }
+
+  .lg\:w-5\/6 {
+    width: 83.333333%;
   }
 }
