@@ -11,6 +11,13 @@
   letter-spacing: 0.1em;
 }
 
+.pageTitle {
+  font-size: large;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
 .onView {
   font-size: x-large;
   font-weight: 300;

@@ -65,7 +65,9 @@ const CV = (props) => {
           </select>
         </div>
         <label htmlFor="cv">
-          (YYYY)* (YYYY), Location *, Title *, Address, Link (https://www..)
+          (YYYY)* (YYYY), Heading 1 *, Heading 2 *, City ST, Link
+          (https://www..) eg 2019 2020, Columbia University, Adjunct Faculty,
+          New York NY
         </label>
         <textarea
           name="cv"

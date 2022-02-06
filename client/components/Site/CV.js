@@ -42,10 +42,13 @@ export const CV = (props) => {
       <div className="h-90vh w-full flex flex-col pt-20 mx-2 md:pl-20">
         {education ? <CVGroup title={"Education"} data={education} /> : null}
         {soloExhibition ? (
-          <CVGroup title={"Solo Exhibition"} data={soloExhibition} />
+          <CVGroup title={"Solo Exhibitions"} data={soloExhibition} />
         ) : null}
         {groupExhibition ? (
-          <CVGroup title={"Select Group Exhibition"} data={groupExhibition} />
+          <CVGroup
+            title={"Selected Group Exhibitions"}
+            data={groupExhibition}
+          />
         ) : null}
         {press ? <CVGroup title={"Press"} data={press} /> : null}
         {publication ? (

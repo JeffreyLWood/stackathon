@@ -4,18 +4,24 @@ import { useSelector, useDispatch } from "react-redux";
 export default function CVGroup(props) {
   return (
     <>
-      <div className="siteTitle mb-5">{props.title}</div>
+      <div className="pageTitle text-gray-500">{props.title}</div>
 
-      <ul className="font-light text-xs tracking-wider flex flex-col sm:text-sm w-full lg:w-4/6">
+      <ul className="font-light text-xs tracking-wider flex flex-col w-full sm:text-sm md:ml-40 lg:w-3/6">
         {props.data &&
           props.data.map((line, index) => {
             let data = line.split(",");
             return (
-              <li className="grid grid-cols-12 mb-5 w-full" key={index}>
-                <span id="date" className="col-span-2 text-gray-500">
+              <li
+                className="grid grid-cols-12 grid-rows-2 mb-5 w-full"
+                key={index}
+              >
+                <span
+                  id="date"
+                  className="col-span-2 row-span-1 row-span-1 text-gray-500"
+                >
                   {data[0]}
                 </span>
-                <div className="col-span-7">
+                <div className="col-span-7 row-span-1">
                   {
                     <>
                       <span id="place" className="font-medium text-gray-600">
@@ -27,10 +33,17 @@ export default function CVGroup(props) {
                     </>
                   }
                 </div>
-                <span id="location" className="col-span-3">
+                <span id="location" className="col-span-3 row-span-1">
                   {data[3]}
                 </span>
-                {data[4] ? <span id="description">{data[4]}</span> : null}
+                {data[4] ? (
+                  <span
+                    id="link"
+                    className="row-start-2 row-span-1 col-start-3 col-span-7"
+                  >
+                    <a href={data[4]}>{data[4]}</a>
+                  </span>
+                ) : null}
               </li>
             );
           })}
