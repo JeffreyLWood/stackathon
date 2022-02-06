@@ -16,7 +16,7 @@ const CV = (props) => {
   // }, []);
 
   // cv && setText(cv[header]);
-  let [header, setHeader] = useState("Education");
+  let [header, setHeader] = useState("education");
 
   let changeHandler = async (evt) => {
     evt.preventDefault();
