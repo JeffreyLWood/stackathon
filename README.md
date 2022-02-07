@@ -1,4 +1,4 @@
-# Artist Portfolio Generator
+# SlctdWork
 
 This repository was started for the Stackathon project at Fullstack Academy of Code. It is software intended to simplify the process of creating a website for one's painting, scultpure or printmaking.
 
