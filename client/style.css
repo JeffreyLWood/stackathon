@@ -17,7 +17,10 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
-
+.aboutImg {
+  display: flex;
+  max-width: 24rem;
+}
 .onView {
   font-size: x-large;
   font-weight: 300;

@@ -65,14 +65,13 @@ const CV = (props) => {
           </select>
         </div>
         <label htmlFor="cv">
-          (YYYY)* (YYYY), Heading 1 *, Heading 2 *, City ST, Link
-          (https://www..) eg 2019 2020, Columbia University, Adjunct Faculty,
-          New York NY
+          {/* (YYYY)* (YYYY), Heading 1 *, Heading 2, City ST, Link (https://www..) */}
+          eg. 2020, Columbia University, MFA Painting, New York NY
         </label>
         <textarea
           name="cv"
-          className="w-full md:w-3/6 h-90vh border-b-2 outline-hidden"
-          placeholder="(YYYY)* (YYYY), Location *, Title *, Address, Link (https://www..)"
+          className="w-full md:w-5/6 h-full border-b-2 outline-hidden"
+          placeholder="(YYYY)* (YYYY), Heading 1 *, Heading 2, City ST, Link (https://www..)"
           onChange={textHandler}
           value={text}
         ></textarea>
