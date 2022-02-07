@@ -15,7 +15,7 @@ export default function ArtworkModal(props) {
         <img src="/icons8-close-16.png"></img>
       </div>
       <div className="workModalBody">
-        <div className="workModalImgContainer bg-red-100">
+        <div className="workModalImgContainer">
           <Image cloudName="jeffreywood" publicId={props.data.imgId} />
         </div>
         <div className="workModalTextContainer">
