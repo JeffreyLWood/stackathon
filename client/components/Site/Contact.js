@@ -17,7 +17,7 @@ export const Contact = (props) => {
     loadUserData();
   }, []);
   let defaultEmail = user.email;
-  console.log(defaultEmail);
+
   let text = user.contact && user.contact.text;
   let email = user.contact && user.contact.email;
   let instagram = user.contact && user.contact.instagram;
