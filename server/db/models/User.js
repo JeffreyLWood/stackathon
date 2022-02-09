@@ -100,7 +100,7 @@ const defaultImages = async (user) => {
       height: 4,
       width: 5,
       status: "available",
-      hidden: "off",
+      hidden: false,
     });
 
     let default1 = await Work.create({
@@ -111,7 +111,7 @@ const defaultImages = async (user) => {
       height: 4,
       width: 5,
       status: "available",
-      hidden: "off",
+      hidden: false,
     });
     let default2 = await Work.create({
       title: "Ice Cream",
@@ -121,7 +121,7 @@ const defaultImages = async (user) => {
       height: 4,
       width: 5,
       status: "available",
-      hidden: "off",
+      hidden: false,
     });
     let default3 = await Work.create({
       title: "Brooklyn Heights",
@@ -131,7 +131,7 @@ const defaultImages = async (user) => {
       height: 4,
       width: 5,
       status: "available",
-      hidden: "off",
+      hidden: false,
     });
     let default4 = await Work.create({
       title: "Sidewalk",
@@ -141,7 +141,7 @@ const defaultImages = async (user) => {
       height: 4,
       width: 5,
       status: "available",
-      hidden: "off",
+      hidden: false,
     });
     let default5 = await Work.create({
       title: "Corner",
@@ -151,7 +151,7 @@ const defaultImages = async (user) => {
       height: 4,
       width: 5,
       status: "available",
-      hidden: "off",
+      hidden: false,
     });
     // let default6 = await Work.create({
     //   title: "A Street in Brooklyn",
@@ -161,7 +161,7 @@ const defaultImages = async (user) => {
     //   height: 4,
     //   width: 5,
     //   status: "available",
-    //   hidden: "off",
+    //   hidden: false,
     // });
     let default7 = await Work.create({
       title: "Street 1",
@@ -171,7 +171,7 @@ const defaultImages = async (user) => {
       height: 5,
       width: 4,
       status: "available",
-      hidden: "off",
+      hidden: false,
     });
     let default8 = await Work.create({
       title: "Street 2",
@@ -181,7 +181,7 @@ const defaultImages = async (user) => {
       height: 5,
       width: 4,
       status: "available",
-      hidden: "off",
+      hidden: true,
     });
     // Put defaults into array for mapping
     let array = [

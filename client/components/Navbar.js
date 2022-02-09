@@ -29,10 +29,20 @@ export const Navbar = (props) => {
   };
 
   return (
-    <div className="flex justify-between items-end mb-5 px-10 h-16">
-      <span className="onView">SlctdWork</span>
-
-      <div className="">
+    <div className="flex justify-between py-4 px-2 font-light">
+      <div className="flex flex-row space-x-5">
+        <span className="">SlctdWork</span>
+        <Link to="/create/in/settings">
+          <span className="italic text-sm text-indigo-600">
+            Hello, {user.firstName}. Manage your site here.
+          </span>
+        </Link>
+        <Link to="/create/in/work">Work</Link>
+        <Link to="/create/in/about"> About</Link>
+        <Link to="/create/in/cv"> CV</Link>
+        <Link to="/create/in/contact">Contact</Link>
+      </div>
+      <div>
         {user.username ? (
           <>
             <Link to={`/${user.username}`}>

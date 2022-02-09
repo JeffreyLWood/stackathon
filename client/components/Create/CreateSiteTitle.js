@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateTitleData } from "../../store/create";
 import { useEffect, useState } from "react";
 import { fetchUserData } from "../../store/user";
+import { Navbar } from "../Navbar";
 export default function SiteTitle(props) {
+  let user = useSelector((state) => state.user);
   let dispatch = useDispatch();
   let titleData = useSelector((state) => state.auth.siteTitle);
   let [title, setTitle] = useState(titleData);
@@ -19,27 +21,30 @@ export default function SiteTitle(props) {
   };
 
   return (
-    <div className="h-full">
-      <form className="flex flex-col" onSubmit={submitHandler}>
-        <label htmlFor="name">
-          Your full name as it will appear on your site
-        </label>
-        <div>
-          <input
-            className="p-1 border-2 w-2/6"
-            name="title"
-            type="text"
-            onChange={changeHandler}
-            value={title}
-          />
-        </div>
-        <div>
-          <button type="submit" className="pill my-2">
-            Submit
-          </button>
-        </div>
-      </form>
-    </div>
+    <>
+      <Navbar user={user} />
+      <div className="h-full">
+        <form className="flex flex-col" onSubmit={submitHandler}>
+          <label htmlFor="name">
+            Your full name as it will appear on your site
+          </label>
+          <div>
+            <input
+              className="p-1 border-2 w-2/6"
+              name="title"
+              type="text"
+              onChange={changeHandler}
+              value={title}
+            />
+          </div>
+          <div>
+            <button type="submit" className="pill my-2">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
 

@@ -2,11 +2,14 @@ import React from "react";
 import { updateContactData } from "../../store/create";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import { Navbar } from "../Navbar";
 export default function Contact(props) {
-  let dispatch = useDispatch();
   let contact = useSelector((state) => state.user.contact);
-  let [state, setState] = useState(contact);
+  let user = props.user;
+  let contactData = user && user.contact;
+
+  let dispatch = useDispatch();
+  let [state, setState] = useState({});
 
   useEffect(() => {
     setState(contact);
@@ -21,10 +24,10 @@ export default function Contact(props) {
     evt.preventDefault();
     dispatch(updateContactData(props.user.id, state));
   };
-  if (!state) {
-    return null;
-  } else {
-    return (
+
+  return (
+    <>
+      <Navbar user={user} />
       <div className="pb-10  w-full pr-10">
         <form
           className="contact flex flex-col  justify-start md:w-3/6"
@@ -39,7 +42,7 @@ export default function Contact(props) {
             name="text"
             type="text"
             onChange={changeHandler}
-            value={state.text}
+            value={state ? state.text : ""}
           />
           <label htmlFor="email">Email *</label>
           <input
@@ -48,7 +51,7 @@ export default function Contact(props) {
             name="email"
             type="text"
             onChange={changeHandler}
-            value={state.email ? state.email : props.user.email}
+            value={state ? state.email : ""}
           ></input>
           <label htmlFor="email">Phone</label>
           <input
@@ -56,7 +59,7 @@ export default function Contact(props) {
             name="phone"
             type="tel"
             onChange={changeHandler}
-            value={state.phone}
+            value={state ? state.phone : ""}
             placeholder={"000 123 4567"}
           ></input>
           <label htmlFor="email">Location</label>
@@ -65,7 +68,7 @@ export default function Contact(props) {
             name="address"
             type="text"
             onChange={changeHandler}
-            value={state.address}
+            value={state ? state.address : ""}
           ></input>
           <label htmlFor="socialMedia" className="mb-1">
             Social Media Links
@@ -76,7 +79,7 @@ export default function Contact(props) {
             name="instagram"
             type="url"
             onChange={changeHandler}
-            value={state.instagram}
+            value={state ? state.instagram : ""}
             placeholder="https://wwww.instagram.com/"
           ></input>
           <label htmlFor="facebook">Facebook</label>
@@ -86,7 +89,7 @@ export default function Contact(props) {
             type="url"
             onChange={changeHandler}
             placeholder="https://wwww.facebook.com/"
-            value={state.facebook}
+            value={state ? state.facebook : ""}
           ></input>
           <label htmlFor="twitter">Twitter</label>
           <input
@@ -95,7 +98,7 @@ export default function Contact(props) {
             type="url"
             onChange={changeHandler}
             placeholder="https://wwww.twitter.com/"
-            value={state.twitter}
+            value={state ? state.twitter : ""}
           ></input>
           <label htmlFor="youtube">Youtube</label>
           <input
@@ -104,7 +107,7 @@ export default function Contact(props) {
             type="url"
             onChange={changeHandler}
             placeholder="https://wwww.youtube.com/"
-            value={state.youtube}
+            value={state ? state.youtube : ""}
           ></input>
           <label htmlFor="linkedin">LinkedIn</label>
           <input
@@ -113,7 +116,7 @@ export default function Contact(props) {
             type="url"
             onChange={changeHandler}
             placeholder="https://wwww.linkedin.com/"
-            value={state.linkedin}
+            value={state ? state.linkedin : ""}
           ></input>
           <label htmlFor="etsy">Etsy</label>
           <input
@@ -122,7 +125,7 @@ export default function Contact(props) {
             type="url"
             onChange={changeHandler}
             placeholder="https://wwww.etsy.com/"
-            value={state.etsy}
+            value={state ? state.etsy : ""}
           ></input>
           <label htmlFor="pinterest">Pinterest</label>
           <input
@@ -131,7 +134,7 @@ export default function Contact(props) {
             type="url"
             onChange={changeHandler}
             placeholder="https://wwww.pinterest.com/"
-            value={state.pinterest}
+            value={state ? state.pinterest : ""}
           ></input>
           <label htmlFor="tiktok">TikTok</label>
           <input
@@ -140,7 +143,7 @@ export default function Contact(props) {
             type="url"
             onChange={changeHandler}
             placeholder="https://wwww.tiktok.com/"
-            value={state.tiktok}
+            value={state ? state.tiktok : ""}
           ></input>
           <div>
             <button type="submit" className="pill">
@@ -149,6 +152,6 @@ export default function Contact(props) {
           </div>
         </form>
       </div>
-    );
-  }
+    </>
+  );
 }

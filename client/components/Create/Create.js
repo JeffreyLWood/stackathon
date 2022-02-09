@@ -1,14 +1,14 @@
 import React from "react";
 import me from "../../store/auth";
-import Work from "./Work";
-import SiteTitle from "./SiteTitle";
-import About from "./About";
-import CV from "./CV";
-import Contact from "./Contact";
+import Work from "./CreateWork";
+import SiteTitle from "./CreateSiteTitle";
+import About from "./CreateAbout";
+import CV from "./CreateCV";
+import Contact from "./CreateContact";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Navbar } from "../Navbar";
-import Snapshot from "./Snapshot";
+import Snapshot from "./CreateSnapshot";
 import { Image } from "cloudinary-react";
 import { fetchUserData } from "../../store/user";
 
@@ -40,16 +40,16 @@ export const Create = (props) => {
     <>
       <Navbar user={user} />
       <div className="flex flex-col w-full">
-        <div className="flex my-10 flex-col md:flex-row w-full">
+        {/* <div className="flex my-10 flex-col md:flex-row w-full">
           <section className="m-5 w-1/6 subHeader">Site Title</section>
           <section className="m-5 w-5/6">
             <SiteTitle user={user} />
           </section>
-        </div>
+        </div> */}
         <div className="flex my-10 flex-row w-full">
           {/* <section className="m-5 w-1/6 subHeader">Work</section> */}
           <section className="m-5 w-5/6">
-            <Snapshot user={user} works={worksData} />
+            <Work user={user} works={worksData} />
           </section>
         </div>
         <div className="flex my-10 flex-row w-full">

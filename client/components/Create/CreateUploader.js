@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { Image } from "cloudinary-react";
 import { fetchSingleWork, destroyWork } from "../../store/create";
 
-const Modal = (props) => {
+export const Uploader = (props) => {
   let work = useSelector((state) => state.create);
 
   const [fileInputState, setFileInputState] = useState("");
@@ -20,7 +20,7 @@ const Modal = (props) => {
     height: "",
     width: "",
     medium: "",
-    hidden: "",
+    hidden: false,
   });
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const Modal = (props) => {
           height: "",
           width: "",
           medium: "",
-          hidden: "",
+          hidden: false,
         });
       }
       if (props.displayName === "Edit Work") {
@@ -62,6 +62,7 @@ const Modal = (props) => {
       //if event target name is in data, change data to value
       setState({ ...state, [evt.target.name]: evt.target.value });
       work = { ...work, [evt.target.name]: evt.target.value };
+      console.log(evt.target.value);
     }
   };
 
@@ -75,7 +76,7 @@ const Modal = (props) => {
 
   let submitHandler = async (evt) => {
     evt.preventDefault();
-
+    console.log(state);
     if (props.displayName === "Edit Work") {
       updateData(previewSource);
     } else if (!previewSource) return;
@@ -89,7 +90,7 @@ const Modal = (props) => {
       height: "",
       width: "",
       medium: "",
-      hidden: "",
+      hidden: false,
     });
     props.setShow(false);
   };
@@ -130,7 +131,7 @@ const Modal = (props) => {
           height: state.height.length ? state.height : work.Height,
           width: state.width.length ? state.width : work.width,
           medium: state.medium.length ? state.medium : work.Medium,
-          hidden: state.hidden.length ? state.hidden : work.Hidden,
+          hidden: state.hidden ? state.hidden : work.Hidden,
         }),
         headers: { "Content-type": "application/json" },
       });
@@ -148,7 +149,7 @@ const Modal = (props) => {
       height: "",
       width: "",
       medium: "",
-      hidden: "",
+      hidden: work.hidden ? work.hidden : false,
     });
   };
 
@@ -265,20 +266,14 @@ const Modal = (props) => {
               </div>
               <label htmlFor="hidden" className="my-1">
                 Set to Hidden
-                <input
+                <button
+                  type="button"
+                  onClick={changeHandler}
                   name="hidden"
-                  type="checkbox"
-                  id="hidden"
-                  onChange={changeHandler}
-                  className="m-1"
-                  value={
-                    state.hidden.length
-                      ? state.hidden
-                      : work
-                      ? work.hidden
-                      : state.hidden
-                  }
-                />
+                  value="false"
+                >
+                  <img src="../eye.png" />
+                </button>
               </label>
 
               <button
@@ -304,5 +299,3 @@ const Modal = (props) => {
     </div>
   );
 };
-
-export const Uploader = Modal;
