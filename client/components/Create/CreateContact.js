@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { Navbar } from "../Navbar";
 import { fetchUserData } from "../../store/user";
 export default function CreateContact(props) {
-  let contact = {};
   let user = useSelector((state) => state.user);
   console.log(props);
   let dispatch = useDispatch();
@@ -16,8 +15,8 @@ export default function CreateContact(props) {
   }, []);
 
   useEffect(() => {
-    setState(contact);
-  }, []);
+    setState(user ? user.contact : {});
+  }, [user]);
 
   let changeHandler = (evt) => {
     evt.preventDefault();
@@ -33,7 +32,7 @@ export default function CreateContact(props) {
   return (
     <>
       <Navbar user={user} />
-      <div className="pb-10  w-full pr-10">
+      <div className="p-10 w-full">
         <form
           className="contact flex flex-col  justify-start md:w-3/6"
           onSubmit={submitHandler}

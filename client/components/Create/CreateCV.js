@@ -3,20 +3,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateCVText } from "../../store/create";
 import { useEffect, useState } from "react";
 import { Navbar } from "../Navbar";
+import { fetchUserData } from "../../store/user";
+
 const CV = (props) => {
   let user = useSelector((state) => state.user);
-  let cv = useSelector((state) => state.user.cv);
 
-  const dispatch = useDispatch();
+  let dispatch = useDispatch();
+
+  useEffect(() => {
+    user = dispatch(fetchUserData(props.match.params.username));
+  }, []);
 
   let [text, setText] = useState("");
 
   let [header, setHeader] = useState("education");
 
+  useEffect(() => {
+    setText(user && user.cv ? user.cv.education : {});
+  }, [user]);
+
   let changeHandler = async (evt) => {
     evt.preventDefault();
     setHeader(evt.target.value);
-    setText(cv[evt.target.value]);
+    setText(user.cv[evt.target.value]);
     [evt.target.name] = evt.target.value;
   };
 
@@ -27,7 +36,8 @@ const CV = (props) => {
 
   let submitHandler = (evt) => {
     evt.preventDefault();
-    dispatch(updateCVText(props.user.id, header, text));
+    // console.log(user.id, header, text);
+    dispatch(updateCVText(user.id, header, text));
   };
 
   return (
@@ -67,7 +77,7 @@ const CV = (props) => {
             className="w-full md:w-5/6 h-full border-b-2 outline-hidden"
             placeholder="(YYYY)* (YYYY), Heading 1 *, Heading 2, City ST, Link (https://www..)"
             onChange={textHandler}
-            value={text}
+            value={text ? text : ""}
           ></textarea>
 
           <button type="submit" className="pill">
