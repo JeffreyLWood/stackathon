@@ -32,15 +32,15 @@ export const Navbar = (props) => {
     <div className="flex justify-between py-4 px-2 font-light">
       <div className="flex flex-row space-x-5">
         <span className="">SlctdWork</span>
-        <Link to="/create/in/settings">
+        <Link to={`/create/in/${user.username}settings`}>
           <span className="italic text-sm text-indigo-600">
             Hello, {user.firstName}. Manage your site here.
           </span>
         </Link>
-        <Link to="/create/in/work">Work</Link>
-        <Link to="/create/in/about"> About</Link>
-        <Link to="/create/in/cv"> CV</Link>
-        <Link to="/create/in/contact">Contact</Link>
+        <Link to={`/create/in/${user.username}/work`}>Work</Link>
+        <Link to={`/create/in/${user.username}/about`}> About</Link>
+        <Link to={`/create/in/${user.username}/cv`}> CV</Link>
+        <Link to={`/create/in/${user.username}/contact`}>Contact</Link>
       </div>
       <div>
         {user.username ? (

@@ -14,25 +14,28 @@ import { Work } from "./components/Site/Work";
 import { About } from "./components/Site/About";
 import { Contact } from "./components/Site/Contact";
 import { CV } from "./components/Site/CV";
-
+import { fetchUserData } from "./store/user";
 /**
  * COMPONENT
  */
 const Routes = () => {
-  // componentDidMount() {
-  //   this.props.loadInitialData();
-  // }
   let user = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(me());
   }, []);
+
+  // useEffect(() => {
+  //   user = dispatch(fetchUserData(auth.username));
+  // });
+
   return (
     <div>
       {user.username ? (
         <Switch>
-          <Route exact path="/create/in" component={CreateWork} user={user} />
+          <Route exact path="/create/in/:username" component={CreateWork} />
           {/* <Route exact path="/create/home" component={CreateCreate} /> */}
           <Route exact path="/:username" component={Work} data={user} />
           <Route exact path="/:username/work" component={Work} />
@@ -41,20 +44,25 @@ const Routes = () => {
           <Route exact path="/:username/contact" component={Contact} />
           <Route
             exact
-            path="/create/in/work"
+            path="/create/in/:username/work"
             component={CreateWork}
             user={user}
           />
           <Route
             exact
-            path="/create/in/about"
+            path="/create/in/:username/about"
             component={CreateAbout}
             user={user}
           />
-          <Route exact path="/create/in/cv" component={CreateCV} user={user} />
           <Route
             exact
-            path="/create/in/contact"
+            path="/create/in/:username/cv"
+            component={CreateCV}
+            user={user}
+          />
+          <Route
+            exact
+            path="/create/in/:username/contact"
             component={CreateContact}
             user={user}
           />

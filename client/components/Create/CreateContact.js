@@ -3,17 +3,21 @@ import { updateContactData } from "../../store/create";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Navbar } from "../Navbar";
-export default function Contact(props) {
-  let contact = useSelector((state) => state.user.contact);
-  let user = props.user;
-  let contactData = user && user.contact;
-
+import { fetchUserData } from "../../store/user";
+export default function CreateContact(props) {
+  let contact = {};
+  let user = useSelector((state) => state.user);
+  console.log(props);
   let dispatch = useDispatch();
   let [state, setState] = useState({});
 
   useEffect(() => {
+    user = dispatch(fetchUserData(props.match.params.username));
+  }, []);
+
+  useEffect(() => {
     setState(contact);
-  }, [contact]);
+  }, []);
 
   let changeHandler = (evt) => {
     evt.preventDefault();
@@ -22,6 +26,7 @@ export default function Contact(props) {
 
   let submitHandler = (evt) => {
     evt.preventDefault();
+    console.log(user);
     dispatch(updateContactData(user.id, state));
   };
 
