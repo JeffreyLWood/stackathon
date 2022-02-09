@@ -32,11 +32,12 @@ export default function CreateContact(props) {
   return (
     <>
       <Navbar user={user} />
-      <div className="p-10 w-full">
-        <form
-          className="contact flex flex-col  justify-start md:w-3/6"
-          onSubmit={submitHandler}
-        >
+
+      <form
+        className="contact w-full flex p-10 space-x-5"
+        onSubmit={submitHandler}
+      >
+        <div className="w-full">
           <label htmlFor="text">Text:</label>
           <textarea
             className="border-2"
@@ -74,6 +75,8 @@ export default function CreateContact(props) {
             onChange={changeHandler}
             value={state ? state.address : ""}
           ></input>
+        </div>
+        <div className="w-full">
           <label htmlFor="socialMedia" className="mb-1">
             Social Media Links
           </label>
@@ -154,8 +157,8 @@ export default function CreateContact(props) {
               Save Changes
             </button>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </>
   );
 }

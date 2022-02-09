@@ -7,27 +7,34 @@ import { Navbar } from "../Navbar";
 
 const About = (props) => {
   let user = useSelector((state) => state.user);
-  let aboutData = user.about;
 
   let dispatch = useDispatch();
 
-  let text = aboutData && aboutData.text;
-  // let imgId = aboutData && aboutData.imgId;
-  let [aboutText, setAboutText] = useState("");
-  let image;
   useEffect(() => {
-    setAboutText(text);
+    user = dispatch(fetchUserData(props.match.params.username));
+  }, []);
+
+  let [text, setText] = useState("");
+
+  useEffect(() => {
+    setText(user && user.about ? user.about.text : "");
+  }, [user]);
+
+  let image;
+
+  useEffect(() => {
+    setText(text);
   }, [text]);
 
   let changeHandler = (evt) => {
     evt.preventDefault();
-    setAboutText(evt.target.value);
+    setText(evt.target.value);
   };
 
   let submitHandler = (evt) => {
     evt.preventDefault();
-    dispatch(updateAboutText(props.user.id, { aboutText }));
-    dispatch(fetchUserData(props.user.userName));
+    dispatch(updateAboutText(user.id, { aboutText: text }));
+    dispatch(fetchUserData(user.userName));
   };
 
   const [fileInputState, setFileInputState] = useState("");
@@ -60,7 +67,7 @@ const About = (props) => {
         method: "POST",
         body: JSON.stringify({
           data: base64EncodedImage,
-          userId: props.user.id,
+          userId: user.id,
           type: "about",
         }),
         headers: { "Content-type": "application/json" },
@@ -73,53 +80,55 @@ const About = (props) => {
   return (
     <>
       <Navbar user={user} />
-      <form className="space-x-5" onSubmit={imgSubmitHandler}>
-        <div>
-          <input
-            id="image"
-            name="image"
-            type="file"
-            onChange={imgChangeHandler}
-            value={fileInputState}
-            style={{ display: "none" }}
-          />
-          <label htmlFor="image">
-            {previewSource ? (
-              <img src={previewSource} alt="chosen" className="h-56" />
-            ) : image ? (
-              <Image
-                cloudName={"jeffreywood"}
-                publicId={null}
-                className="h-56"
-              />
-            ) : (
-              <img src="../placeholderadd.png"></img>
-            )}
-          </label>
-        </div>
-        <button type="submit" className="pill">
-          Submit
-        </button>
-      </form>
-      <form className="space-x-5" onSubmit={submitHandler}>
-        <div>
-          <textarea
-            rows="15"
-            cols="50"
-            className="border-2 w-4/6 p-2"
-            name="about"
-            type="text"
-            style={{ resize: "none" }}
-            onChange={changeHandler}
-            value={aboutText}
-          />
-        </div>
-        <div>
-          <button className="pill my-2" id="about" type="submit">
-            Save Changes
+      <div className="w-full p-10">
+        <form className="space-x-5" onSubmit={imgSubmitHandler}>
+          <div>
+            <input
+              id="image"
+              name="image"
+              type="file"
+              onChange={imgChangeHandler}
+              value={fileInputState}
+              style={{ display: "none" }}
+            />
+            <label htmlFor="image">
+              {previewSource ? (
+                <img src={previewSource} alt="chosen" className="h-56" />
+              ) : image ? (
+                <Image
+                  cloudName={"jeffreywood"}
+                  publicId={null}
+                  className="h-56"
+                />
+              ) : (
+                <img src="../placeholderadd.png"></img>
+              )}
+            </label>
+          </div>
+          <button type="submit" className="pill">
+            Submit
           </button>
-        </div>
-      </form>
+        </form>
+        <form className="space-x-5" onSubmit={submitHandler}>
+          <div>
+            <textarea
+              rows="15"
+              cols="50"
+              className="border-2 w-4/6 p-2"
+              name="about"
+              type="text"
+              style={{ resize: "none" }}
+              onChange={changeHandler}
+              value={text}
+            />
+          </div>
+          <div>
+            <button className="pill my-2" id="about" type="submit">
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
     </>
   );
 };

@@ -43,7 +43,7 @@ const CV = (props) => {
   return (
     <>
       <Navbar user={user} />
-      <div className="w-full flex">
+      <div className="w-full p-10 flex">
         <form className="w-full" onSubmit={submitHandler}>
           <div>
             <label htmlFor="header">Category</label>
