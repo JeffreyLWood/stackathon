@@ -6,7 +6,7 @@ import { Navbar } from "../Navbar";
 import { fetchUserData } from "../../store/user";
 export default function CreateContact(props) {
   let user = useSelector((state) => state.user);
-  console.log(props);
+
   let dispatch = useDispatch();
   let [state, setState] = useState({});
 
@@ -15,7 +15,7 @@ export default function CreateContact(props) {
   }, []);
 
   useEffect(() => {
-    setState(user ? user.contact : {});
+    setState(user?.contact || {});
   }, [user]);
 
   let changeHandler = (evt) => {
@@ -25,7 +25,7 @@ export default function CreateContact(props) {
 
   let submitHandler = (evt) => {
     evt.preventDefault();
-    console.log(user);
+
     dispatch(updateContactData(user.id, state));
   };
 
@@ -47,7 +47,7 @@ export default function CreateContact(props) {
             name="text"
             type="text"
             onChange={changeHandler}
-            value={state ? state.text : ""}
+            value={state?.text || ""}
           />
           <label htmlFor="email">Email *</label>
           <input
@@ -56,7 +56,7 @@ export default function CreateContact(props) {
             name="email"
             type="text"
             onChange={changeHandler}
-            value={state ? state.email : ""}
+            value={state?.email || ""}
           ></input>
           <label htmlFor="email">Phone</label>
           <input
@@ -64,7 +64,7 @@ export default function CreateContact(props) {
             name="phone"
             type="tel"
             onChange={changeHandler}
-            value={state ? state.phone : ""}
+            value={state?.phone || ""}
             placeholder={"000 123 4567"}
           ></input>
           <label htmlFor="email">Location</label>
@@ -73,7 +73,7 @@ export default function CreateContact(props) {
             name="address"
             type="text"
             onChange={changeHandler}
-            value={state ? state.address : ""}
+            value={state?.address || ""}
           ></input>
         </div>
         <div className="w-full">
@@ -86,7 +86,7 @@ export default function CreateContact(props) {
             name="instagram"
             type="url"
             onChange={changeHandler}
-            value={state ? state.instagram : ""}
+            value={state?.instagram || ""}
             placeholder="https://wwww.instagram.com/"
           ></input>
           <label htmlFor="facebook">Facebook</label>
@@ -96,7 +96,7 @@ export default function CreateContact(props) {
             type="url"
             onChange={changeHandler}
             placeholder="https://wwww.facebook.com/"
-            value={state ? state.facebook : ""}
+            value={state?.facebook || ""}
           ></input>
           <label htmlFor="twitter">Twitter</label>
           <input
@@ -105,7 +105,7 @@ export default function CreateContact(props) {
             type="url"
             onChange={changeHandler}
             placeholder="https://wwww.twitter.com/"
-            value={state ? state.twitter : ""}
+            value={state?.twitter || ""}
           ></input>
           <label htmlFor="youtube">Youtube</label>
           <input
@@ -114,7 +114,7 @@ export default function CreateContact(props) {
             type="url"
             onChange={changeHandler}
             placeholder="https://wwww.youtube.com/"
-            value={state ? state.youtube : ""}
+            value={state?.youtube || ""}
           ></input>
           <label htmlFor="linkedin">LinkedIn</label>
           <input
@@ -123,7 +123,7 @@ export default function CreateContact(props) {
             type="url"
             onChange={changeHandler}
             placeholder="https://wwww.linkedin.com/"
-            value={state ? state.linkedin : ""}
+            value={state?.linkedin || ""}
           ></input>
           <label htmlFor="etsy">Etsy</label>
           <input
@@ -132,7 +132,7 @@ export default function CreateContact(props) {
             type="url"
             onChange={changeHandler}
             placeholder="https://wwww.etsy.com/"
-            value={state ? state.etsy : ""}
+            value={state?.etsy || ""}
           ></input>
           <label htmlFor="pinterest">Pinterest</label>
           <input
@@ -141,7 +141,7 @@ export default function CreateContact(props) {
             type="url"
             onChange={changeHandler}
             placeholder="https://wwww.pinterest.com/"
-            value={state ? state.pinterest : ""}
+            value={state?.pinterest || ""}
           ></input>
           <label htmlFor="tiktok">TikTok</label>
           <input
@@ -150,7 +150,7 @@ export default function CreateContact(props) {
             type="url"
             onChange={changeHandler}
             placeholder="https://wwww.tiktok.com/"
-            value={state ? state.tiktok : ""}
+            value={state?.tiktok || ""}
           ></input>
           <div>
             <button type="submit" className="pill">

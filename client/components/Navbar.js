@@ -45,15 +45,17 @@ export const Navbar = (props) => {
             <Link to={`/create/in/${user.username}/cv`}> CV</Link>
             <Link to={`/create/in/${user.username}/contact`}>Contact</Link>
 
-            <Link to={`/${user.username}`}>
-              <button type="button" className="pillDark mx-2">
-                View Site
-              </button>
-            </Link>
-            <a href="#" className="pill mx-2" onClick={handleClick}>
-              Logout
-            </a>
-            <div></div>
+            <div className="">
+              <Link to={`/${user.username}`}>
+                <button type="button" className="pillDark mx-2">
+                  View Site
+                </button>
+              </Link>
+              <a href="#" className="pill mx-2" onClick={handleClick}>
+                Logout
+              </a>
+              <div></div>
+            </div>
           </>
         ) : (
           <>

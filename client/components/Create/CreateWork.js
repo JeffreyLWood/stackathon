@@ -4,9 +4,17 @@ import { useEffect, useState } from "react";
 import Snapshot from "./CreateSnapshot";
 import { DragDropContext } from "react-beautiful-dnd";
 import { Navbar } from "../Navbar";
+import { fetchUserData } from "../../store/user";
 export default function Work(props) {
   let user = useSelector((state) => state.user);
-  let worksData = useSelector((state) => state.user.works);
+
+  let dispatch = useDispatch();
+
+  useEffect(() => {
+    user = dispatch(fetchUserData(props.match.params.username));
+  }, []);
+
+  let worksData = user && user.works;
 
   let [primary, setPrimary] = useState("work");
   let [secondary, setSecondary] = useState("hidden");

@@ -101,7 +101,7 @@ const About = (props) => {
                   className="h-56"
                 />
               ) : (
-                <img src="../placeholderadd.png"></img>
+                <img src="../../../placeholderadd.png"></img>
               )}
             </label>
           </div>
@@ -119,7 +119,7 @@ const About = (props) => {
               type="text"
               style={{ resize: "none" }}
               onChange={changeHandler}
-              value={text}
+              value={text ? text : ""}
             />
           </div>
           <div>
