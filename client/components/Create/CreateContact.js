@@ -22,7 +22,7 @@ export default function Contact(props) {
 
   let submitHandler = (evt) => {
     evt.preventDefault();
-    dispatch(updateContactData(props.user.id, state));
+    dispatch(updateContactData(user.id, state));
   };
 
   return (
