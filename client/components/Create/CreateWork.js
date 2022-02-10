@@ -27,7 +27,6 @@ export default function Work(props) {
       setPrimary(evt.target.value);
     }
     if (evt.target.name === "secondary") {
-      console.log(evt.target.name, evt.target.value, secondary);
       setSecondary(evt.target.value);
     }
   };
@@ -48,45 +47,43 @@ export default function Work(props) {
       <Navbar user={user} />
       <div className="p-10">
         <DragDropContext>
-          <select
-            name="primary"
-            id="primary"
-            onChange={changeHandler}
-            value={primary}
-          >
-            <option value="Hidden">Hidden</option>
-            {headers.map((heading, idx) => (
-              <option key={idx} value={heading}>
-                {heading}
-              </option>
-            ))}
-          </select>
-          <select
-            type="select"
-            name="secondary"
-            id="secondary"
-            onChange={changeHandler}
-            value={secondary}
-          >
-            <option value="Hidden">Hidden</option>
-
-            {headers.map((heading, idx) => (
-              <option key={idx} value={heading}>
-                {heading}
-              </option>
-            ))}
-          </select>
           <div className="flex flex-row w-full">
             <div className="w-4/6">
+              <select
+                name="primary"
+                id="primary"
+                onChange={changeHandler}
+                value={primary}
+              >
+                {headers.map((heading, idx) => (
+                  <option key={idx} value={heading}>
+                    {heading}
+                  </option>
+                ))}
+              </select>
               <CreateSnapshot
                 user={user}
                 works={worksData?.filter(
                   (work) => work?.heading === primary && work.hidden === "false"
                 )}
               />
-              {/* Will be works.primary */}
             </div>
             <div className="w-2/6">
+              <select
+                type="select"
+                name="secondary"
+                id="secondary"
+                onChange={changeHandler}
+                value={secondary}
+              >
+                <option value="Hidden">Hidden</option>
+
+                {headers.map((heading, idx) => (
+                  <option key={idx} value={heading}>
+                    {heading}
+                  </option>
+                ))}
+              </select>
               <CreateSnapshot
                 user={user}
                 works={
