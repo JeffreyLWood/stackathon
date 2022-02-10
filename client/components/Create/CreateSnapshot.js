@@ -4,27 +4,22 @@ import { updateAboutText } from "../../store/create";
 import { useEffect, useState } from "react";
 import { fetchUserData } from "../../store/user";
 import { Image } from "cloudinary-react";
-import { Uploader } from "./CreateUploader";
+import CreateUploader from "./CreateUploader";
 import { fetchAllWork } from "../../store/create";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 export default function CreateSnapshot(props) {
   // still not triggering refresh when a user changes an image of a work or adds a new work
   let user = props.user;
+  console.log("snapshot", props);
   const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   user = dispatch(fetchUserData(user.username));
+  // }, []);
+
   let [show, setShow] = useState(false);
   let [displayName, setDisplayName] = useState("");
   let [imgId, setImgId] = useState("");
-
-  // useEffect(() => {
-  //   async function loadUserData() {
-  //     dispatch(fetchUserData(user.username));
-  //   }
-  //   try {
-  //     loadUserData();
-  //   } catch (error) {
-  //     console.log("snapshot.js", error);
-  //   }
-  // }, [show]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -55,7 +50,7 @@ export default function CreateSnapshot(props) {
           );
         })}
 
-      <button
+      {/* <button
         type="submit"
         onClick={(event) => submitHandler(event)}
         className="pill m-2"
@@ -63,13 +58,13 @@ export default function CreateSnapshot(props) {
       >
         Add a Work
       </button>
-
-      <Uploader
+*/}
+      <CreateUploader
         displayName={displayName}
         show={show}
         setShow={setShow}
         imgId={imgId}
-        user={props.user}
+        user={user}
       />
     </div>
   );

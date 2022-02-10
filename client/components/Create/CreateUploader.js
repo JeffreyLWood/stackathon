@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 import { Image } from "cloudinary-react";
 import { fetchSingleWork, destroyWork } from "../../store/create";
 
-export const Uploader = (props) => {
+export default function CreateUploader(props) {
   let work = useSelector((state) => state.create);
-
+  let user = useSelector((state) => state.user);
   const [fileInputState, setFileInputState] = useState("");
   const [previewSource, setPreviewSource] = useState("");
 
@@ -40,7 +40,7 @@ export const Uploader = (props) => {
         });
       }
       if (props.displayName === "Edit Work") {
-        await dispatch(fetchSingleWork(props.user.id, props.imgId));
+        await dispatch(fetchSingleWork(user.id, props.imgId));
       }
     }
     loadImageData();
@@ -102,7 +102,7 @@ export const Uploader = (props) => {
         method: "POST",
         body: JSON.stringify({
           data: base64EncodedImage,
-          userId: props.user.id,
+          userId: user.id,
           title: state.title,
           year: state.year,
           height: state.height,
@@ -125,7 +125,7 @@ export const Uploader = (props) => {
           data: base64EncodedImage,
           newImage: previewSource ? true : false,
           imgId: state.imgId ? state.imgId : work.imgId,
-          userId: props.user.id,
+          userId: user.id,
           title: state.title.length ? state.title : work.title,
           year: state.year.length ? state.year : work.year,
           height: state.height.length ? state.height : work.Height,
@@ -191,7 +191,7 @@ export const Uploader = (props) => {
                     className="h-56"
                   />
                 ) : (
-                  <img src="../placeholderadd.png"></img>
+                  <img src="../../../placeholderadd.png"></img>
                 )}
               </label>
             </div>
@@ -272,7 +272,7 @@ export const Uploader = (props) => {
                   name="hidden"
                   value="false"
                 >
-                  <img src="../eye.png" />
+                  <img src="../../../eye.png" />
                 </button>
               </label>
 
@@ -285,7 +285,7 @@ export const Uploader = (props) => {
               {work ? (
                 <button
                   className="border-2 text-uppercase p-1"
-                  onClick={() => destroyHandler(props.user.id, work.imgId)}
+                  onClick={() => destroyHandler(user.id, work.imgId)}
                 >
                   Delete
                 </button>
@@ -298,4 +298,4 @@ export const Uploader = (props) => {
       </div>
     </div>
   );
-};
+}

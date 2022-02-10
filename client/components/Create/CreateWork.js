@@ -5,7 +5,8 @@ import CreateSnapshot from "./CreateSnapshot";
 import { DragDropContext } from "react-beautiful-dnd";
 import { Navbar } from "../Navbar";
 import { fetchUserData } from "../../store/user";
-export default function Work(props) {
+import CreateUploader from "./CreateUploader";
+export default function CreateWork(props) {
   let user = useSelector((state) => state.user);
 
   let dispatch = useDispatch();
@@ -14,7 +15,6 @@ export default function Work(props) {
     user = dispatch(fetchUserData(props.match.params.username));
   }, []);
 
-  console.log(props, user);
   let worksData = user?.works;
 
   let [primary, setPrimary] = useState("Work");
@@ -31,6 +31,10 @@ export default function Work(props) {
     }
   };
 
+  let [show, setShow] = useState(false);
+  let [displayName, setDisplayName] = useState("");
+  let [imgId, setImgId] = useState("");
+
   let headers = [];
   const headings = () => {
     for (let i = 0; i < worksData.length; i++) {
@@ -42,6 +46,21 @@ export default function Work(props) {
     }
   };
   worksData && headings();
+
+  // const clickHandler = (e) => {
+  //   e.preventDefault();
+  //   setDisplayName("Edit Work");
+  //   let imgId = e.target.src.split("/").slice(-1).join();
+  //   setImgId(imgId);
+  //   setShow(true);
+  // };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    setDisplayName(e.target.value);
+    setShow(true);
+  };
+
   return (
     <>
       <Navbar user={user} />
@@ -97,9 +116,24 @@ export default function Work(props) {
                   })
                 }
               />
-              {/* will be works.secondary */}
             </div>
           </div>
+          <button
+            type="submit"
+            onClick={(event) => submitHandler(event)}
+            className="pill m-2"
+            value="Add a Work"
+          >
+            Add a Work
+          </button>
+
+          <CreateUploader
+            displayName={displayName}
+            show={show}
+            setShow={setShow}
+            imgId={imgId}
+            user={props.user}
+          />
         </DragDropContext>
       </div>
     </>
