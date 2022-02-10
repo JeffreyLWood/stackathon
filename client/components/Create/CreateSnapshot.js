@@ -6,11 +6,13 @@ import { fetchUserData } from "../../store/user";
 import { Image } from "cloudinary-react";
 import CreateUploader from "./CreateUploader";
 import { fetchAllWork } from "../../store/create";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { Draggable, Droppable } from "react-beautiful-dnd";
+import List from "./List";
+import Item from "./Item";
 export default function CreateSnapshot(props) {
   // still not triggering refresh when a user changes an image of a work or adds a new work
   let user = props.user;
-  console.log("snapshot", props);
+
   const dispatch = useDispatch();
 
   // useEffect(() => {
@@ -36,36 +38,24 @@ export default function CreateSnapshot(props) {
   };
 
   return (
-    <div className="snapshot border-2 border-gray-300 flex flex-wrap justify-around mx-2 p-1">
-      {props.works &&
-        props.works.map((work, index) => {
-          return (
-            <Image
-              key={index}
-              cloudName="jeffreywood"
-              publicId={work.imgId}
-              className="h-32 m-1"
-              onClick={(e) => clickHandler(e)}
-            />
-          );
-        })}
-
-      {/* <button
-        type="submit"
-        onClick={(event) => submitHandler(event)}
-        className="pill m-2"
-        value="Add a Work"
-      >
-        Add a Work
-      </button>
-*/}
-      <CreateUploader
-        displayName={displayName}
-        show={show}
-        setShow={setShow}
-        imgId={imgId}
-        user={user}
-      />
-    </div>
+    <Droppable droppableId={props.id} innerRef={props.innerRef}>
+      {(provided) => (
+        <List
+          id={props.id}
+          innerRef={provided.innerRef}
+          {...provided.droppableProps}
+          works={props.works}
+          displayName={props.displayName}
+          show={props.show}
+          setShow={props.setShow}
+          user={props.user}
+          innerRef={provided.innerRef}
+          cloudName="jeffreywood"
+          clickHandler={props.clickHandler}
+        >
+          {provided.placeholder}
+        </List>
+      )}
+    </Droppable>
   );
 }

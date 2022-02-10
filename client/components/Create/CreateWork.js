@@ -6,6 +6,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { Navbar } from "../Navbar";
 import { fetchUserData } from "../../store/user";
 import CreateUploader from "./CreateUploader";
+import { useRef } from "react";
 export default function CreateWork(props) {
   let user = useSelector((state) => state.user);
 
@@ -61,11 +62,13 @@ export default function CreateWork(props) {
     setShow(true);
   };
 
+  const onDragEnd = () => {};
+  let ddc = useRef("ddc");
   return (
     <>
       <Navbar user={user} />
-      <div className="p-10">
-        <DragDropContext>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <div className="p-10">
           <div className="flex flex-row w-full">
             <div className="w-4/6">
               <select
@@ -80,7 +83,10 @@ export default function CreateWork(props) {
                   </option>
                 ))}
               </select>
+
               <CreateSnapshot
+                innerRef={ddc}
+                id={"primary"}
                 user={user}
                 works={worksData?.filter(
                   (work) => work?.heading === primary && work.hidden === "false"
@@ -104,6 +110,8 @@ export default function CreateWork(props) {
                 ))}
               </select>
               <CreateSnapshot
+                innerRef={ddc}
+                id={"secondary"}
                 user={user}
                 works={
                   worksData &&
@@ -134,8 +142,8 @@ export default function CreateWork(props) {
             imgId={imgId}
             user={props.user}
           />
-        </DragDropContext>
-      </div>
+        </div>
+      </DragDropContext>
     </>
   );
 }
