@@ -7,22 +7,26 @@ export default function List(props) {
   return (
     <div
       ref={props.innerRef}
-      className="snapshot border-2 border-gray-300 flex flex-wrap justify-around mx-2 p-1"
+      className="snapshot border-2 border-gray-300 mx-2 p-1"
     >
-      {props.works &&
-        props.works.map((work, index) => {
-          return (
-            <Item
-              key={index}
-              index={index}
-              innerRef={props.innerRef}
-              cloudName={props.cloudName}
-              publicId={work.imgId}
-              clickHandler={props.clickHandler}
-            />
-          );
-        })}
-
+      <ul className="w-full flex">
+        {props.works &&
+          props.works.map((work, index) => {
+            return (
+              <li className="">
+                <Item
+                  key={index}
+                  index={index}
+                  innerRef={props.innerRef}
+                  cloudName={props.cloudName}
+                  publicId={work.imgId}
+                  clickHandler={props.clickHandler}
+                />
+              </li>
+            );
+          })}
+        {props.placeholder}
+      </ul>
       <CreateUploader
         displayName={props.displayName}
         show={props.show}
