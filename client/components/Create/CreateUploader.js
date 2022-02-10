@@ -113,7 +113,7 @@ export const Uploader = (props) => {
         headers: { "Content-type": "application/json" },
       });
     } catch (error) {
-      console.log(props, error);
+      console.log(error);
     }
   };
 

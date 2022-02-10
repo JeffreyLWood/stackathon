@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import Snapshot from "./CreateSnapshot";
+import CreateSnapshot from "./CreateSnapshot";
 import { DragDropContext } from "react-beautiful-dnd";
 import { Navbar } from "../Navbar";
 import { fetchUserData } from "../../store/user";
@@ -14,9 +14,10 @@ export default function Work(props) {
     user = dispatch(fetchUserData(props.match.params.username));
   }, []);
 
-  let worksData = user && user.works;
+  console.log(props, user);
+  let worksData = user?.works;
 
-  let [primary, setPrimary] = useState("work");
+  let [primary, setPrimary] = useState("Work");
   let [secondary, setSecondary] = useState("hidden");
 
   const changeHandler = (evt) => {
@@ -30,7 +31,7 @@ export default function Work(props) {
       setSecondary(evt.target.value);
     }
   };
-  console.log(worksData);
+
   let headers = [];
   const headings = () => {
     for (let i = 0; i < worksData.length; i++) {
@@ -78,25 +79,22 @@ export default function Work(props) {
           </select>
           <div className="flex flex-row w-full">
             <div className="w-4/6">
-              <Snapshot
-                user={props.user}
-                works={
-                  worksData &&
-                  worksData.filter((work) => work.heading === [primary])
-                }
+              <CreateSnapshot
+                user={user}
+                works={worksData?.filter((work) => work?.heading === primary)}
               />
               {/* Will be works.primary */}
             </div>
             <div className="w-2/6">
-              <Snapshot
-                user={props.user}
+              <CreateSnapshot
+                user={user}
                 works={
                   worksData &&
                   worksData.filter((work) => {
                     if (secondary === "hidden") {
-                      work.hidden === true;
+                      return work.hidden === true;
                     } else {
-                      work.heading === [secondary];
+                      return work.heading === secondary;
                     }
                   })
                 }

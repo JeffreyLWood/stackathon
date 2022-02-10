@@ -7,24 +7,24 @@ import { Image } from "cloudinary-react";
 import { Uploader } from "./CreateUploader";
 import { fetchAllWork } from "../../store/create";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-export default function Snapshot(props) {
+export default function CreateSnapshot(props) {
   // still not triggering refresh when a user changes an image of a work or adds a new work
-  let user = useSelector((state) => state.auth);
+  let user = props.user;
   const dispatch = useDispatch();
   let [show, setShow] = useState(false);
   let [displayName, setDisplayName] = useState("");
   let [imgId, setImgId] = useState("");
 
-  useEffect(() => {
-    async function loadUserData() {
-      dispatch(fetchUserData(user.username));
-    }
-    try {
-      loadUserData();
-    } catch (error) {
-      console.log("snapshot.js", error);
-    }
-  }, [show]);
+  // useEffect(() => {
+  //   async function loadUserData() {
+  //     dispatch(fetchUserData(user.username));
+  //   }
+  //   try {
+  //     loadUserData();
+  //   } catch (error) {
+  //     console.log("snapshot.js", error);
+  //   }
+  // }, [show]);
 
   const submitHandler = (e) => {
     e.preventDefault();

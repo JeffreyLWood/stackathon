@@ -4,7 +4,7 @@ const db = require("../db");
 const Work = db.define("work", {
   heading: {
     type: Sequelize.STRING,
-    defaultVal: "Selected Work",
+    defaultValue: "Work",
   },
   title: {
     type: Sequelize.STRING,
