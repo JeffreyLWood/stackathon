@@ -18,7 +18,7 @@ export default function Work(props) {
   let worksData = user?.works;
 
   let [primary, setPrimary] = useState("Work");
-  let [secondary, setSecondary] = useState("hidden");
+  let [secondary, setSecondary] = useState("Hidden");
 
   const changeHandler = (evt) => {
     evt.preventDefault();
@@ -54,8 +54,7 @@ export default function Work(props) {
             onChange={changeHandler}
             value={primary}
           >
-            <option value="work">Work</option>
-            <option value="hidden">Hidden</option>
+            <option value="Hidden">Hidden</option>
             {headers.map((heading, idx) => (
               <option key={idx} value={heading}>
                 {heading}
@@ -69,8 +68,8 @@ export default function Work(props) {
             onChange={changeHandler}
             value={secondary}
           >
-            <option value="hidden">Hidden</option>
-            <option value="work">Work</option>
+            <option value="Hidden">Hidden</option>
+
             {headers.map((heading, idx) => (
               <option key={idx} value={heading}>
                 {heading}
@@ -81,7 +80,9 @@ export default function Work(props) {
             <div className="w-4/6">
               <CreateSnapshot
                 user={user}
-                works={worksData?.filter((work) => work?.heading === primary)}
+                works={worksData?.filter(
+                  (work) => work?.heading === primary && work.hidden === "false"
+                )}
               />
               {/* Will be works.primary */}
             </div>
@@ -91,8 +92,8 @@ export default function Work(props) {
                 works={
                   worksData &&
                   worksData.filter((work) => {
-                    if (secondary === "hidden") {
-                      return work.hidden === true;
+                    if (secondary === "Hidden") {
+                      return work.hidden === "true";
                     } else {
                       return work.heading === secondary;
                     }
