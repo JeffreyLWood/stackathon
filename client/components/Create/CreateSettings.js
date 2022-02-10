@@ -8,11 +8,15 @@ export default function CreateSettings(props) {
   let user = useSelector((state) => state.user);
   let dispatch = useDispatch();
 
+  let [title, setTitle] = useState(user?.siteTitle);
+
   useEffect(() => {
-    dispatch(fetchUserData(props.match.params.username));
+    user = dispatch(fetchUserData(props.match.params.username));
   }, []);
 
-  let [title, setTitle] = useState(user?.username || "");
+  useEffect(() => {
+    setTitle(user.siteTitle);
+  }, [user]);
 
   let changeHandler = (evt) => {
     evt.preventDefault();

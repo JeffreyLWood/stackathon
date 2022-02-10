@@ -15,15 +15,6 @@ export const Navbar = (props) => {
 
   const dispatch = useDispatch();
 
-  // Used for loading user's data based on the url for logged out viewing
-  useEffect(() => {
-    async function load() {
-      // await fetchUserData(props.history.location.pathname.split("/")[1]);
-    }
-    load();
-    // Not re rendering
-  }, []);
-
   const handleClick = () => {
     dispatch(logout());
   };
