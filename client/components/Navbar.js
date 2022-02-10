@@ -35,7 +35,7 @@ export const Navbar = (props) => {
 
         {user.username ? (
           <>
-            <Link to={`/create/in/${user.username}settings`}>
+            <Link to={`/create/in/${user.username}/settings`}>
               <span className="italic text-sm text-indigo-600">
                 Hello, {user.firstName}. Manage your site here.
               </span>
@@ -46,7 +46,7 @@ export const Navbar = (props) => {
             <Link to={`/create/in/${user.username}/contact`}>Contact</Link>
 
             <div className="">
-              <Link to={`/${user.username}`}>
+              <Link to={`/${user.username}`} target="_blank">
                 <button type="button" className="pillDark mx-2">
                   View Site
                 </button>

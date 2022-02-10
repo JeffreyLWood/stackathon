@@ -34,25 +34,30 @@ export default function CreateContact(props) {
       <Navbar user={user} />
 
       <form
-        className="contact w-full flex p-10 space-x-5"
+        className="contact w-full flex flex-col mx-2 md:flex-row md:p-10 md:space-x-5 font-light text-gray-500"
         onSubmit={submitHandler}
       >
-        <div className="w-full">
-          <label htmlFor="text">Text:</label>
+        <div className="w-full flex flex-col">
+          <label htmlFor="text" className="">
+            Contact Text:
+          </label>
           <textarea
-            className="border-2"
+            className=""
             rows="5"
-            className="w-full"
+            className="w-5/6"
             style={{ resize: "none" }}
             name="text"
             type="text"
             onChange={changeHandler}
             value={state?.text || ""}
           />
+          <label htmlFor="email" className="mt-5">
+            Public Contact Information
+          </label>
           <label htmlFor="email">Email *</label>
           <input
             required
-            className="border-2"
+            className=" w-4/6"
             name="email"
             type="text"
             onChange={changeHandler}
@@ -60,7 +65,7 @@ export default function CreateContact(props) {
           ></input>
           <label htmlFor="email">Phone</label>
           <input
-            className="border-2"
+            className=" w-4/6"
             name="phone"
             type="tel"
             onChange={changeHandler}
@@ -69,20 +74,21 @@ export default function CreateContact(props) {
           ></input>
           <label htmlFor="email">Location</label>
           <input
-            className="border-2"
+            className=" w-4/6"
             name="address"
             type="text"
             onChange={changeHandler}
             value={state?.address || ""}
+            placeholder="City, ST"
           ></input>
         </div>
-        <div className="w-full">
+        <div className="w-full pt-5 sm:pt-0 flex flex-col">
           <label htmlFor="socialMedia" className="mb-1">
             Social Media Links
           </label>
           <label htmlFor="instagram">Instagram</label>
           <input
-            className="border-2"
+            className=" w-4/6"
             name="instagram"
             type="url"
             onChange={changeHandler}
@@ -91,7 +97,7 @@ export default function CreateContact(props) {
           ></input>
           <label htmlFor="facebook">Facebook</label>
           <input
-            className="border-2"
+            className=" w-4/6"
             name="facebook"
             type="url"
             onChange={changeHandler}
@@ -100,7 +106,7 @@ export default function CreateContact(props) {
           ></input>
           <label htmlFor="twitter">Twitter</label>
           <input
-            className="border-2"
+            className=" w-4/6"
             name="twitter"
             type="url"
             onChange={changeHandler}
@@ -109,7 +115,7 @@ export default function CreateContact(props) {
           ></input>
           <label htmlFor="youtube">Youtube</label>
           <input
-            className="border-2"
+            className=" w-4/6"
             name="youtube"
             type="url"
             onChange={changeHandler}
@@ -118,7 +124,7 @@ export default function CreateContact(props) {
           ></input>
           <label htmlFor="linkedin">LinkedIn</label>
           <input
-            className="border-2"
+            className=" w-4/6"
             name="linkedin"
             type="url"
             onChange={changeHandler}
@@ -127,7 +133,7 @@ export default function CreateContact(props) {
           ></input>
           <label htmlFor="etsy">Etsy</label>
           <input
-            className="border-2"
+            className=" w-4/6"
             name="etsy"
             type="url"
             onChange={changeHandler}
@@ -136,7 +142,7 @@ export default function CreateContact(props) {
           ></input>
           <label htmlFor="pinterest">Pinterest</label>
           <input
-            className="border-2"
+            className=" w-4/6"
             name="pinterest"
             type="url"
             onChange={changeHandler}
@@ -145,7 +151,7 @@ export default function CreateContact(props) {
           ></input>
           <label htmlFor="tiktok">TikTok</label>
           <input
-            className="border-2"
+            className=" w-4/6"
             name="tiktok"
             type="url"
             onChange={changeHandler}
@@ -153,7 +159,7 @@ export default function CreateContact(props) {
             value={state?.tiktok || ""}
           ></input>
           <div>
-            <button type="submit" className="pill">
+            <button type="submit" className="pill mt-5 text-black">
               Save Changes
             </button>
           </div>

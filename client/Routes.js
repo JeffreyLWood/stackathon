@@ -15,6 +15,7 @@ import { About } from "./components/Site/About";
 import { Contact } from "./components/Site/Contact";
 import { CV } from "./components/Site/CV";
 import { fetchUserData } from "./store/user";
+import CreateSettings from "./components/Create/CreateSettings";
 /**
  * COMPONENT
  */
@@ -64,6 +65,12 @@ const Routes = () => {
             exact
             path="/create/in/:username/contact"
             component={CreateContact}
+            user={user}
+          />
+          <Route
+            exact
+            path="/create/in/:username/settings"
+            component={CreateSettings}
             user={user}
           />
         </Switch>

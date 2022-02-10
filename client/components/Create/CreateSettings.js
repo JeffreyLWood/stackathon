@@ -4,11 +4,15 @@ import { updateTitleData } from "../../store/create";
 import { useEffect, useState } from "react";
 import { fetchUserData } from "../../store/user";
 import { Navbar } from "../Navbar";
-export default function SiteTitle(props) {
+export default function CreateSettings(props) {
   let user = useSelector((state) => state.user);
   let dispatch = useDispatch();
-  let titleData = useSelector((state) => state.auth.siteTitle);
-  let [title, setTitle] = useState(titleData);
+
+  useEffect(() => {
+    dispatch(fetchUserData(props.match.params.username));
+  }, []);
+
+  let [title, setTitle] = useState(user?.username || "");
 
   let changeHandler = (evt) => {
     evt.preventDefault();
@@ -17,13 +21,13 @@ export default function SiteTitle(props) {
 
   let submitHandler = (evt) => {
     evt.preventDefault();
-    dispatch(updateTitleData(props.user.id, { title }));
+    dispatch(updateTitleData(user.id, { title }));
   };
 
   return (
     <>
       <Navbar user={user} />
-      <div className="h-full">
+      <div className="h-full p-10">
         <form className="flex flex-col" onSubmit={submitHandler}>
           <label htmlFor="name">
             Your full name as it will appear on your site

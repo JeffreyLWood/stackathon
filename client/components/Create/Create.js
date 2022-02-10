@@ -1,7 +1,6 @@
 import React from "react";
 import me from "../../store/auth";
 import Work from "./CreateWork";
-import SiteTitle from "./CreateSiteTitle";
 import About from "./CreateAbout";
 import CV from "./CreateCV";
 import Contact from "./CreateContact";

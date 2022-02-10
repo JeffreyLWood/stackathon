@@ -3,7 +3,9 @@
 @import "tailwindcss/utilities";
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
-
+body {
+  overflow-x: hidden;
+}
 .siteTitle {
   font-size: x-large;
   font-weight: 300;
@@ -137,8 +139,14 @@ textarea {
   outline-color: #ccc;
   outline-style: solid;
   display: block;
+  margin: 0.2rem 0 1rem 0;
+  color: #333;
+  padding: 0.1rem;
+  font-weight: 300;
+}
 
-  margin: 0.2rem 0 2rem 0;
+.contact label {
+  font-weight: 500;
 }
 
 .workModal {
