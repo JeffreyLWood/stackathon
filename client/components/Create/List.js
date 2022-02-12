@@ -10,9 +10,8 @@ export default function List(props) {
         {props.works &&
           props.works.map((work, index) => {
             return (
-              <li className="inline-block">
+              <li key={index} className="inline-block">
                 <Item
-                  key={index}
                   index={index}
                   innerRef={props.innerRef}
                   cloudName={props.cloudName}

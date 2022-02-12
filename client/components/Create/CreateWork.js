@@ -21,17 +21,6 @@ export default function CreateWork(props) {
   let [primary, setPrimary] = useState("Work");
   let [secondary, setSecondary] = useState("Hidden");
 
-  const changeHandler = (evt) => {
-    evt.preventDefault();
-
-    if (evt.target.name === "primary") {
-      setPrimary(evt.target.value);
-    }
-    if (evt.target.name === "secondary") {
-      setSecondary(evt.target.value);
-    }
-  };
-
   let [show, setShow] = useState(false);
   let [displayName, setDisplayName] = useState("");
   let [imgId, setImgId] = useState("");
@@ -48,14 +37,6 @@ export default function CreateWork(props) {
   };
   worksData && headings();
 
-  // const clickHandler = (e) => {
-  //   e.preventDefault();
-  //   setDisplayName("Edit Work");
-  //   let imgId = e.target.src.split("/").slice(-1).join();
-  //   setImgId(imgId);
-  //   setShow(true);
-  // };
-
   const submitHandler = (e) => {
     e.preventDefault();
     setDisplayName(e.target.value);
@@ -71,22 +52,12 @@ export default function CreateWork(props) {
         <div className="p-10">
           <div className="flex flex-row w-full">
             <div className="w-4/6">
-              <select
-                name="primary"
-                id="primary"
-                onChange={changeHandler}
-                value={primary}
-              >
-                {headers.map((heading, idx) => (
-                  <option key={idx} value={heading}>
-                    {heading}
-                  </option>
-                ))}
-              </select>
-
               <CreateSnapshot
-                innerRef={ddc}
                 id={"primary"}
+                setHeader={setPrimary}
+                value={primary}
+                headers={headers}
+                innerRef={ddc}
                 user={user}
                 works={worksData?.filter(
                   (work) => work?.heading === primary && work.hidden === "false"
@@ -94,24 +65,12 @@ export default function CreateWork(props) {
               />
             </div>
             <div className="w-2/6">
-              <select
-                type="select"
-                name="secondary"
-                id="secondary"
-                onChange={changeHandler}
-                value={secondary}
-              >
-                <option value="Hidden">Hidden</option>
-
-                {headers.map((heading, idx) => (
-                  <option key={idx} value={heading}>
-                    {heading}
-                  </option>
-                ))}
-              </select>
               <CreateSnapshot
-                innerRef={ddc}
                 id={"secondary"}
+                innerRef={ddc}
+                setHeader={setSecondary}
+                value={secondary}
+                headers={headers}
                 user={user}
                 works={
                   worksData &&
@@ -126,6 +85,7 @@ export default function CreateWork(props) {
               />
             </div>
           </div>
+
           <button
             type="submit"
             onClick={(event) => submitHandler(event)}

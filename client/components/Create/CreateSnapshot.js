@@ -37,8 +37,33 @@ export default function CreateSnapshot(props) {
     setShow(true);
   };
 
+  const changeHandler = (evt) => {
+    evt.preventDefault();
+    if (evt.target.name === props.id) {
+      props.setHeader(evt.target.value);
+    }
+  };
+
   return (
     <div className="snapshot border-2 border-gray-300 mx-2 p-1">
+      <select
+        className="p-2"
+        name={props.id}
+        id={props.id}
+        onChange={changeHandler}
+        value={props.primary}
+      >
+        {props &&
+          props?.headers.map((heading, idx) => (
+            <option key={idx} value={heading}>
+              {heading}
+            </option>
+          ))}
+        {props.id === "secondary" ? (
+          <option value="Hidden">Hidden</option>
+        ) : null}
+      </select>
+
       <Droppable
         droppableId={props.id}
         direction="horizontal"
