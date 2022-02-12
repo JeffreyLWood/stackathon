@@ -97,8 +97,8 @@ body {
 
 .snapshot {
   height: 32rem;
-  overflow: scroll;
-  scrollbar-width: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .pill {
