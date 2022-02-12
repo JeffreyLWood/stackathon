@@ -12,7 +12,6 @@ const Work = db.define("work", {
   year: {
     type: Sequelize.INTEGER,
   },
-
   height: {
     type: Sequelize.INTEGER,
   },
@@ -31,7 +30,10 @@ const Work = db.define("work", {
   },
   hidden: {
     type: Sequelize.STRING,
-    defaultVal: "off",
+    defaultValue: false,
+  },
+  index: {
+    type: Sequelize.INTEGER,
   },
 });
 
@@ -44,3 +46,14 @@ module.exports = Work;
 /**
  * classMethods
  */
+
+//Hooks
+
+// const index = (work) => {
+//   try {
+//     let idx = work.id
+//     Work.
+//   } catch (error) {}
+// };
+
+// Work.beforeCreate(index)

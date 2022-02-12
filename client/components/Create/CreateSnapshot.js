@@ -38,28 +38,30 @@ export default function CreateSnapshot(props) {
   };
 
   return (
-    <Droppable
-      droppableId={props.id}
-      direction="horizontal"
-      innerRef={props.innerRef}
-    >
-      {(provided) => (
-        <List
-          id={props.id}
-          innerRef={provided.innerRef}
-          {...provided.droppableProps}
-          works={props.works}
-          displayName={displayName}
-          show={show}
-          setShow={setShow}
-          user={props.user}
-          innerRef={provided.innerRef}
-          cloudName="jeffreywood"
-          clickHandler={clickHandler}
-          imgId={imgId}
-          placeholder={provided.placeholder}
-        ></List>
-      )}
-    </Droppable>
+    <div className="snapshot border-2 border-gray-300 mx-2 p-1">
+      <Droppable
+        droppableId={props.id}
+        direction="horizontal"
+        innerRef={props.innerRef}
+      >
+        {(provided) => (
+          <List
+            id={props.id}
+            innerRef={provided.innerRef}
+            {...provided.droppableProps}
+            works={props.works}
+            displayName={displayName}
+            show={show}
+            setShow={setShow}
+            user={props.user}
+            innerRef={provided.innerRef}
+            cloudName="jeffreywood"
+            clickHandler={clickHandler}
+            imgId={imgId}
+            placeholder={provided.placeholder}
+          ></List>
+        )}
+      </Droppable>
+    </div>
   );
 }

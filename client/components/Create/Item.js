@@ -13,7 +13,7 @@ export default function Item(props) {
           <Image
             cloudName={props.cloudName}
             publicId={props.publicId}
-            className="h-32 m-1"
+            className="h-32 m-2"
             onClick={(e) => props.clickHandler(e)}
             {...provided.draggableProps}
             {...provided.dragHandleProps}

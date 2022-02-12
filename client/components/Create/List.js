@@ -2,18 +2,15 @@ import React from "react";
 import CreateUploader from "./CreateUploader";
 import Item from "./Item";
 import { Draggable } from "react-beautiful-dnd";
+
 export default function List(props) {
-  console.log("list props", props);
   return (
-    <div
-      ref={props.innerRef}
-      className="snapshot border-2 border-gray-300 mx-2 p-1"
-    >
+    <div ref={props.innerRef}>
       <ul className="w-full flex">
         {props.works &&
           props.works.map((work, index) => {
             return (
-              <li className="">
+              <li className="inline-block">
                 <Item
                   key={index}
                   index={index}
@@ -27,6 +24,7 @@ export default function List(props) {
           })}
         {props.placeholder}
       </ul>
+
       <CreateUploader
         displayName={props.displayName}
         show={props.show}
