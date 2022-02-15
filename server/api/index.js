@@ -60,10 +60,14 @@ router.post("/update", async (req, res) => {
     //   req.body.imgId
     // );
 
+    let collection = await Collection.findOne({
+      where: { title: req.body.collection, userId: req.body.userId },
+    });
+
     let work = await Work.findOne({
       where: {
         imgId: req.body.imgId,
-        userId: req.body.userId,
+        // collectionId: collection.id,
       },
     });
 
@@ -76,6 +80,7 @@ router.post("/update", async (req, res) => {
 
       await work.update({
         imgId: uploadedResponse.public_id,
+        collectionId: collection.id,
         userId: req.body.userId,
         title: req.body.title,
         year: req.body.year,
@@ -87,6 +92,7 @@ router.post("/update", async (req, res) => {
     } else {
       await work.update({
         userId: req.body.userId,
+        collectionId: collection.id,
         title: req.body.title,
         year: req.body.year,
         height: req.body.height,
