@@ -11,52 +11,26 @@ import List from "./List";
 import Item from "./Item";
 import { fetchCollection } from "../../store/create";
 export default function CreateSnapshot(props) {
-  // still not triggering refresh when a user changes an image of a work or adds a new work
-  let collection = useSelector((state) => state.create.collection);
+  let collection = useSelector((state) => state.create?.collection);
 
   const dispatch = useDispatch();
   let [works, setWorks] = useState([]);
 
   useEffect(() => {
     collection = dispatch(fetchCollection(props.userId, props.collectionTitle));
-  }, []);
-  console.log("collection", collection);
-  let [show, setShow] = useState(false);
-  let [displayName, setDisplayName] = useState("");
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    setDisplayName(e.target.value);
-    setShow(true);
-  };
-
-  const clickHandler = (e) => {
-    e.preventDefault();
-    props.setDisplayName("Edit Work");
-    let imgId = e.target.src.split("/").slice(-1).join();
-    props.setImgId(imgId);
-    props.setShow(true);
-  };
-
-  const changeHandler = (evt) => {
-    evt.preventDefault();
-    if (evt.target.name === props.id) {
-      props.setHeader(evt.target.value);
-    }
-  };
+  }, [props.collectionTitle]);
 
   return (
     <div className="snapshot border-2 border-gray-300 mx-2 p-1">
       <select
-        className="p-2"
-        name={props.id}
         id={props.id}
-        onChange={changeHandler}
-        value={props.primary}
+        className="p-2"
+        onChange={props.changeHandler}
+        value={props.collectionTitle}
       >
         {props &&
           props?.headers.map((heading, idx) => (
-            <option key={idx} value={heading}>
+            <option key={idx} value={heading} id={props.id}>
               {heading}
             </option>
           ))}
@@ -72,7 +46,8 @@ export default function CreateSnapshot(props) {
               cloudName="jeffreywood"
               publicId={work.imgId}
               className="h-32 m-2"
-              onClick={(e) => clickHandler(e)}
+              id={props.collectionTitle}
+              onClick={(e) => props.clickHandler(e)}
             />
           );
         })}

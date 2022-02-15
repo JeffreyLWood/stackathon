@@ -25,8 +25,10 @@ export default function CreateWork(props) {
   let [show, setShow] = useState(false);
   let [displayName, setDisplayName] = useState("");
   let [imgId, setImgId] = useState("");
+  let [modalCollection, setModalCollection] = useState("");
 
   let headers = [];
+
   const headings = () => {
     for (let i = 0; i < worksData.length; i++) {
       if (worksData[i].title !== null && !headers.includes(worksData[i].title))
@@ -42,33 +44,51 @@ export default function CreateWork(props) {
     setShow(true);
   };
 
-  const onDragEnd = () => {};
+  const clickHandler = (e) => {
+    e.preventDefault();
+    setDisplayName("Edit Work");
+    let imgId = e.target.src.split("/").slice(-1).join();
+    setImgId(imgId);
+    setShow(true);
+    setModalCollection(e.target.id);
+  };
 
-  let ddc = useRef("ddc");
+  const changeHandler = (evt) => {
+    evt.preventDefault();
+
+    if (evt.target.id === "primary") {
+      setPrimary(evt.target.value);
+    } else if (evt.target.id === "secondary") {
+      setSecondary(evt.target.value);
+    }
+    console.log("evt.target.value", evt.target.value);
+  };
 
   return (
     <>
       <Navbar user={user} />
-      <DragDropContext onDragEnd={onDragEnd}>
-        <div className="p-10">
-          <div className="flex flex-row w-full">
-            <div className="w-4/6">
-              <CreateSnapshot
-                id={"primary"}
-                setHeader={setPrimary}
-                collectionTitle={primary}
-                headers={headers}
-                innerRef={ddc}
-                userId={userId}
-                // clickHandler={clickHandler}
-                imgId={imgId}
-                setImgId={setImgId}
-                setDisplayName={setDisplayName}
-                setShow={setShow}
-              />
-            </div>
-            <div className="w-2/6">
-              {/* <CreateSnapshot
+
+      <div className="p-10">
+        <div className="flex flex-row w-full">
+          <div className="w-4/6">
+            <CreateSnapshot
+              id={"primary"}
+              setHeader={setPrimary}
+              collectionTitle={primary}
+              changeHandler={changeHandler}
+              headers={headers}
+              userId={userId}
+              clickHandler={clickHandler}
+              imgId={imgId}
+              setImgId={setImgId}
+              displayName={displayName}
+              setDisplayName={setDisplayName}
+              show={show}
+              setShow={setShow}
+            />
+          </div>
+          <div className="w-2/6">
+            {/* <CreateSnapshot
                 id={"secondary"}
                 innerRef={ddc}
                 collectionTitle={secondary}
@@ -82,28 +102,27 @@ export default function CreateWork(props) {
                 setDisplayName={setDisplayName}
                 setShow={setShow}
               /> */}
-            </div>
           </div>
-
-          <button
-            type="submit"
-            onClick={(event) => submitHandler(event)}
-            className="pill m-2"
-            value="Add a Work"
-          >
-            Add a Work
-          </button>
-
-          <CreateUploader
-            collection={primary}
-            displayName={displayName}
-            show={show}
-            setShow={setShow}
-            imgId={imgId}
-            user={user}
-          />
         </div>
-      </DragDropContext>
+
+        <button
+          type="button"
+          onClick={(e) => submitHandler(e)}
+          className="pill m-2"
+          value="Add a Work"
+        >
+          Add a Work
+        </button>
+
+        <CreateUploader
+          collection={modalCollection}
+          displayName={displayName}
+          show={show}
+          setShow={setShow}
+          imgId={imgId}
+          user={user}
+        />
+      </div>
     </>
   );
 }

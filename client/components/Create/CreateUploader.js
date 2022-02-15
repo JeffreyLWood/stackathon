@@ -7,7 +7,7 @@ import { Image } from "cloudinary-react";
 import { fetchSingleWork, destroyWork } from "../../store/create";
 
 export default function CreateUploader(props) {
-  let work = useSelector((state) => state.create);
+  let work = useSelector((state) => state?.create.work);
   let user = useSelector((state) => state.user);
   const [fileInputState, setFileInputState] = useState("");
   const [previewSource, setPreviewSource] = useState("");
@@ -149,7 +149,7 @@ export default function CreateUploader(props) {
       height: "",
       width: "",
       medium: "",
-      hidden: work.hidden ? work.hidden : false,
+      hidden: work?.hidden ? work.hidden : false,
     });
   };
 

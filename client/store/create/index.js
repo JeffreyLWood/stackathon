@@ -170,7 +170,7 @@ export default function (state = {}, action) {
       return newState;
     }
     case GET_SINGLE_WORK: {
-      let newState = action.data;
+      let newState = { ...state, work: action.data };
       return newState;
     }
     case DELETE_WORK: {
