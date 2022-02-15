@@ -15,6 +15,7 @@ export default function CreateUploader(props) {
   const dispatch = useDispatch();
 
   const [state, setState] = useState({
+    collection: props.collection,
     title: "",
     year: "",
     height: "",
@@ -31,6 +32,7 @@ export default function CreateUploader(props) {
         // clears preview image in case modal was closed and add a work was opened
         setPreviewSource("");
         setState({
+          collection: props.collection,
           title: "",
           year: "",
           height: "",
@@ -84,7 +86,9 @@ export default function CreateUploader(props) {
       uploadImage(previewSource);
     }
     await dispatch(fetchSingleWork(null, null));
+
     setState({
+      ...state,
       title: "",
       year: "",
       height: "",
@@ -102,6 +106,7 @@ export default function CreateUploader(props) {
         method: "POST",
         body: JSON.stringify({
           data: base64EncodedImage,
+          collection: state.collection,
           userId: user.id,
           title: state.title,
           year: state.year,
@@ -124,6 +129,7 @@ export default function CreateUploader(props) {
         body: JSON.stringify({
           data: base64EncodedImage,
           newImage: previewSource ? true : false,
+          collection: state.collection,
           imgId: state.imgId ? state.imgId : work.imgId,
           userId: user.id,
           title: state.title.length ? state.title : work.title,
@@ -264,15 +270,36 @@ export default function CreateUploader(props) {
                   }
                 />
               </div>
+              <label htmlFor="collection">Collection: </label>
+              <select
+                name="collection"
+                className="p-2"
+                onChange={changeHandler}
+                value={state.collection}
+              >
+                {props &&
+                  props?.headers.map((heading, idx) => (
+                    <option
+                      key={idx}
+                      name="collection"
+                      value={heading}
+                      id={props.id}
+                    >
+                      {heading}
+                    </option>
+                  ))}
+                {props.id === "secondary" ? (
+                  <option value="Hidden">Hidden</option>
+                ) : null}
+              </select>
               <label htmlFor="hidden" className="my-1">
-                Set to Hidden
                 <button
                   type="button"
                   onClick={changeHandler}
                   name="hidden"
                   value="false"
                 >
-                  <img src="../../../eye.png" />
+                  Set to Hidden
                 </button>
               </label>
 

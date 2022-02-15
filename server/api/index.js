@@ -2,7 +2,9 @@ const router = require("express").Router();
 module.exports = router;
 const Work = require("../db/models/Work");
 const About = require("../db/models/About");
+const Collection = require("../db/models/Collection");
 const { cloudinary } = require("../utils/cloudinary");
+const res = require("express/lib/response");
 router.use("/users", require("./users"));
 
 router.post("/upload", async (req, res) => {
@@ -28,9 +30,13 @@ router.post("/upload", async (req, res) => {
       }
     } else {
       // let user = await user.findByPk(req.body.userId);
+      let collection = await Collection.findOne({
+        where: { userId: req.body.userId, title: req.body.collection },
+      });
+      console.log("==>", req.body.collection);
       await Work.create({
         imgId: uploadedResponse.public_id,
-        collectionId: req.body.collectionId,
+        collectionId: collection.id,
         title: req.body.title,
         year: req.body.year,
         height: req.body.height,
