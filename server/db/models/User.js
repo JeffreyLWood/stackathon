@@ -6,6 +6,7 @@ const Work = require("./Work");
 const CV = require("./CV");
 const About = require("./About");
 const Contact = require("./Contact");
+const Collection = require("./Collection");
 
 const SALT_ROUNDS = 5;
 
@@ -183,6 +184,7 @@ const defaultImages = async (user) => {
       status: "available",
       hidden: true,
     });
+
     // Put defaults into array for mapping
     let array = [
       default0,
@@ -191,13 +193,20 @@ const defaultImages = async (user) => {
       default3,
       default4,
       default5,
-      // default6,
       default7,
       default8,
     ];
     // Map over works array and setUser to the new user.
     // Sets default images in the user's database and displays them on their new site.
-    array.map(async (work) => await work.setUser(user));
+    let workCollection = await Collection.create({
+      userId: user.id,
+      title: "Work",
+      hidden: false,
+    });
+
+    array.map(async (work) => {
+      return await work.setCollection(workCollection);
+    });
   } catch (error) {
     console.log(error);
   }
@@ -220,6 +229,7 @@ const defaultVals = async (user) => {
     let contact = await Contact.create({
       text: "Reach out to me at one of the following:",
     });
+
     await about.setUser(user);
     await exhibition.setUser(user);
     await education.setUser(user);
@@ -232,5 +242,5 @@ const defaultVals = async (user) => {
 User.beforeCreate(hashPassword);
 User.beforeUpdate(hashPassword);
 User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));
-User.afterCreate(defaultImages);
 User.afterCreate(defaultVals);
+User.afterCreate(defaultImages);

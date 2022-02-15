@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { text } = require("express");
 const {
-  models: { User, About, Contact, CV, Work },
+  models: { User, About, Contact, CV, Work, Collection },
 } = require("../db");
 module.exports = router;
 
@@ -109,7 +109,7 @@ router.get("/:username", async (req, res, next) => {
       about: allData.dataValues.about,
       contact: allData.dataValues.contact,
       cv: allData.dataValues.cv,
-      works: allData.dataValues.works,
+      collections: allData.dataValues.collections,
     };
 
     res.status(200).send(userData);
@@ -119,42 +119,85 @@ router.get("/:username", async (req, res, next) => {
 });
 
 //Get all work by a user
-router.get("/:userId", async (req, res, next) => {
+router.get("/:userId/work", async (req, res, next) => {
   try {
-    let workData = await Work.findAll({
+    let workData = await Collection.findAll({
       where: {
         userId: req.params.userId,
       },
+      include: { all: true, nested: true },
     });
     res.status(200).send(workData);
+  } catch (err) {
+    next(err);
+  }
+});
+
+//Get all work in a collection by a user
+router.get("/:userId/:title/work", async (req, res, next) => {
+  try {
+    let collection = await Collection.findOne({
+      where: { userId: req.params.userId, title: req.params.title },
+    });
+    let workData = [];
+
+    if (collection) {
+      console.log(collection.id);
+      workData = await Work.findAll({
+        where: { collectionId: collection.id },
+      });
+      res.status(200).send(workData);
+    } else {
+      res.status(404).send("Not found");
+    }
   } catch (err) {
     next(err);
   }
 });
 
 // Get single work by a user
-router.get("/:userId/:imgId", async (req, res, next) => {
+router.get("/:userId/:collection/:imgId", async (req, res, next) => {
   try {
     let prefix = "stackathonImgs";
+    let collection = await Collection.findOne({
+      where: { userId: req.params.userId, title: req.params.collection },
+    });
     let workData = await Work.findOne({
       where: {
         imgId: `${prefix}/${req.params.imgId}`,
-        userId: req.params.userId,
+        collectionId: collection.id,
       },
     });
+
     res.status(200).send(workData);
   } catch (err) {
     next(err);
   }
 });
 
+//Make new Collection
+router.post("/:userId", async (req, res, next) => {
+  try {
+    await Collection.create({
+      title: req.body.title,
+      description: req.body.description,
+      hidden: req.body.hidden,
+      userId: req.params.userId,
+    }),
+      res.status(200).send();
+  } catch (err) {
+    next(err);
+  }
+});
+
 // Delete a work by a user
-router.delete("/:userId/:imgId", async (req, res, next) => {
+router.delete("/:userId/:collectionId/:imgId", async (req, res, next) => {
   try {
     let prefix = "stackathonImgs";
     await Work.destroy({
       where: {
         imgId: `${prefix}/${req.params.imgId}`,
+        collectionId: req.params.collectionId,
         userId: req.params.userId,
       },
     });

@@ -40,7 +40,7 @@ export default function CreateUploader(props) {
         });
       }
       if (props.displayName === "Edit Work") {
-        await dispatch(fetchSingleWork(user.id, props.imgId));
+        await dispatch(fetchSingleWork(user.id, props.collection, props.imgId));
       }
     }
     loadImageData();

@@ -1,43 +1,23 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
 
-const Work = db.define("work", {
-  // heading: {
-  //   type: Sequelize.STRING,
-  //   defaultValue: "Work",
-  // },
+const Collection = db.define("collection", {
   title: {
     type: Sequelize.STRING,
   },
-  year: {
-    type: Sequelize.INTEGER,
-  },
-  height: {
-    type: Sequelize.INTEGER,
-  },
-  medium: {
+  description: {
     type: Sequelize.STRING,
-  },
-  width: {
-    type: Sequelize.INTEGER,
-  },
-  status: {
-    type: Sequelize.STRING,
-  },
-  imgId: {
-    type: Sequelize.STRING,
-    allowNull: false,
   },
   hidden: {
     type: Sequelize.STRING,
-    defaultValue: false,
+    defaultValue: true,
   },
   index: {
     type: Sequelize.INTEGER,
   },
 });
 
-module.exports = Work;
+module.exports = Collection;
 
 /**
  * instanceMethods

@@ -7,6 +7,7 @@ const CONTACT = "CONTACT";
 const TITLE = "TITLE";
 const GET_SINGLE_WORK = "GET_SINGLE_WORK";
 const GET_ALL_WORK = "GET_ALL_WORK";
+const GET_COLLECTION = "GET_COLLECTION";
 const DELETE_WORK = "DELETE_WORK";
 
 //action creators
@@ -32,6 +33,10 @@ const getAllWork = (data) => {
 
 const getSingleWork = (data) => {
   return { type: GET_SINGLE_WORK, data };
+};
+
+const getCollection = (data) => {
+  return { type: GET_COLLECTION, data };
 };
 
 const deleteWork = (data) => {
@@ -88,30 +93,45 @@ export const updateContactData = (userId, contactData) =>
 export const fetchAllWork = (userId) =>
   async function (dispatch) {
     try {
-      let { data } = await axios.get(`/api/users/${userId}`);
+      let { data } = await axios.get(`/api/users/work/${userId}`);
       dispatch(getAllWork(data));
     } catch (err) {
       return err;
     }
   };
-export const fetchSingleWork = (userId, imgId) =>
+
+export const fetchCollection = (userId, title) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.get(`/api/users/${userId}/${title}/work/`);
+      dispatch(getCollection(data));
+    } catch (err) {
+      return err;
+    }
+  };
+
+export const fetchSingleWork = (userId, collection, imgId) =>
   async function (dispatch) {
     try {
       if (userId === null) {
         dispatch(getSingleWork(null));
         return;
       }
-      let { data } = await axios.get(`/api/users/${userId}/${imgId}`);
+      let { data } = await axios.get(
+        `/api/users/${userId}/${collection}/${imgId}`
+      );
       dispatch(getSingleWork(data));
     } catch (err) {
       return err;
     }
   };
 
-export const destroyWork = (userId, imgId) =>
+export const destroyWork = (userId, collectionId, imgId) =>
   async function (dispatch) {
     try {
-      let { data } = await axios.delete(`/api/users/${userId}/${imgId}`);
+      let { data } = await axios.delete(
+        `/api/users/${userId}/${collectionId}/${imgId}`
+      );
       dispatch(deleteWork(data));
     } catch (err) {
       return err;
@@ -143,6 +163,10 @@ export default function (state = {}, action) {
     }
     case GET_ALL_WORK: {
       let newState = { ...state, works: action.data };
+      return newState;
+    }
+    case GET_COLLECTION: {
+      let newState = { ...state, collection: action.data }; //?
       return newState;
     }
     case GET_SINGLE_WORK: {

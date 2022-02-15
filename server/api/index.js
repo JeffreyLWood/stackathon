@@ -30,7 +30,7 @@ router.post("/upload", async (req, res) => {
       // let user = await user.findByPk(req.body.userId);
       await Work.create({
         imgId: uploadedResponse.public_id,
-        userId: req.body.userId,
+        collectionId: req.body.collectionId,
         title: req.body.title,
         year: req.body.year,
         height: req.body.height,

@@ -8,15 +8,16 @@ import { fetchUserData } from "../../store/user";
 import CreateUploader from "./CreateUploader";
 import { useRef } from "react";
 export default function CreateWork(props) {
+  let username = useSelector((state) => state.auth.username);
+  let userId = useSelector((state) => state.auth.id);
   let user = useSelector((state) => state.user);
-
   let dispatch = useDispatch();
 
   useEffect(() => {
-    user = dispatch(fetchUserData(props.match.params.username));
+    user = dispatch(fetchUserData(username));
   }, []);
 
-  let worksData = user?.works;
+  let worksData = user?.collections;
 
   let [primary, setPrimary] = useState("Work");
   let [secondary, setSecondary] = useState("Hidden");
@@ -28,13 +29,11 @@ export default function CreateWork(props) {
   let headers = [];
   const headings = () => {
     for (let i = 0; i < worksData.length; i++) {
-      if (
-        worksData[i].heading !== null &&
-        !headers.includes(worksData[i].heading)
-      )
-        headers.push(worksData[i].heading);
+      if (worksData[i].title !== null && !headers.includes(worksData[i].title))
+        headers.push(worksData[i].title);
     }
   };
+
   worksData && headings();
 
   const submitHandler = (e) => {
@@ -44,7 +43,9 @@ export default function CreateWork(props) {
   };
 
   const onDragEnd = () => {};
+
   let ddc = useRef("ddc");
+
   return (
     <>
       <Navbar user={user} />
@@ -55,34 +56,32 @@ export default function CreateWork(props) {
               <CreateSnapshot
                 id={"primary"}
                 setHeader={setPrimary}
-                value={primary}
+                collectionTitle={primary}
                 headers={headers}
                 innerRef={ddc}
-                user={user}
-                works={worksData?.filter(
-                  (work) => work?.heading === primary && work.hidden === "false"
-                )}
+                userId={userId}
+                // clickHandler={clickHandler}
+                imgId={imgId}
+                setImgId={setImgId}
+                setDisplayName={setDisplayName}
+                setShow={setShow}
               />
             </div>
             <div className="w-2/6">
-              <CreateSnapshot
+              {/* <CreateSnapshot
                 id={"secondary"}
                 innerRef={ddc}
+                collectionTitle={secondary}
                 setHeader={setSecondary}
-                value={secondary}
                 headers={headers}
-                user={user}
-                works={
-                  worksData &&
-                  worksData.filter((work) => {
-                    if (secondary === "Hidden") {
-                      return work.hidden === "true";
-                    } else {
-                      return work.heading === secondary;
-                    }
-                  })
-                }
-              />
+                innerRef={ddc}
+                userId={userId}
+                // clickHandler={clickHandler}
+                imgId={imgId}
+                setImgId={setImgId}
+                setDisplayName={setDisplayName}
+                setShow={setShow}
+              /> */}
             </div>
           </div>
 
@@ -96,11 +95,12 @@ export default function CreateWork(props) {
           </button>
 
           <CreateUploader
+            collection={primary}
             displayName={displayName}
             show={show}
             setShow={setShow}
             imgId={imgId}
-            user={props.user}
+            user={user}
           />
         </div>
       </DragDropContext>

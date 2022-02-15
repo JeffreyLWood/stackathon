@@ -9,19 +9,20 @@ import { fetchAllWork } from "../../store/create";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import List from "./List";
 import Item from "./Item";
+import { fetchCollection } from "../../store/create";
 export default function CreateSnapshot(props) {
   // still not triggering refresh when a user changes an image of a work or adds a new work
-  let user = props.user;
+  let collection = useSelector((state) => state.create.collection);
 
   const dispatch = useDispatch();
+  let [works, setWorks] = useState([]);
 
-  // useEffect(() => {
-  //   user = dispatch(fetchUserData(user.username));
-  // }, []);
-
+  useEffect(() => {
+    collection = dispatch(fetchCollection(props.userId, props.collectionTitle));
+  }, []);
+  console.log("collection", collection);
   let [show, setShow] = useState(false);
   let [displayName, setDisplayName] = useState("");
-  let [imgId, setImgId] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -31,10 +32,10 @@ export default function CreateSnapshot(props) {
 
   const clickHandler = (e) => {
     e.preventDefault();
-    setDisplayName("Edit Work");
+    props.setDisplayName("Edit Work");
     let imgId = e.target.src.split("/").slice(-1).join();
-    setImgId(imgId);
-    setShow(true);
+    props.setImgId(imgId);
+    props.setShow(true);
   };
 
   const changeHandler = (evt) => {
@@ -63,30 +64,18 @@ export default function CreateSnapshot(props) {
           <option value="Hidden">Hidden</option>
         ) : null}
       </select>
-
-      <Droppable
-        droppableId={props.id}
-        direction="horizontal"
-        innerRef={props.innerRef}
-      >
-        {(provided) => (
-          <List
-            id={props.id}
-            innerRef={provided.innerRef}
-            {...provided.droppableProps}
-            works={props.works}
-            displayName={displayName}
-            show={show}
-            setShow={setShow}
-            user={props.user}
-            innerRef={provided.innerRef}
-            cloudName="jeffreywood"
-            clickHandler={clickHandler}
-            imgId={imgId}
-            placeholder={provided.placeholder}
-          ></List>
-        )}
-      </Droppable>
+      {collection &&
+        collection.map((work, idx) => {
+          return (
+            <Image
+              key={idx}
+              cloudName="jeffreywood"
+              publicId={work.imgId}
+              className="h-32 m-2"
+              onClick={(e) => clickHandler(e)}
+            />
+          );
+        })}
     </div>
   );
 }
