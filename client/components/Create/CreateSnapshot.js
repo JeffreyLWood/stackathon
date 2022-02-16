@@ -17,7 +17,9 @@ export default function CreateSnapshot(props) {
   let [works, setWorks] = useState([]);
 
   useEffect(() => {
-    collection = dispatch(fetchCollection(props.userId, props.collectionTitle));
+    props.collectionTitle === "Hidden"
+      ? null
+      : dispatch(fetchCollection(props.userId, props.collectionTitle));
   }, [props.collectionTitle]);
 
   return (
@@ -39,18 +41,24 @@ export default function CreateSnapshot(props) {
         ) : null}
       </select>
       {collection &&
-        collection.map((work, idx) => {
-          return (
-            <Image
-              key={idx}
-              cloudName="jeffreywood"
-              publicId={work.imgId}
-              className="h-32 m-2"
-              id={props.collectionTitle}
-              onClick={(e) => props.clickHandler(e)}
-            />
-          );
-        })}
+        collection
+          .filter((work) => {
+            return props.collectionTitle === "Hidden"
+              ? work.hidden
+              : !work.hidden;
+          })
+          .map((work, idx) => {
+            return (
+              <Image
+                key={idx}
+                cloudName="jeffreywood"
+                publicId={work.imgId}
+                className="h-32 m-2"
+                id={props.collectionTitle}
+                onClick={(e) => props.clickHandler(e)}
+              />
+            );
+          })}
     </div>
   );
 }

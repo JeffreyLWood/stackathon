@@ -88,20 +88,19 @@ export default function CreateWork(props) {
             />
           </div>
           <div className="w-2/6">
-            {/* <CreateSnapshot
-                id={"secondary"}
-                innerRef={ddc}
-                collectionTitle={secondary}
-                setHeader={setSecondary}
-                headers={headers}
-                innerRef={ddc}
-                userId={userId}
-                // clickHandler={clickHandler}
-                imgId={imgId}
-                setImgId={setImgId}
-                setDisplayName={setDisplayName}
-                setShow={setShow}
-              /> */}
+            <CreateSnapshot
+              id={"secondary"}
+              collectionTitle={secondary}
+              setHeader={setSecondary}
+              changeHandler={changeHandler}
+              headers={headers}
+              userId={userId}
+              clickHandler={clickHandler}
+              imgId={imgId}
+              setImgId={setImgId}
+              setDisplayName={setDisplayName}
+              setShow={setShow}
+            />
           </div>
         </div>
 
