@@ -23,7 +23,7 @@ export default function CreateUploader(props) {
     medium: "",
     hidden: false,
   });
-
+  let [hidden, setHidden] = useState(false);
   useEffect(() => {
     async function loadImageData() {
       if (props.displayName === "Add a Work") {
@@ -42,11 +42,18 @@ export default function CreateUploader(props) {
         });
       }
       if (props.displayName === "Edit Work") {
-        await dispatch(fetchSingleWork(user.id, props.collection, props.imgId));
+        work = await dispatch(
+          fetchSingleWork(user.id, props.collection, props.imgId)
+        );
       }
     }
     loadImageData();
   }, [props.show]);
+
+  //Sets initial value of hidden when work has loaded for Edit Work
+  useEffect(() => {
+    setHidden(work?.hidden);
+  }, [work]);
 
   const destroyHandler = (userId, imgId) => {
     imgId = imgId.split("/").slice(-1).join();
@@ -61,11 +68,18 @@ export default function CreateUploader(props) {
       const file = evt.target.files[0];
       previewFile(file);
     } else {
-      //if event target name is in data, change data to value
       setState({ ...state, [evt.target.name]: evt.target.value });
       work = { ...work, [evt.target.name]: evt.target.value };
-      console.log(evt.target.value);
+      console.log(evt.target.name, evt.target.value);
     }
+  };
+
+  const hiddenHandler = (evt) => {
+    evt.preventDefault();
+    setHidden(hidden ? false : true);
+    console.log(hidden);
+    setState({ ...state, [evt.target.name]: evt.target.value });
+    console.log(evt.target.name, evt.target.value);
   };
 
   const previewFile = (file) => {
@@ -78,7 +92,6 @@ export default function CreateUploader(props) {
 
   let submitHandler = async (evt) => {
     evt.preventDefault();
-    console.log(state);
     if (props.displayName === "Edit Work") {
       updateData(previewSource);
     } else if (!previewSource) return;
@@ -94,7 +107,7 @@ export default function CreateUploader(props) {
       height: "",
       width: "",
       medium: "",
-      hidden: false,
+      hidden: null,
     });
     props.setShow(false);
   };
@@ -134,10 +147,10 @@ export default function CreateUploader(props) {
           userId: user.id,
           title: state.title.length ? state.title : work.title,
           year: state.year.length ? state.year : work.year,
-          height: state.height.length ? state.height : work.Height,
+          height: state.height.length ? state.height : work.height,
           width: state.width.length ? state.width : work.width,
-          medium: state.medium.length ? state.medium : work.Medium,
-          hidden: state.hidden ? state.hidden : work.Hidden,
+          medium: state.medium.length ? state.medium : work.medium,
+          hidden: hidden,
         }),
         headers: { "Content-type": "application/json" },
       });
@@ -155,7 +168,7 @@ export default function CreateUploader(props) {
       height: "",
       width: "",
       medium: "",
-      hidden: work?.hidden ? work.hidden : false,
+      hidden: null,
     });
   };
 
@@ -270,38 +283,51 @@ export default function CreateUploader(props) {
                   }
                 />
               </div>
-              <label htmlFor="collection">Collection: </label>
-              <select
-                name="collection"
-                className="p-2"
-                onChange={changeHandler}
-                value={state.collection}
+              <label
+                htmlFor="collection"
+                className="flex m-1 items-center space-x-2"
               >
-                {props &&
-                  props?.headers.map((heading, idx) => (
-                    <option
-                      key={idx}
-                      name="collection"
-                      value={heading}
-                      id={props.id}
-                    >
-                      {heading}
-                    </option>
-                  ))}
-                {props.id === "secondary" ? (
-                  <option value="Hidden">Hidden</option>
-                ) : null}
-              </select>
-              <label htmlFor="hidden" className="my-1">
-                <button
-                  type="button"
-                  onClick={changeHandler}
-                  name="hidden"
-                  value="false"
+                Collection:
+                <select
+                  name="collection"
+                  className="p-2"
+                  onChange={changeHandler}
+                  value={state.collection}
                 >
-                  Set to Hidden
-                </button>
+                  {props &&
+                    props?.headers.map((heading, idx) => (
+                      <option
+                        key={idx}
+                        name="collection"
+                        value={heading}
+                        id={props.id}
+                      >
+                        {heading}
+                      </option>
+                    ))}
+                  {props.id === "secondary" ? (
+                    <option value="Hidden">Hidden</option>
+                  ) : null}
+                </select>
               </label>
+
+              {hidden ? (
+                <img
+                  src="../../../hiddenactive.png"
+                  onClick={hiddenHandler}
+                  name="hidden"
+                  value={hidden}
+                  className="w-8"
+                />
+              ) : (
+                <img
+                  src="../../../hiddeninactive.png"
+                  onClick={hiddenHandler}
+                  name="hidden"
+                  value={hidden}
+                  className="w-8"
+                />
+              )}
 
               <button
                 type="submit"

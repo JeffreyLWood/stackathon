@@ -162,7 +162,7 @@ const defaultImages = async (user) => {
     //   height: 4,
     //   width: 5,
     //   status: "available",
-    //   hidden: false,
+    //   hidden:false,
     // });
     let default7 = await Work.create({
       title: "Street 1",
@@ -172,7 +172,7 @@ const defaultImages = async (user) => {
       height: 5,
       width: 4,
       status: "available",
-      hidden: false,
+      hidden: true,
     });
     let default8 = await Work.create({
       title: "Street 2",

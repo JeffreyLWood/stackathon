@@ -29,7 +29,7 @@ const Work = db.define("work", {
     allowNull: false,
   },
   hidden: {
-    type: Sequelize.STRING,
+    type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
   index: {
