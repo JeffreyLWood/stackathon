@@ -126,7 +126,7 @@ export default function CreateUploader(props) {
           height: state.height,
           width: state.width,
           medium: state.medium,
-          hidden: state.hidden,
+          hidden: hidden,
         }),
         headers: { "Content-type": "application/json" },
       });
@@ -310,25 +310,30 @@ export default function CreateUploader(props) {
                   ) : null}
                 </select>
               </label>
-
-              {hidden ? (
-                <img
-                  src="../../../hiddenactive.png"
-                  onClick={hiddenHandler}
-                  name="hidden"
-                  value={hidden}
-                  className="w-8"
-                />
-              ) : (
-                <img
-                  src="../../../hiddeninactive.png"
-                  onClick={hiddenHandler}
-                  name="hidden"
-                  value={hidden}
-                  className="w-8"
-                />
-              )}
-
+              <div
+                onClick={hiddenHandler}
+                className="flex space-x-5 items-center w-12 p-1"
+              >
+                {/* <span>{hidden ? "Hidden" : "Visible"}</span> */}
+                <span>
+                  {hidden ? (
+                    <img
+                      src="../../../hiddenactive.png"
+                      name="hidden"
+                      value={hidden}
+                      className="w-8"
+                    />
+                  ) : (
+                    <img
+                      src="../../../hiddeninactive.png"
+                      onClick={hiddenHandler}
+                      name="hidden"
+                      value={hidden}
+                      className="w-8"
+                    />
+                  )}
+                </span>
+              </div>
               <button
                 type="submit"
                 className="bg-black text-white text-uppercase p-1 my-3"
