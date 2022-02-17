@@ -191,14 +191,16 @@ router.post("/:userId", async (req, res, next) => {
 });
 
 // Delete a work by a user
-router.delete("/:userId/:collectionId/:imgId", async (req, res, next) => {
+router.delete("/:userId/:collection/:imgId", async (req, res, next) => {
   try {
+    let collection = await Collection.findOne({
+      where: { userId: req.params.userId, title: req.params.collection },
+    });
     let prefix = "stackathonImgs";
     await Work.destroy({
       where: {
         imgId: `${prefix}/${req.params.imgId}`,
-        collectionId: req.params.collectionId,
-        userId: req.params.userId,
+        collectionId: collection.id,
       },
     });
     res.status(200).send();

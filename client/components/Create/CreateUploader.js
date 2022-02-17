@@ -4,7 +4,11 @@ import { updateAboutText } from "../../store/create";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Image } from "cloudinary-react";
-import { fetchSingleWork, destroyWork } from "../../store/create";
+import {
+  fetchSingleWork,
+  destroyWork,
+  fetchCollection,
+} from "../../store/create";
 
 export default function CreateUploader(props) {
   let work = useSelector((state) => state?.create.work);
@@ -23,7 +27,9 @@ export default function CreateUploader(props) {
     medium: "",
     hidden: false,
   });
+
   let [hidden, setHidden] = useState(false);
+
   useEffect(() => {
     async function loadImageData() {
       if (props.displayName === "Add a Work") {
@@ -55,9 +61,9 @@ export default function CreateUploader(props) {
     setHidden(work?.hidden);
   }, [work]);
 
-  const destroyHandler = (userId, imgId) => {
+  const destroyHandler = (userId, collection, imgId) => {
     imgId = imgId.split("/").slice(-1).join();
-    dispatch(destroyWork(userId, imgId));
+    dispatch(destroyWork(userId, collection, imgId));
     props.setShow(false);
   };
 
@@ -70,16 +76,14 @@ export default function CreateUploader(props) {
     } else {
       setState({ ...state, [evt.target.name]: evt.target.value });
       work = { ...work, [evt.target.name]: evt.target.value };
-      console.log(evt.target.name, evt.target.value);
     }
   };
 
   const hiddenHandler = (evt) => {
     evt.preventDefault();
     setHidden(hidden ? false : true);
-    console.log(hidden);
+
     setState({ ...state, [evt.target.name]: evt.target.value });
-    console.log(evt.target.name, evt.target.value);
   };
 
   const previewFile = (file) => {
@@ -98,8 +102,9 @@ export default function CreateUploader(props) {
     else if (props.displayName === "Add a Work") {
       uploadImage(previewSource);
     }
+    // Clears single work state
     await dispatch(fetchSingleWork(null, null));
-
+    //Clears input fields
     setState({
       ...state,
       title: "",
@@ -109,9 +114,13 @@ export default function CreateUploader(props) {
       medium: "",
       hidden: null,
     });
+    //Closes
     props.setShow(false);
+
+    //Triggers re fresh, hopefully
+    // dispatch(fetchCollection(props.userId, props.collection));
+    // console.log(props.collection);
   };
-  // if preview source => then new image
 
   const uploadImage = async (base64EncodedImage) => {
     try {
@@ -119,7 +128,7 @@ export default function CreateUploader(props) {
         method: "POST",
         body: JSON.stringify({
           data: base64EncodedImage,
-          collection: state.collection,
+          collection: hidden ? "Hidden" : state.collection,
           userId: user.id,
           title: state.title,
           year: state.year,
@@ -142,7 +151,7 @@ export default function CreateUploader(props) {
         body: JSON.stringify({
           data: base64EncodedImage,
           newImage: previewSource ? true : false,
-          collection: state.collection,
+          collection: hidden ? "Hidden" : state.collection,
           imgId: state.imgId ? state.imgId : work.imgId,
           userId: user.id,
           title: state.title.length ? state.title : work.title,
@@ -292,7 +301,7 @@ export default function CreateUploader(props) {
                   name="collection"
                   className="p-2"
                   onChange={changeHandler}
-                  value={state.collection}
+                  value={state.collection ? state.collection : props.collection}
                 >
                   {props &&
                     props?.headers.map((heading, idx) => (
@@ -343,7 +352,10 @@ export default function CreateUploader(props) {
               {work ? (
                 <button
                   className="border-2 text-uppercase p-1"
-                  onClick={() => destroyHandler(user.id, work.imgId)}
+                  type="button"
+                  onClick={() =>
+                    destroyHandler(user.id, props.collection, work.imgId)
+                  }
                 >
                   Delete
                 </button>

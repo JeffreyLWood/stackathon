@@ -5,25 +5,35 @@ import { useEffect, useState } from "react";
 import { fetchUserData } from "../../store/user";
 import { Image } from "cloudinary-react";
 import CreateUploader from "./CreateUploader";
-import { fetchAllWork } from "../../store/create";
+import {
+  fetchAllWork,
+  fetchPrimaryCollection,
+  fetchSecondaryCollection,
+} from "../../store/create";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import List from "./List";
 import Item from "./Item";
-import { fetchCollection } from "../../store/create";
+
 export default function CreateSnapshot(props) {
-  let collection = useSelector((state) => state.create?.collection);
+  let collection =
+    props.id === "primary"
+      ? useSelector((state) => state.create?.primaryCollection)
+      : useSelector((state) => state.create?.secondaryCollection);
 
   const dispatch = useDispatch();
-  let [works, setWorks] = useState([]);
 
   useEffect(() => {
-    props.collectionTitle === "Hidden"
-      ? null
-      : dispatch(fetchCollection(props.userId, props.collectionTitle));
+    collection =
+      props.id === "primary"
+        ? dispatch(fetchPrimaryCollection(props.userId, props.collectionTitle))
+        : dispatch(
+            fetchSecondaryCollection(props.userId, props.collectionTitle)
+          );
+    console.log(collection);
   }, [props.collectionTitle]);
 
   return (
-    <div className="snapshot border-2 border-gray-300 mx-2 p-1">
+    <div className="snapshot border-2 border-gray-200 mx-2 p-2">
       <select
         id={props.id}
         className="p-2"
@@ -32,33 +42,29 @@ export default function CreateSnapshot(props) {
       >
         {props &&
           props?.headers.map((heading, idx) => (
-            <option key={idx} value={heading} id={props.id}>
+            <option
+              key={idx}
+              onChange={props.changeHandler}
+              value={heading}
+              id={props.id}
+            >
               {heading}
             </option>
           ))}
-        {props.id === "secondary" ? (
-          <option value="Hidden">Hidden</option>
-        ) : null}
       </select>
       {collection &&
-        collection
-          .filter((work) => {
-            return props.collectionTitle === "Hidden"
-              ? work.hidden
-              : !work.hidden;
-          })
-          .map((work, idx) => {
-            return (
-              <Image
-                key={idx}
-                cloudName="jeffreywood"
-                publicId={work.imgId}
-                className="h-32 m-2"
-                id={props.collectionTitle}
-                onClick={(e) => props.clickHandler(e)}
-              />
-            );
-          })}
+        collection.map((work, idx) => {
+          return (
+            <Image
+              key={idx}
+              cloudName="jeffreywood"
+              publicId={work.imgId}
+              className="h-32 m-2"
+              id={props.collectionTitle}
+              onClick={(e) => props.clickHandler(e)}
+            />
+          );
+        })}
     </div>
   );
 }

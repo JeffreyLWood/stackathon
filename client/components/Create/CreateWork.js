@@ -13,10 +13,6 @@ export default function CreateWork(props) {
   let user = useSelector((state) => state.user);
   let dispatch = useDispatch();
 
-  useEffect(() => {
-    user = dispatch(fetchUserData(username));
-  }, []);
-
   let worksData = user?.collections;
 
   let [primary, setPrimary] = useState("Work");
@@ -26,6 +22,10 @@ export default function CreateWork(props) {
   let [displayName, setDisplayName] = useState("");
   let [imgId, setImgId] = useState("");
   let [modalCollection, setModalCollection] = useState("");
+
+  useEffect(() => {
+    user = dispatch(fetchUserData(username));
+  }, [show]);
 
   let headers = [];
 
@@ -61,19 +61,17 @@ export default function CreateWork(props) {
     } else if (evt.target.id === "secondary") {
       setSecondary(evt.target.value);
     }
-    console.log("evt.target.value", evt.target.value);
   };
 
   return (
     <>
       <Navbar user={user} />
 
-      <div className="p-10">
-        <div className="flex flex-row w-full">
-          <div className="w-4/6">
+      <div className="sm:h-full h-92vh md:px-10 md:pt-10">
+        <div className="flex flex-col w-full md:flex-row ">
+          <div className="h-3/6 md:h-90vh md:w-4/6">
             <CreateSnapshot
               id={"primary"}
-              setHeader={setPrimary}
               collectionTitle={primary}
               changeHandler={changeHandler}
               headers={headers}
@@ -87,11 +85,10 @@ export default function CreateWork(props) {
               setShow={setShow}
             />
           </div>
-          <div className="w-2/6">
+          <div className="h-2/6 md:w-2/6">
             <CreateSnapshot
               id={"secondary"}
               collectionTitle={secondary}
-              setHeader={setSecondary}
               changeHandler={changeHandler}
               headers={headers}
               userId={userId}
@@ -113,6 +110,15 @@ export default function CreateWork(props) {
           Add a Work
         </button>
 
+        <button
+          type="button"
+          onClick={(e) => submitHandler(e)}
+          className="pill m-2"
+          value="New Collection"
+        >
+          New Collection
+        </button>
+
         <CreateUploader
           headers={headers}
           collection={primary}
@@ -121,6 +127,7 @@ export default function CreateWork(props) {
           setShow={setShow}
           imgId={imgId}
           user={user}
+          usrId={userId}
         />
       </div>
     </>

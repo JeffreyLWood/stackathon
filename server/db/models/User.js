@@ -204,6 +204,12 @@ const defaultImages = async (user) => {
       hidden: false,
     });
 
+    await Collection.create({
+      userId: user.id,
+      title: "Hidden",
+      hidden: true,
+    });
+
     array.map(async (work) => {
       return await work.setCollection(workCollection);
     });

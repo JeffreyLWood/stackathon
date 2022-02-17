@@ -8,6 +8,8 @@ const TITLE = "TITLE";
 const GET_SINGLE_WORK = "GET_SINGLE_WORK";
 const GET_ALL_WORK = "GET_ALL_WORK";
 const GET_COLLECTION = "GET_COLLECTION";
+const GET_PRIMARY_COLLECTION = "GET_PRIMARY_COLLECTION";
+const GET_SECONDARY_COLLECTION = "GET_SECONDARY_COLLECTION";
 const DELETE_WORK = "DELETE_WORK";
 
 //action creators
@@ -35,8 +37,12 @@ const getSingleWork = (data) => {
   return { type: GET_SINGLE_WORK, data };
 };
 
-const getCollection = (data) => {
-  return { type: GET_COLLECTION, data };
+const getPrimaryCollection = (data) => {
+  return { type: GET_PRIMARY_COLLECTION, data };
+};
+
+const getSecondaryCollection = (data) => {
+  return { type: GET_SECONDARY_COLLECTION, data };
 };
 
 const deleteWork = (data) => {
@@ -110,6 +116,26 @@ export const fetchCollection = (userId, title) =>
     }
   };
 
+export const fetchPrimaryCollection = (userId, title) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.get(`/api/users/${userId}/${title}/work/`);
+      dispatch(getPrimaryCollection(data));
+    } catch (err) {
+      return err;
+    }
+  };
+
+export const fetchSecondaryCollection = (userId, title) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.get(`/api/users/${userId}/${title}/work/`);
+      dispatch(getSecondaryCollection(data));
+    } catch (err) {
+      return err;
+    }
+  };
+
 export const fetchSingleWork = (userId, collection, imgId) =>
   async function (dispatch) {
     try {
@@ -126,11 +152,11 @@ export const fetchSingleWork = (userId, collection, imgId) =>
     }
   };
 
-export const destroyWork = (userId, collectionId, imgId) =>
+export const destroyWork = (userId, collection, imgId) =>
   async function (dispatch) {
     try {
       let { data } = await axios.delete(
-        `/api/users/${userId}/${collectionId}/${imgId}`
+        `/api/users/${userId}/${collection}/${imgId}`
       );
       dispatch(deleteWork(data));
     } catch (err) {
@@ -167,6 +193,15 @@ export default function (state = {}, action) {
     }
     case GET_COLLECTION: {
       let newState = { ...state, collection: action.data }; //?
+      return newState;
+    }
+    case GET_PRIMARY_COLLECTION: {
+      let newState = { ...state, primaryCollection: action.data }; //?
+      return newState;
+    }
+
+    case GET_SECONDARY_COLLECTION: {
+      let newState = { ...state, secondaryCollection: action.data }; //?
       return newState;
     }
     case GET_SINGLE_WORK: {

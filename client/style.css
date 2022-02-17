@@ -33,6 +33,11 @@ body {
 .h-90vh {
   min-height: 82vh;
 }
+
+.h-92vh {
+  min-height: 92vh;
+}
+
 .subHeader {
   font-weight: 300;
   text-transform: uppercase;
