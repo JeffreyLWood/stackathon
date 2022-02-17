@@ -75,6 +75,7 @@ export default function CreateWork(props) {
               collectionTitle={primary}
               changeHandler={changeHandler}
               headers={headers}
+              secondary={secondary}
               userId={userId}
               clickHandler={clickHandler}
               imgId={imgId}
@@ -91,6 +92,7 @@ export default function CreateWork(props) {
               collectionTitle={secondary}
               changeHandler={changeHandler}
               headers={headers}
+              primary={primary}
               userId={userId}
               clickHandler={clickHandler}
               imgId={imgId}
@@ -121,7 +123,7 @@ export default function CreateWork(props) {
 
         <CreateUploader
           headers={headers}
-          collection={primary}
+          collection={modalCollection}
           displayName={displayName}
           show={show}
           setShow={setShow}

@@ -41,16 +41,24 @@ export default function CreateSnapshot(props) {
         value={props.collectionTitle}
       >
         {props &&
-          props?.headers.map((heading, idx) => (
-            <option
-              key={idx}
-              onChange={props.changeHandler}
-              value={heading}
-              id={props.id}
-            >
-              {heading}
-            </option>
-          ))}
+          props?.headers
+            .filter((header) => {
+              if (props.id === "primary") {
+                return header !== props.secondary;
+              } else {
+                return header !== props.primary;
+              }
+            })
+            .map((heading, idx) => (
+              <option
+                key={idx}
+                onChange={props.changeHandler}
+                value={heading}
+                id={props.id}
+              >
+                {heading}
+              </option>
+            ))}
       </select>
       {collection &&
         collection.map((work, idx) => {
