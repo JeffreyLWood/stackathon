@@ -210,8 +210,64 @@ const defaultImages = async (user) => {
       hidden: true,
     });
 
+    let default9 = await Work.create({
+      title: "Court Street",
+      medium: "oil on panel",
+      year: 2021,
+      imgId: "stackathonImgs/IMG_8549_z45itv",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: true,
+    });
+
+    let default10 = await Work.create({
+      title: "Brick",
+      medium: "oil on panel",
+      year: 2021,
+      imgId: "stackathonImgs/IMG_8622_otmj6a",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: true,
+    });
+
+    let default11 = await Work.create({
+      title: "Grand Central",
+      medium: "oil on panel",
+      year: 2021,
+      imgId: "stackathonImgs/IMG_8757_b93blk",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: true,
+    });
+
+    let default12 = await Work.create({
+      title: "Canal",
+      medium: "oil on panel",
+      year: 2021,
+      imgId: "stackathonImgs/IMG_8744_1_hnb1c5",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: true,
+    });
+
+    let blueWork = [default9, default10, default11, default12];
+
+    let Blue = await Collection.create({
+      userId: user.id,
+      title: "Blue",
+      hidden: false,
+    });
+
     array.map(async (work) => {
       return await work.setCollection(workCollection);
+    });
+
+    blueWork.map(async (work) => {
+      await work.setCollection(Blue);
     });
   } catch (error) {
     console.log(error);

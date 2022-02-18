@@ -105,7 +105,7 @@ body {
 }
 
 .snapshot {
-  max-height: inherit;
+  max-height: 38rem;
   overflow-x: hidden;
   overflow-y: scroll;
 }

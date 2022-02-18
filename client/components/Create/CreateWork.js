@@ -68,7 +68,7 @@ export default function CreateWork(props) {
       <Navbar user={user} />
 
       <container className="w-screen flex justify-center sm:p-5 sm:h-90vh">
-        <section className="flex flex-col w-full h-full md:flex-row ">
+        <section className="flex flex-col w-full md:flex-row ">
           <div className="md:w-4/6">
             <CreateSnapshot
               id={"primary"}
