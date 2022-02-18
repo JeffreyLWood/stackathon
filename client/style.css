@@ -9,7 +9,7 @@ body {
 .siteTitle {
   font-size: x-large;
   font-weight: 300;
-  text-transform: uppercase;
+
   letter-spacing: 0.1em;
 }
 
@@ -30,14 +30,18 @@ body {
   align-items: flex-end;
   letter-spacing: 0.1em;
 }
-.h-90vh {
-  min-height: 82vh;
+.h-80vh {
+  min-height: 80vh;
 }
 
-.h-92vh {
+.h-90vh {
   min-height: 92vh;
 }
+.toolbar {
+  bottom: 0;
 
+  position: absolute;
+}
 .subHeader {
   font-weight: 300;
   text-transform: uppercase;
@@ -101,9 +105,9 @@ body {
 }
 
 .snapshot {
-  height: 32rem;
+  max-height: inherit;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 .pill {

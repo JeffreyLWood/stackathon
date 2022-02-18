@@ -40,7 +40,7 @@ export default function CreateWork(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    setDisplayName(e.target.value);
+    setDisplayName(e.target.id);
     setShow(true);
   };
 
@@ -64,12 +64,12 @@ export default function CreateWork(props) {
   };
 
   return (
-    <>
+    <div>
       <Navbar user={user} />
 
-      <div className="sm:h-full h-92vh md:px-10 md:pt-10">
-        <div className="flex flex-col w-full md:flex-row ">
-          <div className="h-3/6 md:h-90vh md:w-4/6">
+      <container className="w-screen flex justify-center sm:p-5 sm:h-90vh">
+        <section className="flex flex-col w-full h-full md:flex-row ">
+          <div className="md:w-4/6">
             <CreateSnapshot
               id={"primary"}
               collectionTitle={primary}
@@ -86,7 +86,7 @@ export default function CreateWork(props) {
               setShow={setShow}
             />
           </div>
-          <div className="h-2/6 md:w-2/6">
+          <div className="md:w-2/6">
             <CreateSnapshot
               id={"secondary"}
               collectionTitle={secondary}
@@ -101,37 +101,41 @@ export default function CreateWork(props) {
               setShow={setShow}
             />
           </div>
-        </div>
+        </section>
+        <section className="flex mx-10 toolbar justify-center border-2 w-2/6 border-b-0 border-black">
+          <img
+            src="../../../collectionactive.png"
+            id="Collections"
+            onClick={(e) => submitHandler(e)}
+            className="w-12 m-2"
+          />
 
-        <button
-          type="button"
-          onClick={(e) => submitHandler(e)}
-          className="pill m-2"
-          value="Add a Work"
-        >
-          Add a Work
-        </button>
+          <img
+            src="../../../newworkactive.png"
+            onClick={(e) => submitHandler(e)}
+            id="Add a Work"
+            className="w-12 m-2"
+          />
 
-        <button
-          type="button"
-          onClick={(e) => submitHandler(e)}
-          className="pill m-2"
-          value="New Collection"
-        >
-          New Collection
-        </button>
+          <img
+            onClick={(e) => submitHandler(e)}
+            src="../../../newcollectionactive.png"
+            id="New Collection"
+            className="w-12 m-2"
+          />
+        </section>
+      </container>
 
-        <CreateUploader
-          headers={headers}
-          collection={modalCollection}
-          displayName={displayName}
-          show={show}
-          setShow={setShow}
-          imgId={imgId}
-          user={user}
-          usrId={userId}
-        />
-      </div>
-    </>
+      <CreateUploader
+        headers={headers}
+        collection={modalCollection}
+        displayName={displayName}
+        show={show}
+        setShow={setShow}
+        imgId={imgId}
+        user={user}
+        usrId={userId}
+      />
+    </div>
   );
 }
