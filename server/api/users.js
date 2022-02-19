@@ -203,7 +203,8 @@ router.delete("/:userId/:collection/:imgId", async (req, res, next) => {
         collectionId: collection.id,
       },
     });
-    res.status(200).send();
+    let works = await Work.findAll({ where: { collectionId: collection.id } });
+    res.status(200).send(works);
   } catch (err) {
     next(err);
   }

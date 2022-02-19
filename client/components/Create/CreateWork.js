@@ -67,7 +67,7 @@ export default function CreateWork(props) {
     <div>
       <Navbar user={user} />
 
-      <container className="w-screen flex justify-center sm:p-5 sm:h-90vh">
+      <section className="w-screen flex justify-center sm:p-5 sm:h-90vh">
         <section className="flex flex-col w-full md:flex-row ">
           <div className="md:w-4/6">
             <CreateSnapshot
@@ -102,7 +102,7 @@ export default function CreateWork(props) {
             />
           </div>
         </section>
-        <section className="flex mx-10 toolbar justify-center border-2 w-2/6 border-b-0 border-black">
+        <section className="flex mx-10 toolbar justify-center w-2/6">
           <img
             src="../../../collectionactive.png"
             id="Collections"
@@ -124,7 +124,7 @@ export default function CreateWork(props) {
             className="w-12 m-2"
           />
         </section>
-      </container>
+      </section>
 
       <CreateUploader
         headers={headers}
@@ -135,6 +135,7 @@ export default function CreateWork(props) {
         imgId={imgId}
         user={user}
         usrId={userId}
+        snapshotId={modalCollection === primary ? "primary" : "secondary"}
       />
     </div>
   );

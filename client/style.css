@@ -6,6 +6,9 @@
 body {
   overflow-x: hidden;
 }
+* {
+  font-weight: 300;
+}
 .siteTitle {
   font-size: x-large;
   font-weight: 300;
@@ -38,7 +41,7 @@ body {
   min-height: 92vh;
 }
 .toolbar {
-  bottom: 0;
+  bottom: 5px;
 
   position: absolute;
 }
@@ -67,8 +70,8 @@ body {
 }
 
 .modal-content {
-  width: 50%;
-  min-height: 50%;
+  width: 70%;
+  min-height: 70%;
   background-color: #fff;
 }
 
@@ -82,9 +85,10 @@ body {
 }
 
 .modal-body {
-  padding: 10px;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  padding: 4rem;
+  display: flex;
+  align-items: center;
+  background-color: red;
 }
 .modal-footer button {
   border: none;

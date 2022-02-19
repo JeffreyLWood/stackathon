@@ -829,10 +829,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-bottom-width: 2px;
 }
 
-.border-b-0 {
-  border-bottom-width: 0px;
-}
-
 .border-hidden {
   border-style: hidden;
 }
@@ -845,16 +841,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-blue-300 {
   --tw-border-opacity: 1;
   border-color: rgb(147 197 253 / var(--tw-border-opacity));
-}
-
-.border-gray-100 {
-  --tw-border-opacity: 1;
-  border-color: rgb(243 244 246 / var(--tw-border-opacity));
-}
-
-.border-black {
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
 .bg-white {
@@ -887,6 +873,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .p-1 {
   padding: 0.25rem;
+}
+
+.p-5 {
+  padding: 1.25rem;
 }
 
 .py-4 {
@@ -1055,6 +1045,10 @@ body {
   overflow-x: hidden;
 }
 
+* {
+  font-weight: 300;
+}
+
 .siteTitle {
   font-size: x-large;
   font-weight: 300;
@@ -1090,7 +1084,7 @@ body {
 }
 
 .toolbar {
-  bottom: 0;
+  bottom: 5px;
   position: absolute;
 }
 
@@ -1119,8 +1113,8 @@ body {
 }
 
 .modal-content {
-  width: 50%;
-  min-height: 50%;
+  width: 70%;
+  min-height: 70%;
   background-color: #fff;
 }
 
@@ -1134,9 +1128,10 @@ body {
 }
 
 .modal-body {
-  padding: 10px;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  padding: 4rem;
+  display: flex;
+  align-items: center;
+  background-color: red;
 }
 
 .modal-footer button {

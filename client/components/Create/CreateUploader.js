@@ -61,9 +61,10 @@ export default function CreateUploader(props) {
     setHidden(work?.hidden);
   }, [work]);
 
-  const destroyHandler = (userId, collection, imgId) => {
+  // Deletes a work from a collection
+  const destroyHandler = (userId, collection, imgId, snapshotId) => {
     imgId = imgId.split("/").slice(-1).join();
-    dispatch(destroyWork(userId, collection, imgId));
+    dispatch(destroyWork(userId, collection, imgId, snapshotId));
     props.setShow(false);
   };
 
@@ -94,12 +95,15 @@ export default function CreateUploader(props) {
     };
   };
 
+  // CALL THUNK ACTIONS TO TRIGGER REFRESH
   let submitHandler = async (evt) => {
     evt.preventDefault();
     if (props.displayName === "Edit Work") {
+      // MAKE THUNKER INSTEAD OF:
       updateData(previewSource);
     } else if (!previewSource) return;
     else if (props.displayName === "Add a Work") {
+      // MAKE THUNKER INSTEAD OF:
       uploadImage(previewSource);
     }
     // Clears single work state
@@ -116,12 +120,9 @@ export default function CreateUploader(props) {
     });
     //Closes
     props.setShow(false);
-
-    //Triggers re fresh, hopefully
-    // dispatch(fetchCollection(props.userId, props.collection));
-    // console.log(props.collection);
   };
 
+  //SHOULD BE IN REDUX STORE AS THUNK CREATOR ADD WORK
   const uploadImage = async (base64EncodedImage) => {
     try {
       await fetch("/api/upload", {
@@ -144,6 +145,7 @@ export default function CreateUploader(props) {
     }
   };
 
+  //SHOULD BE IN REDUX STORE AS THUNK CREATOR UPDATE WORK
   const updateData = async (base64EncodedImage) => {
     try {
       await fetch("/api/update", {
@@ -354,7 +356,12 @@ export default function CreateUploader(props) {
                   className="border-2 text-uppercase p-1"
                   type="button"
                   onClick={() =>
-                    destroyHandler(user.id, props.collection, work.imgId)
+                    destroyHandler(
+                      user.id,
+                      props.collection,
+                      work.imgId,
+                      props.snapshotId
+                    )
                   }
                 >
                   Delete

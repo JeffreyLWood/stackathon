@@ -37,6 +37,10 @@ const getSingleWork = (data) => {
   return { type: GET_SINGLE_WORK, data };
 };
 
+const getCollection = (data) => {
+  return { type: GET_COLLECTION, data };
+};
+
 const getPrimaryCollection = (data) => {
   return { type: GET_PRIMARY_COLLECTION, data };
 };
@@ -45,8 +49,8 @@ const getSecondaryCollection = (data) => {
   return { type: GET_SECONDARY_COLLECTION, data };
 };
 
-const deleteWork = (data) => {
-  return { type: DELETE_WORK, data };
+const deleteWork = (snapshotId, data) => {
+  return { type: DELETE_WORK, data, snapshotId };
 };
 
 //thunk creators
@@ -152,13 +156,13 @@ export const fetchSingleWork = (userId, collection, imgId) =>
     }
   };
 
-export const destroyWork = (userId, collection, imgId) =>
+export const destroyWork = (userId, collection, imgId, snapshotId) =>
   async function (dispatch) {
     try {
       let { data } = await axios.delete(
         `/api/users/${userId}/${collection}/${imgId}`
       );
-      dispatch(deleteWork(data));
+      dispatch(deleteWork(snapshotId, data));
     } catch (err) {
       return err;
     }
@@ -209,7 +213,11 @@ export default function (state = {}, action) {
       return newState;
     }
     case DELETE_WORK: {
-      let newState = action.data;
+      let snapshotId = `${action.snapshotId}Collection`;
+      let newState = {
+        ...state,
+        [snapshotId]: action.data.filter((work) => work.imgId !== action.imgId),
+      };
       return newState;
     }
     default:

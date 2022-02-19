@@ -32,11 +32,10 @@ export default function CreateSnapshot(props) {
         : dispatch(
             fetchSecondaryCollection(props.userId, props.collectionTitle)
           );
-    console.log(collection);
   }, [props.collectionTitle]);
 
   return (
-    <div className="snapshot h-full border-2 border-gray-100 mx-2 p-2 font-light">
+    <div className="snapshot h-full border-2 border-gray-200 mx-2 p-5 font-light">
       <div className="flex items-center flex-row">
         <span className="text-gray-400">Collection: </span>
         <select
