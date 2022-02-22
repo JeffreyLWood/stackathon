@@ -62,7 +62,6 @@ router.post("/update", async (req, res) => {
     let collection = await Collection.findOne({
       where: { title: req.body.collection, userId: req.body.userId },
     });
-    console.log("==>", collection);
 
     let work = await Work.findOne({
       where: {

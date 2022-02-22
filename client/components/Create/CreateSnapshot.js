@@ -108,17 +108,6 @@ export default function CreateSnapshot(props) {
           );
         })
       )}
-      <CreateUploader
-        headers={props.headers}
-        collection={props.collectionTitle}
-        displayName={props.displayName}
-        show={props.show}
-        setShow={props.setShow}
-        imgId={props.imgId}
-        user={props.user}
-        usrId={props.userId}
-        snapshotId={props.id}
-      />
     </div>
   );
 }
