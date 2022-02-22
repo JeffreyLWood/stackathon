@@ -713,16 +713,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 1.5rem;
 }
 
-.w-12 {
-  width: 3rem;
-}
-
-.w-8 {
-  width: 2rem;
-}
-
 .w-screen {
   width: 100vw;
+}
+
+.w-12 {
+  width: 3rem;
 }
 
 .w-96 {

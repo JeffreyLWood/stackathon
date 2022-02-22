@@ -125,7 +125,7 @@ export default function CreateWork(props) {
         </section>
       </section>
 
-      <CreateUploader
+      {/* <CreateUploader
         headers={headers}
         collection={modalCollection}
         displayName={displayName}
@@ -135,7 +135,7 @@ export default function CreateWork(props) {
         user={user}
         usrId={userId}
         snapshotId={modalCollection === primary ? "primary" : "secondary"}
-      />
+      /> */}
     </div>
   );
 }

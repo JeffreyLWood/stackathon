@@ -14,11 +14,11 @@ export default function CreateUploader(props) {
   let work = useSelector((state) => state?.create.work);
   let user = useSelector((state) => state.user);
   const [fileInputState, setFileInputState] = useState("");
-  const [previewSource, setPreviewSource] = useState("");
+  let [previewSource, setPreviewSource] = useState("");
 
   const dispatch = useDispatch();
-  console.log("props.collection", props.collection);
-  const [state, setState] = useState({
+
+  let [state, setState] = useState({
     collection: props.collection,
     title: "",
     year: "",
@@ -56,22 +56,10 @@ export default function CreateUploader(props) {
     loadImageData();
   }, [props.show]);
 
-  //Sets initial value of hidden when work has loaded for Edit Work
-  // useEffect(() => {
-  //   setHidden(work?.hidden);
-  // }, [work]);
-
-  // Deletes a work from a collection
-  const destroyHandler = (userId, collection, imgId, snapshotId) => {
-    imgId = imgId.split("/").slice(-1).join();
-    dispatch(destroyWork(userId, collection, imgId, snapshotId));
-    props.setShow(false);
-  };
-
   let changeHandler = (evt) => {
     evt.preventDefault();
     //if evt target is files, we are dealing with the img file
-    if (evt.target.files) {
+    if (evt.target.name === "image") {
       const file = evt.target.files[0];
       previewFile(file);
     } else {
@@ -79,13 +67,6 @@ export default function CreateUploader(props) {
       work = { ...work, [evt.target.name]: evt.target.value };
     }
   };
-
-  // const hiddenHandler = (evt) => {
-  //   evt.preventDefault();
-  //   setHidden(hidden ? false : true);
-
-  //   setState({ ...state, [evt.target.name]: evt.target.value });
-  // };
 
   const previewFile = (file) => {
     const reader = new FileReader();
@@ -97,7 +78,6 @@ export default function CreateUploader(props) {
 
   // CALL THUNK ACTIONS TO TRIGGER REFRESH
   let submitHandler = async (evt) => {
-    console.log(state, work);
     evt.preventDefault();
     if (props.displayName === "Edit Work") {
       // MAKE THUNKER INSTEAD OF:
@@ -131,7 +111,7 @@ export default function CreateUploader(props) {
         method: "POST",
         body: JSON.stringify({
           data: base64EncodedImage,
-          collection: hidden ? "Hidden" : state.collection,
+          collection: state.collection,
           userId: user.id,
           title: state.title,
           year: state.year,
@@ -177,6 +157,13 @@ export default function CreateUploader(props) {
     }
   };
 
+  // Deletes a work from a collection
+  const destroyHandler = (userId, collection, imgId, snapshotId) => {
+    imgId = imgId.split("/").slice(-1).join();
+    dispatch(destroyWork(userId, collection, imgId, snapshotId));
+    props.setShow(false);
+  };
+
   const closeHandler = () => {
     props.setShow(false);
     setState({
@@ -187,6 +174,7 @@ export default function CreateUploader(props) {
       medium: "",
       hidden: null,
     });
+    setPreviewSource("");
   };
 
   if (!props.show) {
@@ -217,6 +205,7 @@ export default function CreateUploader(props) {
                 value={fileInputState}
                 style={{ display: "none" }}
               />
+
               <label htmlFor="image">
                 {previewSource ? (
                   <img src={previewSource} alt="chosen" className="h-56" />
