@@ -17,7 +17,7 @@ export default function CreateUploader(props) {
   const [previewSource, setPreviewSource] = useState("");
 
   const dispatch = useDispatch();
-
+  console.log("props.collection", props.collection);
   const [state, setState] = useState({
     collection: props.collection,
     title: "",
@@ -34,7 +34,7 @@ export default function CreateUploader(props) {
     async function loadImageData() {
       if (props.displayName === "Add a Work") {
         // clears state
-        await dispatch(fetchSingleWork(null, null));
+        await dispatch(fetchSingleWork(null, null, null));
         // clears preview image in case modal was closed and add a work was opened
         setPreviewSource("");
         setState({
@@ -57,9 +57,9 @@ export default function CreateUploader(props) {
   }, [props.show]);
 
   //Sets initial value of hidden when work has loaded for Edit Work
-  useEffect(() => {
-    setHidden(work?.hidden);
-  }, [work]);
+  // useEffect(() => {
+  //   setHidden(work?.hidden);
+  // }, [work]);
 
   // Deletes a work from a collection
   const destroyHandler = (userId, collection, imgId, snapshotId) => {
@@ -80,12 +80,12 @@ export default function CreateUploader(props) {
     }
   };
 
-  const hiddenHandler = (evt) => {
-    evt.preventDefault();
-    setHidden(hidden ? false : true);
+  // const hiddenHandler = (evt) => {
+  //   evt.preventDefault();
+  //   setHidden(hidden ? false : true);
 
-    setState({ ...state, [evt.target.name]: evt.target.value });
-  };
+  //   setState({ ...state, [evt.target.name]: evt.target.value });
+  // };
 
   const previewFile = (file) => {
     const reader = new FileReader();
@@ -97,6 +97,7 @@ export default function CreateUploader(props) {
 
   // CALL THUNK ACTIONS TO TRIGGER REFRESH
   let submitHandler = async (evt) => {
+    console.log(state, work);
     evt.preventDefault();
     if (props.displayName === "Edit Work") {
       // MAKE THUNKER INSTEAD OF:
@@ -112,6 +113,7 @@ export default function CreateUploader(props) {
     setState({
       ...state,
       title: "",
+      collection: "",
       year: "",
       height: "",
       width: "",
@@ -145,6 +147,10 @@ export default function CreateUploader(props) {
     }
   };
 
+  // const uploadHandler = () => {
+
+  // }
+
   //SHOULD BE IN REDUX STORE AS THUNK CREATOR UPDATE WORK
   const updateData = async (base64EncodedImage) => {
     try {
@@ -153,7 +159,7 @@ export default function CreateUploader(props) {
         body: JSON.stringify({
           data: base64EncodedImage,
           newImage: previewSource ? true : false,
-          collection: hidden ? "Hidden" : state.collection,
+          collection: state.collection,
           imgId: state.imgId ? state.imgId : work.imgId,
           userId: user.id,
           title: state.title.length ? state.title : work.title,
@@ -321,12 +327,11 @@ export default function CreateUploader(props) {
                   ) : null}
                 </select>
               </label>
-              <div
+              {/*  <div
                 onClick={hiddenHandler}
                 className="flex space-x-5 items-center w-12 p-1"
               >
-                {/* <span>{hidden ? "Hidden" : "Visible"}</span> */}
-                <span>
+               <span>
                   {hidden ? (
                     <img
                       src="../../../hiddenactive.png"
@@ -343,8 +348,8 @@ export default function CreateUploader(props) {
                       className="w-8"
                     />
                   )}
-                </span>
-              </div>
+                </span> 
+              </div>*/}
               <button
                 type="submit"
                 className="bg-black text-white text-uppercase p-1 my-3"

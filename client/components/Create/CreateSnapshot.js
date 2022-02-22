@@ -64,29 +64,30 @@ export default function CreateSnapshot(props) {
                 </option>
               ))}
         </select>
-        <span className="mx-10 space-x-5 flex flex-row items-center">
-          {settings ? (
-            <span onClick={() => setSettings(false)}>
-              <img
-                src="../../../collection.png"
-                className="w-4 hover:cursor-pointer"
-              />
-            </span>
-          ) : (
-            <span onClick={() => setSettings(true)}>
-              <img
-                src="../../../edit.png "
-                className="w-4 hover:cursor-pointer"
-              />
-            </span>
-          )}
-          <img
-            src="../../../hiddeninactive.png"
-            className="w-6  hover:cursor-pointer"
-          />
-        </span>
+        {props.id === "primary" ? (
+          <span className="mx-10 space-x-5 flex flex-row items-center">
+            {settings ? (
+              <span onClick={() => setSettings(false)}>
+                <img
+                  src="../../../collection.png"
+                  className="w-4 hover:cursor-pointer"
+                />
+              </span>
+            ) : (
+              <span onClick={() => setSettings(true)}>
+                <img
+                  src="../../../edit.png "
+                  className="w-4 hover:cursor-pointer"
+                />
+              </span>
+            )}
+            <img
+              src="../../../hiddeninactive.png"
+              className="w-6  hover:cursor-pointer"
+            />
+          </span>
+        ) : null}
       </div>
-
       {settings ? (
         <CollectionSettings
           collectionTitle={props.collectionTitle}
@@ -107,6 +108,17 @@ export default function CreateSnapshot(props) {
           );
         })
       )}
+      <CreateUploader
+        headers={props.headers}
+        collection={props.collectionTitle}
+        displayName={props.displayName}
+        show={props.show}
+        setShow={props.setShow}
+        imgId={props.imgId}
+        user={props.user}
+        usrId={props.userId}
+        snapshotId={props.id}
+      />
     </div>
   );
 }

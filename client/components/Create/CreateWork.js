@@ -21,7 +21,7 @@ export default function CreateWork(props) {
   let [show, setShow] = useState(false);
   let [displayName, setDisplayName] = useState("");
   let [imgId, setImgId] = useState("");
-  let [modalCollection, setModalCollection] = useState("");
+  let [modalCollection, setModalCollection] = useState(primary); // Not loading
 
   useEffect(() => {
     user = dispatch(fetchUserData(username));
@@ -66,7 +66,6 @@ export default function CreateWork(props) {
   return (
     <div>
       <Navbar user={user} />
-
       <section className="w-screen flex justify-center sm:p-5 sm:h-90vh">
         <section className="flex flex-col w-full md:flex-row ">
           <div className="md:w-4/6">
