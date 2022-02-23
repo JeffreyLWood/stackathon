@@ -136,6 +136,8 @@ export default function CreateWork(props) {
       <CreateUploader
         headers={headers}
         collection={modalCollection}
+        primary={primary}
+        secondary={secondary}
         displayName={displayName}
         show={show}
         setShow={setShow}

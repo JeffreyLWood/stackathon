@@ -98,7 +98,7 @@ router.post("/update", async (req, res) => {
         hidden: req.body.hidden,
       });
     }
-    res.status(200).send();
+    res.status(200).send(work);
   } catch (error) {
     console.log(error);
   }

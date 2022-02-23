@@ -1,6 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateAboutText } from "../../store/create";
+import {
+  fetchPrimaryCollection,
+  fetchSecondaryCollection,
+  updateAboutText,
+} from "../../store/create";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Image } from "cloudinary-react";
@@ -9,6 +13,7 @@ import {
   destroyWork,
   fetchCollection,
   upload,
+  update,
 } from "../../store/create";
 
 export default function CreateUploader(props) {
@@ -130,25 +135,24 @@ export default function CreateUploader(props) {
   // }
 
   //SHOULD BE IN REDUX STORE AS THUNK CREATOR UPDATE WORK
-  const updateData = async (base64EncodedImage) => {
+  const updateHandler = async (base64EncodedImage) => {
     try {
-      await fetch("/api/update", {
-        method: "POST",
-        body: JSON.stringify({
-          data: base64EncodedImage,
-          newImage: previewSource ? true : false,
-          collection: state.collection,
-          imgId: state.imgId ? state.imgId : work.imgId,
-          userId: user.id,
-          title: state.title.length ? state.title : work.title,
-          year: state.year.length ? state.year : work.year,
-          height: state.height.length ? state.height : work.height,
-          width: state.width.length ? state.width : work.width,
-          medium: state.medium.length ? state.medium : work.medium,
-          hidden: hidden,
-        }),
-        headers: { "Content-type": "application/json" },
-      });
+      let body = {
+        data: base64EncodedImage,
+        newImage: previewSource ? true : false,
+        collection: state.collection,
+        imgId: state.imgId ? state.imgId : work.imgId,
+        userId: user.id,
+        title: state.title.length ? state.title : work.title,
+        year: state.year.length ? state.year : work.year,
+        height: state.height.length ? state.height : work.height,
+        width: state.width.length ? state.width : work.width,
+        medium: state.medium.length ? state.medium : work.medium,
+        hidden: hidden,
+      };
+      dispatch(update(body, props.userId, props.primary, props.secondary));
+      dispatch(fetchPrimaryCollection(props.userId, props.primary));
+      dispatch(fetchSecondaryCollection(props.userId, props.secondary));
       setPreviewSource("");
     } catch (error) {
       console.log(props, error);

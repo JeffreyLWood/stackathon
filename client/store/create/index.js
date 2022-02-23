@@ -11,6 +11,7 @@ const GET_COLLECTION = "GET_COLLECTION";
 const GET_PRIMARY_COLLECTION = "GET_PRIMARY_COLLECTION";
 const GET_SECONDARY_COLLECTION = "GET_SECONDARY_COLLECTION";
 const UPLOAD_WORK = "UPLOAD_WORK";
+const UPDATE_WORK = "UPDATE_WORK";
 const DELETE_WORK = "DELETE_WORK";
 
 //action creators
@@ -52,6 +53,10 @@ const getSecondaryCollection = (data) => {
 
 const uploadWork = (data, snapshotId) => {
   return { type: UPLOAD_WORK, data, snapshotId };
+};
+
+const updateWork = (data) => {
+  return { type: UPDATE_WORK, data };
 };
 
 const deleteWork = (snapshotId, data) => {
@@ -161,13 +166,24 @@ export const fetchSingleWork = (userId, collection, imgId) =>
     }
   };
 
-//Upload needs to connect to api routes and db and update the primary or secondary snapshot state / view
-// Removed Headers: Type: JSON from old code, not sure where to place
 export const upload = (body, snapshotId) =>
   async function (dispatch) {
     try {
       let { data } = await axios.post(`/api/upload`, body);
+
       dispatch(uploadWork(data, snapshotId));
+    } catch (err) {
+      return err;
+    }
+  };
+
+export const update = (body, userId, primary, secondary) =>
+  async function () {
+    try {
+      await axios.post(`/api/update`, body);
+      fetchPrimaryCollection(userId, primary);
+      fetchSecondaryCollection(userId, secondary);
+      // dispatch(updateWork(data));
     } catch (err) {
       return err;
     }
@@ -217,11 +233,12 @@ export default function (state = {}, action) {
       return newState;
     }
     case GET_PRIMARY_COLLECTION: {
+      console.log("primary");
       let newState = { ...state, primaryCollection: action.data }; //?
       return newState;
     }
-
     case GET_SECONDARY_COLLECTION: {
+      console.log("secondary");
       let newState = { ...state, secondaryCollection: action.data }; //?
       return newState;
     }
@@ -230,10 +247,19 @@ export default function (state = {}, action) {
       return newState;
     }
     case UPLOAD_WORK: {
-      let snapshotId = `${action.snapshotId}Collection`;
+      let primary = `${action.primary}Collection`;
+      let secondary = `${action.secondary}Collection`;
       let newState = {
         ...state,
-        [snapshotId]: action.data[0].works,
+        [primary]: action.data[0].works,
+        [secondary]: action.data[1].works,
+      };
+      return newState;
+    }
+    case UPDATE_WORK: {
+      //?
+      let newState = {
+        ...state,
       };
       return newState;
     }
