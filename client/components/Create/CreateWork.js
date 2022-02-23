@@ -40,17 +40,23 @@ export default function CreateWork(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    setDisplayName(e.target.id);
+    setDisplayName("Add a Work");
     setShow(true);
+    console.log(
+      "modalCollection, primary, secondary",
+      modalCollection,
+      primary,
+      secondary
+    );
   };
 
   const clickHandler = (e) => {
     e.preventDefault();
     setDisplayName("Edit Work");
     let imgId = e.target.src.split("/").slice(-1).join();
+
     setImgId(imgId);
     setShow(true);
-    setModalCollection(e.target.id);
   };
 
   const changeHandler = (evt) => {
@@ -58,8 +64,10 @@ export default function CreateWork(props) {
 
     if (evt.target.id === "primary") {
       setPrimary(evt.target.value);
+      setModalCollection(evt.target.value);
     } else if (evt.target.id === "secondary") {
       setSecondary(evt.target.value);
+      setModalCollection(evt.target.value);
     }
   };
 
@@ -133,7 +141,7 @@ export default function CreateWork(props) {
         setShow={setShow}
         imgId={imgId}
         user={user}
-        usrId={userId}
+        userId={userId}
         snapshotId={modalCollection === primary ? "primary" : "secondary"}
       />
     </div>

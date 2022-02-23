@@ -8,6 +8,7 @@ import {
   fetchSingleWork,
   destroyWork,
   fetchCollection,
+  upload,
 } from "../../store/create";
 
 export default function CreateUploader(props) {
@@ -81,11 +82,11 @@ export default function CreateUploader(props) {
     evt.preventDefault();
     if (props.displayName === "Edit Work") {
       // MAKE THUNKER INSTEAD OF:
-      updateData(previewSource);
+      updateHandler(previewSource); // !
     } else if (!previewSource) return;
     else if (props.displayName === "Add a Work") {
       // MAKE THUNKER INSTEAD OF:
-      uploadImage(previewSource);
+      uploadHandler(previewSource);
     }
     // Clears single work state
     await dispatch(fetchSingleWork(null, null));
@@ -105,23 +106,20 @@ export default function CreateUploader(props) {
   };
 
   //SHOULD BE IN REDUX STORE AS THUNK CREATOR ADD WORK
-  const uploadImage = async (base64EncodedImage) => {
+  const uploadHandler = async (base64EncodedImage) => {
     try {
-      await fetch("/api/upload", {
-        method: "POST",
-        body: JSON.stringify({
-          data: base64EncodedImage,
-          collection: state.collection,
-          userId: user.id,
-          title: state.title,
-          year: state.year,
-          height: state.height,
-          width: state.width,
-          medium: state.medium,
-          hidden: hidden,
-        }),
-        headers: { "Content-type": "application/json" },
-      });
+      let body = {
+        data: base64EncodedImage,
+        collection: state.collection,
+        userId: user.id,
+        title: state.title,
+        year: state.year,
+        height: state.height,
+        width: state.width,
+        medium: state.medium,
+        hidden: hidden,
+      };
+      dispatch(upload(body, props.snapshotId));
     } catch (error) {
       console.log(error);
     }

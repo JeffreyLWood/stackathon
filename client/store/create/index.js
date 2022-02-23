@@ -10,6 +10,7 @@ const GET_ALL_WORK = "GET_ALL_WORK";
 const GET_COLLECTION = "GET_COLLECTION";
 const GET_PRIMARY_COLLECTION = "GET_PRIMARY_COLLECTION";
 const GET_SECONDARY_COLLECTION = "GET_SECONDARY_COLLECTION";
+const UPLOAD_WORK = "UPLOAD_WORK";
 const DELETE_WORK = "DELETE_WORK";
 
 //action creators
@@ -47,6 +48,10 @@ const getPrimaryCollection = (data) => {
 
 const getSecondaryCollection = (data) => {
   return { type: GET_SECONDARY_COLLECTION, data };
+};
+
+const uploadWork = (data, snapshotId) => {
+  return { type: UPLOAD_WORK, data, snapshotId };
 };
 
 const deleteWork = (snapshotId, data) => {
@@ -156,6 +161,18 @@ export const fetchSingleWork = (userId, collection, imgId) =>
     }
   };
 
+//Upload needs to connect to api routes and db and update the primary or secondary snapshot state / view
+// Removed Headers: Type: JSON from old code, not sure where to place
+export const upload = (body, snapshotId) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.post(`/api/upload`, body);
+      dispatch(uploadWork(data, snapshotId));
+    } catch (err) {
+      return err;
+    }
+  };
+
 export const destroyWork = (userId, collection, imgId, snapshotId) =>
   async function (dispatch) {
     try {
@@ -210,6 +227,14 @@ export default function (state = {}, action) {
     }
     case GET_SINGLE_WORK: {
       let newState = { ...state, work: action.data };
+      return newState;
+    }
+    case UPLOAD_WORK: {
+      let snapshotId = `${action.snapshotId}Collection`;
+      let newState = {
+        ...state,
+        [snapshotId]: action.data[0].works,
+      };
       return newState;
     }
     case DELETE_WORK: {
