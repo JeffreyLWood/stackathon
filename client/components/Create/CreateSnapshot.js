@@ -103,6 +103,7 @@ export default function CreateSnapshot(props) {
               publicId={work.imgId}
               className="h-32 m-2 hover:cursor-pointer"
               id={props.collectionTitle}
+              value={props.id}
               onClick={(e) => props.clickHandler(e)}
             />
           );

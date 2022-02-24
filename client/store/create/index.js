@@ -278,7 +278,7 @@ export default function (state = {}, action) {
         origin: JSON.parse(action.data.origin),
         destination: JSON.parse(action.data.destination),
       };
-      console.log("data.origin", data.origin[0].works);
+
       let newState = {
         ...state,
         [origin]: data.origin[0].works.filter(

@@ -115,7 +115,8 @@ router.post("/update", async (req, res) => {
       destination = JSON.stringify(destination, null, 2);
       res.status(200).send({ work, origin, destination });
     } else {
-      res.status(200).send(work);
+      console.log(work.dataValues);
+      res.status(200).send(work.dataValues);
     }
   } catch (error) {
     console.log(error);

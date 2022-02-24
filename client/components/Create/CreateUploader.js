@@ -71,7 +71,7 @@ export default function CreateUploader(props) {
       previewFile(file);
     } else {
       setState({ ...state, [evt.target.name]: evt.target.value });
-      work = { ...work, [evt.target.name]: evt.target.value };
+      work = { ...work, [evt.target.name]: evt.target.value }; // ? needed?
     }
   };
 
@@ -86,10 +86,15 @@ export default function CreateUploader(props) {
   // CALL THUNK ACTIONS TO TRIGGER REFRESH
   let submitHandler = async (evt) => {
     evt.preventDefault();
+    console.log(
+      "state.collection",
+      state.collection,
+      "props.collection",
+      props.collection
+    );
     if (props.displayName === "Edit Work") {
       if (state.collection !== props.collection) {
         switchHandler(previewSource);
-        console.log(true);
       } else if (state.collection === props.collection) {
         updateHandler(previewSource);
       }
@@ -101,9 +106,8 @@ export default function CreateUploader(props) {
     await dispatch(fetchSingleWork(null, null));
     //Clears input fields
     setState({
-      ...state,
       title: "",
-      collection: "",
+      collection: props.collection,
       year: "",
       height: "",
       width: "",
@@ -148,6 +152,7 @@ export default function CreateUploader(props) {
         width: state.width.length ? state.width : work.width,
         medium: state.medium.length ? state.medium : work.medium,
       };
+      console.log(body);
       dispatch(update(body));
       setPreviewSource("");
     } catch (error) {
@@ -157,7 +162,6 @@ export default function CreateUploader(props) {
 
   const switchHandler = async (base64EncodedImage) => {
     try {
-      console.log("work.imgId", work.imgId);
       let body = {
         newImage: previewSource ? true : false,
         data: base64EncodedImage,

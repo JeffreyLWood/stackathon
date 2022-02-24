@@ -42,26 +42,19 @@ export default function CreateWork(props) {
     e.preventDefault();
     setDisplayName("Add a Work");
     setShow(true);
-    console.log(
-      "modalCollection, primary, secondary",
-      modalCollection,
-      primary,
-      secondary
-    );
   };
 
   const clickHandler = (e) => {
     e.preventDefault();
     setDisplayName("Edit Work");
     let imgId = e.target.src.split("/").slice(-1).join();
-
     setImgId(imgId);
+    setModalCollection(e.target.id);
     setShow(true);
   };
 
   const changeHandler = (evt) => {
     evt.preventDefault();
-
     if (evt.target.id === "primary") {
       setPrimary(evt.target.value);
       setModalCollection(evt.target.value);
