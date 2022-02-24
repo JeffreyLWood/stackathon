@@ -48,7 +48,7 @@ router.post("/upload", async (req, res) => {
       where: { title: req.body.collection, userId: req.body.userId },
       include: Work,
     });
-    console.log(JSON.stringify(response, null, 2));
+
     res.status(200).send(JSON.stringify(response, null, 2));
   } catch (error) {
     console.log(error);
@@ -98,7 +98,25 @@ router.post("/update", async (req, res) => {
         hidden: req.body.hidden,
       });
     }
-    res.status(200).send(work);
+    // If request is switch collection, send back origin and destination collections
+    if (req.body.origin) {
+      let origin = await Collection.findAll({
+        where: { title: req.body.origin.collection, userId: req.body.userId },
+        include: Work,
+      });
+      let destination = await Collection.findAll({
+        where: {
+          title: req.body.destination.collection,
+          userId: req.body.userId,
+        },
+        include: Work,
+      });
+      origin = JSON.stringify(origin, null, 2);
+      destination = JSON.stringify(destination, null, 2);
+      res.status(200).send({ work, origin, destination });
+    } else {
+      res.status(200).send(work);
+    }
   } catch (error) {
     console.log(error);
   }

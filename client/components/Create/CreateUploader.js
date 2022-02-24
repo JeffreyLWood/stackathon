@@ -14,6 +14,7 @@ import {
   fetchCollection,
   upload,
   update,
+  switcher,
 } from "../../store/create";
 
 export default function CreateUploader(props) {
@@ -86,11 +87,14 @@ export default function CreateUploader(props) {
   let submitHandler = async (evt) => {
     evt.preventDefault();
     if (props.displayName === "Edit Work") {
-      // MAKE THUNKER INSTEAD OF:
-      updateHandler(previewSource); // !
+      if (state.collection !== props.collection) {
+        switchHandler(previewSource);
+        console.log(true);
+      } else if (state.collection === props.collection) {
+        updateHandler(previewSource);
+      }
     } else if (!previewSource) return;
     else if (props.displayName === "Add a Work") {
-      // MAKE THUNKER INSTEAD OF:
       uploadHandler(previewSource);
     }
     // Clears single work state
@@ -110,7 +114,6 @@ export default function CreateUploader(props) {
     props.setShow(false);
   };
 
-  //SHOULD BE IN REDUX STORE AS THUNK CREATOR ADD WORK
   const uploadHandler = async (base64EncodedImage) => {
     try {
       let body = {
@@ -124,15 +127,11 @@ export default function CreateUploader(props) {
         medium: state.medium,
         hidden: hidden,
       };
-      dispatch(upload(body, props.snapshotId));
+      dispatch(upload(body));
     } catch (error) {
       console.log(error);
     }
   };
-
-  // const uploadHandler = () => {
-
-  // }
 
   //SHOULD BE IN REDUX STORE AS THUNK CREATOR UPDATE WORK
   const updateHandler = async (base64EncodedImage) => {
@@ -141,21 +140,49 @@ export default function CreateUploader(props) {
         data: base64EncodedImage,
         newImage: previewSource ? true : false,
         collection: state.collection,
-        imgId: state.imgId ? state.imgId : work.imgId,
+        imgId: work.imgId,
         userId: user.id,
         title: state.title.length ? state.title : work.title,
         year: state.year.length ? state.year : work.year,
         height: state.height.length ? state.height : work.height,
         width: state.width.length ? state.width : work.width,
         medium: state.medium.length ? state.medium : work.medium,
-        hidden: hidden,
       };
-      dispatch(update(body, props.userId, props.primary, props.secondary));
-      dispatch(fetchPrimaryCollection(props.userId, props.primary));
-      dispatch(fetchSecondaryCollection(props.userId, props.secondary));
+      dispatch(update(body));
       setPreviewSource("");
     } catch (error) {
       console.log(props, error);
+    }
+  };
+
+  const switchHandler = async (base64EncodedImage) => {
+    try {
+      console.log("work.imgId", work.imgId);
+      let body = {
+        newImage: previewSource ? true : false,
+        data: base64EncodedImage,
+        collection: state.collection,
+        destination: {
+          snapshotId:
+            state.collection === props.primary ? "primary" : "secondary",
+          collection: state.collection,
+        },
+        origin: {
+          snapshotId:
+            props.collection === props.primary ? "primary" : "secondary",
+          collection: props.collection,
+        },
+        userId: user.id,
+        imgId: work.imgId,
+        title: state.title.length ? state.title : work.title,
+        year: state.year.length ? state.year : work.year,
+        height: state.height.length ? state.height : work.height,
+        width: state.width.length ? state.width : work.width,
+        medium: state.medium.length ? state.medium : work.medium,
+      };
+      dispatch(switcher(body));
+    } catch (error) {
+      console.log(error);
     }
   };
 

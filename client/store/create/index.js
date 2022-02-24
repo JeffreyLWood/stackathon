@@ -12,6 +12,7 @@ const GET_PRIMARY_COLLECTION = "GET_PRIMARY_COLLECTION";
 const GET_SECONDARY_COLLECTION = "GET_SECONDARY_COLLECTION";
 const UPLOAD_WORK = "UPLOAD_WORK";
 const UPDATE_WORK = "UPDATE_WORK";
+const SWITCH_COLLECTION = "SWITCH_COLLECTION";
 const DELETE_WORK = "DELETE_WORK";
 
 //action creators
@@ -59,6 +60,10 @@ const updateWork = (data) => {
   return { type: UPDATE_WORK, data };
 };
 
+const switchCollection = (data, origin, destination) => {
+  return { type: SWITCH_COLLECTION, data, origin, destination };
+};
+
 const deleteWork = (snapshotId, data) => {
   return { type: DELETE_WORK, data, snapshotId };
 };
@@ -73,7 +78,6 @@ export const updateTitleData = (userId, titleData) =>
       return err;
     }
   };
-
 export const updateAboutText = (userId, textData) =>
   async function (dispatch) {
     try {
@@ -83,7 +87,6 @@ export const updateAboutText = (userId, textData) =>
       return err;
     }
   };
-
 export const updateCVText = (userId, header, text) =>
   async function (dispatch) {
     let putBody = {
@@ -97,7 +100,6 @@ export const updateCVText = (userId, header, text) =>
       return err;
     }
   };
-
 export const updateContactData = (userId, contactData) =>
   async function (dispatch) {
     try {
@@ -119,7 +121,6 @@ export const fetchAllWork = (userId) =>
       return err;
     }
   };
-
 export const fetchCollection = (userId, title) =>
   async function (dispatch) {
     try {
@@ -139,7 +140,6 @@ export const fetchPrimaryCollection = (userId, title) =>
       return err;
     }
   };
-
 export const fetchSecondaryCollection = (userId, title) =>
   async function (dispatch) {
     try {
@@ -149,7 +149,6 @@ export const fetchSecondaryCollection = (userId, title) =>
       return err;
     }
   };
-
 export const fetchSingleWork = (userId, collection, imgId) =>
   async function (dispatch) {
     try {
@@ -177,13 +176,21 @@ export const upload = (body, snapshotId) =>
     }
   };
 
-export const update = (body, userId, primary, secondary) =>
-  async function () {
+export const update = (body) =>
+  async function (dispatch) {
     try {
-      await axios.post(`/api/update`, body);
-      fetchPrimaryCollection(userId, primary);
-      fetchSecondaryCollection(userId, secondary);
-      // dispatch(updateWork(data));
+      let { data } = await axios.post(`/api/update`, body);
+      dispatch(updateWork(data));
+    } catch (err) {
+      return err;
+    }
+  };
+
+export const switcher = (body) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.post(`/api/update`, body);
+      dispatch(switchCollection(data, body.origin, body.destination));
     } catch (err) {
       return err;
     }
@@ -233,12 +240,10 @@ export default function (state = {}, action) {
       return newState;
     }
     case GET_PRIMARY_COLLECTION: {
-      console.log("primary");
       let newState = { ...state, primaryCollection: action.data }; //?
       return newState;
     }
     case GET_SECONDARY_COLLECTION: {
-      console.log("secondary");
       let newState = { ...state, secondaryCollection: action.data }; //?
       return newState;
     }
@@ -256,13 +261,34 @@ export default function (state = {}, action) {
       };
       return newState;
     }
+    //Caught inbetween updating work and updating collection. Need:
+    //Update_Work, Switch_Collection, Reorder_Collection
     case UPDATE_WORK: {
-      //?
       let newState = {
         ...state,
       };
       return newState;
     }
+
+    case SWITCH_COLLECTION: {
+      let origin = `${action.origin.snapshotId}Collection`;
+      let destination = `${action.destination.snapshotId}Collection`;
+      let data = {
+        ...action.data,
+        origin: JSON.parse(action.data.origin),
+        destination: JSON.parse(action.data.destination),
+      };
+      console.log("data.origin", data.origin[0].works);
+      let newState = {
+        ...state,
+        [origin]: data.origin[0].works.filter(
+          (work) => work.imgId !== data.work.imgId
+        ),
+        [destination]: [...state[destination], data.work],
+      };
+      return newState;
+    }
+
     case DELETE_WORK: {
       let snapshotId = `${action.snapshotId}Collection`;
       let newState = {
