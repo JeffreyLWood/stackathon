@@ -271,6 +271,20 @@ export default function (state = {}, action) {
     }
 
     case SWITCH_COLLECTION: {
+      /* What:
+        This reducer handles sending works to other collections. It logs snapshot Ids and the 
+        works associated with that collection through action.origin/destination and 
+        action.data.origin/destination respectively.
+       
+       Snapshot Ids are passed through our Thunk Creator's request body. Orign and Destination can be
+       primary or secondary interchangeably, or null. If the destination is not to a snapshot, it renders it
+       as nullCollection. Origin can not be null because it is accessed through a snapshot.
+
+       Why:
+       This way a user can click on a work from a snapshot and send it to another collection which may
+       or may not be in the other snapshot. If it is, it will re render both, if it isn't, it will only
+       re render the origin. */
+
       let origin = `${action.origin.snapshotId}Collection`;
       let destination = `${action.destination.snapshotId}Collection`;
       let data = {
@@ -279,13 +293,25 @@ export default function (state = {}, action) {
         destination: JSON.parse(action.data.destination),
       };
 
-      let newState = {
-        ...state,
-        [origin]: data.origin[0].works.filter(
-          (work) => work.imgId !== data.work.imgId
-        ),
-        [destination]: [...state[destination], data.work],
-      };
+      /* The Following Ternary Operator Explained:
+      If destination is nullCollection then our destination is NOT a primary or secondary snapshot and we should
+      not add it to one of them, but only filter it from our origin. Otherwise, it IS primary or secondary
+      and we should add it to the correct snapshot. */
+      let newState =
+        destination === "nullCollection"
+          ? {
+              ...state,
+              [origin]: data.origin[0].works.filter(
+                (work) => work.imgId !== data.work.imgId
+              ),
+            }
+          : {
+              ...state,
+              [origin]: data.origin[0].works.filter(
+                (work) => work.imgId !== data.work.imgId
+              ),
+              [destination]: [...state[destination], data.work],
+            };
       return newState;
     }
 

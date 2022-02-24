@@ -146,7 +146,6 @@ export default function CreateUploader(props) {
         width: state.width.length ? state.width : work.width,
         medium: state.medium.length ? state.medium : work.medium,
       };
-
       dispatch(update(body));
       setPreviewSource("");
     } catch (error) {
@@ -162,7 +161,11 @@ export default function CreateUploader(props) {
         collection: state.collection,
         destination: {
           snapshotId:
-            state.collection === props.primary ? "primary" : "secondary",
+            state.collection === props.primary
+              ? "primary"
+              : state.collection === props.secondary
+              ? "secondary"
+              : null,
           collection: state.collection,
         },
         origin: {
@@ -195,6 +198,7 @@ export default function CreateUploader(props) {
     props.setShow(false);
     setState({
       title: "",
+      collection: props.collection,
       year: "",
       height: "",
       width: "",
