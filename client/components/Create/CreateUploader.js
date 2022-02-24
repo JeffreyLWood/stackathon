@@ -86,12 +86,6 @@ export default function CreateUploader(props) {
   // CALL THUNK ACTIONS TO TRIGGER REFRESH
   let submitHandler = async (evt) => {
     evt.preventDefault();
-    console.log(
-      "state.collection",
-      state.collection,
-      "props.collection",
-      props.collection
-    );
     if (props.displayName === "Edit Work") {
       if (state.collection !== props.collection) {
         switchHandler(previewSource);
@@ -152,7 +146,7 @@ export default function CreateUploader(props) {
         width: state.width.length ? state.width : work.width,
         medium: state.medium.length ? state.medium : work.medium,
       };
-      console.log(body);
+
       dispatch(update(body));
       setPreviewSource("");
     } catch (error) {
