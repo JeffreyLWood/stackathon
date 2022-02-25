@@ -159,6 +159,10 @@ export default function CreateUploader(props) {
         newImage: previewSource ? true : false,
         data: base64EncodedImage,
         collection: state.collection,
+        // Following keys destination and origin:
+        // Used for making the switch. If state.collection is equal to primary, then collection
+        // is associated with the string "primary" for future use, same with secondary. If null,
+        // then it is associated with a collection not in one of the snapshots and can be null.
         destination: {
           snapshotId:
             state.collection === props.primary
@@ -215,7 +219,7 @@ export default function CreateUploader(props) {
   return (
     <div className="modal">
       <div className="modal-content">
-        <div className="modal-header flex justify-between">
+        <div className="modal-collection flex justify-between">
           <h2>{props.displayName}</h2>
           <h2 onClick={closeHandler}>
             <img src="/icons8-close-16.png"></img>
@@ -332,7 +336,7 @@ export default function CreateUploader(props) {
                   value={state.collection ? state.collection : props.collection}
                 >
                   {props &&
-                    props?.headers.map((heading, idx) => (
+                    props?.collections.map((heading, idx) => (
                       <option
                         key={idx}
                         name="collection"

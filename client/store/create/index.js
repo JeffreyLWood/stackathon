@@ -261,8 +261,7 @@ export default function (state = {}, action) {
       };
       return newState;
     }
-    //Caught inbetween updating work and updating collection. Need:
-    //Update_Work, Switch_Collection, Reorder_Collection
+
     case UPDATE_WORK: {
       let newState = {
         ...state,
@@ -272,10 +271,13 @@ export default function (state = {}, action) {
 
     case SWITCH_COLLECTION: {
       /* What:
+        action.origin/destination: primary, secondary or null
+        action.data.origin/destination: array of works from a Collection
+
         This reducer handles sending works to other collections. It logs snapshot Ids and the 
         works associated with that collection through action.origin/destination and 
         action.data.origin/destination respectively.
-       
+
        Snapshot Ids are passed through our Thunk Creator's request body. Orign and Destination can be
        primary or secondary interchangeably, or null. If the destination is not to a snapshot, it renders it
        as nullCollection. Origin can not be null because it is accessed through a snapshot.

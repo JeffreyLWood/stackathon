@@ -45,12 +45,12 @@ export default function CreateSnapshot(props) {
           value={props.collectionTitle}
         >
           {props &&
-            props?.headers
-              .filter((header) => {
+            props?.collections
+              .filter((collection) => {
                 if (props.id === "primary") {
-                  return header !== props.secondary;
+                  return collection !== props.secondary;
                 } else {
-                  return header !== props.primary;
+                  return collection !== props.primary;
                 }
               })
               .map((heading, idx) => (
@@ -104,7 +104,7 @@ export default function CreateSnapshot(props) {
               className="h-32 m-2 hover:cursor-pointer"
               id={props.collectionTitle}
               value={props.id}
-              onClick={(e) => props.clickHandler(e)}
+              onClick={(e) => props.editHandler(e)}
             />
           );
         })
