@@ -252,12 +252,11 @@ export default function (state = {}, action) {
       return newState;
     }
     case UPLOAD_WORK: {
-      let primary = `${action.primary}Collection`;
-      let secondary = `${action.secondary}Collection`;
+      let snapshotId = `${action.snapshotId}Collection`;
+      console.log(action);
       let newState = {
         ...state,
-        [primary]: action.data[0].works,
-        [secondary]: action.data[1].works,
+        [snapshotId]: action.data[0],
       };
       return newState;
     }

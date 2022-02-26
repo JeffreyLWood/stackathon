@@ -136,7 +136,7 @@ export default function CreateUploader(props) {
         medium: state.medium,
         hidden: hidden,
       };
-      dispatch(upload(body));
+      dispatch(upload(body, props.id));
     } catch (error) {
       console.log(error);
     }

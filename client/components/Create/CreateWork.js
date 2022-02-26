@@ -16,9 +16,9 @@ export default function CreateWork(props) {
   let dispatch = useDispatch();
   // Load all of a user's collections from the database to query later
   let worksData = user?.collections;
-  // Primary and Secondary snapshots. These snapshots are where collections are edited.
-  // They are divs taking up 4/6 and 2/6 of the screen respectiely. Users can see thumbnails
-  // of their works in each snapshot, click them and edit their information including moving
+  // Primary and Secondary snapshots - These snapshots are where collections are edited:
+  // Snapshots are divs taking up 4/6 and 2/6 of the screen respectively. Users see thumbnails
+  // of their works in each snapshot, can click them and edit their information including moving
   // them from one collection to another or deleting them all together. The Primary and Secondary
   // views default to Work and to Hidden so user's can see the works on display, and the works hidden
   // with the option to make more, custom, collections.
@@ -113,7 +113,8 @@ export default function CreateWork(props) {
               changeHandler={changeHandler}
               // All collection titles for the drop down menus
               collections={collections}
-              // Data of secondary to exclude it from the drop down list so we can not view the same collection in both snapshots
+              // Title of secondary snapshot to exclude it from the drop down list so we can not view
+              // the same collection in both snapshots
               secondary={secondary}
               userId={userId}
               editHandler={editHandler}
