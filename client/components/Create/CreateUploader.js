@@ -20,11 +20,15 @@ import {
 export default function CreateUploader(props) {
   let work = useSelector((state) => state?.create.work);
   let user = useSelector((state) => state.user);
+
   const [fileInputState, setFileInputState] = useState("");
+  // Preview source is the thumbnil preview image
   let [previewSource, setPreviewSource] = useState("");
 
   const dispatch = useDispatch();
 
+  // Initialize state, set defaults to empty except collection
+  // Remove hidden, not needed
   let [state, setState] = useState({
     collection: props.collection,
     title: "",
@@ -35,14 +39,15 @@ export default function CreateUploader(props) {
     hidden: false,
   });
 
+  // Not needed
   let [hidden, setHidden] = useState(false);
 
   useEffect(() => {
     async function loadImageData() {
       if (props.displayName === "Add a Work") {
-        // clears state
+        // Clears state for having empty fields when adding a work. Might be redundant
         await dispatch(fetchSingleWork(null, null, null));
-        // clears preview image in case modal was closed and add a work was opened
+        // Clears preview image in case modal was closed and add a work was opened
         setPreviewSource("");
         setState({
           collection: props.collection,
@@ -55,6 +60,7 @@ export default function CreateUploader(props) {
         });
       }
       if (props.displayName === "Edit Work") {
+        // Fetch single work to populate form and thumbnail image
         work = await dispatch(
           fetchSingleWork(user.id, props.collection, props.imgId)
         );
@@ -71,10 +77,11 @@ export default function CreateUploader(props) {
       previewFile(file);
     } else {
       setState({ ...state, [evt.target.name]: evt.target.value });
-      work = { ...work, [evt.target.name]: evt.target.value }; // ? needed?
+      // work = { ...work, [evt.target.name]: evt.target.value }; // ? needed?
     }
   };
 
+  // Renders an image based on the input file uploaded and sets previewSource to it
   const previewFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -83,12 +90,16 @@ export default function CreateUploader(props) {
     };
   };
 
-  // CALL THUNK ACTIONS TO TRIGGER REFRESH
+  // For submitting changes or additions to an existing or new work
   let submitHandler = async (evt) => {
     evt.preventDefault();
     if (props.displayName === "Edit Work") {
+      // If state.collection is not the same as props.collection then the user has changed the work's
+      // collection and switchHandler is invoked. A re render is needed to reflect this.
       if (state.collection !== props.collection) {
         switchHandler(previewSource);
+        // Otherwise simply updateHandler is invoked. No re render is needed to reflect this as a
+        // user needs to change view to see the changes.
       } else if (state.collection === props.collection) {
         updateHandler(previewSource);
       }
@@ -96,9 +107,9 @@ export default function CreateUploader(props) {
     else if (props.displayName === "Add a Work") {
       uploadHandler(previewSource);
     }
-    // Clears single work state
+    // Then clear state for opening the modal again. needed?
     await dispatch(fetchSingleWork(null, null));
-    //Clears input fields
+    //Clear input fields. May be redundant with previous clear further above. One or the other.
     setState({
       title: "",
       collection: props.collection,
@@ -108,7 +119,7 @@ export default function CreateUploader(props) {
       medium: "",
       hidden: null,
     });
-    //Closes
+    //Closes modal
     props.setShow(false);
   };
 
@@ -131,7 +142,6 @@ export default function CreateUploader(props) {
     }
   };
 
-  //SHOULD BE IN REDUX STORE AS THUNK CREATOR UPDATE WORK
   const updateHandler = async (base64EncodedImage) => {
     try {
       let body = {
@@ -198,6 +208,8 @@ export default function CreateUploader(props) {
     props.setShow(false);
   };
 
+  // Needed incase a user makes changes and then closes the modal without saving and opens another.
+  // Should trigger a save changes notifcation or warning.
   const closeHandler = () => {
     props.setShow(false);
     setState({

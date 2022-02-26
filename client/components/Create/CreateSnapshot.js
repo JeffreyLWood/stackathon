@@ -22,9 +22,10 @@ export default function CreateSnapshot(props) {
       : useSelector((state) => state.create?.secondaryCollection);
 
   const dispatch = useDispatch();
-
+  // Hide or show collection settings, if true: editing the collection title, description and delete collection
+  // if false the thumbnails are show.
   let [settings, setSettings] = useState(false);
-
+  // Load works from collection based on the user id the props.collectionTitle passed down
   useEffect(() => {
     collection =
       props.id === "primary"
@@ -64,8 +65,10 @@ export default function CreateSnapshot(props) {
                 </option>
               ))}
         </select>
+        {/* If primary, show edit collection settings, secondary cannot edit settings */}
         {props.id === "primary" ? (
           <span className="mx-10 space-x-5 flex flex-row items-center">
+            {/* Toggle settings vs thumbnail view */}
             {settings ? (
               <span onClick={() => setSettings(false)}>
                 <img
@@ -81,6 +84,7 @@ export default function CreateSnapshot(props) {
                 />
               </span>
             )}
+            {/* Set to hidden, not active */}
             <img
               src="../../../hiddeninactive.png"
               className="w-6  hover:cursor-pointer"
@@ -88,6 +92,7 @@ export default function CreateSnapshot(props) {
           </span>
         ) : null}
       </div>
+      {/* If settings, show edit settings, if false show the thumbnails */}
       {settings ? (
         <CollectionSettings
           collectionTitle={props.collectionTitle}
