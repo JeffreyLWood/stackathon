@@ -2,7 +2,7 @@
 
 const {
   db,
-  models: { User, About, Work, Contact },
+  models: { User, About, Work, Contact, CV, Collection },
 } = require("../server/db");
 
 /**
@@ -17,21 +17,26 @@ async function seed() {
   try {
     const users = await Promise.all([
       User.create({
-        username: "cody",
-        email: "cody@gmail.com",
-        password: "123",
-        firstName: "cody",
-        lastName: "george",
-      }),
-      User.create({
-        username: "murphy",
-        email: "murphy@gmail.com",
-        password: "123",
-        firstName: "murphy",
-        lastName: "baggins",
+        username: "jeffreywood",
+        email: "jeffreywood.dev@gmail.com",
+        password: "ambergris",
+        firstName: "Jeffrey",
+        lastName: "Wood",
       }),
     ]);
+    let about = await About.create({
+      text: "Hello welcome to my website.",
+      imgId: "stackathonImgs/IMG_7149_fci6ka",
+    });
 
+    let cv = await CV.create({
+      education:
+        "2019-2021, The New York Academy of Art, MFA Painting, New York NY \n 2013-2017, Angel/Florence Academy of Art, Drawing and Painting, Florence Italy",
+    });
+    // await Work.create({ imgId: "test" });
+    await about.setUser(users[0]);
+    await cv.setUser(users[0]);
+    // await Collection.create({ title: "2020", userId: users[0].id });
     console.log(`seeded ${users.length} users`);
     console.log(`seeded successfully`);
     return {

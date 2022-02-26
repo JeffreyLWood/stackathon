@@ -45,7 +45,7 @@ export const authenticate =
         lastName,
       });
       window.localStorage.setItem(TOKEN, res.data.token);
-      history.push("/create/in");
+      history.push(`/create/in/${username}`);
       dispatch(me());
     } catch (authError) {
       return dispatch(setAuth({ error: authError }));

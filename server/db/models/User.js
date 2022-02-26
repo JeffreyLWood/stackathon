@@ -6,6 +6,7 @@ const Work = require("./Work");
 const CV = require("./CV");
 const About = require("./About");
 const Contact = require("./Contact");
+const Collection = require("./Collection");
 
 const SALT_ROUNDS = 5;
 
@@ -100,7 +101,7 @@ const defaultImages = async (user) => {
       height: 4,
       width: 5,
       status: "available",
-      hidden: "off",
+      hidden: false,
     });
 
     let default1 = await Work.create({
@@ -111,7 +112,7 @@ const defaultImages = async (user) => {
       height: 4,
       width: 5,
       status: "available",
-      hidden: "off",
+      hidden: false,
     });
     let default2 = await Work.create({
       title: "Ice Cream",
@@ -121,7 +122,7 @@ const defaultImages = async (user) => {
       height: 4,
       width: 5,
       status: "available",
-      hidden: "off",
+      hidden: false,
     });
     let default3 = await Work.create({
       title: "Brooklyn Heights",
@@ -131,7 +132,7 @@ const defaultImages = async (user) => {
       height: 4,
       width: 5,
       status: "available",
-      hidden: "off",
+      hidden: false,
     });
     let default4 = await Work.create({
       title: "Sidewalk",
@@ -141,7 +142,7 @@ const defaultImages = async (user) => {
       height: 4,
       width: 5,
       status: "available",
-      hidden: "off",
+      hidden: false,
     });
     let default5 = await Work.create({
       title: "Corner",
@@ -151,7 +152,7 @@ const defaultImages = async (user) => {
       height: 4,
       width: 5,
       status: "available",
-      hidden: "off",
+      hidden: false,
     });
     // let default6 = await Work.create({
     //   title: "A Street in Brooklyn",
@@ -161,7 +162,7 @@ const defaultImages = async (user) => {
     //   height: 4,
     //   width: 5,
     //   status: "available",
-    //   hidden: "off",
+    //   hidden:false,
     // });
     let default7 = await Work.create({
       title: "Street 1",
@@ -171,7 +172,7 @@ const defaultImages = async (user) => {
       height: 5,
       width: 4,
       status: "available",
-      hidden: "off",
+      hidden: true,
     });
     let default8 = await Work.create({
       title: "Street 2",
@@ -181,8 +182,9 @@ const defaultImages = async (user) => {
       height: 5,
       width: 4,
       status: "available",
-      hidden: "off",
+      hidden: true,
     });
+
     // Put defaults into array for mapping
     let array = [
       default0,
@@ -191,13 +193,82 @@ const defaultImages = async (user) => {
       default3,
       default4,
       default5,
-      // default6,
       default7,
       default8,
     ];
     // Map over works array and setUser to the new user.
     // Sets default images in the user's database and displays them on their new site.
-    array.map(async (work) => await work.setUser(user));
+    let workCollection = await Collection.create({
+      userId: user.id,
+      title: "Work",
+      hidden: false,
+    });
+
+    await Collection.create({
+      userId: user.id,
+      title: "Hidden",
+      hidden: true,
+    });
+
+    let default9 = await Work.create({
+      title: "Court Street",
+      medium: "oil on panel",
+      year: 2021,
+      imgId: "stackathonImgs/IMG_8549_z45itv",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: true,
+    });
+
+    let default10 = await Work.create({
+      title: "Brick",
+      medium: "oil on panel",
+      year: 2021,
+      imgId: "stackathonImgs/IMG_8622_otmj6a",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: true,
+    });
+
+    let default11 = await Work.create({
+      title: "Grand Central",
+      medium: "oil on panel",
+      year: 2021,
+      imgId: "stackathonImgs/IMG_8757_b93blk",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: true,
+    });
+
+    let default12 = await Work.create({
+      title: "Canal",
+      medium: "oil on panel",
+      year: 2021,
+      imgId: "stackathonImgs/IMG_8744_1_hnb1c5",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: true,
+    });
+
+    let blueWork = [default9, default10, default11, default12];
+
+    let Blue = await Collection.create({
+      userId: user.id,
+      title: "Blue",
+      hidden: false,
+    });
+
+    array.map(async (work) => {
+      return await work.setCollection(workCollection);
+    });
+
+    blueWork.map(async (work) => {
+      await work.setCollection(Blue);
+    });
   } catch (error) {
     console.log(error);
   }
@@ -220,6 +291,7 @@ const defaultVals = async (user) => {
     let contact = await Contact.create({
       text: "Reach out to me at one of the following:",
     });
+
     await about.setUser(user);
     await exhibition.setUser(user);
     await education.setUser(user);
@@ -232,5 +304,5 @@ const defaultVals = async (user) => {
 User.beforeCreate(hashPassword);
 User.beforeUpdate(hashPassword);
 User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));
-User.afterCreate(defaultImages);
 User.afterCreate(defaultVals);
+User.afterCreate(defaultImages);

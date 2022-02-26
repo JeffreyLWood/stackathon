@@ -7,6 +7,12 @@ const CONTACT = "CONTACT";
 const TITLE = "TITLE";
 const GET_SINGLE_WORK = "GET_SINGLE_WORK";
 const GET_ALL_WORK = "GET_ALL_WORK";
+const GET_COLLECTION = "GET_COLLECTION";
+const GET_PRIMARY_COLLECTION = "GET_PRIMARY_COLLECTION";
+const GET_SECONDARY_COLLECTION = "GET_SECONDARY_COLLECTION";
+const UPLOAD_WORK = "UPLOAD_WORK";
+const UPDATE_WORK = "UPDATE_WORK";
+const SWITCH_COLLECTION = "SWITCH_COLLECTION";
 const DELETE_WORK = "DELETE_WORK";
 
 //action creators
@@ -34,8 +40,32 @@ const getSingleWork = (data) => {
   return { type: GET_SINGLE_WORK, data };
 };
 
-const deleteWork = (data) => {
-  return { type: DELETE_WORK, data };
+const getCollection = (data) => {
+  return { type: GET_COLLECTION, data };
+};
+
+const getPrimaryCollection = (data) => {
+  return { type: GET_PRIMARY_COLLECTION, data };
+};
+
+const getSecondaryCollection = (data) => {
+  return { type: GET_SECONDARY_COLLECTION, data };
+};
+
+const uploadWork = (data, snapshotId) => {
+  return { type: UPLOAD_WORK, data, snapshotId };
+};
+
+const updateWork = (data) => {
+  return { type: UPDATE_WORK, data };
+};
+
+const switchCollection = (data, origin, destination) => {
+  return { type: SWITCH_COLLECTION, data, origin, destination };
+};
+
+const deleteWork = (snapshotId, data) => {
+  return { type: DELETE_WORK, data, snapshotId };
 };
 
 //thunk creators
@@ -48,7 +78,6 @@ export const updateTitleData = (userId, titleData) =>
       return err;
     }
   };
-
 export const updateAboutText = (userId, textData) =>
   async function (dispatch) {
     try {
@@ -58,7 +87,6 @@ export const updateAboutText = (userId, textData) =>
       return err;
     }
   };
-
 export const updateCVText = (userId, header, text) =>
   async function (dispatch) {
     let putBody = {
@@ -72,7 +100,6 @@ export const updateCVText = (userId, header, text) =>
       return err;
     }
   };
-
 export const updateContactData = (userId, contactData) =>
   async function (dispatch) {
     try {
@@ -88,31 +115,94 @@ export const updateContactData = (userId, contactData) =>
 export const fetchAllWork = (userId) =>
   async function (dispatch) {
     try {
-      let { data } = await axios.get(`/api/users/${userId}`);
+      let { data } = await axios.get(`/api/users/work/${userId}`);
       dispatch(getAllWork(data));
     } catch (err) {
       return err;
     }
   };
-export const fetchSingleWork = (userId, imgId) =>
+export const fetchCollection = (userId, title) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.get(`/api/users/${userId}/${title}/work/`);
+      dispatch(getCollection(data));
+    } catch (err) {
+      return err;
+    }
+  };
+
+export const fetchPrimaryCollection = (userId, title) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.get(`/api/users/${userId}/${title}/work/`);
+      dispatch(getPrimaryCollection(data));
+    } catch (err) {
+      return err;
+    }
+  };
+export const fetchSecondaryCollection = (userId, title) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.get(`/api/users/${userId}/${title}/work/`);
+      dispatch(getSecondaryCollection(data));
+    } catch (err) {
+      return err;
+    }
+  };
+export const fetchSingleWork = (userId, collection, imgId) =>
   async function (dispatch) {
     try {
       if (userId === null) {
         dispatch(getSingleWork(null));
         return;
       }
-      let { data } = await axios.get(`/api/users/${userId}/${imgId}`);
+      let { data } = await axios.get(
+        `/api/users/${userId}/${collection}/${imgId}`
+      );
       dispatch(getSingleWork(data));
     } catch (err) {
       return err;
     }
   };
 
-export const destroyWork = (userId, imgId) =>
+export const upload = (body, snapshotId) =>
   async function (dispatch) {
     try {
-      let { data } = await axios.delete(`/api/users/${userId}/${imgId}`);
-      dispatch(deleteWork(data));
+      let { data } = await axios.post(`/api/upload`, body);
+
+      dispatch(uploadWork(data, snapshotId));
+    } catch (err) {
+      return err;
+    }
+  };
+
+export const update = (body) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.post(`/api/update`, body);
+      dispatch(updateWork(data));
+    } catch (err) {
+      return err;
+    }
+  };
+
+export const switcher = (body) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.post(`/api/update`, body);
+      dispatch(switchCollection(data, body.origin, body.destination));
+    } catch (err) {
+      return err;
+    }
+  };
+
+export const destroyWork = (userId, collection, imgId, snapshotId) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.delete(
+        `/api/users/${userId}/${collection}/${imgId}`
+      );
+      dispatch(deleteWork(snapshotId, data));
     } catch (err) {
       return err;
     }
@@ -145,12 +235,93 @@ export default function (state = {}, action) {
       let newState = { ...state, works: action.data };
       return newState;
     }
-    case GET_SINGLE_WORK: {
-      let newState = action.data;
+    case GET_COLLECTION: {
+      let newState = { ...state, collection: action.data }; //?
       return newState;
     }
+    case GET_PRIMARY_COLLECTION: {
+      let newState = { ...state, primaryCollection: action.data }; //?
+      return newState;
+    }
+    case GET_SECONDARY_COLLECTION: {
+      let newState = { ...state, secondaryCollection: action.data }; //?
+      return newState;
+    }
+    case GET_SINGLE_WORK: {
+      let newState = { ...state, work: action.data };
+      return newState;
+    }
+    case UPLOAD_WORK: {
+      let snapshotId = `${action.snapshotId}Collection`;
+      console.log(action);
+      let newState = {
+        ...state,
+        [snapshotId]: action.data[0],
+      };
+      return newState;
+    }
+
+    case UPDATE_WORK: {
+      let newState = {
+        ...state,
+      };
+      return newState;
+    }
+
+    case SWITCH_COLLECTION: {
+      /* What:
+        action.origin/destination: primary, secondary or null
+        action.data.origin/destination: array of works from a Collection
+
+        This reducer handles sending works to other collections. It logs snapshot Ids and the 
+        works associated with that collection through action.origin/destination and 
+        action.data.origin/destination respectively.
+
+       Snapshot Ids are passed through our Thunk Creator's request body. Orign and Destination can be
+       primary or secondary interchangeably, or null. If the destination is not to a snapshot, it renders it
+       as nullCollection. Origin can not be null because it is accessed through a snapshot.
+
+       Why:
+       This way a user can click on a work from a snapshot and send it to another collection which may
+       or may not be in the other snapshot. If it is, it will re render both, if it isn't, it will only
+       re render the origin. */
+
+      let origin = `${action.origin.snapshotId}Collection`;
+      let destination = `${action.destination.snapshotId}Collection`;
+      let data = {
+        ...action.data,
+        origin: JSON.parse(action.data.origin),
+        destination: JSON.parse(action.data.destination),
+      };
+
+      /* The Following Ternary Operator Explained:
+      If destination is nullCollection then our destination is NOT a primary or secondary snapshot and we should
+      not add it to one of them, but only filter it from our origin. Otherwise, it IS primary or secondary
+      and we should add it to the correct snapshot. */
+      let newState =
+        destination === "nullCollection"
+          ? {
+              ...state,
+              [origin]: data.origin[0].works.filter(
+                (work) => work.imgId !== data.work.imgId
+              ),
+            }
+          : {
+              ...state,
+              [origin]: data.origin[0].works.filter(
+                (work) => work.imgId !== data.work.imgId
+              ),
+              [destination]: [...state[destination], data.work],
+            };
+      return newState;
+    }
+
     case DELETE_WORK: {
-      let newState = action.data;
+      let snapshotId = `${action.snapshotId}Collection`;
+      let newState = {
+        ...state,
+        [snapshotId]: action.data.filter((work) => work.imgId !== action.imgId),
+      };
       return newState;
     }
     default:

@@ -3,11 +3,16 @@
 @import "tailwindcss/utilities";
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
-
+body {
+  overflow-x: hidden;
+}
+* {
+  font-weight: 300;
+}
 .siteTitle {
   font-size: x-large;
   font-weight: 300;
-  text-transform: uppercase;
+
   letter-spacing: 0.1em;
 }
 
@@ -28,8 +33,17 @@
   align-items: flex-end;
   letter-spacing: 0.1em;
 }
+.h-80vh {
+  min-height: 80vh;
+}
+
 .h-90vh {
-  min-height: 82vh;
+  min-height: 92vh;
+}
+.toolbar {
+  bottom: 5px;
+
+  position: absolute;
 }
 .subHeader {
   font-weight: 300;
@@ -56,8 +70,8 @@
 }
 
 .modal-content {
-  width: 50%;
-  min-height: 50%;
+  width: 70%;
+  min-height: 70%;
   background-color: #fff;
 }
 
@@ -71,9 +85,10 @@
 }
 
 .modal-body {
-  padding: 10px;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  padding: 4rem;
+  display: flex;
+  align-items: center;
+  background-color: red;
 }
 .modal-footer button {
   border: none;
@@ -94,9 +109,9 @@
 }
 
 .snapshot {
-  height: 32rem;
-  overflow: scroll;
-  scrollbar-width: 0;
+  max-height: 38rem;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .pill {
@@ -137,8 +152,14 @@ textarea {
   outline-color: #ccc;
   outline-style: solid;
   display: block;
+  margin: 0.2rem 0 1rem 0;
+  color: #333;
+  padding: 0.1rem;
+  font-weight: 300;
+}
 
-  margin: 0.2rem 0 2rem 0;
+.contact label {
+  font-weight: 500;
 }
 
 .workModal {

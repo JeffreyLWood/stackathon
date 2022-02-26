@@ -15,34 +15,38 @@ export const Navbar = (props) => {
 
   const dispatch = useDispatch();
 
-  // Used for loading user's data based on the url for logged out viewing
-  useEffect(() => {
-    async function load() {
-      // await fetchUserData(props.history.location.pathname.split("/")[1]);
-    }
-    load();
-    // Not re rendering
-  }, []);
-
   const handleClick = () => {
     dispatch(logout());
   };
 
   return (
-    <div className="flex justify-between items-end mb-5 px-10 h-16">
-      <span className="onView">SlctdWork</span>
+    <div className="flex justify-between py-4 px-2 font-light">
+      <div className="flex flex-row space-x-5">
+        <span className="">SlctdWork</span>
 
-      <div className="">
         {user.username ? (
           <>
-            <Link to={`/${user.username}`}>
-              <button type="button" className="pillDark mx-2">
-                View Site
-              </button>
+            <Link to={`/create/in/${user.username}/settings`}>
+              <span className="italic text-sm text-indigo-600">
+                Hello, {user.firstName}. Manage your site here.
+              </span>
             </Link>
-            <a href="#" className="pill mx-2" onClick={handleClick}>
-              Logout
-            </a>
+            <Link to={`/create/in/${user.username}/work`}>Work</Link>
+            <Link to={`/create/in/${user.username}/about`}> About</Link>
+            <Link to={`/create/in/${user.username}/cv`}> CV</Link>
+            <Link to={`/create/in/${user.username}/contact`}>Contact</Link>
+
+            <div className="">
+              <Link to={`/${user.username}`} target="_blank">
+                <button type="button" className="pillDark mx-2">
+                  View Site
+                </button>
+              </Link>
+              <a href="#" className="pill mx-2" onClick={handleClick}>
+                Logout
+              </a>
+              <div></div>
+            </div>
           </>
         ) : (
           <>

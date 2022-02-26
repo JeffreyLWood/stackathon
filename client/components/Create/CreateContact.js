@@ -2,15 +2,21 @@ import React from "react";
 import { updateContactData } from "../../store/create";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Navbar } from "../Navbar";
+import { fetchUserData } from "../../store/user";
+export default function CreateContact(props) {
+  let user = useSelector((state) => state.user);
 
-export default function Contact(props) {
   let dispatch = useDispatch();
-  let contact = useSelector((state) => state.user.contact);
-  let [state, setState] = useState(contact);
+  let [state, setState] = useState({});
 
   useEffect(() => {
-    setState(contact);
-  }, [contact]);
+    user = dispatch(fetchUserData(props.match.params.username));
+  }, []);
+
+  useEffect(() => {
+    setState(user?.contact || {});
+  }, [user]);
 
   let changeHandler = (evt) => {
     evt.preventDefault();
@@ -19,136 +25,146 @@ export default function Contact(props) {
 
   let submitHandler = (evt) => {
     evt.preventDefault();
-    dispatch(updateContactData(props.user.id, state));
+
+    dispatch(updateContactData(user.id, state));
   };
-  if (!state) {
-    return null;
-  } else {
-    return (
-      <div className="pb-10  w-full pr-10">
-        <form
-          className="contact flex flex-col  justify-start md:w-3/6"
-          onSubmit={submitHandler}
-        >
-          <label htmlFor="text">Text:</label>
+
+  return (
+    <>
+      <Navbar user={user} />
+
+      <form
+        className="contact w-full flex flex-col mx-2 md:flex-row md:p-10 md:space-x-5 font-light text-gray-500"
+        onSubmit={submitHandler}
+      >
+        <div className="w-full flex flex-col">
+          <label htmlFor="text" className="">
+            Contact Text:
+          </label>
           <textarea
-            className="border-2"
+            className=""
             rows="5"
-            className="w-full"
+            className="w-5/6"
             style={{ resize: "none" }}
             name="text"
             type="text"
             onChange={changeHandler}
-            value={state.text}
+            value={state?.text || ""}
           />
+          <label htmlFor="email" className="mt-5">
+            Public Contact Information
+          </label>
           <label htmlFor="email">Email *</label>
           <input
             required
-            className="border-2"
+            className=" w-4/6"
             name="email"
             type="text"
             onChange={changeHandler}
-            value={state.email ? state.email : props.user.email}
+            value={state?.email || ""}
           ></input>
           <label htmlFor="email">Phone</label>
           <input
-            className="border-2"
+            className=" w-4/6"
             name="phone"
             type="tel"
             onChange={changeHandler}
-            value={state.phone}
+            value={state?.phone || ""}
             placeholder={"000 123 4567"}
           ></input>
           <label htmlFor="email">Location</label>
           <input
-            className="border-2"
+            className=" w-4/6"
             name="address"
             type="text"
             onChange={changeHandler}
-            value={state.address}
+            value={state?.address || ""}
+            placeholder="City, ST"
           ></input>
+        </div>
+        <div className="w-full pt-5 sm:pt-0 flex flex-col">
           <label htmlFor="socialMedia" className="mb-1">
             Social Media Links
           </label>
           <label htmlFor="instagram">Instagram</label>
           <input
-            className="border-2"
+            className=" w-4/6"
             name="instagram"
             type="url"
             onChange={changeHandler}
-            value={state.instagram}
+            value={state?.instagram || ""}
             placeholder="https://wwww.instagram.com/"
           ></input>
           <label htmlFor="facebook">Facebook</label>
           <input
-            className="border-2"
+            className=" w-4/6"
             name="facebook"
             type="url"
             onChange={changeHandler}
             placeholder="https://wwww.facebook.com/"
-            value={state.facebook}
+            value={state?.facebook || ""}
           ></input>
           <label htmlFor="twitter">Twitter</label>
           <input
-            className="border-2"
+            className=" w-4/6"
             name="twitter"
             type="url"
             onChange={changeHandler}
             placeholder="https://wwww.twitter.com/"
-            value={state.twitter}
+            value={state?.twitter || ""}
           ></input>
           <label htmlFor="youtube">Youtube</label>
           <input
-            className="border-2"
+            className=" w-4/6"
             name="youtube"
             type="url"
             onChange={changeHandler}
             placeholder="https://wwww.youtube.com/"
-            value={state.youtube}
+            value={state?.youtube || ""}
           ></input>
           <label htmlFor="linkedin">LinkedIn</label>
           <input
-            className="border-2"
+            className=" w-4/6"
             name="linkedin"
             type="url"
             onChange={changeHandler}
             placeholder="https://wwww.linkedin.com/"
-            value={state.linkedin}
+            value={state?.linkedin || ""}
           ></input>
           <label htmlFor="etsy">Etsy</label>
           <input
-            className="border-2"
+            className=" w-4/6"
             name="etsy"
             type="url"
             onChange={changeHandler}
             placeholder="https://wwww.etsy.com/"
-            value={state.etsy}
+            value={state?.etsy || ""}
           ></input>
           <label htmlFor="pinterest">Pinterest</label>
           <input
-            className="border-2"
+            className=" w-4/6"
             name="pinterest"
             type="url"
             onChange={changeHandler}
             placeholder="https://wwww.pinterest.com/"
-            value={state.pinterest}
+            value={state?.pinterest || ""}
           ></input>
           <label htmlFor="tiktok">TikTok</label>
           <input
-            className="border-2"
+            className=" w-4/6"
             name="tiktok"
             type="url"
             onChange={changeHandler}
             placeholder="https://wwww.tiktok.com/"
-            value={state.tiktok}
+            value={state?.tiktok || ""}
           ></input>
           <div>
-            <button type="submit" className="pill">
+            <button type="submit" className="pill mt-5 text-black">
               Save Changes
             </button>
           </div>
-        </form>
-      </div>
-    );
-  }
+        </div>
+      </form>
+    </>
+  );
 }

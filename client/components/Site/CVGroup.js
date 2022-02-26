@@ -11,10 +11,7 @@ export default function CVGroup(props) {
           props.data.map((line, index) => {
             let data = line.split(",");
             return (
-              <li
-                className="grid grid-cols-12 grid-rows-2 mb-5 w-full"
-                key={index}
-              >
+              <li className="grid grid-cols-12 grid-rows-2 w-full" key={index}>
                 <span
                   id="date"
                   className="col-span-2 row-span-1 row-span-1 text-gray-500"

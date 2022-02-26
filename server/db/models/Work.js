@@ -2,17 +2,16 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 
 const Work = db.define("work", {
-  heading: {
-    type: Sequelize.STRING,
-    defaultVal: "Selected Work",
-  },
+  // heading: {
+  //   type: Sequelize.STRING,
+  //   defaultValue: "Work",
+  // },
   title: {
     type: Sequelize.STRING,
   },
   year: {
     type: Sequelize.INTEGER,
   },
-
   height: {
     type: Sequelize.INTEGER,
   },
@@ -30,8 +29,11 @@ const Work = db.define("work", {
     allowNull: false,
   },
   hidden: {
-    type: Sequelize.STRING,
-    defaultVal: "off",
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  index: {
+    type: Sequelize.INTEGER,
   },
 });
 
@@ -44,3 +46,14 @@ module.exports = Work;
 /**
  * classMethods
  */
+
+//Hooks
+
+// const index = (work) => {
+//   try {
+//     let idx = work.id
+//     Work.
+//   } catch (error) {}
+// };
+
+// Work.beforeCreate(index)

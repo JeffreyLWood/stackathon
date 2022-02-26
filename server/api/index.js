@@ -2,7 +2,9 @@ const router = require("express").Router();
 module.exports = router;
 const Work = require("../db/models/Work");
 const About = require("../db/models/About");
+const Collection = require("../db/models/Collection");
 const { cloudinary } = require("../utils/cloudinary");
+const res = require("express/lib/response");
 router.use("/users", require("./users"));
 
 router.post("/upload", async (req, res) => {
@@ -11,7 +13,7 @@ router.post("/upload", async (req, res) => {
     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
       upload_preset: "stackathon",
     });
-    console.log("req.body.type", req.body.type);
+
     //if req.body.type === about, send it to about table instead of work
     if (req.body.type === "about") {
       try {
@@ -28,9 +30,12 @@ router.post("/upload", async (req, res) => {
       }
     } else {
       // let user = await user.findByPk(req.body.userId);
+      let collection = await Collection.findOne({
+        where: { userId: req.body.userId, title: req.body.collection },
+      });
       await Work.create({
         imgId: uploadedResponse.public_id,
-        userId: req.body.userId,
+        collectionId: collection.id,
         title: req.body.title,
         year: req.body.year,
         height: req.body.height,
@@ -39,7 +44,12 @@ router.post("/upload", async (req, res) => {
         hidden: req.body.hidden,
       });
     }
-    res.status(200).send();
+    let response = await Collection.findAll({
+      where: { title: req.body.collection, userId: req.body.userId },
+      include: Work,
+    });
+
+    res.status(200).send(JSON.stringify(response, null, 2));
   } catch (error) {
     console.log(error);
   }
@@ -47,17 +57,14 @@ router.post("/upload", async (req, res) => {
 
 router.post("/update", async (req, res) => {
   try {
-    // console.log(
-    //   "uploadedResponse.publicId",
-    //   uploadedResponse.publicId,
-    //   "req.body.imgId",
-    //   req.body.imgId
-    // );
+    let collection = await Collection.findOne({
+      where: { title: req.body.collection, userId: req.body.userId },
+    });
 
     let work = await Work.findOne({
       where: {
         imgId: req.body.imgId,
-        userId: req.body.userId,
+        // collectionId: collection.id,
       },
     });
 
@@ -70,7 +77,8 @@ router.post("/update", async (req, res) => {
 
       await work.update({
         imgId: uploadedResponse.public_id,
-        userId: req.body.userId,
+        collectionId: collection.id,
+        // userId: req.body.userId,
         title: req.body.title,
         year: req.body.year,
         height: req.body.height,
@@ -80,7 +88,8 @@ router.post("/update", async (req, res) => {
       });
     } else {
       await work.update({
-        userId: req.body.userId,
+        // userId: req.body.userId,
+        collectionId: collection.id,
         title: req.body.title,
         year: req.body.year,
         height: req.body.height,
@@ -89,7 +98,26 @@ router.post("/update", async (req, res) => {
         hidden: req.body.hidden,
       });
     }
-    res.status(200).send();
+    // If request is switch collection, send back origin and destination collections
+    if (req.body.origin) {
+      let origin = await Collection.findAll({
+        where: { title: req.body.origin.collection, userId: req.body.userId },
+        include: Work,
+      });
+      let destination = await Collection.findAll({
+        where: {
+          title: req.body.destination.collection,
+          userId: req.body.userId,
+        },
+        include: Work,
+      });
+      origin = JSON.stringify(origin, null, 2);
+      destination = JSON.stringify(destination, null, 2);
+      res.status(200).send({ work, origin, destination });
+    } else {
+      console.log(work.dataValues);
+      res.status(200).send(work.dataValues);
+    }
   } catch (error) {
     console.log(error);
   }

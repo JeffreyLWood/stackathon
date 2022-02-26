@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 export const Navbar = (props) => {
   let siteTitle = `${props.user.siteTitle}`;
-
+  document.title = siteTitle;
   return (
     <nav className="flex flex-row justify-between h-18 items-end mx-10 mt-10">
       <div className="siteTitle">
