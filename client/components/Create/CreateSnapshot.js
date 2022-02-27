@@ -162,7 +162,7 @@ export default function CreateSnapshot(props) {
             <ListManager
               items={state.sortedList}
               direction="horizontal"
-              maxItems={4}
+              maxItems={props.id === "primary" ? 4 : 2}
               render={(work) => (
                 <Image
                   cloudName="jeffreywood"

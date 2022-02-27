@@ -206,7 +206,6 @@ export const reorder = (userId, collection, list, snapshotId) =>
     let body = { reorder: true, userId, collection, list };
     try {
       let { data } = await axios.post(`/api/reorder`, body);
-      console.log("data", data);
       dispatch(reorderCollection(data, snapshotId));
     } catch (err) {
       return err;
@@ -270,7 +269,7 @@ export default function (state = {}, action) {
     }
     case UPLOAD_WORK: {
       let snapshotId = `${action.snapshotId}Collection`;
-      console.log(action);
+
       let newState = {
         ...state,
         [snapshotId]: action.data[0],
