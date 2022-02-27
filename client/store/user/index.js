@@ -3,10 +3,15 @@ import axios from "axios";
 //action types
 const GET_USER_DATA = "GET_USER_DATA";
 // const GET_SINGLE_WORK = "GET_SINGLE_WORK";
+const GET_COLLECTION = "GET_COLLECTION";
 
 //action creators
 const loadUserData = (userData) => {
   return { type: GET_USER_DATA, userData };
+};
+
+const getCollection = (data) => {
+  return { type: GET_COLLECTION, data };
 };
 
 // const getSingleWork = (data) => {
@@ -19,6 +24,16 @@ export const fetchUserData = (username) =>
       let { data } = await axios.get(`/api/users/${username}`);
 
       dispatch(loadUserData(data));
+    } catch (err) {
+      return err;
+    }
+  };
+
+export const fetchCollection = (userId, title) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.get(`/api/users/${userId}/${title}/work/`);
+      dispatch(getCollection(data));
     } catch (err) {
       return err;
     }
@@ -47,6 +62,10 @@ export default function (state = {}, action) {
     //   console.log("newstate store", newState);
     //   return newState;
     // }
+    case GET_COLLECTION: {
+      let newState = { ...state, collection: action.data }; //?
+      return newState;
+    }
     default:
       return state;
   }
