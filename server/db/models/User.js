@@ -172,7 +172,6 @@ const defaultImages = async (user) => {
       height: 5,
       width: 4,
       status: "available",
-      hidden: true,
     });
     let default8 = await Work.create({
       title: "Street 2",
@@ -182,7 +181,6 @@ const defaultImages = async (user) => {
       height: 5,
       width: 4,
       status: "available",
-      hidden: true,
     });
 
     // Put defaults into array for mapping
@@ -218,7 +216,6 @@ const defaultImages = async (user) => {
       height: 4,
       width: 5,
       status: "available",
-      hidden: true,
     });
 
     let default10 = await Work.create({
@@ -229,7 +226,6 @@ const defaultImages = async (user) => {
       height: 4,
       width: 5,
       status: "available",
-      hidden: true,
     });
 
     let default11 = await Work.create({
@@ -240,7 +236,6 @@ const defaultImages = async (user) => {
       height: 4,
       width: 5,
       status: "available",
-      hidden: true,
     });
 
     let default12 = await Work.create({
@@ -251,7 +246,6 @@ const defaultImages = async (user) => {
       height: 4,
       width: 5,
       status: "available",
-      hidden: true,
     });
 
     let blueWork = [default9, default10, default11, default12];

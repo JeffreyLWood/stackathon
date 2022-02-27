@@ -55,12 +55,32 @@ router.post("/upload", async (req, res) => {
   }
 });
 
+router.post("/reorder", async (req, res) => {
+  try {
+    await Work.bulkCreate(req.body.list, {
+      updateOnDuplicate: ["order"],
+    });
+
+    let collection = await Collection.findOne({
+      where: { title: req.body.collection, userId: req.body.userId },
+    });
+
+    let works = await Work.findAll({
+      where: { collectionId: collection.id },
+      order: [["order"]],
+    });
+
+    res.status(200).send(works);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.post("/update", async (req, res) => {
   try {
     let collection = await Collection.findOne({
       where: { title: req.body.collection, userId: req.body.userId },
     });
-
     let work = await Work.findOne({
       where: {
         imgId: req.body.imgId,

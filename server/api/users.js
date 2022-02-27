@@ -142,8 +142,8 @@ router.get("/:userId/:title/work", async (req, res, next) => {
     let workData = [];
 
     if (collection) {
-      console.log(collection.id);
       workData = await Work.findAll({
+        order: [["order", "ASC"]],
         where: { collectionId: collection.id },
       });
       res.status(200).send(workData);

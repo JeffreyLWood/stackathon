@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
+const Collection = require("./Collection");
 
 const Work = db.define("work", {
   // heading: {
@@ -32,8 +33,8 @@ const Work = db.define("work", {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
-  index: {
-    type: Sequelize.INTEGER,
+  order: {
+    type: Sequelize.REAL,
   },
 });
 
@@ -49,11 +50,14 @@ module.exports = Work;
 
 //Hooks
 
-// const index = (work) => {
-//   try {
-//     let idx = work.id
-//     Work.
-//   } catch (error) {}
-// };
+const index = async (work) => {
+  try {
+    let count = await Work.count();
+    work.order = count;
+    console.log(work.order);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-// Work.beforeCreate(index)
+Work.beforeCreate(index);
