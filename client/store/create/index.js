@@ -13,6 +13,7 @@ const GET_SECONDARY_COLLECTION = "GET_SECONDARY_COLLECTION";
 const UPLOAD_WORK = "UPLOAD_WORK";
 const UPDATE_WORK = "UPDATE_WORK";
 const SWITCH_COLLECTION = "SWITCH_COLLECTION";
+const REORDER_COLLECTION = "REORDER_COLLECTION";
 const DELETE_WORK = "DELETE_WORK";
 
 //action creators
@@ -62,6 +63,10 @@ const updateWork = (data) => {
 
 const switchCollection = (data, origin, destination) => {
   return { type: SWITCH_COLLECTION, data, origin, destination };
+};
+
+const reorderCollection = (data, snapshotId) => {
+  return { type: REORDER_COLLECTION, data, snapshotId };
 };
 
 const deleteWork = (snapshotId, data) => {
@@ -196,6 +201,18 @@ export const switcher = (body) =>
     }
   };
 
+export const reorder = (userId, collection, list, snapshotId) =>
+  async function (dispatch) {
+    let body = { reorder: true, userId, collection, list };
+    try {
+      let { data } = await axios.post(`/api/reorder`, body);
+      console.log("data", data);
+      dispatch(reorderCollection(data, snapshotId));
+    } catch (err) {
+      return err;
+    }
+  };
+
 export const destroyWork = (userId, collection, imgId, snapshotId) =>
   async function (dispatch) {
     try {
@@ -313,6 +330,15 @@ export default function (state = {}, action) {
               ),
               [destination]: [...state[destination], data.work],
             };
+      return newState;
+    }
+
+    case REORDER_COLLECTION: {
+      let snapshotId = `${action.snapshotId}Collection`;
+      let newState = {
+        ...state,
+        [snapshotId]: action.data,
+      };
       return newState;
     }
 
