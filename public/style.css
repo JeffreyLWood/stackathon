@@ -568,6 +568,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin: 2.5rem;
 }
 
+.m-4 {
+  margin: 1rem;
+}
+
+.m-6 {
+  margin: 1.5rem;
+}
+
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
@@ -647,6 +655,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .block {
   display: block;
+}
+
+.inline-block {
+  display: inline-block;
 }
 
 .inline {
