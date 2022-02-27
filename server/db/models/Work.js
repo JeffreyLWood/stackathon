@@ -34,7 +34,7 @@ const Work = db.define("work", {
     defaultValue: false,
   },
   order: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.REAL,
   },
 });
 
