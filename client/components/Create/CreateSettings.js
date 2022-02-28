@@ -28,6 +28,12 @@ export default function CreateSettings(props) {
     dispatch(updateTitleData(user.id, { title }));
   };
 
+  const deleteCollection = (evt) => {
+    evt.preventDefault();
+    dispatch(destroyCollection(userId, collectionId));
+    dispatch(fetchUserData(username));
+  };
+
   return (
     <>
       <Navbar user={user} />

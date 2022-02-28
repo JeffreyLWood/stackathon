@@ -12,9 +12,12 @@ const GET_PRIMARY_COLLECTION = "GET_PRIMARY_COLLECTION";
 const GET_SECONDARY_COLLECTION = "GET_SECONDARY_COLLECTION";
 const UPLOAD_WORK = "UPLOAD_WORK";
 const UPDATE_WORK = "UPDATE_WORK";
+const UPDATE_COLLECTION = "UPDATE_COLLECTION";
 const SWITCH_COLLECTION = "SWITCH_COLLECTION";
 const REORDER_COLLECTION = "REORDER_COLLECTION";
+const ADD_COLLECTION = "ADD_COLLECTION";
 const DELETE_WORK = "DELETE_WORK";
+const DELETE_COLLECTION = "DELETE_COLLECTION";
 
 //action creators
 const updateAbout = (aboutData) => {
@@ -53,6 +56,10 @@ const getSecondaryCollection = (data) => {
   return { type: GET_SECONDARY_COLLECTION, data };
 };
 
+const updateCollection = (data) => {
+  return { type: UPDATE_COLLECTION, data };
+};
+
 const uploadWork = (data, snapshotId) => {
   return { type: UPLOAD_WORK, data, snapshotId };
 };
@@ -69,8 +76,16 @@ const reorderCollection = (data, snapshotId) => {
   return { type: REORDER_COLLECTION, data, snapshotId };
 };
 
+const addCollection = (data) => {
+  return { type: ADD_COLLECTION, data };
+};
+
 const deleteWork = (snapshotId, data) => {
   return { type: DELETE_WORK, data, snapshotId };
+};
+
+const deleteCollection = (data) => {
+  return { type: DELETE_COLLECTION, data };
 };
 
 //thunk creators
@@ -154,6 +169,20 @@ export const fetchSecondaryCollection = (userId, title) =>
       return err;
     }
   };
+
+export const updateCollectionData = (userId, collection, body) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.put(
+        `/api/collections/${userId}/${collection}`,
+        body
+      );
+      dispatch(updateCollection(data));
+    } catch (err) {
+      return err;
+    }
+  };
+
 export const fetchSingleWork = (userId, collection, imgId) =>
   async function (dispatch) {
     try {
@@ -212,6 +241,16 @@ export const reorder = (userId, collection, list, snapshotId) =>
     }
   };
 
+export const newCollection = (userId) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.post(`/api/collections`, { userId });
+      dispatch(addCollection(data));
+    } catch (err) {
+      return err;
+    }
+  };
+
 export const destroyWork = (userId, collection, imgId, snapshotId) =>
   async function (dispatch) {
     try {
@@ -219,6 +258,18 @@ export const destroyWork = (userId, collection, imgId, snapshotId) =>
         `/api/users/${userId}/${collection}/${imgId}`
       );
       dispatch(deleteWork(snapshotId, data));
+    } catch (err) {
+      return err;
+    }
+  };
+
+export const destroyCollection = (userId, collection) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.delete(
+        `/api/collections/${userId}/${collection}`
+      );
+      dispatch(deleteCollection(data));
     } catch (err) {
       return err;
     }
@@ -256,7 +307,12 @@ export default function (state = {}, action) {
       return newState;
     }
     case GET_PRIMARY_COLLECTION: {
-      let newState = { ...state, primaryCollection: action.data }; //?
+      let newState = {
+        ...state,
+        primaryCollection: action.data.newCollectionWork
+          ? action.data.newCollectionWork
+          : action.data,
+      }; //?
       return newState;
     }
     case GET_SECONDARY_COLLECTION: {
@@ -341,11 +397,47 @@ export default function (state = {}, action) {
       return newState;
     }
 
+    case ADD_COLLECTION: {
+      let newState = {
+        ...state,
+        primaryCollection: [],
+        user: { ...state, collections: action.data.allCollections },
+      };
+      return newState;
+    }
+
+    case UPDATE_COLLECTION: {
+      console.log("action.data", action.data);
+      let newState = {
+        ...state,
+        primaryCollection: action.data.newCollection[0].works,
+        user: {
+          ...state.user,
+          collections: action.data.collections,
+        },
+      };
+      return newState;
+    }
+
     case DELETE_WORK: {
       let snapshotId = `${action.snapshotId}Collection`;
       let newState = {
         ...state,
         [snapshotId]: action.data.filter((work) => work.imgId !== action.imgId),
+      };
+      return newState;
+    }
+    case DELETE_COLLECTION: {
+      console.log(action.data);
+      let newState = {
+        ...state,
+        user: {
+          ...state.user,
+          collections: action.data.collections.filter(
+            (collection) => collection !== action.data.collection.title
+          ),
+          primaryCollection: action.data.collections[1].works,
+        },
       };
       return newState;
     }

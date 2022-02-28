@@ -12,7 +12,7 @@ const Collection = db.define("collection", {
     type: Sequelize.STRING,
     defaultValue: true,
   },
-  index: {
+  order: {
     type: Sequelize.INTEGER,
   },
 });
@@ -29,11 +29,12 @@ module.exports = Collection;
 
 //Hooks
 
-// const index = (work) => {
+// const newCollection = (collection) => {
 //   try {
-//     let idx = work.id
-//     Work.
+//    if(collection.title === "New Collection"){
+//      await Collection.find
+//    }
 //   } catch (error) {}
 // };
 
-// Work.beforeCreate(index)
+// Work.beforeCreate(newCollection)

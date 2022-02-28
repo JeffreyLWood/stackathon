@@ -156,26 +156,29 @@ export default function CreateSnapshot(props) {
           <CollectionSettings
             collectionTitle={props.collectionTitle}
             collectionDescription={collection?.description}
+            userId={props.userId}
+            changeHandler={props.changeHandler}
+            setSettings={setSettings}
+          />
+        ) : collection?.length ? (
+          <ListManager
+            items={state.sortedList}
+            direction="horizontal"
+            maxItems={props.id === "primary" ? 4 : 2}
+            render={(work) => (
+              <Image
+                cloudName="jeffreywood"
+                publicId={work.imgId}
+                className="h-32 m-6 hover:cursor-pointer"
+                id={props.collectionTitle}
+                value={props.id}
+                onClick={(e) => props.editHandler(e)}
+              />
+            )}
+            onDragEnd={reorderList}
           />
         ) : (
-          collection && (
-            <ListManager
-              items={state.sortedList}
-              direction="horizontal"
-              maxItems={props.id === "primary" ? 4 : 2}
-              render={(work) => (
-                <Image
-                  cloudName="jeffreywood"
-                  publicId={work.imgId}
-                  className="h-32 m-6 hover:cursor-pointer"
-                  id={props.collectionTitle}
-                  value={props.id}
-                  onClick={(e) => props.editHandler(e)}
-                />
-              )}
-              onDragEnd={reorderList}
-            />
-          )
+          "Collection is empty"
         )}
       </div>
     );

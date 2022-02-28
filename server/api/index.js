@@ -158,6 +158,77 @@ router.get("/images", async (req, res) => {
   }
 });
 
+router.post("/collections", async (req, res) => {
+  try {
+    let newCollection = await Collection.create({
+      userId: req.body.userId,
+      title: "New Collection",
+    });
+    let allCollections = await Collection.findAll({
+      where: { userId: req.body.userId },
+    });
+    let newCollectionWork = await Collection.findAll(
+      { where: { id: newCollection.id } },
+      { include: Work }
+    );
+
+    res.status(200).send({ newCollectionWork, allCollections });
+  } catch (error) {
+    console.log("/api/collections", error);
+  }
+});
+
+router.put("/collections/:userId/:collection", async (req, res) => {
+  try {
+    console.log("req.body", req.body);
+    await Collection.update(
+      {
+        title: req.body.title,
+        description: req.body.description,
+        hidden: req.body.hidden,
+      },
+      { where: { userId: req.params.userId, title: req.params.collection } }
+    );
+    let collection = await Collection.findOne({
+      where: { userId: req.params.userId, title: req.body.title },
+    });
+    let newCollection = await Collection.findAll({
+      where: { id: collection.id },
+      include: Work,
+    });
+    let collections = await Collection.findAll({
+      where: { userId: req.params.userId },
+      include: Work,
+    });
+    // response = JSON.stringify(response, null, 2);
+
+    res.status(200).send({ newCollection, collections });
+  } catch (error) {
+    console.log("/api/collections", error);
+  }
+});
+
+router.delete("/collections/:userId/:collection", async (req, res) => {
+  try {
+    let collection = await Collection.findOne({
+      where: { userId: req.params.userId, title: req.params.collection },
+    });
+    await Collection.destroy({
+      where: {
+        userId: req.params.userId,
+        id: collection.id,
+      },
+    });
+    let collections = await Collection.findAll({
+      where: { userId: req.params.userId },
+      include: Work,
+    });
+    res.status(202).send({ collections, collection });
+  } catch (error) {
+    console.log("/api/collections", error);
+  }
+});
+
 router.use((req, res, next) => {
   const error = new Error("Not Found");
   error.status = 404;

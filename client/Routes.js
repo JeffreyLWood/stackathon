@@ -85,7 +85,7 @@ const Routes = () => {
             displayName="signup"
           />
           <Route exact path="/:username" component={Work} data={user} />
-          <Route path="/:username/:collection" component={Work} />
+          {/* <Route path="/:username/:collection" component={Work} /> */}
           <Route exact path="/:username/about" component={About} />
           <Route exact path="/:username/cv" component={CV} />
           <Route exact path="/:username/contact" component={Contact} />

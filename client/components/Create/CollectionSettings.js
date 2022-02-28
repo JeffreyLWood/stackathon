@@ -1,6 +1,15 @@
 import React from "react";
 import { useState } from "react";
+import {
+  updateCollection,
+  destroyCollection,
+  updateCollectionData,
+} from "../../store/create";
+import { useSelector, useDispatch } from "react-redux";
 export default function CollectionSettings(props) {
+  let collection = useSelector((state) => state.user?.primaryColletion);
+  const dispatch = useDispatch();
+
   let [state, setState] = useState({
     title: props.collectionTitle,
     description: props.collectionDescription,
@@ -8,16 +17,24 @@ export default function CollectionSettings(props) {
 
   const changeHandler = (e) => {
     e.preventDefault();
-    setState({ ...state, [e.target.name]: [e.target.value] });
+    setState({ ...state, [e.target.name]: e.target.value });
   };
 
-  //   const submitHandler = (e) => {
-  //     e.preventDefault();
-  //     dispatch(updateCollection(userId, collectionId, state));
-  //   };
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    dispatch(updateCollectionData(props.userId, props.collectionTitle, state));
+  };
+
+  const deleteCollection = (e) => {
+    e.preventDefault();
+    props.changeHandler(e);
+    dispatch(destroyCollection(props.userId, props.collectionTitle));
+    props.setSettings(false);
+  };
 
   return (
-    <form className="flex flex-col my-5 font-light">
+    <form className="flex flex-col my-5 font-light" onSubmit={submitHandler}>
       <label htmlFor="title" className="text-gray-400">
         Collection Title: *{" "}
       </label>
@@ -47,7 +64,13 @@ export default function CollectionSettings(props) {
         <button type="submit" className="pill">
           Save Changes
         </button>
-        <button type="submit" className="pillDark hover:bg-red-700">
+        <button
+          type="button"
+          onClick={deleteCollection}
+          className="pillDark hover:bg-red-700"
+          id="primary"
+          value="Work"
+        >
           Delete Collection
         </button>
       </div>

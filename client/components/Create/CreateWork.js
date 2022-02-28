@@ -7,6 +7,7 @@ import { Navbar } from "../Navbar";
 import { fetchUserData } from "../../store/user";
 import CreateUploader from "./CreateUploader";
 import { useRef } from "react";
+import { newCollection } from "../../store/create";
 export default function CreateWork(props) {
   let username = useSelector((state) => state.auth.username);
   // Loading user information mainly for props later on. Had difficulty
@@ -40,17 +41,17 @@ export default function CreateWork(props) {
     user = dispatch(fetchUserData(username));
   }, [show]);
 
+  useEffect(() => {
+    user = dispatch(fetchUserData(username));
+  }, []);
+
   // Load collection headings to pass to snapshot views.
   // These allow users to select from a list of their collections.
   let collections = [];
   // Loop through collections, add to the array if not already added. Passed as props to the snapshots
   const loadCollections = () => {
     for (let i = 0; i < worksData.length; i++) {
-      if (
-        worksData[i].title !== null &&
-        !collections.includes(worksData[i].title)
-      )
-        collections.push(worksData[i].title);
+      if (worksData[i].title !== null) collections.push(worksData[i].title);
     }
   };
 
@@ -91,6 +92,14 @@ export default function CreateWork(props) {
       setSecondary(evt.target.value);
       setModalCollection(evt.target.value);
     }
+  };
+
+  const addCollection = (evt) => {
+    evt.preventDefault();
+    setModalCollection(primary);
+    setPrimary("New Collection");
+    dispatch(newCollection(userId));
+    dispatch(fetchUserData(username));
   };
 
   return (
@@ -163,7 +172,7 @@ export default function CreateWork(props) {
           />
           {/* Add a Collection - Not Functional */}
           <img
-            onClick={(e) => addHandler(e)}
+            onClick={(e) => addCollection(e)}
             src="../../../newcollectionactive.png"
             id="New Collection"
             className="w-12 m-2"
