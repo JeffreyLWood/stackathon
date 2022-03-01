@@ -115,6 +115,7 @@ export default function CreateSnapshot(props) {
             id={props.id}
             primary={props.primary}
             secondary={props.secondary}
+            settings={settings}
           />
           {props.id === "primary" ? (
             <SnapshotToolbar
