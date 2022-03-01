@@ -146,6 +146,9 @@ export const fetchAllWork = (userId) =>
       return err;
     }
   };
+
+// State.create.collection, used primarily
+// for collectionSettings.
 export const fetchCollection = (userId, title) =>
   async function (dispatch) {
     try {
@@ -291,7 +294,7 @@ export const destroyCollection = (userId, collection) =>
     }
   };
 
-//reducer
+//Reducer
 export default function (state = {}, action) {
   switch (action.type) {
     case TITLE: {
@@ -417,28 +420,32 @@ export default function (state = {}, action) {
       let newState = {
         ...state,
         primaryCollection: [],
-        user: { ...state, collections: action.data.allCollections },
+        collections: [...state.collections, action.data.newCollection],
+        // user: { ...state, collections: action.data.allCollections },
       };
       return newState;
     }
 
     case UPDATE_COLLECTION: {
+      console.log(action.data);
       let newState = {
         ...state,
         primaryCollection: action.data.newCollection[0].works,
-        user: {
-          ...state.user,
-          collections: action.data.collections,
-        },
+        collection: action.data.newCollection,
+        collections: action.data.collections,
+        // user: {
+        //   ...state.user,
+        //   collections: [action.data.collections, action.data.newCollection],
+        // },
       };
       return newState;
     }
 
     case HIDDEN_COLLECTION: {
-      // Not quite working, loading collections in some places and collectionWorks in others
-      let toggle = state.primaryCollection.hidden ? false : true;
-      let collection = state.primaryCollection;
-      collection.hidden = toggle;
+      let collection = action.data;
+      collection.hidden
+        ? (collection.hidden = false)
+        : (collection.hidden = true);
       let newState = {
         ...state,
         collection: collection,
@@ -458,13 +465,10 @@ export default function (state = {}, action) {
       console.log(action.data);
       let newState = {
         ...state,
-        user: {
-          ...state.user,
-          collections: action.data.collections.filter(
-            (collection) => collection !== action.data.collection.title
-          ),
-          primaryCollection: action.data.collections[1].works,
-        },
+        collections: action.data.collections.filter(
+          (collection) => collection !== action.data.collection.title
+        ),
+        primaryCollection: action.data.collections[1].works,
       };
       return newState;
     }

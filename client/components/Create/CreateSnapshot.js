@@ -155,6 +155,7 @@ export default function CreateSnapshot(props) {
             userId={props.userId}
             changeHandler={props.changeHandler}
             setSettings={setSettings}
+            setPrimary={props.setPrimary}
           />
         ) : collection?.length ? (
           <ListManager

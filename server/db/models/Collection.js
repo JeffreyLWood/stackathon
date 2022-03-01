@@ -9,7 +9,7 @@ const Collection = db.define("collection", {
     type: Sequelize.STRING,
   },
   hidden: {
-    type: Sequelize.STRING,
+    type: Sequelize.BOOLEAN,
     defaultValue: true,
   },
   order: {

@@ -54,7 +54,6 @@ const index = async (work) => {
   try {
     let count = await Work.count();
     work.order = count;
-    console.log(work.order);
   } catch (error) {
     console.log(error);
   }

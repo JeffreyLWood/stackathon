@@ -22,15 +22,15 @@ export default function CollectionSettings(props) {
     setState(collection);
   }, []);
 
-  useEffect(() => {
-    const load = async () => {
-      collection = await dispatch(
-        fetchCollection(props.userId, props.collectionTitle)
-      );
-    };
-    load();
-    setState(collection);
-  }, [props.settings]);
+  // useEffect(() => {
+  //   const load = async () => {
+  //     collection = await dispatch(
+  //       fetchCollection(props.userId, props.collectionTitle)
+  //     );
+  //   };
+  //   load();
+  //   setState(collection);
+  // }, [props.settings]);
 
   const changeHandler = (e) => {
     e.preventDefault();
@@ -39,8 +39,8 @@ export default function CollectionSettings(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-
     dispatch(updateCollectionData(props.userId, props.collectionTitle, state));
+    props.setPrimary(state.title);
   };
 
   const deleteCollection = (e) => {

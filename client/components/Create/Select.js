@@ -14,8 +14,16 @@ export default function Select(props) {
     worksData = dispatch(fetchAllWork(userId));
   }, []);
 
+  //   useEffect(() => {
+  //     collection = dispatch(fetchCollection(userId, props.collectionTitle));
+  //   }, []); //?
+
   useEffect(() => {
-    collection = dispatch(fetchCollection(userId, props.collectionTitle));
+    try {
+      collection = dispatch(fetchCollection(userId, props.collectionTitle));
+    } catch (error) {
+      console.log(error, "Select Component");
+    }
   }, [props.settings]); //?
 
   // Load collection headings to pass to snapshot views.
