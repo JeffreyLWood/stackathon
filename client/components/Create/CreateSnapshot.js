@@ -8,6 +8,7 @@ import {
   fetchPrimaryCollection,
   fetchSecondaryCollection,
   reorder,
+  hiddenCollection,
 } from "../../store/create";
 // import { Draggable, Droppable } from "react-beautiful-dnd";
 // import List from "./List";
@@ -91,6 +92,12 @@ export default function CreateSnapshot(props) {
     sortList(list);
   };
 
+  const hiddenHandler = (e) => {
+    e.preventDefault();
+    let toggle = collection.hidden ? false : true;
+    dispatch(hiddenCollection(props.userId, props.collectionTitle, toggle));
+  };
+
   if (!state.sortedList) {
     return null;
   } else {
@@ -145,6 +152,7 @@ export default function CreateSnapshot(props) {
               )}
               {/* Set to hidden, not active */}
               <img
+                onClick={(e) => hiddenHandler(e)}
                 src="../../../hiddeninactive.png"
                 className="w-6  hover:cursor-pointer"
               />

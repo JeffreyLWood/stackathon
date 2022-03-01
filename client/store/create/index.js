@@ -16,6 +16,7 @@ const UPDATE_COLLECTION = "UPDATE_COLLECTION";
 const SWITCH_COLLECTION = "SWITCH_COLLECTION";
 const REORDER_COLLECTION = "REORDER_COLLECTION";
 const ADD_COLLECTION = "ADD_COLLECTION";
+const HIDDEN_COLLECTION = "HIDDEN_COLLECTION";
 const DELETE_WORK = "DELETE_WORK";
 const DELETE_COLLECTION = "DELETE_COLLECTION";
 
@@ -82,6 +83,10 @@ const addCollection = (data) => {
 
 const deleteWork = (snapshotId, data) => {
   return { type: DELETE_WORK, data, snapshotId };
+};
+
+const hideCollection = (data) => {
+  return { type: HIDDEN_COLLECTION, data };
 };
 
 const deleteCollection = (data) => {
@@ -182,7 +187,18 @@ export const updateCollectionData = (userId, collection, body) =>
       return err;
     }
   };
-
+export const hiddenCollection = (userId, collection, toggle) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.put(
+        `/api/collections/${userId}/${collection}/hide`,
+        { toggle: toggle }
+      );
+      dispatch(hideCollection(data));
+    } catch (err) {
+      return err;
+    }
+  };
 export const fetchSingleWork = (userId, collection, imgId) =>
   async function (dispatch) {
     try {
@@ -308,7 +324,6 @@ export default function (state = {}, action) {
       return newState;
     }
     case GET_PRIMARY_COLLECTION: {
-      console.log("action.data primary", action.data);
       let newState = {
         ...state,
         primaryCollection: action.data.newCollectionWork
@@ -409,7 +424,6 @@ export default function (state = {}, action) {
     }
 
     case UPDATE_COLLECTION: {
-      console.log("action.data", action.data);
       let newState = {
         ...state,
         primaryCollection: action.data.newCollection[0].works,
@@ -417,6 +431,18 @@ export default function (state = {}, action) {
           ...state.user,
           collections: action.data.collections,
         },
+      };
+      return newState;
+    }
+
+    case HIDDEN_COLLECTION: {
+      // Not quite working, loading collections in some places and collectionWorks in others
+      let toggle = state.primaryCollection.hidden ? false : true;
+      let collection = state.primaryCollection;
+      collection.hidden = toggle;
+      let newState = {
+        ...state,
+        collection: collection,
       };
       return newState;
     }

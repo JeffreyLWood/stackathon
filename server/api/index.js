@@ -178,9 +178,32 @@ router.post("/collections", async (req, res) => {
   }
 });
 
+//Toggle hide and show collection
+router.put("/collections/:userId/:collection/hide", async (req, res) => {
+  try {
+    await Collection.update(
+      {
+        hidden: req.body.toggle,
+      },
+      { where: { userId: req.params.userId, title: req.params.collection } }
+    );
+    let collection = await Collection.findOne({
+      where: { userId: req.params.userId, title: req.params.collection },
+    });
+
+    let collections = await Collection.findAll({
+      where: { userId: req.params.userId },
+      include: Work,
+    });
+
+    res.status(200).send({ collection, collections });
+  } catch (error) {
+    console.log("/api/collections", error);
+  }
+});
+
 router.put("/collections/:userId/:collection", async (req, res) => {
   try {
-    console.log("req.body", req.body);
     await Collection.update(
       {
         title: req.body.title,
