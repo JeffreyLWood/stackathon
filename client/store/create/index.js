@@ -140,7 +140,7 @@ export const updateContactData = (userId, contactData) =>
 export const fetchAllWork = (userId) =>
   async function (dispatch) {
     try {
-      let { data } = await axios.get(`/api/users/work/${userId}`);
+      let { data } = await axios.get(`/api/users/${userId}/work`);
       dispatch(getAllWork(data));
     } catch (err) {
       return err;
@@ -315,7 +315,7 @@ export default function (state = {}, action) {
       return newState;
     }
     case GET_ALL_WORK: {
-      let newState = { ...state, works: action.data };
+      let newState = { ...state, collections: action.data };
       return newState;
     }
     case GET_COLLECTION: {

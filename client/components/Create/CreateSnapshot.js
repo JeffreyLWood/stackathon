@@ -126,7 +126,7 @@ export default function CreateSnapshot(props) {
   } else {
     return (
       <div className="snapshot h-full border-2 border-gray-200 mx-2 p-5 font-light">
-        <div className="flex items-center flex-row">
+        <div className="flex flex-row justify-between">
           <Select
             changeHandler={props.changeHandler}
             collectionTitle={props.collectionTitle}
@@ -135,6 +135,7 @@ export default function CreateSnapshot(props) {
             primary={props.primary}
             secondary={props.secondary}
             settings={settings}
+            userId={props.userId}
           />
           {props.id === "primary" ? (
             <SnapshotToolbar
