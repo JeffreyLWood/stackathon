@@ -218,6 +218,7 @@ router.delete("/collections/:userId/:collection", async (req, res) => {
         userId: req.params.userId,
         id: collection.id,
       },
+      include: Work,
     });
     let collections = await Collection.findAll({
       where: { userId: req.params.userId },

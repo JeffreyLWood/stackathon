@@ -1,19 +1,27 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
-  updateCollection,
+  fetchCollection,
   destroyCollection,
   updateCollectionData,
 } from "../../store/create";
 import { useSelector, useDispatch } from "react-redux";
 export default function CollectionSettings(props) {
-  let collection = useSelector((state) => state.user?.primaryColletion);
+  let collection = useSelector((state) => state.create.collection);
   const dispatch = useDispatch();
 
-  let [state, setState] = useState({
-    title: props.collectionTitle,
-    description: props.collectionDescription,
-  });
+  let [state, setState] = useState({});
+
+  useEffect(() => {
+    const load = async () => {
+      collection = await dispatch(
+        fetchCollection(props.userId, props.collectionTitle)
+      );
+    };
+    load();
+    console.log("collection", collection);
+    setState(collection);
+  }, []);
 
   const changeHandler = (e) => {
     e.preventDefault();
@@ -43,7 +51,7 @@ export default function CollectionSettings(props) {
         type="text"
         style={{ outline: "none" }}
         className="border-b-2 border-gray-200 mb-5 w-3/6 font-light"
-        value={state.title}
+        value={state?.title || ""}
         onChange={changeHandler}
         required
       ></input>
@@ -56,7 +64,7 @@ export default function CollectionSettings(props) {
         name="description"
         onChange={changeHandler}
         className="border-b-2"
-        value={state.description}
+        value={state?.description || ""}
         style={{ resize: "none", outline: "none" }}
         placeholder=""
       ></textarea>

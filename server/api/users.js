@@ -138,6 +138,7 @@ router.get("/:userId/:title/work", async (req, res, next) => {
   try {
     let collection = await Collection.findOne({
       where: { userId: req.params.userId, title: req.params.title },
+      include: Work,
     });
     let workData = [];
 
@@ -146,7 +147,7 @@ router.get("/:userId/:title/work", async (req, res, next) => {
         order: [["order", "ASC"]],
         where: { collectionId: collection.id },
       });
-      res.status(200).send(workData);
+      res.status(200).send({ collection, workData }); ///!
     } else {
       res.status(404).send("Not found");
     }

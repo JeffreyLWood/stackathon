@@ -303,20 +303,22 @@ export default function (state = {}, action) {
       return newState;
     }
     case GET_COLLECTION: {
-      let newState = { ...state, collection: action.data }; //?
+      console.log("action.data", action.data);
+      let newState = { ...state, collection: action.data.collection }; //?
       return newState;
     }
     case GET_PRIMARY_COLLECTION: {
+      console.log("action.data primary", action.data);
       let newState = {
         ...state,
         primaryCollection: action.data.newCollectionWork
           ? action.data.newCollectionWork
-          : action.data,
+          : action.data.workData,
       }; //?
       return newState;
     }
     case GET_SECONDARY_COLLECTION: {
-      let newState = { ...state, secondaryCollection: action.data }; //?
+      let newState = { ...state, secondaryCollection: action.data.workData }; //?
       return newState;
     }
     case GET_SINGLE_WORK: {
