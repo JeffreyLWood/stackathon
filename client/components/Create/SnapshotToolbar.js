@@ -2,7 +2,7 @@ import React from "react";
 
 export default function SnapshotToolbar(props) {
   return (
-    <span className="mx-10 space-x-5 flex flex-row items-center">
+    <span className="mx-10 space-x-5 flex flex-row items-end">
       {props.settings ? (
         <span onClick={() => props.setSettings(false)}>
           <img

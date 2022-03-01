@@ -30,6 +30,7 @@ export default function CreateSnapshot(props) {
 
   let [state, setState] = useState({ sortedList: [] });
 
+  // Load Collection Data
   useEffect(() => {
     const load = async () => {
       collection =
@@ -47,7 +48,26 @@ export default function CreateSnapshot(props) {
       console.log(error);
     }
   }, [props.collectionTitle]);
+  // Reload Collection Data when Settings Toggles
+  useEffect(() => {
+    const load = async () => {
+      collection =
+        props.id === "primary"
+          ? await dispatch(
+              fetchPrimaryCollection(props.userId, props.collectionTitle)
+            )
+          : await dispatch(
+              fetchSecondaryCollection(props.userId, props.collectionTitle)
+            );
+    };
+    try {
+      load();
+    } catch (error) {
+      console.log(error);
+    }
+  }, [settings]);
 
+  // Drag and Drop Functionality _______________*
   useEffect(() => {
     try {
       setState({ sortedList: collection });
@@ -55,7 +75,6 @@ export default function CreateSnapshot(props) {
       console.log(error);
     }
   }, [collection]);
-
   const sortList = (list) => {
     setState({
       sortedList: list
@@ -67,7 +86,6 @@ export default function CreateSnapshot(props) {
       reorder(props.userId, props.collectionTitle, state.sortedList, props.id)
     );
   };
-
   const reorderList = (sourceIndex, destinationIndex) => {
     if (destinationIndex === sourceIndex) {
       return;
@@ -93,6 +111,7 @@ export default function CreateSnapshot(props) {
       (list[destinationIndex].order + list[destinationIndex + 1].order) / 2;
     sortList(list);
   };
+  // Drag and Drop Functionality End ----------- *
 
   let [hidden, setHidden] = useState(collection?.hidden);
 

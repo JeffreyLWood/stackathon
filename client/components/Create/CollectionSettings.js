@@ -10,7 +10,7 @@ export default function CollectionSettings(props) {
   let collection = useSelector((state) => state.create.collection);
   const dispatch = useDispatch();
 
-  let [state, setState] = useState({});
+  let [state, setState] = useState(collection);
 
   useEffect(() => {
     const load = async () => {
@@ -19,7 +19,6 @@ export default function CollectionSettings(props) {
       );
     };
     load();
-    console.log("collection", collection);
     setState(collection);
   }, []);
 

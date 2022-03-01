@@ -12,25 +12,7 @@ export default function Select(props) {
           value={props.collectionTitle}
           disabled
         >
-          {props &&
-            props?.collections
-              .filter((collection) => {
-                if (props.id === "primary") {
-                  return collection !== props.secondary;
-                } else {
-                  return collection !== props.primary;
-                }
-              })
-              .map((heading, idx) => (
-                <option
-                  key={idx}
-                  onChange={props.changeHandler}
-                  value={heading}
-                  id={props.id}
-                >
-                  {heading}
-                </option>
-              ))}
+          <option>{props.collectionTitle}</option>
         </select>
       ) : (
         <select
@@ -43,7 +25,9 @@ export default function Select(props) {
             props?.collections
               .filter((collection) => {
                 if (props.id === "primary") {
-                  return collection !== props.secondary;
+                  return (
+                    collection !== props.secondary && collection !== "Hidden"
+                  );
                 } else {
                   return collection !== props.primary;
                 }
