@@ -13,6 +13,8 @@ import {
 // import { Draggable, Droppable } from "react-beautiful-dnd";
 // import List from "./List";
 // import Item from "./Item";
+import Select from "./Select";
+import SnapshotToolbar from "./SnapshotToolbar";
 
 export default function CreateSnapshot(props) {
   let collection =
@@ -92,10 +94,12 @@ export default function CreateSnapshot(props) {
     sortList(list);
   };
 
+  let [hidden, setHidden] = useState(collection?.hidden);
+
   const hiddenHandler = (e) => {
     e.preventDefault();
-    let toggle = collection.hidden ? false : true;
-    dispatch(hiddenCollection(props.userId, props.collectionTitle, toggle));
+    setHidden(hidden ? false : true);
+    dispatch(hiddenCollection(props.userId, props.collectionTitle, hidden));
   };
 
   if (!state.sortedList) {
@@ -104,62 +108,25 @@ export default function CreateSnapshot(props) {
     return (
       <div className="snapshot h-full border-2 border-gray-200 mx-2 p-5 font-light">
         <div className="flex items-center flex-row">
-          <span className="text-gray-400">Collection: </span>
-          <select
+          <Select
+            changeHandler={props.changeHandler}
+            collectionTitle={props.collectionTitle}
+            collections={props.collections}
             id={props.id}
-            className="p-2"
-            onChange={props.changeHandler}
-            value={props.collectionTitle}
-          >
-            {props &&
-              props?.collections
-                .filter((collection) => {
-                  if (props.id === "primary") {
-                    return collection !== props.secondary;
-                  } else {
-                    return collection !== props.primary;
-                  }
-                })
-                .map((heading, idx) => (
-                  <option
-                    key={idx}
-                    onChange={props.changeHandler}
-                    value={heading}
-                    id={props.id}
-                  >
-                    {heading}
-                  </option>
-                ))}
-          </select>
-          {/* If primary, show edit collection settings, secondary cannot edit settings */}
+            primary={props.primary}
+            secondary={props.secondary}
+          />
           {props.id === "primary" ? (
-            <span className="mx-10 space-x-5 flex flex-row items-center">
-              {/* Toggle settings vs thumbnail view */}
-              {settings ? (
-                <span onClick={() => setSettings(false)}>
-                  <img
-                    src="../../../collection.png"
-                    className="w-4 hover:cursor-pointer"
-                  />
-                </span>
-              ) : (
-                <span onClick={() => setSettings(true)}>
-                  <img
-                    src="../../../edit.png "
-                    className="w-4 hover:cursor-pointer"
-                  />
-                </span>
-              )}
-              {/* Set to hidden, not active */}
-              <img
-                onClick={(e) => hiddenHandler(e)}
-                src="../../../hiddeninactive.png"
-                className="w-6  hover:cursor-pointer"
-              />
-            </span>
+            <SnapshotToolbar
+              id={props.id}
+              settings={settings}
+              setSettings={setSettings}
+              hiddenHandler={hiddenHandler}
+              hidden={hidden}
+            />
           ) : null}
         </div>
-        {/* If settings, show edit settings, if false show the thumbnails */}
+        {/* If settings, show CollectionSettings, if false show the thumbnails (ListManager) */}
         {settings ? (
           <CollectionSettings
             collectionTitle={props.collectionTitle}
