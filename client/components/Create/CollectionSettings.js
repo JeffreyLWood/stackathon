@@ -22,6 +22,16 @@ export default function CollectionSettings(props) {
     setState(collection);
   }, []);
 
+  useEffect(() => {
+    const load = async () => {
+      collection = await dispatch(
+        fetchCollection(props.userId, props.collectionTitle)
+      );
+    };
+    load();
+    setState(collection);
+  }, [props.settings]);
+
   const changeHandler = (e) => {
     e.preventDefault();
     setState({ ...state, [e.target.name]: e.target.value });

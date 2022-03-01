@@ -7,7 +7,7 @@ import { Navbar } from "../Navbar";
 import { fetchUserData } from "../../store/user";
 import CreateUploader from "./CreateUploader";
 import { useRef } from "react";
-import { newCollection } from "../../store/create";
+import { newCollection, fetchCollection } from "../../store/create";
 export default function CreateWork(props) {
   let username = useSelector((state) => state.auth.username);
   // Loading user information mainly for props later on. Had difficulty
@@ -88,6 +88,7 @@ export default function CreateWork(props) {
     if (evt.target.id === "primary") {
       setPrimary(evt.target.value);
       setModalCollection(evt.target.value);
+      dispatch(fetchCollection(userId, evt.target.value));
     } else if (evt.target.id === "secondary") {
       setSecondary(evt.target.value);
       setModalCollection(evt.target.value);

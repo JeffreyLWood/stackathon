@@ -1,15 +1,22 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fetchAllWork } from "../../store/create";
+import { fetchAllWork, fetchCollection } from "../../store/create";
 import { useSelector } from "react-redux";
+
 export default function Select(props) {
   let worksData = useSelector((state) => state.create.collections);
+  let collection = useSelector((state) => state.create.collection);
   let userId = useSelector((state) => state.auth.id);
   const dispatch = useDispatch();
+
   useEffect(() => {
     worksData = dispatch(fetchAllWork(userId));
   }, []);
+
+  useEffect(() => {
+    collection = dispatch(fetchCollection(userId, props.collectionTitle));
+  }, [props.settings]); //?
 
   // Load collection headings to pass to snapshot views.
   // These allow users to select from a list of their collections.

@@ -319,7 +319,6 @@ export default function (state = {}, action) {
       return newState;
     }
     case GET_COLLECTION: {
-      console.log("action.data", action.data);
       let newState = { ...state, collection: action.data.collection }; //?
       return newState;
     }
