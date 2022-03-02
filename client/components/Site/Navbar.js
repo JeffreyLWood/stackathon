@@ -37,6 +37,7 @@ export const Navbar = (props) => {
             className="subHeader cursor-pointer"
             onMouseOver={show}
             onMouseLeave={hide}
+            onClick={hide}
           >
             Work
             <div className={workDropdown}>
