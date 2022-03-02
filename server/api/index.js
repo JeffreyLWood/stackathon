@@ -7,6 +7,7 @@ const { cloudinary } = require("../utils/cloudinary");
 const res = require("express/lib/response");
 router.use("/users", require("./users"));
 
+// Used for uploading images. Image data goes to Cloudinary, image information including Cloudinary link goes to DB
 router.post("/upload", async (req, res) => {
   try {
     const fileStr = req.body.data;
@@ -55,6 +56,7 @@ router.post("/upload", async (req, res) => {
   }
 });
 
+// Use for reordering images by drag and drop in the CreateSnapshot
 router.post("/reorder", async (req, res) => {
   try {
     await Work.bulkCreate(req.body.list, {
@@ -76,6 +78,7 @@ router.post("/reorder", async (req, res) => {
   }
 });
 
+// Used for updating artwork/artwork information from the Snapshot/Modal
 router.post("/update", async (req, res) => {
   try {
     let collection = await Collection.findOne({
@@ -143,6 +146,7 @@ router.post("/update", async (req, res) => {
   }
 });
 
+// Not sure this is still needed
 router.get("/images", async (req, res) => {
   try {
     const { resources } = await cloudinary.search

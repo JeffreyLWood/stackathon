@@ -8,6 +8,11 @@ body {
 }
 * {
   font-weight: 300;
+  letter-spacing: 0.05em;
+  color: rgb(63 63 70);
+}
+a:hover {
+  color: rgb(24 24 27);
 }
 .siteTitle {
   font-size: x-large;
@@ -16,12 +21,34 @@ body {
   letter-spacing: 0.1em;
 }
 
+.dropdown {
+  z-index: 10;
+  position: absolute;
+  left: 0;
+  display: flex;
+  background-color: #fff;
+  justify-content: end;
+  width: 100vw;
+  border-bottom: rgb(39 39 42) 1px solid;
+  min-height: 50vh;
+  transition: ease-in-out 0.5s;
+}
+
+.dropdown ul {
+  margin: 2rem 15rem 2rem 2rem;
+}
+
+.dropdown li {
+  padding: 0.5rem;
+}
+
 .pageTitle {
   font-size: large;
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
+
 .aboutImg {
   display: flex;
   max-width: 24rem;

@@ -27,21 +27,35 @@ export default function Footer(props) {
   let etsy = user.contact && user.contact.etsy;
   let tiktok = user.contact && user.contact.tiktok;
   return (
-    <div className="footer flex-col md:flex-row bg-neutral-100 font-light text-sm">
+    <div className="footer flex-col md:flex-row bg-stone-100 text-zinc-800 font-light tracking-wider text-sm">
       <div className="mr-10">
         <ul>
           <li className="uppercase tracking-wider text-lg">{user.siteTitle}</li>
           <li>
-            <a href={`/${props.userName}`}>Work</a>
+            <a href={`/${props.userName}`} className="hover:text-zinc-800">
+              Work
+            </a>
           </li>
           <li>
-            <a href={`/${props.userName}/about`}>About</a>
+            <a
+              href={`/${props.userName}/about`}
+              className="hover:text-zinc-800"
+            >
+              About
+            </a>
           </li>
           <li>
-            <a href={`/${props.userName}/contact`}>Contact</a>
+            <a
+              href={`/${props.userName}/contact`}
+              className="hover:text-zinc-800"
+            >
+              Contact
+            </a>
           </li>
           <li>
-            <a href={`/${props.userName}/cv`}>CV</a>
+            <a href={`/${props.userName}/cv`} className="hover:text-zinc-800">
+              CV
+            </a>
           </li>
           <li>All Work and Images Copyright 2022</li>
         </ul>
@@ -51,7 +65,9 @@ export default function Footer(props) {
           {address ? <li className="font-medium">{address}</li> : null}
           <li>
             <span className="font-medium mr-2">Email</span>
-            <a href={{ mailto: { email } }}>{email}</a>
+            <a href={{ mailto: { email } }} className="hover:text-zinc-800">
+              {email}
+            </a>
           </li>
           {phone ? (
             <li>

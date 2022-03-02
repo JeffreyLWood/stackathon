@@ -1,23 +1,57 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import {
+  fetchCollection,
+  destroyCollection,
+  updateCollectionData,
+} from "../../store/create";
+import { useSelector, useDispatch } from "react-redux";
 export default function CollectionSettings(props) {
-  let [state, setState] = useState({
-    title: props.collectionTitle,
-    description: props.collectionDescription,
-  });
+  let collection = useSelector((state) => state.create.collection);
+  const dispatch = useDispatch();
+
+  let [state, setState] = useState(collection);
+
+  useEffect(() => {
+    const load = async () => {
+      collection = await dispatch(
+        fetchCollection(props.userId, props.collectionTitle)
+      );
+    };
+    load();
+    setState(collection);
+  }, []);
+
+  // useEffect(() => {
+  //   const load = async () => {
+  //     collection = await dispatch(
+  //       fetchCollection(props.userId, props.collectionTitle)
+  //     );
+  //   };
+  //   load();
+  //   setState(collection);
+  // }, [props.settings]);
 
   const changeHandler = (e) => {
     e.preventDefault();
-    setState({ ...state, [e.target.name]: [e.target.value] });
+    setState({ ...state, [e.target.name]: e.target.value });
   };
 
-  //   const submitHandler = (e) => {
-  //     e.preventDefault();
-  //     dispatch(updateCollection(userId, collectionId, state));
-  //   };
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(updateCollectionData(props.userId, props.collectionTitle, state));
+    props.setPrimary(state.title);
+  };
+
+  const deleteCollection = (e) => {
+    e.preventDefault();
+    props.changeHandler(e);
+    dispatch(destroyCollection(props.userId, props.collectionTitle));
+    props.setSettings(false);
+  };
 
   return (
-    <form className="flex flex-col my-5 font-light">
+    <form className="flex flex-col my-5 font-light" onSubmit={submitHandler}>
       <label htmlFor="title" className="text-gray-400">
         Collection Title: *{" "}
       </label>
@@ -26,7 +60,7 @@ export default function CollectionSettings(props) {
         type="text"
         style={{ outline: "none" }}
         className="border-b-2 border-gray-200 mb-5 w-3/6 font-light"
-        value={state.title}
+        value={state?.title || ""}
         onChange={changeHandler}
         required
       ></input>
@@ -39,7 +73,7 @@ export default function CollectionSettings(props) {
         name="description"
         onChange={changeHandler}
         className="border-b-2"
-        value={state.description}
+        value={state?.description || ""}
         style={{ resize: "none", outline: "none" }}
         placeholder=""
       ></textarea>
@@ -47,7 +81,13 @@ export default function CollectionSettings(props) {
         <button type="submit" className="pill">
           Save Changes
         </button>
-        <button type="submit" className="pillDark hover:bg-red-700">
+        <button
+          type="button"
+          onClick={deleteCollection}
+          className="pillDark hover:bg-red-700"
+          id="primary"
+          value="Work"
+        >
           Delete Collection
         </button>
       </div>

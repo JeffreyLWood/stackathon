@@ -7,15 +7,22 @@ import { Navbar } from "../Navbar";
 import { fetchUserData } from "../../store/user";
 import CreateUploader from "./CreateUploader";
 import { useRef } from "react";
+import {
+  newCollection,
+  fetchCollection,
+  fetchAllWork,
+} from "../../store/create";
 export default function CreateWork(props) {
   let username = useSelector((state) => state.auth.username);
+  let worksData = useSelector((state) => state.create.collections);
+  let collection = useSelector((state) => state.create.collection);
   // Loading user information mainly for props later on. Had difficulty
   // failing to render when using user.id in components, so passed userId as a variable.
   let userId = useSelector((state) => state.auth.id);
   let user = useSelector((state) => state.user);
   let dispatch = useDispatch();
   // Load all of a user's collections from the database to query later
-  let worksData = user?.collections;
+
   // Primary and Secondary snapshots - These snapshots are where collections are edited:
   // Snapshots are divs taking up 4/6 and 2/6 of the screen respectively. Users see thumbnails
   // of their works in each snapshot, can click them and edit their information including moving
@@ -40,17 +47,25 @@ export default function CreateWork(props) {
     user = dispatch(fetchUserData(username));
   }, [show]);
 
+  useEffect(() => {
+    user = dispatch(fetchUserData(username));
+  }, []);
+
+  useEffect(() => {
+    worksData = dispatch(fetchAllWork(userId));
+  }, []);
+
+  useEffect(() => {
+    collection = dispatch(fetchCollection(userId, primary));
+  }, [primary]);
+
   // Load collection headings to pass to snapshot views.
   // These allow users to select from a list of their collections.
   let collections = [];
   // Loop through collections, add to the array if not already added. Passed as props to the snapshots
   const loadCollections = () => {
     for (let i = 0; i < worksData.length; i++) {
-      if (
-        worksData[i].title !== null &&
-        !collections.includes(worksData[i].title)
-      )
-        collections.push(worksData[i].title);
+      if (worksData[i].title !== null) collections.push(worksData[i].title);
     }
   };
 
@@ -87,10 +102,19 @@ export default function CreateWork(props) {
     if (evt.target.id === "primary") {
       setPrimary(evt.target.value);
       setModalCollection(evt.target.value);
+      // dispatch(fetchCollection(userId, evt.target.value));
     } else if (evt.target.id === "secondary") {
       setSecondary(evt.target.value);
       setModalCollection(evt.target.value);
     }
+  };
+
+  const addCollection = (evt) => {
+    evt.preventDefault();
+    setModalCollection(primary);
+    setPrimary("New Collection");
+    dispatch(newCollection(userId));
+    dispatch(fetchUserData(username));
   };
 
   return (
@@ -127,6 +151,8 @@ export default function CreateWork(props) {
               // Boolean value, true is display modal, false is modal display:none
               show={show}
               setShow={setShow}
+              primary={primary}
+              setPrimary={setPrimary}
             />
           </div>
           <div className="md:w-2/6">
@@ -163,7 +189,7 @@ export default function CreateWork(props) {
           />
           {/* Add a Collection - Not Functional */}
           <img
-            onClick={(e) => addHandler(e)}
+            onClick={(e) => addCollection(e)}
             src="../../../newcollectionactive.png"
             id="New Collection"
             className="w-12 m-2"

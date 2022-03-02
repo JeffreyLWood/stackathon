@@ -8,10 +8,14 @@ import {
   fetchPrimaryCollection,
   fetchSecondaryCollection,
   reorder,
+  hiddenCollection,
+  fetchCollection,
 } from "../../store/create";
 // import { Draggable, Droppable } from "react-beautiful-dnd";
 // import List from "./List";
 // import Item from "./Item";
+import Select from "./Select";
+import SnapshotToolbar from "./SnapshotToolbar";
 
 export default function CreateSnapshot(props) {
   let collection =
@@ -20,13 +24,13 @@ export default function CreateSnapshot(props) {
       : useSelector((state) => state.create?.secondaryCollection);
 
   const dispatch = useDispatch();
+
   // Hide or show collection settings, if true: editing the collection title, description and delete collection
   // if false the thumbnails are show.
   let [settings, setSettings] = useState(false);
+
   // Load works from collection based on the user id the props.collectionTitle passed down
-
-  let [state, setState] = useState({ sortedList: [] });
-
+  // Load Collection Data
   useEffect(() => {
     const load = async () => {
       collection =
@@ -44,7 +48,27 @@ export default function CreateSnapshot(props) {
       console.log(error);
     }
   }, [props.collectionTitle]);
+  // Reload Collection Data when Settings Toggles
+  useEffect(() => {
+    const load = async () => {
+      collection =
+        props.id === "primary"
+          ? await dispatch(
+              fetchPrimaryCollection(props.userId, props.collectionTitle)
+            )
+          : await dispatch(
+              fetchSecondaryCollection(props.userId, props.collectionTitle)
+            );
+    };
+    try {
+      load();
+    } catch (error) {
+      console.log(error);
+    }
+  }, [settings]);
 
+  // Drag and Drop Functionality _______________*
+  let [state, setState] = useState({ sortedList: [] });
   useEffect(() => {
     try {
       setState({ sortedList: collection });
@@ -52,7 +76,6 @@ export default function CreateSnapshot(props) {
       console.log(error);
     }
   }, [collection]);
-
   const sortList = (list) => {
     setState({
       sortedList: list
@@ -64,7 +87,6 @@ export default function CreateSnapshot(props) {
       reorder(props.userId, props.collectionTitle, state.sortedList, props.id)
     );
   };
-
   const reorderList = (sourceIndex, destinationIndex) => {
     if (destinationIndex === sourceIndex) {
       return;
@@ -90,92 +112,63 @@ export default function CreateSnapshot(props) {
       (list[destinationIndex].order + list[destinationIndex + 1].order) / 2;
     sortList(list);
   };
+  // Drag and Drop Functionality End ----------- *
 
   if (!state.sortedList) {
     return null;
   } else {
     return (
       <div className="snapshot h-full border-2 border-gray-200 mx-2 p-5 font-light">
-        <div className="flex items-center flex-row">
-          <span className="text-gray-400">Collection: </span>
-          <select
+        <div className="flex flex-row justify-between">
+          <Select
+            changeHandler={props.changeHandler}
+            collectionTitle={props.collectionTitle}
+            collections={props.collections}
             id={props.id}
-            className="p-2"
-            onChange={props.changeHandler}
-            value={props.collectionTitle}
-          >
-            {props &&
-              props?.collections
-                .filter((collection) => {
-                  if (props.id === "primary") {
-                    return collection !== props.secondary;
-                  } else {
-                    return collection !== props.primary;
-                  }
-                })
-                .map((heading, idx) => (
-                  <option
-                    key={idx}
-                    onChange={props.changeHandler}
-                    value={heading}
-                    id={props.id}
-                  >
-                    {heading}
-                  </option>
-                ))}
-          </select>
-          {/* If primary, show edit collection settings, secondary cannot edit settings */}
+            primary={props.primary}
+            secondary={props.secondary}
+            settings={settings}
+            userId={props.userId}
+          />
           {props.id === "primary" ? (
-            <span className="mx-10 space-x-5 flex flex-row items-center">
-              {/* Toggle settings vs thumbnail view */}
-              {settings ? (
-                <span onClick={() => setSettings(false)}>
-                  <img
-                    src="../../../collection.png"
-                    className="w-4 hover:cursor-pointer"
-                  />
-                </span>
-              ) : (
-                <span onClick={() => setSettings(true)}>
-                  <img
-                    src="../../../edit.png "
-                    className="w-4 hover:cursor-pointer"
-                  />
-                </span>
-              )}
-              {/* Set to hidden, not active */}
-              <img
-                src="../../../hiddeninactive.png"
-                className="w-6  hover:cursor-pointer"
-              />
-            </span>
+            <SnapshotToolbar
+              id={props.id}
+              settings={settings}
+              setSettings={setSettings}
+              primary={props.primary}
+              userId={props.userId}
+            />
           ) : null}
         </div>
-        {/* If settings, show edit settings, if false show the thumbnails */}
+        {/* If settings, show CollectionSettings, if false show the thumbnails (ListManager) */}
         {settings ? (
           <CollectionSettings
             collectionTitle={props.collectionTitle}
             collectionDescription={collection?.description}
+            userId={props.userId}
+            changeHandler={props.changeHandler}
+            setSettings={setSettings}
+            setPrimary={props.setPrimary}
+          />
+        ) : collection?.length ? (
+          <ListManager
+            items={state.sortedList}
+            direction="horizontal"
+            maxItems={props.id === "primary" ? 4 : 2}
+            render={(work) => (
+              <Image
+                cloudName="jeffreywood"
+                publicId={work.imgId}
+                className="h-32 m-6 hover:cursor-pointer"
+                id={props.collectionTitle}
+                value={props.id}
+                onClick={(e) => props.editHandler(e)}
+              />
+            )}
+            onDragEnd={reorderList}
           />
         ) : (
-          collection && (
-            <ListManager
-              items={state.sortedList}
-              direction="horizontal"
-              maxItems={props.id === "primary" ? 4 : 2}
-              render={(work) => (
-                <Image
-                  cloudName="jeffreywood"
-                  publicId={work.imgId}
-                  className="h-32 m-6 hover:cursor-pointer"
-                  id={props.collectionTitle}
-                  value={props.id}
-                  onClick={(e) => props.editHandler(e)}
-                />
-              )}
-              onDragEnd={reorderList}
-            />
-          )
+          "Collection is empty"
         )}
       </div>
     );

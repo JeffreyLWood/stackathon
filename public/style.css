@@ -556,24 +556,20 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin: 1.25rem;
 }
 
-.m-2 {
-  margin: 0.5rem;
+.m-6 {
+  margin: 1.5rem;
 }
 
 .m-1 {
   margin: 0.25rem;
 }
 
+.m-2 {
+  margin: 0.5rem;
+}
+
 .m-10 {
   margin: 2.5rem;
-}
-
-.m-4 {
-  margin: 1rem;
-}
-
-.m-6 {
-  margin: 1.5rem;
 }
 
 .mx-2 {
@@ -596,11 +592,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 0.5rem;
 }
 
-.mx-10 {
-  margin-left: 2.5rem;
-  margin-right: 2.5rem;
-}
-
 .my-1 {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
@@ -609,6 +600,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .my-3 {
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
+}
+
+.mx-10 {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
 }
 
 .mx-auto {
@@ -657,10 +653,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: block;
 }
 
-.inline-block {
-  display: inline-block;
-}
-
 .inline {
   display: inline;
 }
@@ -693,6 +685,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 8rem;
 }
 
+.w-6 {
+  width: 1.5rem;
+}
+
 .w-3\/6 {
   width: 50%;
 }
@@ -713,20 +709,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 33.333333%;
 }
 
-.w-4 {
-  width: 1rem;
-}
-
-.w-6 {
-  width: 1.5rem;
-}
-
 .w-screen {
   width: 100vw;
 }
 
 .w-12 {
   width: 3rem;
+}
+
+.w-4 {
+  width: 1rem;
 }
 
 .w-96 {
@@ -866,9 +858,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(254 226 226 / var(--tw-bg-opacity));
 }
 
-.bg-neutral-100 {
+.bg-stone-100 {
   --tw-bg-opacity: 1;
-  background-color: rgb(245 245 245 / var(--tw-bg-opacity));
+  background-color: rgb(245 245 244 / var(--tw-bg-opacity));
 }
 
 .p-10 {
@@ -1017,6 +1009,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
+.text-zinc-800 {
+  --tw-text-opacity: 1;
+  color: rgb(39 39 42 / var(--tw-text-opacity));
+}
+
 .outline {
   outline-style: solid;
 }
@@ -1059,12 +1056,39 @@ body {
 
 * {
   font-weight: 300;
+  letter-spacing: 0.05em;
+  color: rgb(63 63 70);
+}
+
+a:hover {
+  color: rgb(24 24 27);
 }
 
 .siteTitle {
   font-size: x-large;
   font-weight: 300;
   letter-spacing: 0.1em;
+}
+
+.dropdown {
+  z-index: 10;
+  position: absolute;
+  left: 0;
+  display: flex;
+  background-color: #fff;
+  justify-content: end;
+  width: 100vw;
+  border-bottom: rgb(39 39 42) 1px solid;
+  min-height: 50vh;
+  transition: ease-in-out 0.5s;
+}
+
+.dropdown ul {
+  margin: 2rem 15rem 2rem 2rem;
+}
+
+.dropdown li {
+  padding: 0.5rem;
 }
 
 .pageTitle {
@@ -1351,6 +1375,11 @@ textarea {
 .hover\:bg-red-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(185 28 28 / var(--tw-bg-opacity));
+}
+
+.hover\:text-zinc-800:hover {
+  --tw-text-opacity: 1;
+  color: rgb(39 39 42 / var(--tw-text-opacity));
 }
 
 @media (min-width: 640px) {
