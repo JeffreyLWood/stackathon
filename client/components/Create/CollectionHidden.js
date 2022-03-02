@@ -7,28 +7,44 @@ export default function CollectionHidden(props) {
 
   const dispatch = useDispatch();
 
-  let [hidden, setHidden] = useState(collection?.hidden);
+  let [hidden, setHidden] = useState(false);
 
   useEffect(() => {
-    collection = dispatch(fetchCollection(props.userId, props.collectionTitle));
-    setHidden(collection.hidden);
+    const load = async () => {
+      collection = await dispatch(fetchCollection(props.userId, props.primary));
+    };
+    load();
+    console.log("fire");
   }, [props.primary]);
 
-  const hiddenHandler = (e) => {
-    e.preventDefault();
-    setHidden(hidden ? false : true);
-    dispatch(hiddenCollection(props.userId, props.collectionTitle, hidden));
-  };
+  useEffect(() => {
+    setHidden(collection?.hidden);
+  }, [collection]);
 
+  const hiddenHandler = async (e) => {
+    e.preventDefault();
+    hidden ? setHidden(false) : setHidden(true);
+    console.log("hiddenhandler", hidden);
+    dispatch(
+      hiddenCollection(props.userId, props.primary, hidden ? false : true)
+    );
+  };
+  console.log("collection?.hidden", collection?.hidden);
   return (
     <div>
-      <img
-        onClick={(e) => hiddenHandler(e)}
-        src={
-          hidden ? "../../../hiddenactive.png" : "../../../hiddeninactive.png"
-        }
-        className="w-6  hover:cursor-pointer"
-      />
+      {hidden ? (
+        <img
+          onClick={(e) => hiddenHandler(e)}
+          src={"../../../hiddenactive.png"}
+          className="w-6  hover:cursor-pointer"
+        />
+      ) : (
+        <img
+          onClick={(e) => hiddenHandler(e)}
+          src={"../../../hiddeninactive.png"}
+          className="w-6  hover:cursor-pointer"
+        />
+      )}
     </div>
   );
 }

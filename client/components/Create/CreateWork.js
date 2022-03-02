@@ -151,6 +151,7 @@ export default function CreateWork(props) {
               // Boolean value, true is display modal, false is modal display:none
               show={show}
               setShow={setShow}
+              primary={primary}
               setPrimary={setPrimary}
             />
           </div>

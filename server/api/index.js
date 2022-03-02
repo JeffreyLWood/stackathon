@@ -7,6 +7,7 @@ const { cloudinary } = require("../utils/cloudinary");
 const res = require("express/lib/response");
 router.use("/users", require("./users"));
 
+// Used for uploading images. Image data goes to Cloudinary, image information including Cloudinary link goes to DB
 router.post("/upload", async (req, res) => {
   try {
     const fileStr = req.body.data;
@@ -55,6 +56,7 @@ router.post("/upload", async (req, res) => {
   }
 });
 
+// Use for reordering images by drag and drop in the CreateSnapshot
 router.post("/reorder", async (req, res) => {
   try {
     await Work.bulkCreate(req.body.list, {
@@ -76,6 +78,7 @@ router.post("/reorder", async (req, res) => {
   }
 });
 
+// Used for updating artwork/artwork information from the Snapshot/Modal
 router.post("/update", async (req, res) => {
   try {
     let collection = await Collection.findOne({
@@ -143,6 +146,7 @@ router.post("/update", async (req, res) => {
   }
 });
 
+// Not sure this is still needed
 router.get("/images", async (req, res) => {
   try {
     const { resources } = await cloudinary.search
@@ -155,97 +159,6 @@ router.get("/images", async (req, res) => {
     res.send(publicIds);
   } catch (error) {
     console.log("/api/index.js line 100", error);
-  }
-});
-
-router.post("/collections", async (req, res) => {
-  try {
-    let newCollection = await Collection.create({
-      userId: req.body.userId,
-      title: "New Collection",
-    });
-    let allCollections = await Collection.findAll({
-      where: { userId: req.body.userId },
-    });
-
-    res.status(200).send({ newCollection, allCollections });
-  } catch (error) {
-    console.log("/api/collections", error);
-  }
-});
-
-//Toggle hide and show collection
-router.put("/collections/:userId/:collection/hide", async (req, res) => {
-  try {
-    await Collection.update(
-      {
-        hidden: req.body.toggle,
-      },
-      { where: { userId: req.params.userId, title: req.params.collection } }
-    );
-    let collection = await Collection.findOne({
-      where: { userId: req.params.userId, title: req.params.collection },
-      include: Work,
-    });
-
-    // let collections = await Collection.findAll({
-    //   where: { userId: req.params.userId },
-    //   include: Work,
-    // });
-
-    res.status(200).send(collection);
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-router.put("/collections/:userId/:collection", async (req, res) => {
-  try {
-    await Collection.update(
-      {
-        title: req.body.title,
-        description: req.body.description,
-      },
-      { where: { userId: req.params.userId, title: req.params.collection } }
-    );
-    // let collection = await Collection.findOne({
-    //   where: { userId: req.params.userId, title: req.body.title },
-    // });
-    let newCollection = await Collection.findAll({
-      where: { userId: req.params.userId, title: req.body.title },
-      include: Work,
-    });
-    let collections = await Collection.findAll({
-      where: { userId: req.params.userId },
-      include: Work,
-    });
-    // response = JSON.stringify(response, null, 2);
-
-    res.status(200).send({ newCollection, collections });
-  } catch (error) {
-    console.log("/api/collections", error);
-  }
-});
-
-router.delete("/collections/:userId/:collection", async (req, res) => {
-  try {
-    let collection = await Collection.findOne({
-      where: { userId: req.params.userId, title: req.params.collection },
-    });
-    await Collection.destroy({
-      where: {
-        userId: req.params.userId,
-        id: collection.id,
-      },
-      include: Work,
-    });
-    let collections = await Collection.findAll({
-      where: { userId: req.params.userId },
-      include: Work,
-    });
-    res.status(202).send({ collections, collection });
-  } catch (error) {
-    console.log("/api/collections", error);
   }
 });
 

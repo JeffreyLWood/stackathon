@@ -5,15 +5,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 export const Navbar = (props) => {
-  let siteTitle = `${props.user.siteTitle}`;
-
-  document.title = siteTitle;
-
   const dispatch = useDispatch();
 
   // useEffect(() => {
-  //   dispatch(fetchUserData(props.user.username));
+  //   user = dispatch(fetchUserData(props?.match.params.url));
   // }, []);
+  console.log("navbar", props);
+  let siteTitle = `${props?.user.siteTitle}`;
+
+  document.title = siteTitle;
 
   let [workDropdown, setWorkDropdown] = useState("hidden");
 
@@ -43,7 +43,7 @@ export const Navbar = (props) => {
               <ul>
                 {collections &&
                   collections
-                    .filter((collection) => collection.hidden === "false")
+                    .filter((collection) => collection.hidden === false)
                     .map((collection, idx) => (
                       <li key={idx} className="cursor-pointer">
                         <Link to={`/jeffreywood/${collection.title}`}>

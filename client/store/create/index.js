@@ -193,9 +193,10 @@ export const updateCollectionData = (userId, collection, body) =>
 export const hiddenCollection = (userId, collection, toggle) =>
   async function (dispatch) {
     try {
+      console.log("store", toggle);
       let { data } = await axios.put(
-        `/api/collections/${userId}/${collection}/hide`,
-        { toggle: toggle }
+        `/api/collections/${userId}/hide/${collection}`,
+        { toggle }
       );
       dispatch(hideCollection(data));
     } catch (err) {
@@ -317,14 +318,17 @@ export default function (state = {}, action) {
       newState.contact = action.contactData;
       return newState;
     }
+
     case GET_ALL_WORK: {
       let newState = { ...state, collections: action.data };
       return newState;
     }
+
     case GET_COLLECTION: {
       let newState = { ...state, collection: action.data.collection }; //?
       return newState;
     }
+
     case GET_PRIMARY_COLLECTION: {
       let newState = {
         ...state,
@@ -334,17 +338,20 @@ export default function (state = {}, action) {
       }; //?
       return newState;
     }
+
     case GET_SECONDARY_COLLECTION: {
       let newState = { ...state, secondaryCollection: action.data.workData }; //?
       return newState;
     }
+
     case GET_SINGLE_WORK: {
       let newState = { ...state, work: action.data };
       return newState;
     }
-    case UPLOAD_WORK: {
-      let snapshotId = `${action.snapshotId}Collection`;
 
+    case UPLOAD_WORK: {
+      //Check
+      let snapshotId = `${action.snapshotId}Collection`;
       let newState = {
         ...state,
         [snapshotId]: action.data[0],
@@ -376,7 +383,6 @@ export default function (state = {}, action) {
        This way a user can click on a work from a snapshot and send it to another collection which may
        or may not be in the other snapshot. If it is, it will re render both, if it isn't, it will only
        re render the origin. */
-
       let origin = `${action.origin.snapshotId}Collection`;
       let destination = `${action.destination.snapshotId}Collection`;
       let data = {
@@ -421,34 +427,26 @@ export default function (state = {}, action) {
         ...state,
         primaryCollection: [],
         collections: [...state.collections, action.data.newCollection],
-        // user: { ...state, collections: action.data.allCollections },
       };
       return newState;
     }
 
     case UPDATE_COLLECTION: {
-      console.log(action.data);
       let newState = {
         ...state,
         primaryCollection: action.data.newCollection[0].works,
         collection: action.data.newCollection,
         collections: action.data.collections,
-        // user: {
-        //   ...state.user,
-        //   collections: [action.data.collections, action.data.newCollection],
-        // },
       };
       return newState;
     }
 
     case HIDDEN_COLLECTION: {
       let collection = action.data;
-      state.collection.hidden
-        ? (collection.hidden = false)
-        : (collection.hidden = true);
+      console.log("reduxer", action.data);
       let newState = {
         ...state,
-        collection: collection,
+        // collection: { ...collection, hidden: collection.hidden ? false : true },
       };
       return newState;
     }
@@ -461,8 +459,8 @@ export default function (state = {}, action) {
       };
       return newState;
     }
+
     case DELETE_COLLECTION: {
-      console.log(action.data);
       let newState = {
         ...state,
         collections: action.data.collections.filter(
