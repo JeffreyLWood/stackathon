@@ -9,6 +9,7 @@ import {
   fetchSecondaryCollection,
   reorder,
   hiddenCollection,
+  fetchCollection,
 } from "../../store/create";
 // import { Draggable, Droppable } from "react-beautiful-dnd";
 // import List from "./List";
@@ -23,13 +24,12 @@ export default function CreateSnapshot(props) {
       : useSelector((state) => state.create?.secondaryCollection);
 
   const dispatch = useDispatch();
+
   // Hide or show collection settings, if true: editing the collection title, description and delete collection
   // if false the thumbnails are show.
   let [settings, setSettings] = useState(false);
+
   // Load works from collection based on the user id the props.collectionTitle passed down
-
-  let [state, setState] = useState({ sortedList: [] });
-
   // Load Collection Data
   useEffect(() => {
     const load = async () => {
@@ -68,6 +68,7 @@ export default function CreateSnapshot(props) {
   }, [settings]);
 
   // Drag and Drop Functionality _______________*
+  let [state, setState] = useState({ sortedList: [] });
   useEffect(() => {
     try {
       setState({ sortedList: collection });
@@ -113,14 +114,6 @@ export default function CreateSnapshot(props) {
   };
   // Drag and Drop Functionality End ----------- *
 
-  let [hidden, setHidden] = useState(collection?.hidden);
-
-  const hiddenHandler = (e) => {
-    e.preventDefault();
-    setHidden(hidden ? false : true);
-    dispatch(hiddenCollection(props.userId, props.collectionTitle, hidden));
-  };
-
   if (!state.sortedList) {
     return null;
   } else {
@@ -142,8 +135,8 @@ export default function CreateSnapshot(props) {
               id={props.id}
               settings={settings}
               setSettings={setSettings}
-              hiddenHandler={hiddenHandler}
-              hidden={hidden}
+              primary={props.primary}
+              userId={props.userId}
             />
           ) : null}
         </div>

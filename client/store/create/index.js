@@ -443,7 +443,7 @@ export default function (state = {}, action) {
 
     case HIDDEN_COLLECTION: {
       let collection = action.data;
-      collection.hidden
+      state.collection.hidden
         ? (collection.hidden = false)
         : (collection.hidden = true);
       let newState = {
