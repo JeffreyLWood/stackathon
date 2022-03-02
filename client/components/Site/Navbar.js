@@ -39,7 +39,7 @@ export const Navbar = (props) => {
             onMouseLeave={hide}
             onClick={hide}
           >
-            Work
+            Selected Work
             <div className={workDropdown}>
               <ul>
                 {collections &&
@@ -53,7 +53,9 @@ export const Navbar = (props) => {
                           props.setCollection(collection);
                         }}
                       >
-                        {collection.title}
+                        <Link to={`/${props.user.userName}/`}>
+                          {collection.title}
+                        </Link>
                       </li>
                     ))}
               </ul>
