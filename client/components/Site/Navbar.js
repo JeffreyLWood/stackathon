@@ -45,10 +45,14 @@ export const Navbar = (props) => {
                   collections
                     .filter((collection) => collection.hidden === false)
                     .map((collection, idx) => (
-                      <li key={idx} className="cursor-pointer">
-                        <Link to={`/jeffreywood/${collection.title}`}>
-                          {collection.title}
-                        </Link>
+                      <li
+                        key={idx}
+                        className="cursor-pointer"
+                        onClick={() => {
+                          props.setCollection(collection);
+                        }}
+                      >
+                        {collection.title}
                       </li>
                     ))}
               </ul>
