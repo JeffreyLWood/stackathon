@@ -20,8 +20,6 @@ export const Work = (props) => {
     user.collections && setCollection(user.collections[1]);
   }, [user]);
 
-  console.log("collection", collection);
-
   return (
     <>
       <Navbar
@@ -32,6 +30,9 @@ export const Work = (props) => {
       <div className="flex justify-between flex-wrap w-full h-90vh">
         {collection?.works
           ? collection.works
+              .sort(function (a, b) {
+                return a.order - b.order;
+              })
               .filter((collection) => !collection.hidden) //?
               .map((work, index) => {
                 return <Artwork key={index} data={work} user={user} />;

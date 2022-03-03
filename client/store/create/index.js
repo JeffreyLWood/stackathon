@@ -330,6 +330,7 @@ export default function (state = {}, action) {
     }
 
     case GET_PRIMARY_COLLECTION: {
+      //Ideally the collections should be entire collection object not just works
       let newState = {
         ...state,
         primaryCollection: action.data.newCollectionWork
@@ -448,7 +449,6 @@ export default function (state = {}, action) {
 
     case HIDDEN_COLLECTION: {
       let collection = action.data;
-      console.log("reduxer", action.data);
       let newState = {
         ...state,
         // collection: { ...collection, hidden: collection.hidden ? false : true },

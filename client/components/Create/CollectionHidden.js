@@ -29,7 +29,7 @@ export default function CollectionHidden(props) {
       hiddenCollection(props.userId, props.primary, hidden ? false : true)
     );
   };
-  console.log("collection?.hidden", collection?.hidden);
+
   return (
     <div>
       {hidden ? (

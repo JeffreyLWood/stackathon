@@ -36,12 +36,6 @@ router.put("/:userId/hide/:collection", async (req, res) => {
       where: { userId: req.params.userId, title: req.params.collection },
       include: Work,
     });
-
-    // let collections = await Collection.findAll({
-    //   where: { userId: req.params.userId },
-    //   include: Work,
-    // });
-
     res.status(200).send(collection);
   } catch (error) {
     console.log(error);
@@ -57,9 +51,6 @@ router.put("/:userId/:collection", async (req, res) => {
       },
       { where: { userId: req.params.userId, title: req.params.collection } }
     );
-    // let collection = await Collection.findOne({
-    //   where: { userId: req.params.userId, title: req.body.title },
-    // });
     let newCollection = await Collection.findAll({
       where: { userId: req.params.userId, title: req.body.title },
       include: Work,
@@ -68,8 +59,6 @@ router.put("/:userId/:collection", async (req, res) => {
       where: { userId: req.params.userId },
       include: Work,
     });
-    // response = JSON.stringify(response, null, 2);
-
     res.status(200).send({ newCollection, collections });
   } catch (error) {
     console.log("/api/collections", error);

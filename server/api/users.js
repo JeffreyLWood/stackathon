@@ -125,8 +125,11 @@ router.get("/:userId/work", async (req, res, next) => {
       where: {
         userId: req.params.userId,
       },
-      include: { all: true, nested: true },
+
+      include: Work,
+      order: [["createdAt", "ASC"]],
     });
+
     res.status(200).send(workData);
   } catch (err) {
     next(err);

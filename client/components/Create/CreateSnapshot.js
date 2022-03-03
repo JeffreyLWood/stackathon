@@ -11,9 +11,6 @@ import {
   hiddenCollection,
   fetchCollection,
 } from "../../store/create";
-// import { Draggable, Droppable } from "react-beautiful-dnd";
-// import List from "./List";
-// import Item from "./Item";
 import Select from "./Select";
 import SnapshotToolbar from "./SnapshotToolbar";
 
@@ -48,6 +45,7 @@ export default function CreateSnapshot(props) {
       console.log(error);
     }
   }, [props.collectionTitle]);
+
   // Reload Collection Data when Settings Toggles
   useEffect(() => {
     const load = async () => {
@@ -167,6 +165,8 @@ export default function CreateSnapshot(props) {
             )}
             onDragEnd={reorderList}
           />
+        ) : props.collectionTitle === "Hidden" ? (
+          "Works you have marked as hidden will appear here and not be visible on your site"
         ) : (
           "Collection is empty"
         )}
