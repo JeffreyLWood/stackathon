@@ -350,12 +350,17 @@ export default function (state = {}, action) {
     }
 
     case UPLOAD_WORK: {
-      //Check
       let snapshotId = `${action.snapshotId}Collection`;
-      let newState = {
-        ...state,
-        [snapshotId]: action.data[0],
-      };
+      // If snapshotId is null then we are uploading to a collection not currently viewed
+      // by either snapshot and we can just return the state. Otherwise we need to refresh
+      // the correct snapshot view with the new work.
+      let newState =
+        action.snapshotId === null
+          ? { ...state }
+          : {
+              ...state,
+              [snapshotId]: action.data[0].works,
+            };
       return newState;
     }
 

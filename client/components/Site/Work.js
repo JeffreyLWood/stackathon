@@ -31,9 +31,11 @@ export const Work = (props) => {
       />
       <div className="flex justify-between flex-wrap w-full h-90vh">
         {collection?.works
-          ? collection.works.map((work, index) => {
-              return <Artwork key={index} data={work} user={user} />;
-            })
+          ? collection.works
+              .filter((collection) => !collection.hidden) //?
+              .map((work, index) => {
+                return <Artwork key={index} data={work} user={user} />;
+              })
           : null}
       </div>
 

@@ -19,6 +19,7 @@ app.use(express.json({ limit: "50mb" }));
 // auth and api routes
 app.use("/auth", require("./auth"));
 app.use("/api/collections/", require("./api/collections"));
+app.use("/api/users/", require("./api/users"));
 app.use("/api", require("./api"));
 
 app.get("/", (req, res) =>

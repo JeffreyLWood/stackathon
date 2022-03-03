@@ -48,7 +48,7 @@ export const Navbar = (props) => {
                     .map((collection, idx) => (
                       <li
                         key={idx}
-                        className="cursor-pointer"
+                        className="cursor-pointer mx-8"
                         onClick={() => {
                           props.setCollection(collection);
                         }}

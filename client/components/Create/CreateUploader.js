@@ -136,7 +136,14 @@ export default function CreateUploader(props) {
         medium: state.medium,
         hidden: hidden,
       };
-      dispatch(upload(body, props.id));
+      let snapshotId =
+        props.primary === state.collection
+          ? "primary"
+          : props.secondary === state.collection
+          ? "secondary"
+          : null;
+
+      dispatch(upload(body, snapshotId));
     } catch (error) {
       console.log(error);
     }
