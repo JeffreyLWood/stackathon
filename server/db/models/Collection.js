@@ -15,6 +15,10 @@ const Collection = db.define("collection", {
   order: {
     type: Sequelize.INTEGER,
   },
+  category: {
+    type: Sequelize.STRING,
+    defaultValue: "Primary",
+  },
 });
 
 module.exports = Collection;

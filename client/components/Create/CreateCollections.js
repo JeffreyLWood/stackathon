@@ -13,42 +13,49 @@ import {
   fetchCollection,
   fetchAllWork,
 } from "../../store/create";
+import { DragDropContext } from "react-beautiful-dnd";
+import CollectionColumn from "./CollectionColumn";
+
 export default function CreateCollections(props) {
   let collections = useSelector((state) => state.create.collections);
   const dispatch = useDispatch();
 
-  //   useEffect(() => {
-  //     collections = dispatch(fetchAllWork(props.userId));
-  //   }, []);
+  useEffect(() => {
+    collections = dispatch(fetchAllWork(props.userId));
+  }, []);
 
   const closeHandler = () => {
     props.setShowCollections(false);
   };
+
+  const onDragEnd = () => {};
 
   if (!props.showCollections) {
     return null;
   }
 
   return (
-    <div></div>
-    // <div className="modal">
-    //   <div className="modal-content">
-    //     <div className="modal-collection flex justify-between">
-    //       <h2>{props.displayName}</h2>
-    //       <h2 onClick={closeHandler}>
-    //         <img src="/icons8-close-16.png"></img>
-    //       </h2>
-    //     </div>
-    //     {/* Modal Body */}
-    //     <div className="h-full">
-    //       <ul>
-    //         {collections &&
-    //           collections.map((collection, index) => (
-    //             <li key={index}>{collection.title}</li>
-    //           ))}
-    //       </ul>
-    //     </div>
-    //   </div>
-    // </div>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <div className="modal">
+        <div className="modal-content">
+          <div className="modal-collection flex justify-between">
+            <h2>{props.displayName}</h2>
+            <h2 onClick={closeHandler}>
+              <img src="/icons8-close-16.png"></img>
+            </h2>
+          </div>
+          {/* Modal Body */}
+          <div className="min-h-full flex flex-col md:flex-row">
+            <div className="w-3/6 min-h-full"></div>
+            <CollectionColumn category={"Primary"} collections={collections} />
+            <CollectionColumn
+              category={"Secondary"}
+              collections={collections}
+            />
+            <CollectionColumn category={"Hidden"} collections={collections} />
+          </div>
+        </div>
+      </div>
+    </DragDropContext>
   );
 }

@@ -17,7 +17,11 @@ export const Work = (props) => {
   }, []);
 
   useEffect(() => {
-    user.collections && setCollection(user.collections[1]);
+    let visible =
+      user.collections &&
+      user.collections.filter((collection) => !collection.hidden);
+
+    user.collections && setCollection(visible[0]);
   }, [user]);
 
   return (

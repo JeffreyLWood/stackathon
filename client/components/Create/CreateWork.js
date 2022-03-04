@@ -181,7 +181,7 @@ export default function CreateWork(props) {
           <img
             src="../../../collectionactive.png"
             id="Collections"
-            onClick={(e) => addHandler(e)}
+            onClick={() => setShowCollections(true)}
             className="w-12 m-2"
           />
           {/* Add a Work */}
@@ -221,8 +221,6 @@ export default function CreateWork(props) {
       {/* Modal for editing Collections */}
       <CreateCollections
         collections={collections}
-        // Collection which the Edit Work work is in
-
         primary={primary}
         secondary={secondary}
         // Edit or Add a Work
