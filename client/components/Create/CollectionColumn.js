@@ -28,8 +28,8 @@ const CollectionList = styled.div`
 import CollectionDraggable from "./CollectionDraggable";
 export default function CollectionColumn(props) {
   return (
-    <div className="border-2 border-neutral-100 p-2 m-2 h-36 md:h-96 md:w-3/12">
-      <span>{props.category}</span>
+    <div className="border-l-2 border-neutral-100 p-2 m-2 h-36 md:h-96 md:w-3/12">
+      <span className="ml-2">{props.category}</span>
       <Droppable droppableId={props.column}>
         {(provided, snapshot) => (
           <CollectionList

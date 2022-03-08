@@ -268,9 +268,14 @@ export const reorder = (userId, collection, list, snapshotId) =>
     }
   };
 
-export const reorderWholeCollections = (userId, collection) =>
+export const reorderWholeCollections = (userId, collection, reorder) =>
   async function (dispatch) {
     try {
+      if (reorder === true) {
+        collection.category =
+          collection.category === "Primary" ? "Secondary" : "Primary";
+      }
+
       let { data } = await axios.put(
         `/api/collections/${userId}/${collection}/reorder`,
         collection

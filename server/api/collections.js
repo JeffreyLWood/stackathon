@@ -84,6 +84,7 @@ router.put("/:userId/:collection/reorder", async (req, res) => {
     await Collection.update(
       {
         order: req.body.order,
+        category: req.body.category,
       },
       { where: { userId: req.params.userId, title: req.body.title } }
     );

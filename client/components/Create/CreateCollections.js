@@ -24,7 +24,6 @@ export default function CreateCollections(props) {
   let [columns, setColumns] = useState({
     col1: { id: "col1", title: "Primary", collections: [] },
     col2: { id: "col2", title: "Secondary", collections: [] },
-    col3: { id: "col3", title: "Hidden", collections: [] },
   });
 
   useEffect(() => {
@@ -34,27 +33,36 @@ export default function CreateCollections(props) {
   useEffect(() => {
     let primary = [];
     let secondary = [];
-    let hidden = [];
 
+    console.log("columns", columns);
     for (let i = 0; i < collections.length; i++) {
       let category = collections[i].category;
-      if (category === "Primary") {
-        primary.push(collections[i]);
-        setColumns({
-          ...columns,
-          col1: {
-            ...columns.col1,
-            collections: primary,
-          },
-        });
-      }
-      if (category === "Secondary") {
+      if (collections[i].category === "Secondary") {
+        console.log("secondary", secondary);
         secondary.push(collections[i]);
         setColumns({
           ...columns,
           col2: {
             ...columns.col2,
             collections: secondary,
+          },
+          col1: {
+            ...columns.col1,
+            collections: primary,
+          },
+        });
+      }
+      if (category === "Primary") {
+        primary.push(collections[i]);
+        setColumns({
+          ...columns,
+          col2: {
+            ...columns.col2,
+            collections: secondary,
+          },
+          col1: {
+            ...columns.col1,
+            collections: primary,
           },
         });
       }
@@ -89,10 +97,10 @@ export default function CreateCollections(props) {
         }
       }
       if (source.index > destination.index) {
-        newOrder = start.collections[destination.index].order - 0.1;
+        newOrder = start.collections[destination.index].order - 0.5;
       }
       if (source.index < destination.index) {
-        newOrder = start.collections[destination.index].order + 0.1;
+        newOrder = start.collections[destination.index].order + 0.5;
       }
 
       newCollection.order = newOrder;
@@ -105,14 +113,15 @@ export default function CreateCollections(props) {
       };
       newColumn.collections.push(newCollection);
       setColumns({ ...columns, [newColumn.id]: newColumn });
-      dispatch(reorderWholeCollections(props.userId, newCollection));
+      dispatch(reorderWholeCollections(props.userId, newCollection, false));
     } else {
       let newCollection = {};
-      for (let i = 0; i < start.collections.length; i++) {
+      for (let i = 0; i < collections.length; i++) {
         if (collections[i].title === draggableId) {
           newCollection = collections[i];
         }
       }
+
       const startColumn = {
         ...start,
         collections: start.collections.filter(
@@ -125,10 +134,11 @@ export default function CreateCollections(props) {
       };
 
       setColumns({
-        ...columns,
         [startColumn.id]: startColumn,
         [finishColumn.id]: finishColumn,
       });
+
+      dispatch(reorderWholeCollections(props.userId, newCollection, true));
     }
   };
 
