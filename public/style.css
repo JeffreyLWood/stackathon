@@ -557,6 +557,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   grid-row-start: 2;
 }
 
+.m-2 {
+  margin: 0.5rem;
+}
+
 .m-5 {
   margin: 1.25rem;
 }
@@ -569,21 +573,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin: 0.25rem;
 }
 
-.m-2 {
-  margin: 0.5rem;
-}
-
 .m-10 {
   margin: 2.5rem;
-}
-
-.m-4 {
-  margin: 1rem;
 }
 
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+}
+
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .my-5 {
@@ -594,11 +595,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .my-10 {
   margin-top: 2.5rem;
   margin-bottom: 2.5rem;
-}
-
-.my-2 {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
 }
 
 .my-1 {
@@ -687,6 +683,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
+.h-36 {
+  height: 9rem;
+}
+
 .h-56 {
   height: 14rem;
 }
@@ -697,18 +697,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-32 {
   height: 8rem;
-}
-
-.h-3\/6 {
-  height: 50%;
-}
-
-.h-96 {
-  height: 24rem;
-}
-
-.h-36 {
-  height: 9rem;
 }
 
 .min-h-full {
@@ -753,14 +741,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-96 {
   width: 24rem;
-}
-
-.w-1\/6 {
-  width: 16.666667%;
-}
-
-.w-3\/12 {
-  width: 25%;
 }
 
 .shrink {
@@ -871,6 +851,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-style: hidden;
 }
 
+.border-neutral-100 {
+  --tw-border-opacity: 1;
+  border-color: rgb(245 245 245 / var(--tw-border-opacity));
+}
+
 .border-gray-200 {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
@@ -879,21 +864,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-blue-300 {
   --tw-border-opacity: 1;
   border-color: rgb(147 197 253 / var(--tw-border-opacity));
-}
-
-.border-neutral-200 {
-  --tw-border-opacity: 1;
-  border-color: rgb(229 229 229 / var(--tw-border-opacity));
-}
-
-.border-white {
-  --tw-border-opacity: 1;
-  border-color: rgb(255 255 255 / var(--tw-border-opacity));
-}
-
-.border-neutral-100 {
-  --tw-border-opacity: 1;
-  border-color: rgb(245 245 245 / var(--tw-border-opacity));
 }
 
 .bg-white {
@@ -916,10 +886,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(245 245 244 / var(--tw-bg-opacity));
 }
 
-.p-10 {
-  padding: 2.5rem;
-}
-
 .p-2 {
   padding: 0.5rem;
 }
@@ -928,18 +894,22 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding: 0.25rem;
 }
 
-.p-5 {
-  padding: 1.25rem;
+.p-10 {
+  padding: 2.5rem;
 }
 
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+.p-5 {
+  padding: 1.25rem;
 }
 
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .px-16 {
@@ -1421,22 +1391,8 @@ textarea {
   cursor: pointer;
 }
 
-.hover\:border-2:hover {
-  border-width: 2px;
-}
-
 .hover\:border-solid:hover {
   border-style: solid;
-}
-
-.hover\:border-neutral-400:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(163 163 163 / var(--tw-border-opacity));
-}
-
-.hover\:border-neutral-200:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(229 229 229 / var(--tw-border-opacity));
 }
 
 .hover\:border-indigo-400:hover {
@@ -1452,11 +1408,6 @@ textarea {
 .hover\:text-zinc-800:hover {
   --tw-text-opacity: 1;
   color: rgb(39 39 42 / var(--tw-text-opacity));
-}
-
-.focus\:border-neutral-200:focus {
-  --tw-border-opacity: 1;
-  border-color: rgb(229 229 229 / var(--tw-border-opacity));
 }
 
 @media (min-width: 640px) {
@@ -1539,12 +1490,16 @@ textarea {
     margin-left: 10rem;
   }
 
+  .md\:h-96 {
+    height: 24rem;
+  }
+
   .md\:h-56 {
     height: 14rem;
   }
 
-  .md\:h-96 {
-    height: 24rem;
+  .md\:w-3\/12 {
+    width: 25%;
   }
 
   .md\:w-5\/6 {
@@ -1557,10 +1512,6 @@ textarea {
 
   .md\:w-2\/6 {
     width: 33.333333%;
-  }
-
-  .md\:w-3\/12 {
-    width: 25%;
   }
 
   .md\:flex-row {

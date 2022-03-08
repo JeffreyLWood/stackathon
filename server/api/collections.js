@@ -4,14 +4,28 @@ const {
   models: { User, About, Contact, CV, Work, Collection },
 } = require("../db");
 module.exports = router;
+const Sequelize = require("sequelize");
 
 // Used for creating a new collection
 router.post("/", async (req, res) => {
   try {
-    let newCollection = await Collection.create({
-      userId: req.body.userId,
-      title: "New Collection",
+    let check = await Collection.findAll({
+      where: {
+        userId: req.body.userId,
+        title: { [Sequelize.Op.startsWith]: "New Collection" },
+      },
     });
+    let newCollection =
+      check.length > 0
+        ? await Collection.create({
+            userId: req.body.userId,
+            title: `New Collection ${(check.length += 1)}`,
+          })
+        : await Collection.create({
+            userId: req.body.userId,
+            title: "New Collection",
+          });
+
     let allCollections = await Collection.findAll({
       where: { userId: req.body.userId },
     });

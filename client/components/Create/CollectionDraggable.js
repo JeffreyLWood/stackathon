@@ -16,14 +16,15 @@ import {
 import { Draggable } from "react-beautiful-dnd";
 
 export default function CollectionDraggable(props) {
+  console.log("draggable", props);
   return (
-    <Draggable draggableId={String(props.id)} index={props.index}>
+    <Draggable draggableId={props.collectionTitle} index={props.index}>
       {(provided) => (
         <div
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
-          className="bg-white my-2 border-2 text-sm p-1 border-neutral-100 hover:border-indigo-400"
+          className="bg-white my-2 px-2 border-2 text-sm p-1 border-neutral-100 hover:border-indigo-400"
         >
           {props.collectionTitle}
         </div>

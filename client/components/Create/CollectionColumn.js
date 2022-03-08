@@ -21,19 +21,15 @@ export default function CollectionColumn(props) {
   return (
     <div className="border-2 border-neutral-100 p-2 m-2 h-36 md:h-96 md:w-3/12">
       <span>{props.category}</span>
-      <Droppable droppableId={props.category}>
+      <Droppable droppableId={props.column}>
         {(provided) => (
           <CollectionList ref={provided.innerRef} {...provided.droppableProps}>
             {props.collections &&
               props.collections
-                .filter(
-                  (collection) =>
-                    collection.category === props.category &&
-                    collection.title !== "Hidden"
-                )
+                .sort((a, b) => a.order - b.order)
                 .map((collection, index) => (
                   <CollectionDraggable
-                    key={index}
+                    key={collection.id}
                     id={collection.id}
                     collectionTitle={collection.title}
                     index={index}

@@ -224,7 +224,7 @@ export default function CreateWork(props) {
         primary={primary}
         secondary={secondary}
         // Edit or Add a Work
-        displayName={"Collections"}
+        displayName={"Collections Navigation"}
         showCollections={showCollections}
         setShowCollections={setShowCollections}
         // imgId for the fetchSingleWork for Edit Work

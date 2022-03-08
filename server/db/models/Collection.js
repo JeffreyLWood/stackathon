@@ -33,12 +33,14 @@ module.exports = Collection;
 
 //Hooks
 
-// const newCollection = (collection) => {
-//   try {
-//    if(collection.title === "New Collection"){
-//      await Collection.find
-//    }
-//   } catch (error) {}
-// };
+// Applies an index to each collection made for ordering/reordering purposes
+const index = async (collection) => {
+  try {
+    let count = await Collection.count();
+    collection.order = count;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-// Work.beforeCreate(newCollection)
+Collection.beforeCreate(index);
