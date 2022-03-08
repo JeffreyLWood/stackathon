@@ -34,11 +34,9 @@ export default function CreateCollections(props) {
     let primary = [];
     let secondary = [];
 
-    console.log("columns", columns);
     for (let i = 0; i < collections.length; i++) {
       let category = collections[i].category;
       if (collections[i].category === "Secondary") {
-        console.log("secondary", secondary);
         secondary.push(collections[i]);
         setColumns({
           ...columns,
