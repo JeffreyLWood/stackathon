@@ -13,7 +13,7 @@ const Collection = db.define("collection", {
     defaultValue: true,
   },
   order: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.REAL,
   },
   category: {
     type: Sequelize.STRING,

@@ -79,6 +79,25 @@ router.put("/:userId/:collection", async (req, res) => {
   }
 });
 
+router.put("/:userId/:collection/reorder", async (req, res) => {
+  try {
+    await Collection.update(
+      {
+        order: req.body.order,
+      },
+      { where: { userId: req.params.userId, title: req.body.title } }
+    );
+    let newCollection = await Collection.findAll({
+      where: { userId: req.params.userId, title: req.body.title },
+      include: Work,
+    });
+
+    res.status(200).send(newCollection);
+  } catch (error) {
+    console.log("/api/collections", error);
+  }
+});
+
 router.delete("/:userId/:collection", async (req, res) => {
   try {
     let collection = await Collection.findOne({

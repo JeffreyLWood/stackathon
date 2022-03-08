@@ -12,6 +12,7 @@ import {
   fetchSingleWork,
   fetchCollection,
   fetchAllWork,
+  reorderWholeCollections,
 } from "../../store/create";
 import { DragDropContext } from "react-beautiful-dnd";
 import CollectionColumn from "./CollectionColumn";
@@ -34,6 +35,7 @@ export default function CreateCollections(props) {
     let primary = [];
     let secondary = [];
     let hidden = [];
+
     for (let i = 0; i < collections.length; i++) {
       let category = collections[i].category;
       if (category === "Primary") {
@@ -46,8 +48,17 @@ export default function CreateCollections(props) {
           },
         });
       }
+      if (category === "Secondary") {
+        secondary.push(collections[i]);
+        setColumns({
+          ...columns,
+          col2: {
+            ...columns.col2,
+            collections: secondary,
+          },
+        });
+      }
     }
-    console.log("columns", columns);
   }, [collections]);
 
   const closeHandler = () => {
@@ -56,7 +67,6 @@ export default function CreateCollections(props) {
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
-    console.log("result", result);
     if (!destination) {
       return;
     }
@@ -67,34 +77,59 @@ export default function CreateCollections(props) {
     ) {
       return;
     }
-    const column = columns[source.droppableId];
+    const start = columns[source.droppableId];
+    const finish = columns[destination.droppableId];
     // newCollectionIds.splice(destination.index, 0, Number(draggableId));
-    let newOrder = 0;
-    let newCollection = {};
-    for (let i = 0; i < column.collections.length; i++) {
-      if (collections[i].title === draggableId) {
-        newCollection = collections[i];
+    if (start === finish) {
+      let newOrder = 0;
+      let newCollection = {};
+      for (let i = 0; i < start.collections.length; i++) {
+        if (collections[i].title === draggableId) {
+          newCollection = collections[i];
+        }
       }
-    }
-    if (source.index > destination.index) {
-      newOrder = column.collections[destination.index].order - 1;
-    }
-    if (source.index < destination.index) {
-      newOrder = column.collections[destination.index].order + 1;
-    }
+      if (source.index > destination.index) {
+        newOrder = start.collections[destination.index].order - 0.1;
+      }
+      if (source.index < destination.index) {
+        newOrder = start.collections[destination.index].order + 0.1;
+      }
 
-    newCollection.order = newOrder;
+      newCollection.order = newOrder;
 
-    const newColumn = {
-      ...column,
-      collections: column.collections.filter(
-        (collection) => collection.title !== newCollection.title
-      ),
-    };
-    newColumn.collections.push(newCollection);
-    setColumns({ ...columns, [newColumn.id]: newColumn });
-    console.log("columns", columns);
-    console.log("newColumn", newColumn);
+      const newColumn = {
+        ...start,
+        collections: start.collections.filter(
+          (collection) => collection.title !== newCollection.title
+        ),
+      };
+      newColumn.collections.push(newCollection);
+      setColumns({ ...columns, [newColumn.id]: newColumn });
+      dispatch(reorderWholeCollections(props.userId, newCollection));
+    } else {
+      let newCollection = {};
+      for (let i = 0; i < start.collections.length; i++) {
+        if (collections[i].title === draggableId) {
+          newCollection = collections[i];
+        }
+      }
+      const startColumn = {
+        ...start,
+        collections: start.collections.filter(
+          (collection) => collection.title !== newCollection.title
+        ),
+      };
+      const finishColumn = {
+        ...finish,
+        collections: [...finish.collections, newCollection],
+      };
+
+      setColumns({
+        ...columns,
+        [startColumn.id]: startColumn,
+        [finishColumn.id]: finishColumn,
+      });
+    }
   };
 
   if (!props.showCollections) {
@@ -124,11 +159,11 @@ export default function CreateCollections(props) {
               column="col2"
               collections={columns.col2.collections}
             />
-            <CollectionColumn
+            {/* <CollectionColumn
               category={"Hidden"}
               column="col3"
               collections={columns.col3.collections}
-            />
+            /> */}
           </div>
         </div>
       </div>

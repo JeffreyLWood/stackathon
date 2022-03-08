@@ -14,7 +14,10 @@ const UPLOAD_WORK = "UPLOAD_WORK";
 const UPDATE_WORK = "UPDATE_WORK";
 const UPDATE_COLLECTION = "UPDATE_COLLECTION";
 const SWITCH_COLLECTION = "SWITCH_COLLECTION";
+//Used for Reordering works in a collection
 const REORDER_COLLECTION = "REORDER_COLLECTION";
+//Used for reordering collections themselves
+const REORDER_COLLECTIONS = "REORDER_COLLECTIONS";
 const ADD_COLLECTION = "ADD_COLLECTION";
 const HIDDEN_COLLECTION = "HIDDEN_COLLECTION";
 const DELETE_WORK = "DELETE_WORK";
@@ -75,6 +78,10 @@ const switchCollection = (data, origin, destination) => {
 
 const reorderCollection = (data, snapshotId) => {
   return { type: REORDER_COLLECTION, data, snapshotId };
+};
+
+const reorderCollections = (data) => {
+  return { type: REORDER_COLLECTION, data };
 };
 
 const addCollection = (data) => {
@@ -256,6 +263,19 @@ export const reorder = (userId, collection, list, snapshotId) =>
     try {
       let { data } = await axios.post(`/api/reorder`, body);
       dispatch(reorderCollection(data, snapshotId));
+    } catch (err) {
+      return err;
+    }
+  };
+
+export const reorderWholeCollections = (userId, collection) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.put(
+        `/api/collections/${userId}/${collection}/reorder`,
+        collection
+      );
+      dispatch(reorderCollections(data));
     } catch (err) {
       return err;
     }
@@ -453,6 +473,17 @@ export default function (state = {}, action) {
         ...state,
         // collection: { ...collection, hidden: collection.hidden ? false : true },
       };
+      return newState;
+    }
+
+    case REORDER_COLLECTIONS: {
+      let newState = {
+        ...state,
+        collections: state.collections.filter(
+          (collection) => collection.id !== action.data.id
+        ),
+      };
+      newState.collections.push(action.data);
       return newState;
     }
 

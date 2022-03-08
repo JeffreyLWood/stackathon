@@ -14,20 +14,26 @@ import {
   fetchAllWork,
 } from "../../store/create";
 import { Draggable } from "react-beautiful-dnd";
-
+import styled from "styled-components";
+const Container = styled.div`
+  border-width: 1px;
+  border-style: solid;
+  border-color: ${(props) =>
+    props.isDragging ? "rgb(129 140 248)" : "rgb(245 245 245)"};
+`;
 export default function CollectionDraggable(props) {
-  console.log("draggable", props);
   return (
     <Draggable draggableId={props.collectionTitle} index={props.index}>
-      {(provided) => (
-        <div
+      {(provided, snapshot) => (
+        <Container
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
-          className="bg-white my-2 px-2 border-2 text-sm p-1 border-neutral-100 hover:border-indigo-400"
+          isDragging={snapshot.isDragging}
+          className="bg-white my-2 px-2 text-sm p-1 "
         >
           {props.collectionTitle}
-        </div>
+        </Container>
       )}
     </Draggable>
   );

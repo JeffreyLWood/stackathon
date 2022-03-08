@@ -747,6 +747,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   flex-shrink: 1;
 }
 
+.flex-grow {
+  flex-grow: 1;
+}
+
 .grow {
   flex-grow: 1;
 }

@@ -15,15 +15,28 @@ import {
 } from "../../store/create";
 import styled from "styled-components";
 import { Droppable } from "react-beautiful-dnd";
-const CollectionList = styled.div``;
+const CollectionList = styled.div`
+  background-color: ${(props) =>
+    props.isDraggingOver ? "rgb(245 245 245)" : "#fff"};
+  padding: 0.5rem;
+  transition: background-color 0.2s ease-in;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 1rem;
+`;
 import CollectionDraggable from "./CollectionDraggable";
 export default function CollectionColumn(props) {
   return (
     <div className="border-2 border-neutral-100 p-2 m-2 h-36 md:h-96 md:w-3/12">
       <span>{props.category}</span>
       <Droppable droppableId={props.column}>
-        {(provided) => (
-          <CollectionList ref={provided.innerRef} {...provided.droppableProps}>
+        {(provided, snapshot) => (
+          <CollectionList
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            isDraggingOver={snapshot.isDraggingOver}
+          >
             {props.collections &&
               props.collections
                 .sort((a, b) => a.order - b.order)
