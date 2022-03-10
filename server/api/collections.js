@@ -4,14 +4,28 @@ const {
   models: { User, About, Contact, CV, Work, Collection },
 } = require("../db");
 module.exports = router;
+const Sequelize = require("sequelize");
 
 // Used for creating a new collection
 router.post("/", async (req, res) => {
   try {
-    let newCollection = await Collection.create({
-      userId: req.body.userId,
-      title: "New Collection",
+    let check = await Collection.findAll({
+      where: {
+        userId: req.body.userId,
+        title: { [Sequelize.Op.startsWith]: "New Collection" },
+      },
     });
+    let newCollection =
+      check.length > 0
+        ? await Collection.create({
+            userId: req.body.userId,
+            title: `New Collection ${(check.length += 1)}`,
+          })
+        : await Collection.create({
+            userId: req.body.userId,
+            title: "New Collection",
+          });
+
     let allCollections = await Collection.findAll({
       where: { userId: req.body.userId },
     });
@@ -60,6 +74,26 @@ router.put("/:userId/:collection", async (req, res) => {
       include: Work,
     });
     res.status(200).send({ newCollection, collections });
+  } catch (error) {
+    console.log("/api/collections", error);
+  }
+});
+
+router.put("/:userId/:collection/reorder", async (req, res) => {
+  try {
+    await Collection.update(
+      {
+        order: req.body.order,
+        category: req.body.category,
+      },
+      { where: { userId: req.params.userId, title: req.body.title } }
+    );
+    let newCollection = await Collection.findAll({
+      where: { userId: req.params.userId, title: req.body.title },
+      include: Work,
+    });
+
+    res.status(200).send(newCollection);
   } catch (error) {
     console.log("/api/collections", error);
   }

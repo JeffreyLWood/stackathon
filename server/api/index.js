@@ -81,13 +81,18 @@ router.post("/reorder", async (req, res) => {
 // Used for updating artwork/artwork information from the Snapshot/Modal
 router.post("/update", async (req, res) => {
   try {
+    let origin = await Collection.findOne({
+      where: { title: req.body.origin.collection, userId: req.body.userId },
+    });
+
     let collection = await Collection.findOne({
       where: { title: req.body.collection, userId: req.body.userId },
     });
+
     let work = await Work.findOne({
       where: {
         imgId: req.body.imgId,
-        // collectionId: collection.id,
+        collectionId: origin.id,
       },
     });
 
@@ -122,7 +127,7 @@ router.post("/update", async (req, res) => {
       });
     }
     // If request is switch collection, send back origin and destination collections
-    if (req.body.origin) {
+    if (req.body.origin && req.body.destination) {
       let origin = await Collection.findAll({
         where: { title: req.body.origin.collection, userId: req.body.userId },
         include: Work,

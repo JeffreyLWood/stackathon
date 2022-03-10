@@ -12,6 +12,7 @@ import {
   fetchCollection,
   fetchAllWork,
 } from "../../store/create";
+import CreateCollections from "./CreateCollections";
 export default function CreateWork(props) {
   let username = useSelector((state) => state.auth.username);
   let worksData = useSelector((state) => state.create.collections);
@@ -41,6 +42,9 @@ export default function CreateWork(props) {
   // Set modal collection tells the modal what collection the work is from, setting
   // the select option to default to it when Editing a Work. Could be further optimized
   let [modalCollection, setModalCollection] = useState("Work"); // Not loading
+
+  //Modal for editing collections
+  let [showCollections, setShowCollections] = useState(false);
 
   // Load user data at each change.
   useEffect(() => {
@@ -177,7 +181,7 @@ export default function CreateWork(props) {
           <img
             src="../../../collectionactive.png"
             id="Collections"
-            onClick={(e) => addHandler(e)}
+            onClick={() => setShowCollections(true)}
             className="w-12 m-2"
           />
           {/* Add a Work */}
@@ -213,6 +217,19 @@ export default function CreateWork(props) {
         userId={userId}
         // Room for optimization here, if Modal collection is same as primary, id is primary, else it is secondary
         snapshotId={modalCollection === primary ? "primary" : "secondary"}
+      />
+      {/* Modal for editing Collections */}
+      <CreateCollections
+        collections={collections}
+        primary={primary}
+        secondary={secondary}
+        // Edit or Add a Work
+        displayName={"Collections Navigation"}
+        showCollections={showCollections}
+        setShowCollections={setShowCollections}
+        // imgId for the fetchSingleWork for Edit Work
+        user={user}
+        userId={userId}
       />
     </div>
   );

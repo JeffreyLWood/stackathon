@@ -154,6 +154,7 @@ export default function CreateUploader(props) {
       let body = {
         data: base64EncodedImage,
         newImage: previewSource ? true : false,
+        origin: { collection: props.collection },
         collection: state.collection,
         imgId: work.imgId,
         userId: user.id,

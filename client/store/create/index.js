@@ -14,7 +14,10 @@ const UPLOAD_WORK = "UPLOAD_WORK";
 const UPDATE_WORK = "UPDATE_WORK";
 const UPDATE_COLLECTION = "UPDATE_COLLECTION";
 const SWITCH_COLLECTION = "SWITCH_COLLECTION";
+//Used for Reordering works in a collection
 const REORDER_COLLECTION = "REORDER_COLLECTION";
+//Used for reordering collections themselves
+const REORDER_COLLECTIONS = "REORDER_COLLECTIONS";
 const ADD_COLLECTION = "ADD_COLLECTION";
 const HIDDEN_COLLECTION = "HIDDEN_COLLECTION";
 const DELETE_WORK = "DELETE_WORK";
@@ -75,6 +78,10 @@ const switchCollection = (data, origin, destination) => {
 
 const reorderCollection = (data, snapshotId) => {
   return { type: REORDER_COLLECTION, data, snapshotId };
+};
+
+const reorderCollections = (data) => {
+  return { type: REORDER_COLLECTION, data };
 };
 
 const addCollection = (data) => {
@@ -261,6 +268,24 @@ export const reorder = (userId, collection, list, snapshotId) =>
     }
   };
 
+export const reorderWholeCollections = (userId, collection, reorder) =>
+  async function (dispatch) {
+    try {
+      if (reorder === true) {
+        collection.category =
+          collection.category === "Primary" ? "Secondary" : "Primary";
+      }
+
+      let { data } = await axios.put(
+        `/api/collections/${userId}/${collection}/reorder`,
+        collection
+      );
+      dispatch(reorderCollections(data));
+    } catch (err) {
+      return err;
+    }
+  };
+
 export const newCollection = (userId) =>
   async function (dispatch) {
     try {
@@ -389,6 +414,7 @@ export default function (state = {}, action) {
        This way a user can click on a work from a snapshot and send it to another collection which may
        or may not be in the other snapshot. If it is, it will re render both, if it isn't, it will only
        re render the origin. */
+
       let origin = `${action.origin.snapshotId}Collection`;
       let destination = `${action.destination.snapshotId}Collection`;
       let data = {
@@ -396,7 +422,6 @@ export default function (state = {}, action) {
         origin: JSON.parse(action.data.origin),
         destination: JSON.parse(action.data.destination),
       };
-
       /* The Following Ternary Operator Explained:
       If destination is nullCollection then our destination is NOT a primary or secondary snapshot and we should
       not add it to one of them, but only filter it from our origin. Otherwise, it IS primary or secondary
@@ -453,6 +478,17 @@ export default function (state = {}, action) {
         ...state,
         // collection: { ...collection, hidden: collection.hidden ? false : true },
       };
+      return newState;
+    }
+
+    case REORDER_COLLECTIONS: {
+      let newState = {
+        ...state,
+        collections: state.collections.filter(
+          (collection) => collection.id !== action.data.id
+        ),
+      };
+      newState.collections.push(action.data);
       return newState;
     }
 
