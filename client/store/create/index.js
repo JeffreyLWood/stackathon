@@ -414,6 +414,7 @@ export default function (state = {}, action) {
        This way a user can click on a work from a snapshot and send it to another collection which may
        or may not be in the other snapshot. If it is, it will re render both, if it isn't, it will only
        re render the origin. */
+
       let origin = `${action.origin.snapshotId}Collection`;
       let destination = `${action.destination.snapshotId}Collection`;
       let data = {
@@ -421,7 +422,6 @@ export default function (state = {}, action) {
         origin: JSON.parse(action.data.origin),
         destination: JSON.parse(action.data.destination),
       };
-
       /* The Following Ternary Operator Explained:
       If destination is nullCollection then our destination is NOT a primary or secondary snapshot and we should
       not add it to one of them, but only filter it from our origin. Otherwise, it IS primary or secondary

@@ -627,6 +627,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 2rem;
 }
 
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
 .mb-5 {
   margin-bottom: 1.25rem;
 }
@@ -657,10 +661,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .mt-10 {
   margin-top: 2.5rem;
-}
-
-.ml-2 {
-  margin-left: 0.5rem;
 }
 
 .block {
@@ -749,10 +749,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .shrink {
   flex-shrink: 1;
-}
-
-.flex-grow {
-  flex-grow: 1;
 }
 
 .grow {
@@ -1405,11 +1401,6 @@ textarea {
 
 .hover\:border-solid:hover {
   border-style: solid;
-}
-
-.hover\:border-indigo-400:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(129 140 248 / var(--tw-border-opacity));
 }
 
 .hover\:bg-red-700:hover {
