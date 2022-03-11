@@ -94,6 +94,7 @@ router.post("/:userId/contact", async (req, res, next) => {
 // Get User Data
 router.get("/:username", async (req, res, next) => {
   try {
+    console.log(req);
     let allData = await User.findOne({
       where: { username: req.params.username },
       include: { all: true, nested: true },
