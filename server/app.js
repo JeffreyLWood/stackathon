@@ -2,19 +2,44 @@ const path = require("path");
 const express = require("express");
 const router = require("express").Router();
 const morgan = require("morgan");
+const subdomain = require("express-subdomain");
+const User = require("./db/models/User");
+const Collection = require("./db/models/Collection");
 const app = express();
-
-const {
-  models: { User, About, Contact, CV, Work },
-} = require("./db");
-
+const url = require("url");
+const { database } = require("pg/lib/defaults");
 module.exports = app;
 
-// logging middleware
+// // logging middleware
 app.use(morgan("dev"));
 
-// body parsing middleware
+// // body parsing middleware
 app.use(express.json({ limit: "50mb" }));
+
+var checkUser = subdomain("*", async (req, res, next) => {
+  let username = req.headers.host.split(".")[0];
+  if (username !== "slctdwork") {
+    let data = await User.findOne({
+      where: { username: username },
+    });
+    if (data) {
+      res.redirect(
+        url.format({
+          protocol: "http",
+          hostname: "slctdwork.herokuapp.com",
+          pathname: `/${username}`,
+        })
+      );
+    } else {
+      res.status(404).send("User not found");
+    }
+  } else {
+    next();
+  }
+});
+
+app.use(checkUser);
+// app.use(subdomain("*", require("./sub")));
 
 // auth and api routes
 app.use("/auth", require("./auth"));
