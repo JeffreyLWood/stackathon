@@ -18,7 +18,7 @@ app.use(express.json({ limit: "50mb" }));
 
 var checkUser = subdomain("*", async (req, res, next) => {
   let username = req.headers.host.split(".")[0];
-  if (username !== "selected-work") {
+  if (username !== "selected-work" && username !== "www") {
     let user = await User.findOne({
       where: { username: username },
     });
