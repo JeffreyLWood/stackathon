@@ -22,7 +22,7 @@ var checkUser = subdomain("*", async (req, res, next) => {
     let data = await User.findOne({
       where: { username: username },
     });
-    if (data) {
+    if (data.id) {
       res.redirect(
         url.format({
           protocol: "http",
