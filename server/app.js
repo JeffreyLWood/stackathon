@@ -19,10 +19,10 @@ app.use(express.json({ limit: "50mb" }));
 var checkUser = subdomain("*", async (req, res, next) => {
   let username = req.headers.host.split(".")[0];
   if (username !== "selected-work") {
-    let data = await User.findOne({
+    let user = await User.findOne({
       where: { username: username },
     });
-    if (data.id) {
+    if (user) {
       res.redirect(
         url.format({
           protocol: "http",
