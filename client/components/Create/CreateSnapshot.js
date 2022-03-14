@@ -116,7 +116,7 @@ export default function CreateSnapshot(props) {
     return null;
   } else {
     return (
-      <div className="snapshot h-full border-2 border-gray-200 mx-2 p-5 font-light">
+      <div className="snapshot h-full shadow-xl mx-2 p-5 font-light">
         <div className="flex flex-row justify-between">
           <Select
             changeHandler={props.changeHandler}

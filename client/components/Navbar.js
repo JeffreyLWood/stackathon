@@ -22,7 +22,7 @@ export const Navbar = (props) => {
   return (
     <div className="flex justify-between py-4 px-2 font-light">
       <div className="flex flex-row space-x-5">
-        <span className="">SlctdWork</span>
+        <span className="">Selected-Work</span>
 
         {user.username ? (
           <>

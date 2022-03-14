@@ -137,8 +137,9 @@ a:hover {
 
 .snapshot {
   max-height: 38rem;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  overflow: auto;
+  border: 1px rgb(240, 238, 238) solid;
+  border-radius: 1%;
 }
 
 .pill {

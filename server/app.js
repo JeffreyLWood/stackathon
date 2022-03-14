@@ -18,7 +18,7 @@ app.use(express.json({ limit: "50mb" }));
 
 var checkUser = subdomain("*", async (req, res, next) => {
   let username = req.headers.host.split(".")[0];
-  if (username !== "slctdwork") {
+  if (username !== "selected-work") {
     let data = await User.findOne({
       where: { username: username },
     });
@@ -26,7 +26,7 @@ var checkUser = subdomain("*", async (req, res, next) => {
       res.redirect(
         url.format({
           protocol: "http",
-          hostname: "slctdwork.herokuapp.com",
+          hostname: "selected-work.com",
           pathname: `/${username}`,
         })
       );

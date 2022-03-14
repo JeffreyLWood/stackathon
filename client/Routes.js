@@ -37,7 +37,7 @@ const Routes = () => {
       {user.username ? (
         <Switch>
           <Route exact path="/create/in/:username" component={CreateWork} />
-          {/* <Route exact path="/create/home" component={CreateCreate} /> */}
+          <Route exact path="/" component={CreateWork} />
           <Route exact path="/:username" component={Work} data={user} />
           <Route exact path="/:username/work" component={Work} />
           <Route exact path="/:username/about" component={About} />
