@@ -90,6 +90,7 @@ a:hover {
   top: 0;
   right: 0;
   bottom: 0;
+  transition: 0.5s ease-in-out;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
@@ -100,6 +101,7 @@ a:hover {
   width: 70%;
   min-height: 70%;
   background-color: #fff;
+  padding: 1rem;
 }
 
 .modal-header,
@@ -140,6 +142,7 @@ a:hover {
   overflow: auto;
   border: 1px rgb(240, 238, 238) solid;
   border-radius: 1%;
+  background-color: #fff;
 }
 
 .pill {
