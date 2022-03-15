@@ -581,6 +581,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin: 2.5rem;
 }
 
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
@@ -691,6 +696,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
 .h-36 {
   height: 9rem;
 }
@@ -711,12 +720,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   min-height: 100%;
 }
 
-.w-6 {
-  width: 1.5rem;
-}
-
 .w-3\/6 {
   width: 50%;
+}
+
+.w-4\/6 {
+  width: 66.666667%;
+}
+
+.w-6 {
+  width: 1.5rem;
 }
 
 .w-full {
@@ -725,10 +738,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-5\/6 {
   width: 83.333333%;
-}
-
-.w-4\/6 {
-  width: 66.666667%;
 }
 
 .w-2\/6 {
@@ -815,6 +824,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   justify-content: space-around;
 }
 
+.space-y-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+
 .space-x-5 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(1.25rem * var(--tw-space-x-reverse));
@@ -825,6 +840,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-space-x-reverse: 0;
   margin-right: calc(0.5rem * var(--tw-space-x-reverse));
   margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-y-10 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(2.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(2.5rem * var(--tw-space-y-reverse));
 }
 
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
@@ -893,6 +914,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(250 250 250 / var(--tw-bg-opacity));
 }
 
+.bg-neutral-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 245 245 / var(--tw-bg-opacity));
+}
+
 .bg-red-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(254 226 226 / var(--tw-bg-opacity));
@@ -919,9 +945,23 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding: 1.25rem;
 }
 
+.p-4 {
+  padding: 1rem;
+}
+
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+
+.px-80 {
+  padding-left: 20rem;
+  padding-right: 20rem;
 }
 
 .py-4 {
@@ -932,11 +972,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .px-16 {
   padding-left: 4rem;
   padding-right: 4rem;
-}
-
-.py-10 {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
 }
 
 .pt-5 {
@@ -961,6 +996,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .text-right {
   text-align: right;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .text-sm {
@@ -1014,6 +1054,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   letter-spacing: 0.05em;
 }
 
+.text-neutral-400 {
+  --tw-text-opacity: 1;
+  color: rgb(163 163 163 / var(--tw-text-opacity));
+}
+
 .text-gray-400 {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
@@ -1037,11 +1082,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-indigo-600 {
   --tw-text-opacity: 1;
   color: rgb(79 70 229 / var(--tw-text-opacity));
-}
-
-.text-neutral-400 {
-  --tw-text-opacity: 1;
-  color: rgb(163 163 163 / var(--tw-text-opacity));
 }
 
 .text-gray-600 {
@@ -1108,6 +1148,54 @@ body {
 
 a:hover {
   color: rgb(24 24 27);
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+}
+
+.auth {
+  background-image: url("auth.jpeg");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: contain;
+}
+
+.welcome {
+  height: 100vh;
+  width: 100vw;
+  background-image: url("welcome.jpeg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 70%;
+  display: flex;
+  align-items: center;
+}
+
+.welcome h1 {
+  font-size: 36pt;
+}
+
+.welcome h2 {
+  font-size: 24pt;
+  color: #fff;
+}
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  padding: 5rem;
+  display: flex;
+  align-items: center;
+}
+
+.auth h1 {
+  font-size: 48pt;
+  font-weight: 400;
 }
 
 .siteTitle {
@@ -1241,6 +1329,7 @@ a:hover {
   border: 1px rgb(240, 238, 238) solid;
   border-radius: 1%;
   background-color: #fff;
+  height: 100%;
 }
 
 .pill {
@@ -1433,6 +1522,10 @@ textarea {
 }
 
 @media (min-width: 640px) {
+  .sm\:mt-10 {
+    margin-top: 2.5rem;
+  }
+
   .sm\:h-full {
     height: 100%;
   }
@@ -1487,10 +1580,6 @@ textarea {
   .sm\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
-  }
-
-  .sm\:h-90vh {
-    min-height: 92vh;
   }
 }
 

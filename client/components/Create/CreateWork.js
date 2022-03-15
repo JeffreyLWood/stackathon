@@ -125,9 +125,9 @@ export default function CreateWork(props) {
     <div>
       <Navbar user={user} />
       {/* Container */}
-      <section className="w-screen flex justify-center sm:p-5 sm:h-90vh bg-neutral-50">
+      <section className="w-screen flex justify-center sm:p-5 sm:h-full bg-neutral-50">
         {/* Redundant Container? */}
-        <section className="flex flex-col w-full md:flex-row ">
+        <section className="flex flex-col w-full h-full sm:mt-10 md:flex-row ">
           {/* Primary Snapshot. Shows Work collection thumbnails by default. Allows for editing collection data such
           as collection title, description, viisbility status and allows for delete entire collection functionality. */}
           <div className="md:w-4/6">
