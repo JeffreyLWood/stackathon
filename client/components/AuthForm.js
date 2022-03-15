@@ -13,20 +13,21 @@ const AuthForm = (props) => {
   return (
     <>
       <Navbar />
-
       <div className="container auth flex flex-row items-center">
         <div className="h-screen flex items-center w-3/6 p-4">
-          <p>
-            <h1>Lets Get Started.</h1>
-          </p>
+          <h1>Lets Get Started.</h1>
         </div>
-        <div className="w-3/6 space-y-4 flex flex-col">
+        <div className="w-3/6 space-y-4 flex flex-col justify-center">
           <label htmlFor={name}>
             {displayName}
             {displayName === "Sign Up" ? " for" : " to"} your Selected-Work
             account
           </label>
-          <form className="flex flex-col" onSubmit={handleSubmit} name={name}>
+          <form
+            className="flex flex-col space-y-4 bg-white"
+            onSubmit={handleSubmit}
+            name={name}
+          >
             <div className="flex justify-between flex-row">
               <label htmlFor="username">
                 <small>Username</small>
@@ -155,3 +156,4 @@ const mapDispatch = (dispatch) => {
 
 export const Login = connect(mapLogin, mapDispatch)(AuthForm);
 export const Signup = connect(mapSignup, mapDispatch)(AuthForm);
+export default AuthForm;

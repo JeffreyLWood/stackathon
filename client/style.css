@@ -35,17 +35,27 @@ a:hover {
   background-image: url("welcome.jpeg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 70%;
+  background-size: 60%;
   display: flex;
   align-items: center;
 }
 
 .welcome h1 {
   font-size: 36pt;
+  text-align: center;
+  font-weight: 500;
 }
+
 .welcome h2 {
   font-size: 24pt;
   color: #fff;
+  text-align: center;
+}
+
+.downarrow {
+  position: absolute;
+  bottom: 3rem;
+  left: 27%;
 }
 
 .container {
@@ -59,6 +69,25 @@ a:hover {
 .auth h1 {
   font-size: 48pt;
   font-weight: 400;
+}
+
+.features {
+  background-image: url("features.jpeg");
+  background-repeat: no-repeat;
+  background-size: 100vw;
+  background-position: top;
+  height: 200vh;
+  width: 100vw;
+}
+
+.phoneimg {
+  position: absolute;
+  right: 37%;
+}
+
+.desktopimg {
+  position: absolute;
+  right: 5%;
 }
 
 .siteTitle {
