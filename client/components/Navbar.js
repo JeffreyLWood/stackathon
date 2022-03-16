@@ -54,16 +54,13 @@ export const Navbar = (props) => {
       ) : (
         <>
           <div>
-            <Link to="/login/in">
-              <button type="button" className="pillDark mx-2">
-                Login
-              </button>
-            </Link>
-            <Link to="/signup/in">
-              <button type="button" className="pill mx-2" onClick={handleClick}>
-                Sign Up
-              </button>
-            </Link>
+            <button type="button" className="pillDark mx-2">
+              <a href="#auth"> Login </a>
+            </button>
+
+            <button type="button" className="pill mx-2" onClick={handleClick}>
+              Sign Up
+            </button>
           </div>
         </>
       )}

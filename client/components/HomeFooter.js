@@ -11,7 +11,7 @@ export default function HomeFooter() {
       data-scroll-section
     >
       <ul className="">
-        <li>Selected-Work</li>
+        <li className="text-lg">Selected-Work</li>
       </ul>
     </section>
   );
