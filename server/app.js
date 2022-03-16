@@ -16,29 +16,29 @@ app.use(morgan("dev"));
 // // body parsing middleware
 app.use(express.json({ limit: "50mb" }));
 
-var checkUser = subdomain("*", async (req, res, next) => {
-  let username = req.headers.host.split(".")[0];
-  if (username !== "selected-work" && username !== "www") {
-    let user = await User.findOne({
-      where: { username: username },
-    });
-    if (user) {
-      res.redirect(
-        url.format({
-          protocol: "http",
-          hostname: "selected-work.com",
-          pathname: `/${username}`,
-        })
-      );
-    } else {
-      res.status(404).send("User not found");
-    }
-  } else {
-    next();
-  }
-});
+// var checkUser = subdomain("*", async (req, res, next) => {
+//   let username = req.headers.host.split(".")[0];
+//   if (username !== "selected-work" && username !== "www") {
+//     let user = await User.findOne({
+//       where: { username: username },
+//     });
+//     if (user) {
+//       res.redirect(
+//         url.format({
+//           protocol: "http",
+//           hostname: "selected-work.com",
+//           pathname: `/${username}`,
+//         })
+//       );
+//     } else {
+//       res.status(404).send("User not found");
+//     }
+//   } else {
+//     next();
+//   }
+// });
 
-app.use(checkUser);
+// app.use(checkUser);
 // app.use(subdomain("*", require("./sub")));
 
 // auth and api routes

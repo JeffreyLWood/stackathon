@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 export default function Welcome() {
-  let titles = [
+  let [titles, setTitles] = useState([
     "painters",
     "sculptors",
     "pastelists",
@@ -24,11 +24,16 @@ export default function Welcome() {
     "watercolorists",
     "contemporary realists",
     "illustrators",
-  ];
-  let [title, setTitle] = useState(titles[0]);
+  ]);
+  let random = Math.floor(Math.random() * titles.length);
+  // let [numbers, setNumbers] = useState([])
+  // useEffect(()=>{
+  //   if(random Math.floor(Math.random() * titles.length));
+  // }, [])
+  let [title, setTitle] = useState(titles[random]);
 
   const changeTitle = () => {
-    let random = Math.floor(Math.random() * titles.length);
+    random = Math.floor(Math.random() * titles.length);
     setTimeout(() => {
       setTitle(titles[random]);
     }, 1500);
