@@ -6,18 +6,169 @@
 body {
   overflow-x: hidden;
 }
+
 * {
   font-weight: 300;
   letter-spacing: 0.05em;
   color: rgb(63 63 70);
 }
+
 a:hover {
   color: rgb(24 24 27);
 }
+/* Scrolling */
+html.has-scroll-smooth {
+  overflow: hidden;
+}
+
+html.has-scroll-dragging {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.has-scroll-smooth body {
+  overflow: hidden;
+}
+
+.has-scroll-smooth [data-scroll-container] {
+  min-height: 100vh;
+}
+
+[data-scroll-direction="horizontal"] [data-scroll-container] {
+  height: 100vh;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+[data-scroll-direction="horizontal"] [data-scroll-section] {
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
+  height: 100%;
+}
+
+.c-scrollbar {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 11px;
+  height: 100%;
+  transform-origin: center right;
+  transition: transform 0.3s, opacity 0.3s;
+  opacity: 0;
+}
+.c-scrollbar:hover {
+  transform: scaleX(1.45);
+}
+.c-scrollbar:hover,
+.has-scroll-scrolling .c-scrollbar,
+.has-scroll-dragging .c-scrollbar {
+  opacity: 1;
+}
+[data-scroll-direction="horizontal"] .c-scrollbar {
+  width: 100%;
+  height: 10px;
+  top: auto;
+  bottom: 0;
+  transform: scaleY(1);
+}
+[data-scroll-direction="horizontal"] .c-scrollbar:hover {
+  transform: scaleY(1.3);
+}
+
+.c-scrollbar_thumb {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: black;
+  opacity: 0.5;
+  width: 7px;
+  border-radius: 10px;
+  margin: 2px;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+.has-scroll-dragging .c-scrollbar_thumb {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+[data-scroll-direction="horizontal"] .c-scrollbar_thumb {
+  right: auto;
+  bottom: 0;
+}
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+}
+.container {
+  height: 100vh;
+  width: 100vw;
+  padding: 5rem;
+  display: flex;
+  align-items: center;
+}
+
+.welcome {
+  height: 100vh;
+  width: 100vw;
+  background-image: url("welcome.jpeg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60%;
+  display: flex;
+  align-items: center;
+}
+
+.welcome h1 {
+  font-size: 36pt;
+  text-align: center;
+  font-weight: 500;
+}
+
+.welcome h2 {
+  font-size: 24pt;
+  color: #fff;
+  text-align: center;
+}
+
+.downarrow {
+  position: absolute;
+  bottom: 3rem;
+  left: 27%;
+}
+
+.features {
+  background-image: url("features.jpeg");
+  background-repeat: no-repeat;
+  background-size: 100vw;
+  background-position: top;
+}
+
+.phoneimg {
+  position: absolute;
+  right: 37%;
+}
+
+.desktopimg {
+  position: absolute;
+  right: 5%;
+}
+
+.auth {
+  background-image: url("auth.jpeg");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: contain;
+}
+
 .siteTitle {
   font-size: x-large;
   font-weight: 300;
-
   letter-spacing: 0.1em;
 }
 
@@ -90,6 +241,7 @@ a:hover {
   top: 0;
   right: 0;
   bottom: 0;
+  transition: 0.5s ease-in-out;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
@@ -100,6 +252,7 @@ a:hover {
   width: 70%;
   min-height: 70%;
   background-color: #fff;
+  padding: 1rem;
 }
 
 .modal-header,
@@ -140,6 +293,8 @@ a:hover {
   overflow: auto;
   border: 1px rgb(240, 238, 238) solid;
   border-radius: 1%;
+  background-color: #fff;
+  height: 100%;
 }
 
 .pill {

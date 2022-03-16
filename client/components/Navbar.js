@@ -20,12 +20,15 @@ export const Navbar = (props) => {
   };
 
   return (
-    <div className="flex justify-between py-4 px-2 font-light">
-      <div className="flex flex-row space-x-5">
-        <span className="">Selected-Work</span>
+    <div className="navbar flex justify-between py-4 px-2 font-light bg-white z-20">
+      {/* <div className="flex flex-row justify-between space-x-5"> */}
+      <span className="text-lg">
+        <Link to="/">Selected-Work</Link>
+      </span>
 
-        {user.username ? (
-          <>
+      {user.username ? (
+        <>
+          <div>
             <Link to={`/create/in/${user.username}/settings`}>
               <span className="italic text-sm text-indigo-600">
                 Hello, {user.firstName}. Manage your site here.
@@ -35,34 +38,33 @@ export const Navbar = (props) => {
             <Link to={`/create/in/${user.username}/about`}> About</Link>
             <Link to={`/create/in/${user.username}/cv`}> CV</Link>
             <Link to={`/create/in/${user.username}/contact`}>Contact</Link>
+          </div>
 
-            <div className="">
-              <Link to={`/${user.username}`} target="_blank">
-                <button type="button" className="pillDark mx-2">
-                  View Site
-                </button>
-              </Link>
-              <a href="#" className="pill mx-2" onClick={handleClick}>
-                Logout
-              </a>
-              <div></div>
-            </div>
-          </>
-        ) : (
-          <>
-            <Link to="/login/in">
+          <div className="">
+            <Link to={`/${user.username}`} target="_blank">
               <button type="button" className="pillDark mx-2">
-                Login
+                View Site
               </button>
             </Link>
-            <Link to="/signup/in">
-              <button type="button" className="pill mx-2" onClick={handleClick}>
-                Sign Up
-              </button>
-            </Link>
-          </>
-        )}
-      </div>
+            <a href="#" className="pill mx-2" onClick={handleClick}>
+              Logout
+            </a>
+          </div>
+        </>
+      ) : (
+        <>
+          <div>
+            <button type="button" className="pillDark mx-2">
+              <a href="#auth"> Login </a>
+            </button>
+
+            <button type="button" className="pill mx-2" onClick={handleClick}>
+              Sign Up
+            </button>
+          </div>
+        </>
+      )}
+      {/* </div> */}
     </div>
   );
 };

@@ -1,26 +1,43 @@
 import React from "react";
 import { connect } from "react-redux";
-import Navbar from "./Navbar";
+import { Navbar } from "./Navbar";
+
+import AuthForm from "./AuthForm";
+import Onboard from "./Onboard";
+import Footer from "./Site/Footer";
+import Welcome from "./Welcome";
+import Features from "./Features";
+import { useState } from "react";
+import LocomotiveScroll from "locomotive-scroll";
+import { useSelector } from "react-redux";
+import HomeFooter from "./HomeFooter";
+const scroll = new LocomotiveScroll();
 /**
  * COMPONENT
  */
-export const Home = (props) => {
-  const { username } = props;
+export default function Home(props) {
+  // let username = useSelector((state) => state.auth.username);
+  let [displayName, setDisplayName] = useState("Sign Up");
 
   return (
-    <div>
-      <h3>Welcome, {username}</h3>
-    </div>
+    <section>
+      <Navbar />
+      <Welcome />
+      <Onboard />
+      {/* <Features /> */}
+      <AuthForm displayName={displayName} setDisplayName={setDisplayName} />
+      <HomeFooter />
+    </section>
   );
-};
+}
 
 /**
  * CONTAINER
  */
-const mapState = (state) => {
-  return {
-    username: state.auth.username,
-  };
-};
+// const mapState = (state) => {
+//   return {
+//     username: state.auth.username,
+//   };
+// };
 
-export default connect(mapState)(Home);
+// export default connect(mapState)(Home);
