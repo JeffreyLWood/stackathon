@@ -417,6 +417,22 @@ textarea {
 }
 
 @media (max-width: 768px) {
+  .welcome {
+    background-size: auto;
+    padding: 2rem;
+  }
+  .phoneimg {
+    right: auto;
+    position: relative;
+  }
+  .desktopimg {
+    right: auto;
+    position: relative;
+  }
+  .container {
+    padding: 2rem;
+  }
+
   .workModalBody {
     flex-direction: column;
     padding-left: 0rem;
