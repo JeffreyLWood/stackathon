@@ -6,7 +6,10 @@ export default function HomeFooter() {
   const address = "";
   const youtube = "";
   return (
-    <section className="footer flex-col md:flex-row bg-stone-100 text-zinc-800 font-light tracking-wider text-sm p-5">
+    <section
+      className="footer flex-col md:flex-row bg-stone-100 text-zinc-800 font-light tracking-wider text-sm p-5"
+      data-scroll-section
+    >
       <ul className="">
         <li>Selected-Work</li>
       </ul>

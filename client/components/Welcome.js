@@ -37,7 +37,10 @@ export default function Welcome() {
   changeTitle();
 
   return (
-    <section className="welcome  bg-cyan-900 justify-center">
+    <section
+      className="welcome  bg-cyan-900 justify-center"
+      data-scroll-section
+    >
       <div className="flex space-y-8 flex-col">
         <h2>Show Your Work Online</h2>
         <span className="text-5xl font-bold text-cyan-900">

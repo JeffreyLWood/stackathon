@@ -29,7 +29,10 @@ export default function AuthForm(props) {
   };
 
   return (
-    <section className="container auth flex flex-row items-center">
+    <section
+      className="container auth flex flex-row items-center"
+      data-scroll-section
+    >
       <div className="h-screen flex items-center w-3/6 p-4">
         <h1>Lets Get Started.</h1>
       </div>
