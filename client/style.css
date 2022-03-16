@@ -22,13 +22,14 @@ a:hover {
   right: 0;
   padding: 1rem;
 }
-
-.auth {
-  background-image: url("auth.jpeg");
-  background-repeat: no-repeat;
-  background-position: left;
-  background-size: contain;
+.container {
+  height: 100vh;
+  width: 100vw;
+  padding: 5rem;
+  display: flex;
+  align-items: center;
 }
+
 .welcome {
   height: 100vh;
   width: 100vw;
@@ -58,26 +59,11 @@ a:hover {
   left: 27%;
 }
 
-.container {
-  height: 100vh;
-  width: 100vw;
-  padding: 5rem;
-  display: flex;
-  align-items: center;
-}
-
-.auth h1 {
-  font-size: 48pt;
-  font-weight: 400;
-}
-
 .features {
   background-image: url("features.jpeg");
   background-repeat: no-repeat;
   background-size: 100vw;
   background-position: top;
-  height: 200vh;
-  width: 100vw;
 }
 
 .phoneimg {
@@ -90,10 +76,16 @@ a:hover {
   right: 5%;
 }
 
+.auth {
+  background-image: url("auth.jpeg");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: contain;
+}
+
 .siteTitle {
   font-size: x-large;
   font-weight: 300;
-
   letter-spacing: 0.1em;
 }
 

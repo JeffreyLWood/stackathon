@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch, Redirect } from "react-router-dom";
-import { Login, Signup } from "./components/AuthForm";
+// import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import { me } from "./store";
 import CreateAbout from "./components/Create/CreateAbout";
@@ -16,6 +16,7 @@ import { Contact } from "./components/Site/Contact";
 import { CV } from "./components/Site/CV";
 import { fetchUserData } from "./store/user";
 import CreateSettings from "./components/Create/CreateSettings";
+
 /**
  * COMPONENT
  */
@@ -77,13 +78,7 @@ const Routes = () => {
       ) : (
         <Switch>
           <Route exact path="/" component={Home} displayName="login" />
-          <Route exact path="/login/in" component={Login} displayName="login" />
-          <Route
-            exact
-            path="/signup/in"
-            component={Signup}
-            displayName="signup"
-          />
+
           <Route exact path="/:username" component={Work} data={user} />
           {/* <Route path="/:username/:collection" component={Work} /> */}
           <Route exact path="/:username/about" component={About} />

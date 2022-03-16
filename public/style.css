@@ -737,6 +737,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 50%;
 }
 
+.h-1\/6 {
+  height: 16.666667%;
+}
+
 .min-h-full {
   min-height: 100%;
 }
@@ -935,14 +939,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(250 250 250 / var(--tw-bg-opacity));
 }
 
-.bg-red-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 226 226 / var(--tw-bg-opacity));
-}
-
 .bg-stone-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(245 245 244 / var(--tw-bg-opacity));
+}
+
+.bg-red-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 226 226 / var(--tw-bg-opacity));
 }
 
 .bg-cyan-900 {
@@ -994,8 +998,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-top: 1.25rem;
 }
 
-.pb-10 {
-  padding-bottom: 2.5rem;
+.pb-5 {
+  padding-bottom: 1.25rem;
 }
 
 .pt-10 {
@@ -1080,12 +1084,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 2rem;
 }
 
-.tracking-widest {
-  letter-spacing: 0.1em;
-}
-
 .tracking-wider {
   letter-spacing: 0.05em;
+}
+
+.tracking-widest {
+  letter-spacing: 0.1em;
 }
 
 .text-neutral-400 {
@@ -1113,6 +1117,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-zinc-800 {
+  --tw-text-opacity: 1;
+  color: rgb(39 39 42 / var(--tw-text-opacity));
+}
+
 .text-indigo-600 {
   --tw-text-opacity: 1;
   color: rgb(79 70 229 / var(--tw-text-opacity));
@@ -1121,11 +1130,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-gray-600 {
   --tw-text-opacity: 1;
   color: rgb(75 85 99 / var(--tw-text-opacity));
-}
-
-.text-zinc-800 {
-  --tw-text-opacity: 1;
-  color: rgb(39 39 42 / var(--tw-text-opacity));
 }
 
 .text-cyan-900 {
@@ -1202,11 +1206,12 @@ a:hover {
   padding: 1rem;
 }
 
-.auth {
-  background-image: url("auth.jpeg");
-  background-repeat: no-repeat;
-  background-position: left;
-  background-size: contain;
+.container {
+  height: 100vh;
+  width: 100vw;
+  padding: 5rem;
+  display: flex;
+  align-items: center;
 }
 
 .welcome {
@@ -1238,26 +1243,11 @@ a:hover {
   left: 27%;
 }
 
-.container {
-  height: 100vh;
-  width: 100vw;
-  padding: 5rem;
-  display: flex;
-  align-items: center;
-}
-
-.auth h1 {
-  font-size: 48pt;
-  font-weight: 400;
-}
-
 .features {
   background-image: url("features.jpeg");
   background-repeat: no-repeat;
   background-size: 100vw;
   background-position: top;
-  height: 200vh;
-  width: 100vw;
 }
 
 .phoneimg {
@@ -1268,6 +1258,13 @@ a:hover {
 .desktopimg {
   position: absolute;
   right: 5%;
+}
+
+.auth {
+  background-image: url("auth.jpeg");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: contain;
 }
 
 .siteTitle {

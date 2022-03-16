@@ -14,7 +14,7 @@ export default function Welcome() {
     "abstract expressionists",
     "neo-dadaists",
     "neo-expressionists",
-    "Neo Rauch",
+    // "Neo Rauch",
     "photographers",
     "ceramicists",
     "classical realists",
@@ -29,14 +29,6 @@ export default function Welcome() {
 
   const changeTitle = () => {
     let random = Math.floor(Math.random() * titles.length);
-    // if (typeof titles[random] === "object") {
-    //   titles[random].map((title) =>
-    //     setTimeout(function () {
-    //       setTitle(title);
-    //     }, 1500)
-    //   );
-    // }
-
     setTimeout(() => {
       setTitle(titles[random]);
     }, 1500);
@@ -45,7 +37,7 @@ export default function Welcome() {
   changeTitle();
 
   return (
-    <div className="welcome  bg-cyan-900 justify-center">
+    <section className="welcome  bg-cyan-900 justify-center">
       <div className="flex space-y-8 flex-col">
         <h2>Show Your Work Online</h2>
         <span className="text-5xl font-bold text-cyan-900">
@@ -58,6 +50,6 @@ export default function Welcome() {
         </div>
         <img className="h-18 downarrow" src="downarrow.png" />
       </div>
-    </div>
+    </section>
   );
 }
