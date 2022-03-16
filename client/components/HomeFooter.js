@@ -12,7 +12,7 @@ export default function HomeFooter() {
     >
       <ul className="">
         <li className="text-lg">Selected-Work</li>
-        <li className="text-white">2022</li>
+        <li className="text-stone-100">2022</li>
       </ul>
     </section>
   );

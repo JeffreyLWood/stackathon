@@ -39,25 +39,37 @@ export const Navbar = (props) => {
             onMouseLeave={hide}
             onClick={hide}
           >
-            Selected Work
+            <Link to={`/${props.user.userName}`}>Selected Work</Link>
             <div className={workDropdown}>
               <ul>
                 {collections &&
                   collections
                     .filter((collection) => collection.hidden === false)
-                    .map((collection, idx) => (
-                      <li
-                        key={idx}
-                        className="cursor-pointer mx-8"
-                        onClick={() => {
-                          props.setCollection(collection);
-                        }}
-                      >
-                        <Link to={`/${props.user.userName}/`}>
-                          {collection.title}
-                        </Link>
-                      </li>
-                    ))}
+                    .map((collection, idx) =>
+                      props.setCollection ? (
+                        <li
+                          key={idx}
+                          className="cursor-pointer mx-8"
+                          onClick={() => {
+                            props.setCollection(collection);
+                          }}
+                        >
+                          <Link
+                            to={`/${props.user.userName}/${collection.title}`}
+                          >
+                            {collection.title}
+                          </Link>
+                        </li>
+                      ) : (
+                        <li key={idx} className="cursor-pointer mx-8">
+                          <Link
+                            to={`/${props.user.userName}/${collection.title}`}
+                          >
+                            {collection.title}
+                          </Link>
+                        </li>
+                      )
+                    )}
               </ul>
             </div>
           </div>

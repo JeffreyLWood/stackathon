@@ -8,22 +8,37 @@ import Footer from "./Footer";
 import { fetchCollection } from "../../store/user";
 export const Work = (props) => {
   let user = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
 
   let [collection, setCollection] = useState({});
 
   useEffect(() => {
-    user = dispatch(fetchUserData(props?.location.pathname));
+    user = dispatch(fetchUserData(props?.match.params.username));
   }, []);
 
   useEffect(() => {
-    let visible =
-      user.collections &&
-      user.collections.filter((collection) => !collection.hidden);
+    let paramsCollectionTitle =
+      props.match.params?.collection && props.match.params.collection;
 
-    user.collections && setCollection(visible[0]);
+    if (paramsCollectionTitle) {
+      let paramsCollection =
+        user.collections &&
+        user.collections.filter(
+          (collection) => collection.title === paramsCollectionTitle
+        );
+      paramsCollection && setCollection(paramsCollection[0]);
+      return;
+    } else {
+      let visible =
+        user.collections &&
+        user.collections.filter((collection) => !collection.hidden);
+
+      user.collections && setCollection(visible[0]);
+    }
   }, [user]);
 
+  console.log("props", props);
   return (
     <>
       <Navbar

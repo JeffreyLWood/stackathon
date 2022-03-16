@@ -54,7 +54,7 @@ export default function Welcome() {
         <div className="flex flex-row space-x-2">
           <span className="text-2xl sm:text-4xl text-white">Perfect for </span>
 
-          <span className="text-2xl sm:text-4xl text-amber-300">{title}</span>
+          <span className="text-2xl sm:text-4xl text-amber-400">{title}</span>
         </div>
         <img className="h-18 downarrow" src="downarrow.png" />
       </div>
