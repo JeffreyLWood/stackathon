@@ -47,7 +47,7 @@ export const Work = (props) => {
         setCollection={setCollection}
       />
       <div className="min-h-screen mt-8 flex justify-center sm:mx-5">
-        <div className="flex w-full min-h-screen flex-wrap">
+        <div className="flex w-full h-full overflow-visible flex-wrap">
           {collection?.works
             ? collection.works
                 .sort(function (a, b) {

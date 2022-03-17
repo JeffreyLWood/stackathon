@@ -6,7 +6,7 @@ export default function Artwork(props) {
   let [show, setShow] = useState(false);
 
   return (
-    <div className="flex flex-col flex-wrap lg:h-3/6 px-12 py-8 md:mt-4 md:mx-0 md:px-8">
+    <div className="flex flex-col flex-wrap md:h-3/6  px-12 py-8 md:mt-4 md:mx-0 md:px-8">
       <div onClick={() => setShow(true)} className=" cursor-pointer">
         <Image
           cloudName="jeffreywood"
