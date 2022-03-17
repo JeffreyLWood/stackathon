@@ -10,8 +10,10 @@ export const Navbar = (props) => {
   // useEffect(() => {
   //   user = dispatch(fetchUserData(props?.match.params.url));
   // }, []);
-  console.log("navbar", props);
-  let siteTitle = `${props?.user.siteTitle}`;
+
+  let siteTitle = props?.user.siteTitle
+    ? `${props?.user.siteTitle}`
+    : `${props.user.firstName} ${props.user.lastName}`;
 
   document.title = siteTitle;
 
