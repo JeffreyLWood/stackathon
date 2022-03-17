@@ -19,22 +19,23 @@ export default function ArtworkModal(props) {
           <Image cloudName="jeffreywood" publicId={props.data.imgId} />
         </div>
         <div className="workModalTextContainer">
-          <ul>
-            <li className="uppercase tracking-widest text-gray-400 font-light text-large md:mb-2">
-              {props.user.siteTitle}
+          <ul className="tracking-widest">
+            <li className="italic text-neutral-500 mb-2">{props.data.title}</li>
+            <li className="uppercase tracking-widest text-neutral-300 text-sm sm:mb-10">
+              {props.user.siteTitle ||
+                props.user.firstName + " " + props.user.lastName}
             </li>
-            <li className="uppercase italic font-light text-large mb-2 md:mb-6 tracking-widest">
-              {props.data.title}
+            <li className="text-sm text-neutral-400 mb-2">{props.data.year}</li>
+            <li className="text-xs uppercase text-neutral-300 mb-2">
+              {props.data.medium}
             </li>
-            <li className="text-large text-gray-400">{props.data.year}</li>
-            <li className="font-light text-large ">{props.data.medium}</li>
-            <li className="font-light text-large">
+            <li className="text-sm text-neutral-600">
               {props.data.height} x {props.data.width} "
             </li>
             <li className="md:py-10">
-              <button type="button" className="border-2 p-2 ">
+              {/* <button type="button" className="border-2 p-2 ">
                 Enquire
-              </button>
+              </button> */}
             </li>
           </ul>
         </div>
