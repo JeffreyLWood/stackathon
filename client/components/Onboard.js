@@ -13,7 +13,12 @@ export default function Onboard() {
           <li>Free to Use</li>
           <li>
             <button type="button" className="pill mr-4 my-4">
-              View Demo Site
+              <a
+                href="http://www.selected-work.com/jeffreywood"
+                target="_blank"
+              >
+                View Demo Site
+              </a>
             </button>
             <button type="button" className="pillDark my-4">
               Get Started

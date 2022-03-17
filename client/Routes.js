@@ -44,12 +44,7 @@ const Routes = () => {
           <Route exact path="/:username/about" component={About} />
           <Route exact path="/:username/cv" component={CV} />
           <Route exact path="/:username/contact" component={Contact} />
-          <Route
-            exact
-            path="/:username/:collection"
-            component={Work}
-            test={456}
-          />
+          <Route exact path="/:username/:collection" component={Work} />
           <Route
             exact
             path="/create/in/:username/work"
@@ -90,6 +85,7 @@ const Routes = () => {
           <Route exact path="/:username/about" component={About} />
           <Route exact path="/:username/cv" component={CV} />
           <Route exact path="/:username/contact" component={Contact} />
+          <Route exact path="/:username/:collection" component={Work} />
         </Switch>
       )}
     </div>
