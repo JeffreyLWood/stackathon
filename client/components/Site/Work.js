@@ -38,7 +38,6 @@ export const Work = (props) => {
     }
   }, [user]);
 
-  console.log("props", props);
   return (
     <>
       <Navbar

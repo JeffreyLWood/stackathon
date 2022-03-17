@@ -3,7 +3,8 @@
 @import "tailwindcss/utilities";
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
-body {
+body,
+html {
   overflow-x: hidden;
 }
 
@@ -289,7 +290,6 @@ html.has-scroll-dragging {
 }
 
 .snapshot {
-  max-height: 38rem;
   overflow: auto;
   border: 1px rgb(240, 238, 238) solid;
   border-radius: 1%;
