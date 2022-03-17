@@ -15,7 +15,7 @@ export default function Artwork(props) {
         />
       </div>
       <div
-        className="pt-4 sm:pt-10 text-xs italic font-light tracking-widest uppercase text-right cursor-pointer text-neutral-400"
+        className="pt-4 sm:pt-8 text-xs italic font-light tracking-widest uppercase text-right cursor-pointer text-neutral-400"
         onClick={() => setShow(true)}
       >
         {props.data.title}
