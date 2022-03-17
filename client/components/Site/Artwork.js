@@ -6,12 +6,15 @@ export default function Artwork(props) {
   let [show, setShow] = useState(false);
 
   return (
-    <div className="flex flex-col flex-wrap md:h-3/6  px-12 py-8 md:mt-4 md:mx-0 md:px-8">
-      <div onClick={() => setShow(true)} className=" cursor-pointer">
+    <div className="flex flex-col flex-wrap justify-center w-full sm:w-2/4 lg:w-1/4 px-12 py-8 md:mt-4 md:mx-0 md:px-8">
+      <div
+        onClick={() => setShow(true)}
+        className="cursor-pointer flex justify-center"
+      >
         <Image
           cloudName="jeffreywood"
           publicId={props.data.imgId}
-          className="min-h-70 md:h-56"
+          className="min-h-70 md:h-56 object-contain"
         />
       </div>
       <div
