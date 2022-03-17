@@ -3,13 +3,14 @@ import { fetchUserData } from "../../store/user";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { Image } from "cloudinary-react";
 
 export const Navbar = (props) => {
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   user = dispatch(fetchUserData(props?.match.params.url));
-  // }, []);
+  let user = [];
+  useEffect(() => {
+    user = dispatch(fetchUserData(props?.user.username));
+  }, []);
 
   let siteTitle = props?.user.siteTitle
     ? `${props?.user.siteTitle}`
@@ -17,16 +18,27 @@ export const Navbar = (props) => {
 
   document.title = siteTitle;
 
+  let collections = props.user && props.user.collections;
+  console.log("collections", collections);
+
+  let [preview, setPreview] = useState({});
+
   let [workDropdown, setWorkDropdown] = useState("hidden");
 
   const show = () => {
-    setWorkDropdown("block dropdown");
+    setWorkDropdown("flex justify-between dropdown");
   };
+
   const hide = () => {
     setWorkDropdown("hidden");
   };
 
-  let collections = props.user && props.user.collections;
+  const previewHandler = (e) => {
+    e.preventDefault();
+    console.log("e.t.v", e.target.value);
+    // setPreview(e.target.value?.works[0]);
+  };
+
   console.log(props);
   return (
     <>
@@ -43,6 +55,16 @@ export const Navbar = (props) => {
           >
             <Link to={`/${props.user.userName}`}>Selected Work</Link>
             <div className={workDropdown}>
+              <div className="h-3/6 w-3/6 bg-red-100 m-5">
+                <Image
+                  cloudName="jeffreywood"
+                  publicId={preview.imgId}
+                  className="hover:cursor-pointer"
+                  id={preview.collectionTitle}
+                  value={preview.id}
+                  // onClick={(e) => props.editHandler(e)}
+                />
+              </div>
               <ul>
                 {collections &&
                   collections
@@ -50,22 +72,28 @@ export const Navbar = (props) => {
                     .map((collection, idx) =>
                       props.setCollection ? (
                         <li
+                          value={collection}
                           key={idx}
                           className="cursor-pointer mx-8"
+                          onMouseOver={(e) => previewHandler(e)}
                           onClick={() => {
                             props.setCollection(collection);
                           }}
                         >
                           <Link
-                            to={`/${props.user.userName}/${collection.title}`}
+                            to={`/${props.user.userName}/work/${collection.title}`}
                           >
                             {collection.title}
                           </Link>
                         </li>
                       ) : (
-                        <li key={idx} className="cursor-pointer mx-8">
+                        <li
+                          key={idx}
+                          className="cursor-pointer mx-8"
+                          onMouseOver={(e) => previewHandler(e)}
+                        >
                           <Link
-                            to={`/${props.user.userName}/${collection.title}`}
+                            to={`/${props.user.userName}/work/${collection.title}`}
                           >
                             {collection.title}
                           </Link>

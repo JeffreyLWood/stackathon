@@ -22,6 +22,7 @@ export const Work = (props) => {
       props.match.params?.collection && props.match.params.collection;
 
     if (paramsCollectionTitle) {
+      console.log("GO", paramsCollectionTitle);
       let paramsCollection =
         user.collections &&
         user.collections.filter(
@@ -34,11 +35,10 @@ export const Work = (props) => {
         user.collections &&
         user.collections.filter((collection) => !collection.hidden);
 
-      user.collections && setCollection(visible[0]);
+      user.collections && !paramsCollectionTitle && setCollection(visible[0]);
     }
   }, [user]);
 
-  console.log("props", props);
   return (
     <>
       <Navbar
@@ -46,17 +46,19 @@ export const Work = (props) => {
         collection={collection}
         setCollection={setCollection}
       />
-      <div className="flex justify-between flex-wrap w-full h-90vh">
-        {collection?.works
-          ? collection.works
-              .sort(function (a, b) {
-                return a.order - b.order;
-              })
-              .filter((collection) => !collection.hidden) //?
-              .map((work, index) => {
-                return <Artwork key={index} data={work} user={user} />;
-              })
-          : null}
+      <div className="min-h-screen mt-8 flex justify-center sm:mx-5">
+        <div className="flex w-full h-full overflow-visible flex-wrap">
+          {collection?.works
+            ? collection.works
+                .sort(function (a, b) {
+                  return a.order - b.order;
+                })
+                .filter((collection) => !collection.hidden) //?
+                .map((work, index) => {
+                  return <Artwork key={index} data={work} user={user} />;
+                })
+            : null}
+        </div>
       </div>
 
       <Footer user={user} userName={props.match.params.username} />

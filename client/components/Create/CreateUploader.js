@@ -246,36 +246,38 @@ export default function CreateUploader(props) {
           </h2>
         </div>
         {/* Modal Body */}
-        <div className="h-full">
+        <div className="h-full flex flex-row justify-center mt-20 items-center">
           <form
-            className="h-full bg-white flex justify-around items-center"
+            className="h-full w-5/6 bg-white flex justify-between items-center"
             onSubmit={submitHandler}
           >
             <div>
-              <input
-                id="image"
-                name="image"
-                type="file"
-                onChange={changeHandler}
-                value={fileInputState}
-                style={{ display: "none" }}
-              />
+              <div>
+                <input
+                  id="image"
+                  name="image"
+                  type="file"
+                  onChange={changeHandler}
+                  value={fileInputState}
+                  style={{ display: "none" }}
+                />
 
-              <label htmlFor="image">
-                {previewSource ? (
-                  <img src={previewSource} alt="chosen" className="h-56" />
-                ) : work ? (
-                  <Image
-                    cloudName={"jeffreywood"}
-                    publicId={work.imgId}
-                    className="h-56"
-                  />
-                ) : (
-                  <img src="../../../placeholderadd.png"></img>
-                )}
-              </label>
+                <label htmlFor="image">
+                  {previewSource ? (
+                    <img src={previewSource} alt="chosen" className="h-56" />
+                  ) : work ? (
+                    <Image
+                      cloudName={"jeffreywood"}
+                      publicId={work.imgId}
+                      className="h-56"
+                    />
+                  ) : (
+                    <img src="../../../placeholderadd.png"></img>
+                  )}
+                </label>
+              </div>
             </div>
-            <div className="flex flex-col justify-around">
+            <div className="flex flex-col justify-around space-y-2">
               <input
                 type="text"
                 name="title"

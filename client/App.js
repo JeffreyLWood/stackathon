@@ -8,7 +8,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 const App = (props) => {
   let user = useSelector((state) => state.auth);
   return (
-    <div data-scroll-container>
+    // <div data-scroll-container>
+    <div>
       {/* <Navbar user={user} history={props.history} /> */}
       <Routes user={user} />
     </div>

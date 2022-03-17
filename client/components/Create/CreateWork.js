@@ -122,84 +122,63 @@ export default function CreateWork(props) {
   };
 
   return (
-    <div>
+    <section className="flex flex-col sm:items-center overflow-hidden h-screen w-screen bg-neutral-50 p-2 md:flex-row">
       <Navbar user={user} />
       {/* Container */}
-      <section className="w-screen flex justify-center sm:p-5 sm:h-full bg-neutral-50">
-        {/* Redundant Container? */}
-        <section className="flex flex-col w-full h-full sm:mt-10 md:flex-row ">
-          {/* Primary Snapshot. Shows Work collection thumbnails by default. Allows for editing collection data such
+
+      {/* Primary Snapshot. Shows Work collection thumbnails by default. Allows for editing collection data such
           as collection title, description, viisbility status and allows for delete entire collection functionality. */}
-          <div className="md:w-4/6">
-            <CreateSnapshot
-              // Id used to identify through props whether the work clicked for example is from the primary or
-              // secondary snapshot for triggering a refresh in the redux store.
-              id={"primary"}
-              // Collection title passed to snapshot to load the works from that collection.
-              collectionTitle={primary}
-              // ChangeHandler used in the select drop down to reset which collection we are viewing
-              changeHandler={changeHandler}
-              // All collection titles for the drop down menus
-              collections={collections}
-              // Title of secondary snapshot to exclude it from the drop down list so we can not view
-              // the same collection in both snapshots
-              secondary={secondary}
-              userId={userId}
-              editHandler={editHandler}
-              // For setting the imgId when the modal opens which is done from here, not from the snapshot component.
-              imgId={imgId}
-              setImgId={setImgId}
-              // Display name is either Add a Work or Edit a Work depending on how the modal was called
-              displayName={displayName}
-              setDisplayName={setDisplayName}
-              // Boolean value, true is display modal, false is modal display:none
-              show={show}
-              setShow={setShow}
-              primary={primary}
-              setPrimary={setPrimary}
-            />
-          </div>
-          <div className="md:w-2/6">
-            <CreateSnapshot
-              id={"secondary"}
-              collectionTitle={secondary}
-              changeHandler={changeHandler}
-              collections={collections}
-              primary={primary}
-              userId={userId}
-              editHandler={editHandler}
-              imgId={imgId}
-              setImgId={setImgId}
-              setDisplayName={setDisplayName}
-              setShow={setShow}
-            />
-          </div>
-        </section>
-        {/* Toolbar */}
-        <section className="flex mx-10 toolbar justify-center w-2/6">
-          {/* View collections Not functional */}
-          <img
-            src="../../../collectionactive.png"
-            id="Collections"
-            onClick={() => setShowCollections(true)}
-            className="w-12 m-2"
-          />
-          {/* Add a Work */}
-          <img
-            src="../../../newworkactive.png"
-            onClick={(e) => addHandler(e)}
-            id="Add a Work"
-            className="w-12 m-2"
-          />
-          {/* Add a Collection - Not Functional */}
-          <img
-            onClick={(e) => addCollection(e)}
-            src="../../../newcollectionactive.png"
-            id="New Collection"
-            className="w-12 m-2"
-          />
-        </section>
-      </section>
+      <div className="h-3/6 mt-24 mb-4 sm:h-5/6 sm:mt-10 sm:mb-0 md:w-4/6">
+        <CreateSnapshot
+          // Id used to identify through props whether the work clicked for example is from the primary or
+          // secondary snapshot for triggering a refresh in the redux store.
+          id={"primary"}
+          // Collection title passed to snapshot to load the works from that collection.
+          collectionTitle={primary}
+          // ChangeHandler used in the select drop down to reset which collection we are viewing
+          changeHandler={changeHandler}
+          // All collection titles for the drop down menus
+          collections={collections}
+          // Title of secondary snapshot to exclude it from the drop down list so we can not view
+          // the same collection in both snapshots
+          secondary={secondary}
+          userId={userId}
+          editHandler={editHandler}
+          // For setting the imgId when the modal opens which is done from here, not from the snapshot component.
+          imgId={imgId}
+          setImgId={setImgId}
+          // Display name is either Add a Work or Edit a Work depending on how the modal was called
+          displayName={displayName}
+          setDisplayName={setDisplayName}
+          // Boolean value, true is display modal, false is modal display:none
+          show={show}
+          setShow={setShow}
+          primary={primary}
+          setPrimary={setPrimary}
+          //Snapshot toolbar
+          setShowCollections={setShowCollections}
+          addHandler={addHandler}
+          addCollection={addCollection}
+        />
+      </div>
+      <div className="h-2/6  sm:h-5/6  sm:mt-10 md:w-2/6">
+        <CreateSnapshot
+          id={"secondary"}
+          collectionTitle={secondary}
+          changeHandler={changeHandler}
+          collections={collections}
+          primary={primary}
+          userId={userId}
+          editHandler={editHandler}
+          imgId={imgId}
+          setImgId={setImgId}
+          setDisplayName={setDisplayName}
+          setShow={setShow}
+        />
+      </div>
+
+      {/* Toolbar */}
+
       {/* Modal for Adding a Work and Editing a Work */}
       <CreateUploader
         collections={collections}
@@ -231,6 +210,6 @@ export default function CreateWork(props) {
         user={user}
         userId={userId}
       />
-    </div>
+    </section>
   );
 }
