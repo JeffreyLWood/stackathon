@@ -39,6 +39,7 @@ export default function CollectionColumn(props) {
           >
             {props.collections &&
               props.collections
+                .filter((collection) => !collection.hidden)
                 .sort((a, b) => a.order - b.order)
                 .map((collection, index) => (
                   <CollectionDraggable
