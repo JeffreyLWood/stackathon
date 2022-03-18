@@ -39,7 +39,7 @@ export const CV = (props) => {
     <>
       <Navbar user={user} />
       {/* Container */}
-      <div className="h-90vh w-full flex flex-col pt-20 mx-2 md:pl-20">
+      <div className="h-90vh w-full flex flex-col pt-20 pb-20 mx-2 md:pl-20">
         {education ? <CVGroup title={"Education"} data={education} /> : null}
         {soloExhibition ? (
           <CVGroup title={"Solo Exhibitions"} data={soloExhibition} />

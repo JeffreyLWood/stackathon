@@ -32,7 +32,7 @@ export const About = (props) => {
     <>
       <Navbar user={user} />
       <div className="font-light h-full md:h-90vh m-10 flex flex-col items-start justify-center sm:py-10 sm:flex-row md:justify-start">
-        <div className="w-full flex sm:w-3/6 sm:h-full md:justify-start bg-red-100">
+        <div className="w-full flex justify-center pb-4 sm:pb-0 sm:w-3/6 sm:h-full ">
           <Image
             cloudName="jeffreywood"
             publicId={imgId}

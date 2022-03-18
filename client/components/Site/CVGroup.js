@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 export default function CVGroup(props) {
   return (
     <>
-      <div className="pageTitle text-gray-500 md:ml-40">{props.title}</div>
+      <div className="pageTitle text-gray-500 my-6 md:ml-40">{props.title}</div>
 
       <ul className="font-light text-xs tracking-wider flex flex-col w-full sm:text-sm md:ml-40 md:w-5/6">
         {props.data &&
@@ -18,7 +18,7 @@ export default function CVGroup(props) {
                 >
                   {data[0]}
                 </span>
-                <div className="col-span-7 row-span-1">
+                <div className="col-span-7 row-span-1  mr-2">
                   {
                     <>
                       <span id="place" className="font-medium text-gray-600">
@@ -36,7 +36,7 @@ export default function CVGroup(props) {
                 {data[4] ? (
                   <span
                     id="link"
-                    className="row-start-2 row-span-1 col-start-3 col-span-7"
+                    className="row-start-2 row-span-1 col-start-3 col-span-7 underline"
                   >
                     <a href={data[4]}>{data[4]}</a>
                   </span>
