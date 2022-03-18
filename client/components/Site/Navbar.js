@@ -43,10 +43,10 @@ export const Navbar = (props) => {
   return (
     <>
       <nav className="flex flex-row justify-between h-18 items-end mx-2 sm:mx-12 mt-10 tracking-widest">
-        <div className="text-lg sm:text-xl">
+        <div className="text-sm sm:text-xl">
           <Link to={`/${props.user.userName}`}>{siteTitle}</Link>
         </div>
-        <div className="flex flex-row space-x-3 text-sm pe-5">
+        <div className="flex flex-row space-x-3 text-xs sm:text-sm pe-5">
           <div
             className="subHeader cursor-pointer"
             onMouseOver={show}
