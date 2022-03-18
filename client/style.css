@@ -359,11 +359,17 @@ textarea {
   flex-direction: column;
   height: 100vh;
 }
-
 .workModalHeader {
+  width: 100vw;
+  height: 4rem;
+
+  background-color: #333;
+}
+.workModalClose {
   top: 2rem;
   right: 4rem;
   position: absolute;
+  margin-bottom: 1rem;
 }
 
 .workModalBody {
