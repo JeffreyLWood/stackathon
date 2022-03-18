@@ -634,6 +634,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 1rem;
 }
 
+.my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -665,6 +670,22 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 0.25rem;
 }
 
+.mt-20 {
+  margin-top: 5rem;
+}
+
+.mt-24 {
+  margin-top: 6rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mr-20 {
+  margin-right: 5rem;
+}
+
 .mr-4 {
   margin-right: 1rem;
 }
@@ -687,22 +708,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .mt-10 {
   margin-top: 2.5rem;
-}
-
-.mt-20 {
-  margin-top: 5rem;
-}
-
-.mt-24 {
-  margin-top: 6rem;
-}
-
-.mb-4 {
-  margin-bottom: 1rem;
-}
-
-.mr-20 {
-  margin-right: 5rem;
 }
 
 .mt-8 {
@@ -757,20 +762,24 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 8rem;
 }
 
-.h-2\/6 {
-  height: 33.333333%;
+.h-screen {
+  height: 100vh;
 }
 
 .h-3\/6 {
   height: 50%;
 }
 
+.h-2\/6 {
+  height: 33.333333%;
+}
+
 .h-4\/6 {
   height: 66.666667%;
 }
 
-.h-screen {
-  height: 100vh;
+.max-h-full {
+  max-height: 100%;
 }
 
 .min-h-full {
@@ -809,20 +818,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 100vw;
 }
 
-.w-12 {
-  width: 3rem;
-}
-
 .w-4 {
   width: 1rem;
 }
 
 .w-96 {
   width: 24rem;
-}
-
-.w-1\/4 {
-  width: 25%;
 }
 
 .shrink {
@@ -1049,19 +1050,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 1rem;
 }
 
-.px-16 {
-  padding-left: 4rem;
-  padding-right: 4rem;
-}
-
-.px-12 {
-  padding-left: 3rem;
-  padding-right: 3rem;
-}
-
-.py-8 {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .pt-5 {
@@ -1072,8 +1063,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 1rem;
 }
 
-.pt-10 {
-  padding-top: 2.5rem;
+.pt-4 {
+  padding-top: 1rem;
 }
 
 .pt-20 {
@@ -1082,14 +1073,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pr-4 {
   padding-right: 1rem;
-}
-
-.pt-4 {
-  padding-top: 1rem;
-}
-
-.text-center {
-  text-align: center;
 }
 
 .text-right {
@@ -1114,6 +1097,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .text-5xl {
@@ -1205,6 +1193,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(79 70 229 / var(--tw-text-opacity));
 }
 
+.text-neutral-600 {
+  --tw-text-opacity: 1;
+  color: rgb(82 82 82 / var(--tw-text-opacity));
+}
+
+.text-neutral-500 {
+  --tw-text-opacity: 1;
+  color: rgb(115 115 115 / var(--tw-text-opacity));
+}
+
 .text-gray-600 {
   --tw-text-opacity: 1;
   color: rgb(75 85 99 / var(--tw-text-opacity));
@@ -1223,21 +1221,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-amber-400 {
   --tw-text-opacity: 1;
   color: rgb(251 191 36 / var(--tw-text-opacity));
-}
-
-.text-neutral-500 {
-  --tw-text-opacity: 1;
-  color: rgb(115 115 115 / var(--tw-text-opacity));
-}
-
-.text-neutral-300 {
-  --tw-text-opacity: 1;
-  color: rgb(212 212 212 / var(--tw-text-opacity));
-}
-
-.text-neutral-600 {
-  --tw-text-opacity: 1;
-  color: rgb(82 82 82 / var(--tw-text-opacity));
 }
 
 .shadow-xl {
@@ -1653,9 +1636,16 @@ textarea {
 }
 
 .workModalHeader {
+  width: 100vw;
+  height: 4rem;
+  background-color: #333;
+}
+
+.workModalClose {
   top: 2rem;
   right: 4rem;
   position: absolute;
+  margin-bottom: 1rem;
 }
 
 .workModalBody {
@@ -1808,6 +1798,11 @@ textarea {
     margin-right: 1.25rem;
   }
 
+  .sm\:my-5 {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
   .sm\:mt-10 {
     margin-top: 2.5rem;
   }
@@ -1820,8 +1815,16 @@ textarea {
     margin-bottom: 2.5rem;
   }
 
+  .sm\:mb-5 {
+    margin-bottom: 1.25rem;
+  }
+
   .sm\:h-screen {
     height: 100vh;
+  }
+
+  .sm\:h-5\/6 {
+    height: 83.333333%;
   }
 
   .sm\:h-full {
@@ -1836,11 +1839,11 @@ textarea {
     height: 50%;
   }
 
-  .sm\:h-5\/6 {
-    height: 83.333333%;
+  .sm\:w-3\/6 {
+    width: 50%;
   }
 
-  .sm\:w-3\/6 {
+  .sm\:w-2\/4 {
     width: 50%;
   }
 
@@ -1850,14 +1853,6 @@ textarea {
 
   .sm\:w-4\/6 {
     width: 66.666667%;
-  }
-
-  .sm\:w-1\/4 {
-    width: 25%;
-  }
-
-  .sm\:w-2\/4 {
-    width: 50%;
   }
 
   .sm\:flex-row {
@@ -1892,18 +1887,9 @@ textarea {
     padding: 1rem;
   }
 
-  .sm\:p-5 {
-    padding: 1.25rem;
-  }
-
   .sm\:py-10 {
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
-  }
-
-  .sm\:py-16 {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
   }
 
   .sm\:px-10 {
@@ -1919,12 +1905,16 @@ textarea {
     padding-right: 2.5rem;
   }
 
+  .sm\:pt-8 {
+    padding-top: 2rem;
+  }
+
   .sm\:pl-10 {
     padding-left: 2.5rem;
   }
 
-  .sm\:pt-8 {
-    padding-top: 2rem;
+  .sm\:pt-6 {
+    padding-top: 1.5rem;
   }
 
   .sm\:text-sm {
@@ -1941,40 +1931,39 @@ textarea {
     --tw-text-opacity: 1;
     color: rgb(0 0 0 / var(--tw-text-opacity));
   }
+
+  .sm\:workModalHeader {
+    width: 100vw;
+    height: 4rem;
+    background-color: #333;
+  }
 }
 
 @media (min-width: 768px) {
+  .md\:my-0 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
   .md\:mx-0 {
     margin-left: 0px;
     margin-right: 0px;
-  }
-
-  .md\:mb-2 {
-    margin-bottom: 0.5rem;
-  }
-
-  .md\:mb-6 {
-    margin-bottom: 1.5rem;
-  }
-
-  .md\:ml-40 {
-    margin-left: 10rem;
   }
 
   .md\:mt-4 {
     margin-top: 1rem;
   }
 
+  .md\:ml-40 {
+    margin-left: 10rem;
+  }
+
   .md\:h-96 {
     height: 24rem;
   }
 
-  .md\:h-56 {
-    height: 14rem;
-  }
-
-  .md\:h-3\/6 {
-    height: 50%;
+  .md\:h-64 {
+    height: 16rem;
   }
 
   .md\:w-3\/12 {
@@ -1991,14 +1980,6 @@ textarea {
 
   .md\:w-2\/6 {
     width: 33.333333%;
-  }
-
-  .md\:w-1\/4 {
-    width: 25%;
-  }
-
-  .md\:w-2\/4 {
-    width: 50%;
   }
 
   .md\:flex-row {
@@ -2019,19 +2000,14 @@ textarea {
     padding: 2.5rem;
   }
 
-  .md\:px-10 {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
-  }
-
   .md\:py-10 {
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
   }
 
-  .md\:px-8 {
-    padding-left: 2rem;
-    padding-right: 2rem;
+  .md\:px-10 {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
   }
 
   .md\:pl-20 {

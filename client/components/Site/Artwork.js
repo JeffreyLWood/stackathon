@@ -6,22 +6,22 @@ export default function Artwork(props) {
   let [show, setShow] = useState(false);
 
   return (
-    <div className="flex flex-col flex-wrap justify-center w-full sm:w-2/4 lg:w-1/4 px-12 py-8 md:mt-4 md:mx-0 md:px-8">
-      <div
-        onClick={() => setShow(true)}
-        className="cursor-pointer flex justify-center"
-      >
-        <Image
-          cloudName="jeffreywood"
-          publicId={props.data.imgId}
-          className="min-h-70 md:h-56 object-contain"
-        />
-      </div>
-      <div
-        className="pt-4 sm:pt-8 text-xs italic font-light tracking-widest uppercase text-right cursor-pointer text-neutral-400"
-        onClick={() => setShow(true)}
-      >
-        {props.data.title}
+    <>
+      <div className="flex flex-col flex-wrap w-full my-8 md:my-0 sm:w-2/4 lg:w-1/4 md:h-96 px-8 md:mt-4 md:mx-0">
+        <span>
+          <Image
+            cloudName="jeffreywood"
+            publicId={props.data.imgId}
+            onClick={() => setShow(true)}
+            className="min-h-70 max-h-full object-contain mx-auto  md:h-64 cursor-pointer"
+          />
+        </span>
+        <span
+          className="pt-4 sm:pt-8 text-xs italic font-light tracking-widest uppercase text-right cursor-pointer text-neutral-400"
+          onClick={() => setShow(true)}
+        >
+          {props.data.title}
+        </span>
       </div>
       <ArtworkModal
         show={show}
@@ -31,6 +31,6 @@ export default function Artwork(props) {
         publicId={props.data.imgId}
         data={props.data}
       />
-    </div>
+    </>
   );
 }
