@@ -17,7 +17,7 @@ export default function Artwork(props) {
           />
         </span>
         <span
-          className="pt-4 sm:pt-8 text-xs italic font-light tracking-widest uppercase text-right cursor-pointer text-neutral-500"
+          className="pt-4 sm:pt-8 text-xs  font-light tracking-widest uppercase text-right cursor-pointer text-neutral-500"
           onClick={() => setShow(true)}
         >
           {props.data.title},{" "}

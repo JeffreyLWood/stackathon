@@ -778,6 +778,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 66.666667%;
 }
 
+.h-24 {
+  height: 6rem;
+}
+
+.h-44 {
+  height: 11rem;
+}
+
 .max-h-full {
   max-height: 100%;
 }
@@ -1800,6 +1808,14 @@ textarea {
     position: absolute;
   }
 
+  .sm\:m-6 {
+    margin: 1.5rem;
+  }
+
+  .sm\:m-0 {
+    margin: 0px;
+  }
+
   .sm\:my-5 {
     margin-top: 1.25rem;
     margin-bottom: 1.25rem;
@@ -1822,6 +1838,10 @@ textarea {
     margin-bottom: 2.5rem;
   }
 
+  .sm\:mt-20 {
+    margin-top: 5rem;
+  }
+
   .sm\:h-screen {
     height: 100vh;
   }
@@ -1840,6 +1860,14 @@ textarea {
 
   .sm\:h-3\/6 {
     height: 50%;
+  }
+
+  .sm\:h-32 {
+    height: 8rem;
+  }
+
+  .sm\:h-56 {
+    height: 14rem;
   }
 
   .sm\:w-3\/6 {
@@ -1888,6 +1916,10 @@ textarea {
 
   .sm\:p-4 {
     padding: 1rem;
+  }
+
+  .sm\:p-5 {
+    padding: 1.25rem;
   }
 
   .sm\:py-10 {
@@ -1949,6 +1981,10 @@ textarea {
 
   .md\:ml-40 {
     margin-left: 10rem;
+  }
+
+  .md\:mt-20 {
+    margin-top: 5rem;
   }
 
   .md\:h-96 {

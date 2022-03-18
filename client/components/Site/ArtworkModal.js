@@ -21,7 +21,7 @@ export default function ArtworkModal(props) {
         </div>
         <div className="workModalTextContainer">
           <ul className="tracking-wider">
-            <li className="italic text-xl text-neutral-600 mb-2">
+            <li className="text-xl text-neutral-600 mb-2">
               {props.data.title}
             </li>
             <li className="uppercase tracking-widest text-neutral-500 text-sm sm:mb-10">

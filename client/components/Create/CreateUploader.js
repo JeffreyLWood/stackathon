@@ -246,9 +246,9 @@ export default function CreateUploader(props) {
           </h2>
         </div>
         {/* Modal Body */}
-        <div className="h-full flex flex-row justify-center mt-20 items-center">
+        <div className="h-full flex flex-col justify-center items-center md:mt-20 md:flex-row">
           <form
-            className="h-full w-5/6 bg-white flex justify-between items-center"
+            className="h-full w-5/6 bg-white flex flex-col items-center md:flex-row justify-between"
             onSubmit={submitHandler}
           >
             <div>
@@ -264,12 +264,16 @@ export default function CreateUploader(props) {
 
                 <label htmlFor="image">
                   {previewSource ? (
-                    <img src={previewSource} alt="chosen" className="h-56" />
+                    <img
+                      src={previewSource}
+                      alt="chosen"
+                      className="h-44 my-4 sm:m-0 sm:h-56"
+                    />
                   ) : work ? (
                     <Image
                       cloudName={"jeffreywood"}
                       publicId={work.imgId}
-                      className="h-56"
+                      className="h-44 my-4 sm:m-0 sm:h-56"
                     />
                   ) : (
                     <img src="../../../placeholderadd.png"></img>

@@ -116,7 +116,7 @@ export default function CreateSnapshot(props) {
     return null;
   } else {
     return (
-      <div className="snapshot shadow-xl mx-2 p-5 font-light">
+      <div className="snapshot shadow-xl mx-2 p-2 sm:p-5 font-light">
         <div className="flex flex-row justify-between">
           <Select
             changeHandler={props.changeHandler}
@@ -160,7 +160,7 @@ export default function CreateSnapshot(props) {
               <Image
                 cloudName="jeffreywood"
                 publicId={work.imgId}
-                className="h-32 m-6 hover:cursor-pointer"
+                className="h-24 m-2 sm:h-32 sm:m-6 hover:cursor-pointer"
                 id={props.collectionTitle}
                 value={props.id}
                 onClick={(e) => props.editHandler(e)}
