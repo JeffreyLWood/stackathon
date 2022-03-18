@@ -362,6 +362,7 @@ textarea {
 .workModalHeader {
   width: 100vw;
   height: 4rem;
+  display: none;
 }
 .workModalClose {
   top: 1rem;
