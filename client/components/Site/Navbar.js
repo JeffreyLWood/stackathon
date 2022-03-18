@@ -42,8 +42,8 @@ export const Navbar = (props) => {
   console.log(props);
   return (
     <>
-      <nav className="flex flex-row justify-between h-18 items-end mx-12 mt-10 tracking-widest">
-        <div className="siteTitle">
+      <nav className="flex flex-row justify-between h-18 items-end mx-2 sm:mx-12 mt-10 tracking-widest">
+        <div className="text-lg sm:text-xl">
           <Link to={`/${props.user.userName}`}>{siteTitle}</Link>
         </div>
         <div className="flex flex-row space-x-3 text-sm pe-5">
