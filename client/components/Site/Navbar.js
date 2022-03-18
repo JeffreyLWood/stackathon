@@ -69,6 +69,9 @@ export const Navbar = (props) => {
                 {collections &&
                   collections
                     .filter((collection) => collection.hidden === false)
+                    .sort(function (a, b) {
+                      return a.order - b.order;
+                    })
                     .map((collection, idx) =>
                       props.setCollection ? (
                         <li

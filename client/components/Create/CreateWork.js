@@ -30,7 +30,7 @@ export default function CreateWork(props) {
   // them from one collection to another or deleting them all together. The Primary and Secondary
   // views default to Work and to Hidden so user's can see the works on display, and the works hidden
   // with the option to make more, custom, collections.
-  let [primary, setPrimary] = useState("Work");
+  let [primary, setPrimary] = useState("");
   let [secondary, setSecondary] = useState("Hidden");
   // Show is the modal state, either true for display and false for display: none
   let [show, setShow] = useState(false);
@@ -41,7 +41,7 @@ export default function CreateWork(props) {
   let [imgId, setImgId] = useState("");
   // Set modal collection tells the modal what collection the work is from, setting
   // the select option to default to it when Editing a Work. Could be further optimized
-  let [modalCollection, setModalCollection] = useState("Work"); // Not loading
+  let [modalCollection, setModalCollection] = useState(""); // Not loading
 
   //Modal for editing collections
   let [showCollections, setShowCollections] = useState(false);
@@ -58,6 +58,12 @@ export default function CreateWork(props) {
   useEffect(() => {
     worksData = dispatch(fetchAllWork(userId));
   }, []);
+
+  useEffect(() => {
+    worksData?.length && setPrimary(worksData[0].title);
+  }, [worksData]);
+
+  console.log("user", user, "worksData", worksData);
 
   useEffect(() => {
     collection = dispatch(fetchCollection(userId, primary));
