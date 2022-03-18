@@ -1816,6 +1816,10 @@ textarea {
     margin: 0px;
   }
 
+  .sm\:m-4 {
+    margin: 1rem;
+  }
+
   .sm\:my-5 {
     margin-top: 1.25rem;
     margin-bottom: 1.25rem;
@@ -1840,6 +1844,10 @@ textarea {
 
   .sm\:mt-20 {
     margin-top: 5rem;
+  }
+
+  .sm\:mt-16 {
+    margin-top: 4rem;
   }
 
   .sm\:h-screen {
@@ -1868,6 +1876,14 @@ textarea {
 
   .sm\:h-56 {
     height: 14rem;
+  }
+
+  .sm\:h-36 {
+    height: 9rem;
+  }
+
+  .sm\:h-40 {
+    height: 10rem;
   }
 
   .sm\:w-3\/6 {
@@ -1948,6 +1964,10 @@ textarea {
     padding-left: 2.5rem;
   }
 
+  .sm\:pl-20 {
+    padding-left: 5rem;
+  }
+
   .sm\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -1965,6 +1985,10 @@ textarea {
 }
 
 @media (min-width: 768px) {
+  .md\:m-4 {
+    margin: 1rem;
+  }
+
   .md\:my-0 {
     margin-top: 0px;
     margin-bottom: 0px;
@@ -1987,12 +2011,24 @@ textarea {
     margin-top: 5rem;
   }
 
+  .md\:mt-10 {
+    margin-top: 2.5rem;
+  }
+
   .md\:h-96 {
     height: 24rem;
   }
 
   .md\:h-64 {
     height: 16rem;
+  }
+
+  .md\:h-40 {
+    height: 10rem;
+  }
+
+  .md\:h-36 {
+    height: 9rem;
   }
 
   .md\:w-3\/12 {
@@ -2009,6 +2045,10 @@ textarea {
 
   .md\:w-2\/6 {
     width: 33.333333%;
+  }
+
+  .md\:w-1\/4 {
+    width: 25%;
   }
 
   .md\:flex-row {
@@ -2055,5 +2095,17 @@ textarea {
 @media (min-width: 1024px) {
   .lg\:w-1\/4 {
     width: 25%;
+  }
+
+  .lg\:pl-20 {
+    padding-left: 5rem;
+  }
+
+  .lg\:pl-14 {
+    padding-left: 3.5rem;
+  }
+
+  .lg\:pl-12 {
+    padding-left: 3rem;
   }
 }

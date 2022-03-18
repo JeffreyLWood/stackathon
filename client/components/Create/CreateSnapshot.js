@@ -152,22 +152,24 @@ export default function CreateSnapshot(props) {
             setPrimary={props.setPrimary}
           />
         ) : collection?.length ? (
-          <ListManager
-            items={state.sortedList}
-            direction="horizontal"
-            maxItems={props.id === "primary" ? 4 : 2}
-            render={(work) => (
-              <Image
-                cloudName="jeffreywood"
-                publicId={work.imgId}
-                className="h-24 m-2 sm:h-32 sm:m-6 hover:cursor-pointer"
-                id={props.collectionTitle}
-                value={props.id}
-                onClick={(e) => props.editHandler(e)}
-              />
-            )}
-            onDragEnd={reorderList}
-          />
+          <div className="w-full h-content flex flex-wrap">
+            <ListManager
+              items={state.sortedList}
+              direction="horizontal"
+              maxItems={props.id === "primary" ? 4 : 2}
+              render={(work) => (
+                <Image
+                  cloudName="jeffreywood"
+                  publicId={work.imgId}
+                  className="h-24 m-2 md:h-36 md:m-4 hover:cursor-pointer"
+                  id={props.collectionTitle}
+                  value={props.id}
+                  onClick={(e) => props.editHandler(e)}
+                />
+              )}
+              onDragEnd={reorderList}
+            />
+          </div>
         ) : props.collectionTitle === "Hidden" ? (
           "Works you have marked as hidden will appear here and not be visible on your site"
         ) : (
