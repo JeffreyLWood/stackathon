@@ -22,7 +22,6 @@ export const Work = (props) => {
       props.match.params?.collection && props.match.params.collection;
 
     if (paramsCollectionTitle) {
-      console.log("GO", paramsCollectionTitle);
       let paramsCollection =
         user.collections &&
         user.collections.filter(
@@ -33,7 +32,11 @@ export const Work = (props) => {
     } else {
       let visible =
         user.collections &&
-        user.collections.filter((collection) => !collection.hidden);
+        user.collections
+          .filter((collection) => !collection.hidden)
+          .sort(function (a, b) {
+            return a.order - b.order;
+          });
 
       user.collections && !paramsCollectionTitle && setCollection(visible[0]);
     }
