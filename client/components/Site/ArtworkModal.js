@@ -8,14 +8,14 @@ export default function ArtworkModal(props) {
 
   return (
     <div className="workModal">
-      {/* <div className="sm:workModalHeader"> */}
-      <span
-        className="workModalClose cursor-pointer"
-        onClick={() => props.setShow(false)}
-      >
-        <img src="/icons8-close-16.png"></img>
-      </span>
-      {/* </div> */}
+      <div className="workModalHeader">
+        <span
+          className="workModalClose cursor-pointer"
+          onClick={() => props.setShow(false)}
+        >
+          <img src="/icons8-close-16.png" className="w-6" />
+        </span>
+      </div>
       <div className="workModalBody ">
         <div className="workModalImgContainer mb-2 sm:my-5">
           <Image cloudName="jeffreywood" publicId={props.data.imgId} />

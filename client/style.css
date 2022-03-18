@@ -362,14 +362,11 @@ textarea {
 .workModalHeader {
   width: 100vw;
   height: 4rem;
-
-  background-color: #333;
 }
 .workModalClose {
-  top: 2rem;
-  right: 4rem;
+  top: 1rem;
+  right: 2rem;
   position: absolute;
-  margin-bottom: 1rem;
 }
 
 .workModalBody {
@@ -441,30 +438,34 @@ textarea {
     padding: 2rem;
   }
 
+  .workModalHeader {
+    display: block;
+  }
+
   .workModalBody {
     flex-direction: column;
     padding-left: 0rem;
     padding-right: 0rem;
-    padding-top: 2rem;
   }
 
   .workModalImgContainer {
     width: 100%;
-    height: 70%;
+    max-height: 80%;
+    padding-left: 2rem;
+    padding-right: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
   }
+
   .workModalImgContainer img {
-    padding-left: 2rem;
-    padding-right: 2rem;
     min-height: 25rem;
     object-fit: contain;
     margin: 0rem;
   }
   .workModalTextContainer {
     width: 100%;
-    height: 30%;
+    height: 20%;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
