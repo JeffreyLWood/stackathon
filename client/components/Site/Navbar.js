@@ -42,7 +42,7 @@ export const Navbar = (props) => {
   console.log(props);
   return (
     <>
-      <nav className="flex flex-row justify-between h-18 items-end mx-10 mt-10">
+      <nav className="flex flex-row justify-between h-18 items-end mx-12 mt-10">
         <div className="siteTitle">
           <Link to={`/${props.user.userName}`}>{siteTitle}</Link>
         </div>
