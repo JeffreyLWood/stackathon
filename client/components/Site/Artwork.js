@@ -17,10 +17,11 @@ export default function Artwork(props) {
           />
         </span>
         <span
-          className="pt-4 sm:pt-8 text-xs italic font-light tracking-widest uppercase text-right cursor-pointer text-neutral-400"
+          className="pt-4 sm:pt-8 text-xs italic font-light tracking-widest uppercase text-right cursor-pointer text-neutral-500"
           onClick={() => setShow(true)}
         >
-          {props.data.title}
+          {props.data.title},{" "}
+          <span className="text-neutral-400">{props.data.year}</span>
         </span>
       </div>
       <ArtworkModal
