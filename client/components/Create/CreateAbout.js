@@ -4,7 +4,7 @@ import { updateAboutText } from "../../store/create";
 import { useEffect, useState } from "react";
 import { fetchUserData } from "../../store/user";
 import { Navbar } from "../Navbar";
-
+import { Image } from "cloudinary-react";
 const About = (props) => {
   let user = useSelector((state) => state.user);
 
@@ -16,11 +16,16 @@ const About = (props) => {
 
   let [text, setText] = useState("");
 
+  let [image, setImage] = useState("");
+
+  let [previous, setPrevious] = useState("");
+
+  let [unsavedChanges, setUnsavedChanges] = useState(false);
   useEffect(() => {
     setText(user && user.about ? user.about.text : "");
+    setImage(user && user.about ? user.about.imgId : "");
+    setPrevious(text);
   }, [user]);
-
-  let image;
 
   useEffect(() => {
     setText(text);
@@ -28,11 +33,19 @@ const About = (props) => {
 
   let changeHandler = (evt) => {
     evt.preventDefault();
+
+    if (text == previous) {
+      setUnsavedChanges(false);
+    } else {
+      setUnsavedChanges(true);
+    }
     setText(evt.target.value);
   };
 
   let submitHandler = (evt) => {
     evt.preventDefault();
+    setUnsavedChanges(false);
+
     dispatch(updateAboutText(user.id, { aboutText: text }));
     dispatch(fetchUserData(user.userName));
   };
@@ -43,6 +56,7 @@ const About = (props) => {
 
   let imgChangeHandler = (evt) => {
     evt.preventDefault();
+    setUnsavedChanges(true);
     const file = evt.target.files[0];
     previewFile(file);
   };
@@ -80,9 +94,9 @@ const About = (props) => {
   return (
     <>
       <Navbar user={user} />
-      <div className="w-full p-10">
-        <form className="space-x-5" onSubmit={imgSubmitHandler}>
-          <div>
+      <div className="container w-full p-10 flex flex-col justify-center md:flex-row">
+        <div className="h-3/6 md:w-3/6 h-full flex items-center justify-center">
+          <form className="" onSubmit={imgSubmitHandler}>
             <input
               id="image"
               name="image"
@@ -93,41 +107,45 @@ const About = (props) => {
             />
             <label htmlFor="image">
               {previewSource ? (
-                <img src={previewSource} alt="chosen" className="h-56" />
+                <img src={previewSource} alt="chosen" className="h-72" />
               ) : image ? (
                 <Image
                   cloudName={"jeffreywood"}
-                  publicId={null}
-                  className="h-56"
+                  publicId={image}
+                  className="my-4 h-72"
                 />
               ) : (
                 <img src="../../../placeholderadd.png"></img>
               )}
             </label>
-          </div>
-          <button type="submit" className="pill">
-            Submit
-          </button>
-        </form>
-        <form className="space-x-5" onSubmit={submitHandler}>
-          <div>
+
+            <button type="submit" className="pill">
+              Submit
+            </button>
+          </form>
+        </div>
+
+        <div className="h-3/6 md:w-3/6 h-full flex items-center">
+          <form className="" onSubmit={submitHandler}>
             <textarea
               rows="15"
-              cols="50"
-              className="border-2 w-4/6 p-2"
+              cols="140"
+              className="w-full p-4"
               name="about"
               type="text"
               style={{ resize: "none" }}
               onChange={changeHandler}
               value={text ? text : ""}
             />
-          </div>
-          <div>
+
             <button className="pill my-2" id="about" type="submit">
               Save Changes
             </button>
-          </div>
-        </form>
+            <span className="italic text-indigo-600 text-sm mx-4">
+              {unsavedChanges ? `Remember to save your changes` : null}
+            </span>
+          </form>
+        </div>
       </div>
     </>
   );
