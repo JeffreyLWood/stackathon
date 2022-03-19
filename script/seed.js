@@ -45,7 +45,7 @@ async function seed() {
     );
     let cv = await CV.create({
       education:
-        "2019-2021, Columbia University, MFA Photography, New York NY \n 2013-2017, Boston University, BFA Theatre Design, Boston MA",
+        "2018, Columbia University, MFA Photography, New York NY \n 2016, Boston University, BFA Theatre Design, Boston MA",
       groupExhibition:
         "2020, Lombardy Gallery, Feline Form: Cats in Photography, New York NY \n 2020, Hutchison Gallery, 2020 Vision, New York NY \n 2019, Grover and Co., Lower East Siders, New York NY \n 2018, Hutchison Gallery, Belief Disbelief: Reality Reassessed, New York NY",
       soloExhibition:

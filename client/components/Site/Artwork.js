@@ -12,17 +12,24 @@ export default function Artwork(props) {
           <Image
             cloudName="jeffreywood"
             publicId={props.data.imgId}
-            onClick={() => setShow(true)}
+            onClick={() => (window.outerWidth > 638 ? setShow(true) : null)}
             className="min-h-70 max-h-full object-contain mx-auto  md:h-64 cursor-pointer"
           />
         </span>
-        <span
-          className="pt-4 sm:pt-8 text-xs  font-light tracking-widest uppercase text-right cursor-pointer text-neutral-500"
-          onClick={() => setShow(true)}
-        >
-          {props.data.title},{" "}
-          <span className="text-neutral-400">{props.data.year}</span>
-        </span>
+        <div className="pt-4 sm:pt-8 text-xs flex flex-col space-y-2 sm:space-y-0 justify-end font-light tracking-widest uppercase text-right cursor-pointer text-neutral-500">
+          <span
+            onClick={() => (window.outerWidth > 638 ? setShow(true) : null)}
+          >
+            {props.data.title},{" "}
+            <span className="text-neutral-400">{props.data.year}</span>
+          </span>
+          <span className="mobileArtDescription text-neutral-500">
+            {props.data.medium}
+          </span>
+          <span className="mobileArtDescription text-neutral-500">
+            {props.data.height} {"x"} {props.data.width}
+          </span>
+        </div>
       </div>
       <ArtworkModal
         show={show}

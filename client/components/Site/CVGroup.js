@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 export default function CVGroup(props) {
   return (
     <>
-      <div className="pageTitle text-gray-500 mb-6 md:ml-40">{props.title}</div>
+      <div className="pageTitle text-gray-500 mb-6 md:mx-60">{props.title}</div>
 
-      <ul className="font-light text-xs tracking-wider flex flex-col w-full mb-4 sm:text-sm md:ml-40 md:w-5/6">
+      <ul className="font-light text-xs tracking-wider flex flex-col w-full mb-4 sm:text-sm md:mx-60 md:w-4/6">
         {props.data &&
           props.data.map((line, index) => {
             let data = line.split(",");
@@ -30,7 +30,10 @@ export default function CVGroup(props) {
                     </>
                   }
                 </div>
-                <span id="location" className="col-span-3 row-span-1">
+                <span
+                  id="location"
+                  className="col-span-3 row-span-1 text-right pr-1"
+                >
                   {data[3]}
                 </span>
                 {data[4] ? (

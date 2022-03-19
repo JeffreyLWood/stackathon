@@ -173,13 +173,16 @@ html.has-scroll-dragging {
   letter-spacing: 0.1em;
 }
 
+.mobileArtDescription {
+  display: none;
+}
+
 .dropdown {
   z-index: 10;
   position: absolute;
   left: 0;
-  display: flex;
+
   background-color: #fff;
-  justify-content: between;
   width: 100vw;
   border-bottom: rgb(39 39 42) 1px solid;
   min-height: 50vh;
@@ -420,6 +423,12 @@ textarea {
 .aboutText:focus {
   outline: none;
   border: none;
+}
+
+@media (max-width: 638px) {
+  .mobileArtDescription {
+    display: block;
+  }
 }
 
 @media (max-width: 768px) {

@@ -20,39 +20,43 @@ export const Navbar = (props) => {
   };
 
   return (
-    <div className="navbar flex justify-between py-4 px-2 font-light bg-white z-20">
+    <div className="navbar flex justify-between py-4 px-2 font-light bg-white z-10">
       {/* <div className="flex flex-row justify-between space-x-5"> */}
-      <span className="text-lg">
-        <Link to="/">Selected-Work</Link>
-      </span>
 
       {user.username ? (
         <>
-          <div>
-            <Link to={`/create/in/${user.username}/settings`}>
-              <span className="italic text-sm text-indigo-600">
+          <div className="text-xs md:text-sm sm:text-md flex flex-wrap sm:flex-row space-x-2 sm:space-x-4 items-center">
+            <span className="">
+              <Link to="/">Selected-Work</Link>
+            </span>
+            <span className="italic  text-indigo-600">
+              <Link to={`/create/in/${user.username}/settings`}>
                 Hello, {user.firstName}. Manage your site here.
-              </span>
-            </Link>
-            <Link to={`/create/in/${user.username}/work`}>Work</Link>
-            <Link to={`/create/in/${user.username}/about`}> About</Link>
-            <Link to={`/create/in/${user.username}/cv`}> CV</Link>
-            <Link to={`/create/in/${user.username}/contact`}>Contact</Link>
+              </Link>
+            </span>
+            <div className="space-x-4">
+              <Link to={`/create/in/${user.username}/work`}>Work</Link>
+              <Link to={`/create/in/${user.username}/about`}> About</Link>
+              <Link to={`/create/in/${user.username}/cv`}> CV</Link>
+              <Link to={`/create/in/${user.username}/contact`}>Contact</Link>
+            </div>
           </div>
-
-          <div className="">
+          <div className="space-x-2">
             <Link to={`/${user.username}`} target="_blank">
-              <button type="button" className="pillDark mx-2">
+              <button type="button" className="pillDark">
                 View Site
               </button>
             </Link>
-            <a href="#" className="pill mx-2" onClick={handleClick}>
+            <a href="#" className="pill" onClick={handleClick}>
               Logout
             </a>
           </div>
         </>
       ) : (
         <>
+          <span className="text-sm sm:text-lg">
+            <Link to="/">Selected-Work</Link>
+          </span>
           <div>
             <button type="button" className="pillDark mx-2">
               <a href="#auth">Login</a>
