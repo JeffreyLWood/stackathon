@@ -18,6 +18,7 @@ const CV = (props) => {
 
   let [header, setHeader] = useState("education");
   let [data, setData] = useState("");
+  let [unsaved, setUnsaved] = useState(false);
 
   useEffect(() => {
     setText(user && user.cv ? user.cv.education : {});
@@ -39,12 +40,14 @@ const CV = (props) => {
     evt.preventDefault();
     setText(evt.target.value);
     setData(text.split("\n"));
+    setUnsaved(true);
   };
 
   let submitHandler = (evt) => {
     evt.preventDefault();
     // console.log(user.id, header, text);
     dispatch(updateCVText(user.id, header, text));
+    setUnsaved(false);
   };
 
   return (
@@ -99,17 +102,17 @@ const CV = (props) => {
                 Having trouble? See the examples below. Copy and paste them into
                 the input field and hit enter to see how they render.
               </span>
-              <span className="text-sm italic ">
-                2020, Columbia University, MFA Painting, New York NY
-              </span>
-              <span className=" text-sm italic">
-                2013-2015, New York University, Adjunct Faculty, New York NY,
-                https://nyu.edu, Painting 1 Professor, Admissions Supervisor
-              </span>
-              <span className="mb-2 text-sm italic">
-                2022, New York Times, 30 Artists Under 30 by Jean Sullivan, ,
-                https://nytimes.com/notarealarticle
-              </span>
+              <ul className="text-sm italic list-disc">
+                <li>2020, Columbia University, MFA Painting, New York NY</li>
+                <li>
+                  2013-2015, New York University, Adjunct Faculty, New York NY,
+                  https://nyu.edu, Painting 1 Professor, Admissions Supervisor
+                </li>
+                <li>
+                  2022, New York Times, 30 Artists Under 30 by Jean Sullivan, ,
+                  https://nytimes.com/notarealarticle
+                </li>
+              </ul>
             </label>
           </div>
           <div className="w-full h-72 flex flex-row space-x-4">
@@ -130,6 +133,12 @@ const CV = (props) => {
           <button type="submit" className="pill">
             Save
           </button>
+          {unsaved ? (
+            <span className="text-xs mx-4 tracking-widest italic text-indigo-600">
+              Remember to save your changes before moving on to another category
+              or exiting the window.
+            </span>
+          ) : null}
         </form>
       </div>
     </>
