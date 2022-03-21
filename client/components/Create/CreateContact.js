@@ -34,7 +34,7 @@ export default function CreateContact(props) {
       <Navbar user={user} />
 
       <form
-        className="contact w-full flex flex-col mx-2 md:flex-row md:p-10 md:space-x-5 font-light text-gray-500"
+        className="contact h-full mt-10 w-full bg-neutral-50 flex flex-col mx-2 md:flex-row md:p-10 md:space-x-5 font-light text-gray-500"
         onSubmit={submitHandler}
       >
         <div className="w-full flex flex-col">

@@ -52,7 +52,7 @@ const CV = (props) => {
       <Navbar user={user} />
       <div className="w-full min-h-screen justify-center bg-neutral-50 mt-20 p-10 flex">
         <form
-          className="w-full min-h-screen space-y-10"
+          className="w-full min-h-screen space-y-5"
           onSubmit={submitHandler}
         >
           <div className="flex flex-col">
@@ -80,23 +80,35 @@ const CV = (props) => {
                 </option>
               </select>
             </span>
-            <label htmlFor="header" className="my-2 flex flex-col">
+            <label htmlFor="header" className="mt-2 flex flex-col">
               <span className=" mb-2 font-semibold">
                 Columns must be separated by comma and in order:
               </span>
               <span className="text-lg mb-2">
-                YYYY, Heading 1, Heading 2, Location, Link or Description 1,
+                YYYY, Heading 1, Heading 2, Location, Link and/or Description 1,
                 Description 2, Description 3
               </span>
-              <span className="italic text-neutral-400">
+              <span className="italic text-sm text-neutral-400">
                 If there is a comma in your title, use double-comma. eg. "Me,,
                 Myself,, and Irene" would be "Me, Myself, and Irene"
               </span>
-              <span className="mb-2 italic text-neutral-400">
-                eg. 2020, Columbia University, MFA Painting, New York NY
-                <br />
-                eg. 2013-2015, New York University, Adjunct Faculty New York NY,
+              <span className="italic mb-2 text-sm text-neutral-400">
+                Links must begin with 'https://'
+              </span>
+              <span className=" italic text-neutral-400">
+                Having trouble? See the examples below. Copy and paste them into
+                the input field and hit enter to see how they render.
+              </span>
+              <span className="text-sm italic ">
+                2020, Columbia University, MFA Painting, New York NY
+              </span>
+              <span className=" text-sm italic">
+                2013-2015, New York University, Adjunct Faculty, New York NY,
                 https://nyu.edu, Painting 1 Professor, Admissions Supervisor
+              </span>
+              <span className="mb-2 text-sm italic">
+                2022, New York Times, 30 Artists Under 30 by Jean Sullivan, ,
+                https://nytimes.com/notarealarticle
               </span>
             </label>
           </div>
