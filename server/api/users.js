@@ -37,11 +37,29 @@ router.post("/:userId/about", async (req, res, next) => {
     await About.update(
       {
         text: req.body.aboutText,
+        header: req.body.header,
         userId: req.params.userId,
+        caption: req.body.caption,
       },
       { where: { userId: req.params.userId } }
     );
-    res.status(200).send();
+    let about = await About.findOne({ where: { userId: req.params.userId } });
+    res.status(200).send(about);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete("/:userId/about", async (req, res, next) => {
+  try {
+    await About.update(
+      {
+        imgId: null,
+      },
+      { where: { userId: req.params.userId } }
+    );
+    let about = await About.findOne({ where: { userId: req.params.userId } });
+    res.status(200).send(about);
   } catch (err) {
     next(err);
   }
@@ -94,7 +112,6 @@ router.post("/:userId/contact", async (req, res, next) => {
 // Get User Data
 router.get("/:username", async (req, res, next) => {
   try {
-    console.log(req);
     let allData = await User.findOne({
       where: { username: req.params.username },
       include: { all: true, nested: true },

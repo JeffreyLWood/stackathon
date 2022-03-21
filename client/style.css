@@ -424,6 +424,9 @@ textarea {
   outline: none;
   border: none;
 }
+.aboutImage {
+  max-height: 495px;
+}
 
 @media (max-width: 638px) {
   .mobileArtDescription {

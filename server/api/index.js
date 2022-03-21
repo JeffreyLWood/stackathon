@@ -17,18 +17,17 @@ router.post("/upload", async (req, res) => {
 
     //if req.body.type === about, send it to about table instead of work
     if (req.body.type === "about") {
-      try {
-        await About.update(
-          {
-            imgId: uploadedResponse.public_id,
-          },
-          {
-            where: { userId: req.body.userId },
-          }
-        );
-      } catch (error) {
-        console.log(error, "about error");
-      }
+      await About.update(
+        {
+          imgId: uploadedResponse.public_id,
+          caption: req.body.caption,
+        },
+        {
+          where: { userId: req.body.userId },
+        }
+      );
+      let about = await About.findOne({ where: { userId: req.body.userId } });
+      res.status(204).send(about);
     } else {
       // let user = await user.findByPk(req.body.userId);
       let collection = await Collection.findOne({
@@ -143,7 +142,6 @@ router.post("/update", async (req, res) => {
       destination = JSON.stringify(destination, null, 2);
       res.status(200).send({ work, origin, destination });
     } else {
-      console.log(work.dataValues);
       res.status(200).send(work.dataValues);
     }
   } catch (error) {

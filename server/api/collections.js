@@ -38,7 +38,6 @@ router.post("/", async (req, res) => {
 
 //Toggle hide and show collection
 router.put("/:userId/hide/:collection", async (req, res) => {
-  console.log("req.body.toggle", req.body.toggle);
   try {
     await Collection.update(
       {

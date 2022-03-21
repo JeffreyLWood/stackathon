@@ -7,8 +7,16 @@ const About = db.define("about", {
     type: Sequelize.STRING(2000),
     allowNull: true,
   },
+  header: {
+    type: Sequelize.STRING(200),
+    allowNull: true,
+  },
   imgId: {
     type: Sequelize.STRING(2000),
+    allowNull: true,
+  },
+  caption: {
+    type: Sequelize.STRING(100),
     allowNull: true,
   },
 });

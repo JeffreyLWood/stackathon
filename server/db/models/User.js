@@ -272,7 +272,9 @@ const defaultVals = async (user) => {
   try {
     let about = await About.create({
       text: null,
+      header: null,
       imgId: null,
+      caption: null,
     });
     let exhibition = await CV.create({
       header: "Exhibition",

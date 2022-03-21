@@ -2,6 +2,7 @@ import axios from "axios";
 
 //action types
 const ABOUT = "ABOUT";
+const REMOVE_ABOUT_IMAGE = "REMOVE_ABOUT_IMAGE";
 const CV = "CV";
 const CONTACT = "CONTACT";
 const TITLE = "TITLE";
@@ -25,6 +26,10 @@ const DELETE_COLLECTION = "DELETE_COLLECTION";
 
 //action creators
 const updateAbout = (aboutData) => {
+  return { type: ABOUT, aboutData };
+};
+
+const deleteAboutImage = (aboutData) => {
   return { type: ABOUT, aboutData };
 };
 
@@ -119,6 +124,16 @@ export const updateAboutText = (userId, textData) =>
       return err;
     }
   };
+
+export const destroyAboutImage = (userId) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.delete(`/api/users/${userId}/about`);
+      dispatch(deleteAboutImage(data));
+    } catch (err) {
+      return err;
+    }
+  };
 export const updateCVText = (userId, header, text) =>
   async function (dispatch) {
     let putBody = {
@@ -200,7 +215,6 @@ export const updateCollectionData = (userId, collection, body) =>
 export const hiddenCollection = (userId, collection, toggle) =>
   async function (dispatch) {
     try {
-      console.log("store", toggle);
       let { data } = await axios.put(
         `/api/collections/${userId}/hide/${collection}`,
         { toggle }
@@ -331,6 +345,11 @@ export default function (state = {}, action) {
     case ABOUT: {
       let newState = state;
       newState.about = action.aboutData;
+      return newState;
+    }
+    case REMOVE_ABOUT_IMAGE: {
+      let newState = state;
+      newState.about.imgId = null;
       return newState;
     }
     case CV: {

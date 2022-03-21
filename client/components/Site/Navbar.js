@@ -54,7 +54,7 @@ export const Navbar = (props) => {
           >
             <Link to={`/${props.user.userName}`}>Selected Work</Link>
             <div className={workDropdown}>
-              <div className="h-56 w-56 m-20 bg-neutral-400 m-5">
+              <div className="hidden sm:block h-56 w-56 m-20 bg-neutral-400 m-5">
                 {/* <Image
                   cloudName="jeffreywood"
                   publicId={preview.imgId}
