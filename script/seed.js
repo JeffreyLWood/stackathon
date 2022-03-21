@@ -57,7 +57,7 @@ async function seed() {
       experience:
         "2020, New England College, Adjunct Faculty - Intro. to Photography, Cornish NH \n 2020, Salem University, Visiting Lecturer, Salem MA, 1 hour lecture with slides",
       press:
-        "2022, Wayne Schuman, Jane Isidor's Views of Brooklyn Heights Find a Sense of Calm Among Chaos, New York Times, https://nytimes.com/notarealarticle\n2021, Lester C Wiley, 30 Photographers Under 30, Harvard Business Review, https://hbr.com/notarealarticle",
+        "2022, New York Times, Jane Isidor's Views of Brooklyn Heights Find a Sense of Calm Among Chaos by Wayne Schuman, , https://nytimes.com/notarealarticle\n2021, Harvard Business Review, 30 Photographers Under 30 by Lester C Wiley, , https://harvardbusinessreview.com/notarealarticle",
       publications:
         "2020, Jason Ortega, Photography Today, Yale University Press, https://yalebooks.yale.edu/notarealbook, Pages 20-24",
     });

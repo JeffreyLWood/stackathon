@@ -59,7 +59,9 @@ export const CV = (props) => {
           <CVGroup title={"Residencies"} data={residencies} />
         ) : null}
         {teaching ? <CVGroup title={"Teaching"} data={teaching} /> : null}
-        {experience ? <CVGroup title={"Experience"} data={experience} /> : null}
+        {experience ? (
+          <CVGroup title={"Related Experience"} data={experience} />
+        ) : null}
         {advocacy ? <CVGroup title={"Advocacy"} data={advocacy} /> : null}
         {communityInvolvement ? (
           <CVGroup
