@@ -52,7 +52,9 @@ export const Navbar = (props) => {
             onMouseLeave={hide}
             onClick={hide}
           >
-            <Link to={`/${props.user.userName}`}>Selected Work</Link>
+            <Link to={`/${props.user.userName}`} onClick={hide}>
+              Selected Work
+            </Link>
             <div className={workDropdown}>
               <div className="hidden sm:block h-56 w-56 m-20 bg-neutral-400 m-5">
                 {/* <Image
