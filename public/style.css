@@ -553,16 +553,40 @@ Ensure the default browser behavior of the `hidden` attribute.
   grid-column: span 3 / span 3;
 }
 
+.col-span-6 {
+  grid-column: span 6 / span 6;
+}
+
 .col-start-3 {
   grid-column-start: 3;
+}
+
+.col-start-4 {
+  grid-column-start: 4;
 }
 
 .row-span-1 {
   grid-row: span 1 / span 1;
 }
 
+.row-span-3 {
+  grid-row: span 3 / span 3;
+}
+
+.row-span-4 {
+  grid-row: span 4 / span 4;
+}
+
 .row-start-2 {
   grid-row-start: 2;
+}
+
+.row-start-3 {
+  grid-row-start: 3;
+}
+
+.row-start-1 {
+  grid-row-start: 1;
 }
 
 .m-2 {
@@ -587,6 +611,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .m-20 {
   margin: 5rem;
+}
+
+.m-0 {
+  margin: 0px;
 }
 
 .mx-4 {
@@ -789,6 +817,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 14rem;
 }
 
+.h-auto {
+  height: auto;
+}
+
 .max-h-full {
   max-height: 100%;
 }
@@ -869,12 +901,20 @@ Ensure the default browser behavior of the `hidden` attribute.
   resize: both;
 }
 
+.list-disc {
+  list-style-type: disc;
+}
+
 .grid-cols-12 {
   grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 
 .grid-rows-2 {
   grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+.grid-rows-3 {
+  grid-template-rows: repeat(3, minmax(0, 1fr));
 }
 
 .flex-row {
@@ -957,6 +997,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-space-y-reverse: 0;
   margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(2rem * var(--tw-space-y-reverse));
+}
+
+.space-y-10 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(2.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(2.5rem * var(--tw-space-y-reverse));
 }
 
 .overflow-hidden {
@@ -1068,6 +1114,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .p-5 {
   padding: 1.25rem;
+}
+
+.p-0 {
+  padding: 0px;
 }
 
 .py-10 {
@@ -1891,6 +1941,11 @@ textarea {
     margin-right: 1.25rem;
   }
 
+  .sm\:mx-0 {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
   .sm\:mb-0 {
     margin-bottom: 0px;
   }
@@ -2113,6 +2168,10 @@ textarea {
 
   .md\:w-5\/6 {
     width: 83.333333%;
+  }
+
+  .md\:w-3\/6 {
+    width: 50%;
   }
 
   .md\:flex-row {

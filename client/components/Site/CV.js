@@ -26,7 +26,7 @@ export const CV = (props) => {
   let groupExhibition =
     cv && cv.groupExhibition ? cv.groupExhibition.split("\n") : null;
   let press = cv && cv.press ? cv.press.split("\n") : null;
-  let publication = cv && cv.publication ? cv.publication.split("\n") : null;
+  let publications = cv && cv.publications ? cv.publications.split("\n") : null;
   let awards = cv && cv.awards ? cv.awards.split("\n") : null;
   let residencies = cv && cv.residencies ? cv.residencies.split("\n") : null;
   let teaching = cv && cv.teaching ? cv.teaching.split("\n") : null;
@@ -39,7 +39,7 @@ export const CV = (props) => {
     <>
       <Navbar user={user} />
       {/* Container */}
-      <div className="h-90vh w-full flex flex-col justify-center  pt-20 pb-20">
+      <div className="h-90vh mx-1 sm:mx-0 w-full flex flex-col justify-center  pt-20 pb-20">
         {education ? <CVGroup title={"Education"} data={education} /> : null}
         {soloExhibition ? (
           <CVGroup title={"Solo Exhibitions"} data={soloExhibition} />
@@ -51,8 +51,8 @@ export const CV = (props) => {
           />
         ) : null}
         {press ? <CVGroup title={"Press"} data={press} /> : null}
-        {publication ? (
-          <CVGroup title={"Publication"} data={publication} />
+        {publications ? (
+          <CVGroup title={"Publications"} data={publications} />
         ) : null}
         {awards ? <CVGroup title={"Awards"} data={awards} /> : null}
         {residencies ? (

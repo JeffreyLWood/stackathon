@@ -28,7 +28,7 @@ async function seed() {
       {
         text: "Jane Isidor is not a real person. She is not a real photographer based in Brooklyn, nor did she obtain degrees from Boston University or Columbia University. She is merely a figmant of the engineers' imagination at Selected-Work.com who may or may not be a figmant of someone else's imagination. Possibly yours? You may never really know with absolute certainty. \n \n Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         header:
-          "Jane Isidor's photographs transcend the obvious and reexamine the connection between time and place. --New York City Times Review of Books",
+          "Jane Isidor's photographs transcend the obvious and reexamine the connection between time and place. --New York Times, 2022",
         imgId: "stackathonImgs/janeisidor_rvlm1p",
         caption: null,
       },
@@ -48,14 +48,18 @@ async function seed() {
     );
     let cv = await CV.create({
       education:
-        "2018, Columbia University, MFA Photography, New York NY \n 2016, Boston University, BFA Theatre Design, Boston MA",
+        "2018, Columbia University, MFA Photography, New York NY\n2016, Boston University, BFA Theatre Design, Boston MA",
       groupExhibition:
-        "2020, Lombardy Gallery, Feline Form: Cats in Photography, New York NY \n 2020, Hutchison Gallery, 2020 Vision, New York NY \n 2019, Grover and Co., Lower East Siders, New York NY \n 2018, Hutchison Gallery, Belief Disbelief: Reality Reassessed, New York NY",
+        "2021, Groupthink, On Being and Somethingness, New York NY\n2020, Hutchison Gallery, 2020 Vision, New York NY\n2019, Grover and Co., Lower East Siders, New York NY\n2018, Hutchison Gallery, Belief Disbelief: Reality Reassessed, New York NY\n2017, Lombardy Gallery, Feline Gaze: Photographer's and Their Cats, Cambridge MA",
       soloExhibition:
         "2022, Howel Gallery, Views of Brooklyn Heights, New York NY",
       awards: "2021, Halfbright Scholarship, Photography, Berlin",
+      experience:
+        "2020, New England College, Adjunct Faculty - Intro. to Photography, Cornish NH \n 2020, Salem University, Visiting Lecturer, Salem MA, 1 hour lecture with slides",
       press:
-        "2022, The Gotham City Journal, Jane Isidor's Views of Brooklyn Heights Find a Sense of Calm Among Chaos, New York NY, https://gothamcityjournal.com/notarealarticle",
+        "2022, Wayne Schuman, Jane Isidor's Views of Brooklyn Heights Find a Sense of Calm Among Chaos, New York Times, https://nytimes.com/notarealarticle\n2021, Lester C Wiley, 30 Photographers Under 30, Harvard Business Review, https://hbr.com/notarealarticle",
+      publications:
+        "2020, Jason Ortega, Photography Today, Yale University Press, https://yalebooks.yale.edu/notarealbook, Pages 20-24",
     });
 
     await cv.setUser(users[0]);

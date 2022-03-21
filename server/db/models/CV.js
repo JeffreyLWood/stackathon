@@ -21,7 +21,7 @@ const CV = db.define("cv", {
   press: {
     type: Sequelize.TEXT(10000),
   },
-  publication: {
+  publications: {
     type: Sequelize.TEXT(10000),
   },
   residencies: {
