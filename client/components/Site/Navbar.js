@@ -19,7 +19,6 @@ export const Navbar = (props) => {
   document.title = siteTitle;
 
   let collections = props.user && props.user.collections;
-  console.log("collections", collections);
 
   let [preview, setPreview] = useState("");
 
@@ -29,28 +28,28 @@ export const Navbar = (props) => {
       collections
         .filter((collection) => !collection.hidden)
         .sort((a, b) => a.order - b.order);
-    visible && visible[0]?.works
-      ? setPreview(visible[0]?.works[0]?.imgId)
-      : setPreview("");
-  }, [collections]);
+    props.collection && props.collection?.works
+      ? setPreview(props.collection.works[0].imgId)
+      : visible && visible[0]?.works && setPreview(visible[0]?.works[0]?.imgId);
+  }, [props]);
 
   let [workDropdown, setWorkDropdown] = useState("hidden");
 
   const show = () => {
-    setWorkDropdown("flex flex-row justify-between dropdown");
+    setWorkDropdown(
+      "flex flex-row justify-between dropdown drop-down drop-shadow-xl"
+    );
   };
 
   const hide = () => {
-    setWorkDropdown("hidden");
+    setWorkDropdown("flex flex-row justify-between dropdown drop-down-up");
   };
 
   const previewHandler = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
-    setPreview(e.target.value?.works[0]?.imgId);
+    setPreview(e.target.id);
   };
 
-  console.log(props);
   return (
     <>
       <nav className="flex flex-row justify-between h-18 items-end mx-2 sm:mx-12 mt-10 tracking-widest">
@@ -60,21 +59,27 @@ export const Navbar = (props) => {
         <div className="flex flex-row space-x-3 text-xs sm:text-sm pe-5">
           <div
             className="subHeader cursor-pointer"
-            onMouseOver={show}
-            onMouseLeave={hide}
+            onMouseOver={() => show()}
+            onMouseLeave={() => hide()}
             onClick={hide}
           >
             <Link to={`/${props.user.userName}`} onClick={hide}>
               Selected Work
             </Link>
             <div className={workDropdown}>
-              <div className="hidden sm:block w-full flex justify-center h-content m-20">
-                <Image
-                  cloudName="jeffreywood"
-                  publicId={preview}
-                  className="hover:cursor-pointer h-64"
-                  // onClick={(e) => props.editHandler(e)}
-                />
+              <div className="hidden sm:block w-full flex text-center h-content m-10">
+                <ul className="w-full h-full">
+                  <span className="w-full h-full">
+                    <li className="w-full h-full">
+                      <Image
+                        cloudName="jeffreywood"
+                        publicId={preview}
+                        className="hover:cursor-pointer h-72 mx-auto "
+                        // onClick={(e) => props.editHandler(e)}
+                      />
+                    </li>
+                  </span>
+                </ul>
               </div>
               <div className="flex flex-col justify-center items-start h-full w-screen sm:justify-start sm:w-2/6 md:flex-row">
                 <span className="w-full flex justify-center sm:justify-start sm:w-3/6">
@@ -92,15 +97,15 @@ export const Navbar = (props) => {
                         .map((collection, idx) =>
                           props.setCollection ? (
                             <li
-                              value={collection}
                               key={idx}
                               className="cursor-pointer text-xl sm:text-sm text-neutral-500"
-                              onMouseOver={(e) => previewHandler(e)}
                               onClick={() => {
                                 props.setCollection(collection);
                               }}
                             >
                               <Link
+                                id={collection.works[0].imgId}
+                                onMouseOver={(e) => previewHandler(e)}
                                 to={`/${props.user.userName}/work/${collection.title}`}
                               >
                                 {collection.title}
@@ -109,11 +114,11 @@ export const Navbar = (props) => {
                           ) : (
                             <li
                               key={idx}
-                              value={collection}
                               className="cursor-pointer text-xl sm:text-sm"
-                              onMouseOver={(e) => previewHandler(e)}
                             >
                               <Link
+                                id={collection.works[0].imgId}
+                                onMouseOver={(e) => previewHandler(e)}
                                 to={`/${props.user.userName}/work/${collection.title}`}
                               >
                                 {collection.title}
@@ -138,15 +143,15 @@ export const Navbar = (props) => {
                         .map((collection, idx) =>
                           props.setCollection ? (
                             <li
-                              value={collection}
                               key={idx}
                               className="cursor-pointer text-xl sm:text-sm text-neutral-400 tracking-widest"
-                              onMouseOver={(e) => previewHandler(e)}
                               onClick={() => {
                                 props.setCollection(collection);
                               }}
                             >
                               <Link
+                                onMouseOver={(e) => previewHandler(e)}
+                                id={collection.works[0].imgId}
                                 to={`/${props.user.userName}/work/${collection.title}`}
                               >
                                 {collection.title}
@@ -154,12 +159,12 @@ export const Navbar = (props) => {
                             </li>
                           ) : (
                             <li
-                              value={collection}
                               key={idx}
                               className="cursor-pointer text-xl sm:text-sm  text-neutral-400 tracking-widest"
-                              onMouseOver={(e) => previewHandler(e)}
                             >
                               <Link
+                                onMouseOver={(e) => previewHandler(e)}
+                                id={collection.works[0].imgId}
                                 to={`/${props.user.userName}/work/${collection.title}`}
                               >
                                 {collection.title}

@@ -8,10 +8,14 @@ html {
   overflow-x: hidden;
 }
 
+:root {
+  --primary: rgb(63 63 70);
+}
+
 * {
   font-weight: 300;
   letter-spacing: 0.05em;
-  color: rgb(63 63 70);
+  color: var(--primary);
 }
 
 a:hover {
@@ -178,13 +182,11 @@ html.has-scroll-dragging {
 }
 
 .dropdown {
-  z-index: 10;
   position: absolute;
   left: 0;
-
   background-color: #fff;
   width: 100vw;
-  border-bottom: rgb(39 39 42) 1px solid;
+  /* border-bottom: rgb(39 39 42) 1px solid; */
   min-height: 50vh;
   transition: ease-in-out 0.5s;
 }
@@ -195,6 +197,20 @@ html.has-scroll-dragging {
 
 .dropdown li {
   padding: 0.5rem;
+  opacity: 0;
+  animation-name: fadein;
+  animation-delay: 0.5s;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .pageTitle {
@@ -208,25 +224,15 @@ html.has-scroll-dragging {
   display: flex;
   max-width: 24rem;
 }
-.onView {
-  font-size: x-large;
-  font-weight: 300;
-  display: flex;
-  align-items: flex-end;
-  letter-spacing: 0.1em;
-}
-.h-80vh {
+
+/* .h-80vh {
   min-height: 80vh;
-}
+} */
 
 .h-90vh {
   min-height: 92vh;
 }
-.toolbar {
-  bottom: 5px;
 
-  position: absolute;
-}
 .subHeader {
   font-weight: 300;
   text-transform: uppercase;
@@ -246,7 +252,7 @@ html.has-scroll-dragging {
   right: 0;
   bottom: 0;
   transition: 0.5s ease-in-out;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -426,6 +432,64 @@ textarea {
 }
 .aboutImage {
   max-height: 495px;
+}
+
+/* .fade-in {
+  animation: fadeIn ease-in-out 0.3s;
+} */
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.drop-down {
+  animation: growDown 300ms ease-in-out forwards;
+  transform-origin: top center;
+}
+
+@keyframes growDown {
+  0% {
+    transform: scaleY(0);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+.drop-down-up {
+  animation: growUp 300ms ease-in-out forwards;
+  transform-origin: top center;
+}
+
+.drop-down-up li {
+  animation-name: fadeout;
+  animation-fill-mode: forwards;
+  animation-duration: 0.4s;
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes growUp {
+  0% {
+    transform: scaleY(1);
+  }
+
+  100% {
+    transform: scaleY(0);
+  }
 }
 
 @media (max-width: 638px) {
