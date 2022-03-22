@@ -20,7 +20,7 @@ export const Navbar = (props) => {
   };
 
   return (
-    <div className="navbar flex justify-between py-4 px-2 font-light bg-white z-10">
+    <div className="navbar flex justify-between py-4 px-2 font-light bg-white">
       {/* <div className="flex flex-row justify-between space-x-5"> */}
 
       {user.username ? (

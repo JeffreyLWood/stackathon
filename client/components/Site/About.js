@@ -67,7 +67,7 @@ export const About = (props) => {
 
         <div className="w-full h-full flex flex-col mx-auto text-sm leading-8 sm:w-3/6 sm:pr-10">
           {newHeader ? (
-            <span className="border-l-2 border-r-2 mb-8 px-4 tracking-widest min-w-full h-full flex flex-col text-lg leading-8 sm:w-3/6 sm:pr-10">
+            <span className="border-l-2 border-r-2 mb-6 px-4 tracking-widest min-w-full h-full flex flex-col text-lg leading-8 sm:w-3/6 sm:pr-10">
               {newHeader}
             </span>
           ) : null}

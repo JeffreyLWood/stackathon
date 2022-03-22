@@ -144,6 +144,7 @@ export default function CreateSnapshot(props) {
         {/* If settings, show CollectionSettings, if false show the thumbnails (ListManager) */}
         {settings ? (
           <CollectionSettings
+            collections={props.collections}
             collectionTitle={props.collectionTitle}
             collectionDescription={collection?.description}
             userId={props.userId}

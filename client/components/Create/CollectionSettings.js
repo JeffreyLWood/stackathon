@@ -11,6 +11,7 @@ export default function CollectionSettings(props) {
   const dispatch = useDispatch();
 
   let [state, setState] = useState(collection);
+  let [unique, setUnique] = useState(true);
 
   useEffect(() => {
     const load = async () => {
@@ -22,25 +23,22 @@ export default function CollectionSettings(props) {
     setState(collection);
   }, []);
 
-  // useEffect(() => {
-  //   const load = async () => {
-  //     collection = await dispatch(
-  //       fetchCollection(props.userId, props.collectionTitle)
-  //     );
-  //   };
-  //   load();
-  //   setState(collection);
-  // }, [props.settings]);
-
   const changeHandler = (e) => {
     e.preventDefault();
     setState({ ...state, [e.target.name]: e.target.value });
+    setUnique(true);
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(updateCollectionData(props.userId, props.collectionTitle, state));
+    for (let i = 0; i < props.collections.length; i++) {
+      if (props.collections[i] === state.title) {
+        setUnique(false);
+        return;
+      }
+    }
     props.setPrimary(state.title);
+    dispatch(updateCollectionData(props.userId, props.collectionTitle, state));
   };
 
   const deleteCollection = (e) => {
@@ -54,6 +52,11 @@ export default function CollectionSettings(props) {
     <form className="flex flex-col my-5 font-light" onSubmit={submitHandler}>
       <label htmlFor="title" className="text-gray-400">
         Collection Title: *{" "}
+        {!unique ? (
+          <span className="text-sm italic text-indigo-600">
+            Title must be unique
+          </span>
+        ) : null}
       </label>
       <input
         name="title"
@@ -78,9 +81,18 @@ export default function CollectionSettings(props) {
         placeholder=""
       ></textarea>
       <div className="flex flex-row justify-between w-3/6">
-        <button type="submit" className="pill">
-          Save Changes
-        </button>
+        {!unique ? (
+          <button
+            type="button"
+            className="pill text-neutral-300 background-neutral-300"
+          >
+            Save Changes
+          </button>
+        ) : (
+          <button type="submit" className="pill">
+            Save Changes
+          </button>
+        )}
         <button
           type="button"
           onClick={deleteCollection}

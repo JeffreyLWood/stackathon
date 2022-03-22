@@ -32,11 +32,10 @@ export default function CreateUploader(props) {
   let [state, setState] = useState({
     collection: props.collection,
     title: "",
-    year: "",
-    height: "",
-    width: "",
+    year: null,
+    height: null,
+    width: null,
     medium: "",
-    hidden: false,
   });
 
   // Not needed
@@ -50,13 +49,12 @@ export default function CreateUploader(props) {
         // Clears preview image in case modal was closed and add a work was opened
         setPreviewSource("");
         setState({
-          collection: props.collection,
+          collection: props.primary,
           title: "",
-          year: "",
-          height: "",
-          width: "",
+          year: null,
+          height: null,
+          width: null,
           medium: "",
-          hidden: false,
         });
       }
       if (props.displayName === "Edit Work") {
@@ -68,6 +66,19 @@ export default function CreateUploader(props) {
     }
     loadImageData();
   }, [props.show]);
+
+  useEffect(() => {
+    work && work.title
+      ? setState({
+          collection: props.collection,
+          title: work.title,
+          year: work.year,
+          height: work.height,
+          width: work.width,
+          medium: work.medium,
+        })
+      : null;
+  }, [work]);
 
   let changeHandler = (evt) => {
     evt.preventDefault();
@@ -117,7 +128,6 @@ export default function CreateUploader(props) {
       height: "",
       width: "",
       medium: "",
-      hidden: null,
     });
     //Closes modal
     props.setShow(false);
@@ -134,7 +144,6 @@ export default function CreateUploader(props) {
         height: state.height,
         width: state.width,
         medium: state.medium,
-        hidden: hidden,
       };
       let snapshotId =
         props.primary === state.collection
@@ -158,11 +167,11 @@ export default function CreateUploader(props) {
         collection: state.collection,
         imgId: work.imgId,
         userId: user.id,
-        title: state.title.length ? state.title : work.title,
-        year: state.year.length ? state.year : work.year,
-        height: state.height.length ? state.height : work.height,
-        width: state.width.length ? state.width : work.width,
-        medium: state.medium.length ? state.medium : work.medium,
+        title: state.title,
+        year: state.year,
+        height: state.height,
+        width: state.width,
+        medium: state.medium,
       };
       dispatch(update(body));
       setPreviewSource("");
@@ -197,11 +206,11 @@ export default function CreateUploader(props) {
         },
         userId: user.id,
         imgId: work.imgId,
-        title: state.title.length ? state.title : work.title,
-        year: state.year.length ? state.year : work.year,
-        height: state.height.length ? state.height : work.height,
-        width: state.width.length ? state.width : work.width,
-        medium: state.medium.length ? state.medium : work.medium,
+        title: state.title,
+        year: state.year,
+        height: state.height,
+        width: state.width,
+        medium: state.medium,
       };
       dispatch(switcher(body));
     } catch (error) {
@@ -227,7 +236,6 @@ export default function CreateUploader(props) {
       height: "",
       width: "",
       medium: "",
-      hidden: null,
     });
     setPreviewSource("");
   };
@@ -288,13 +296,7 @@ export default function CreateUploader(props) {
                 className="my-1 border-b-2"
                 placeholder="Title"
                 onChange={changeHandler}
-                value={
-                  state.title.length
-                    ? state.title
-                    : work
-                    ? work.title
-                    : state.title
-                }
+                value={state.title}
               />
               <input
                 type="text"
@@ -302,9 +304,7 @@ export default function CreateUploader(props) {
                 className="my-1 border-b-2"
                 placeholder="Year"
                 onChange={changeHandler}
-                value={
-                  state.year.length ? state.year : work ? work.year : state.year
-                }
+                value={state.year}
               />
               <input
                 type="text"
@@ -312,13 +312,7 @@ export default function CreateUploader(props) {
                 className="my-1 border-b-2"
                 placeholder="Medium"
                 onChange={changeHandler}
-                value={
-                  state.medium.length
-                    ? state.medium
-                    : work
-                    ? work.medium
-                    : state.medium
-                }
+                value={state.medium}
               />
               <div className="flex flex-row">
                 <input
@@ -327,13 +321,7 @@ export default function CreateUploader(props) {
                   className="my-1 border-b-2"
                   placeholder="Height"
                   onChange={changeHandler}
-                  value={
-                    state.height.length
-                      ? state.length
-                      : work
-                      ? work.height
-                      : state.height
-                  }
+                  value={state.height}
                 />
                 <input
                   type="text"
@@ -341,13 +329,7 @@ export default function CreateUploader(props) {
                   className="my-1 border-b-2"
                   placeholder="Width"
                   onChange={changeHandler}
-                  value={
-                    state.width.length
-                      ? state.length
-                      : work
-                      ? work.width
-                      : state.width
-                  }
+                  value={state.width}
                 />
               </div>
               <label
@@ -359,7 +341,7 @@ export default function CreateUploader(props) {
                   name="collection"
                   className="p-2"
                   onChange={changeHandler}
-                  value={state.collection ? state.collection : props.collection}
+                  value={state.collection}
                 >
                   {props &&
                     props?.collections.map((heading, idx) => (
@@ -377,29 +359,7 @@ export default function CreateUploader(props) {
                   ) : null}
                 </select>
               </label>
-              {/*  <div
-                onClick={hiddenHandler}
-                className="flex space-x-5 items-center w-12 p-1"
-              >
-               <span>
-                  {hidden ? (
-                    <img
-                      src="../../../hiddenactive.png"
-                      name="hidden"
-                      value={hidden}
-                      className="w-8"
-                    />
-                  ) : (
-                    <img
-                      src="../../../hiddeninactive.png"
-                      onClick={hiddenHandler}
-                      name="hidden"
-                      value={hidden}
-                      className="w-8"
-                    />
-                  )}
-                </span> 
-              </div>*/}
+
               <button
                 type="submit"
                 className="bg-black text-white text-uppercase p-1 my-3"

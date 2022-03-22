@@ -537,8 +537,48 @@ Ensure the default browser behavior of the `hidden` attribute.
   position: sticky;
 }
 
+.top-0 {
+  top: 0px;
+}
+
+.left-0 {
+  left: 0px;
+}
+
+.right-0 {
+  right: 0px;
+}
+
+.top-2 {
+  top: 0.5rem;
+}
+
+.bottom-5 {
+  bottom: 1.25rem;
+}
+
+.top-20 {
+  top: 5rem;
+}
+
+.top-5 {
+  top: 1.25rem;
+}
+
+.top-10 {
+  top: 2.5rem;
+}
+
+.top-12 {
+  top: 3rem;
+}
+
 .z-10 {
   z-index: 10;
+}
+
+.z-0 {
+  z-index: 0;
 }
 
 .col-span-2 {
@@ -1296,6 +1336,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(251 191 36 / var(--tw-text-opacity));
 }
 
+.text-neutral-300 {
+  --tw-text-opacity: 1;
+  color: rgb(212 212 212 / var(--tw-text-opacity));
+}
+
 .underline {
   text-decoration: underline;
 }
@@ -2011,6 +2056,10 @@ textarea {
 @media (min-width: 640px) {
   .sm\:absolute {
     position: absolute;
+  }
+
+  .sm\:relative {
+    position: relative;
   }
 
   .sm\:m-0 {

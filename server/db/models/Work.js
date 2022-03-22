@@ -9,29 +9,31 @@ const Work = db.define("work", {
   // },
   title: {
     type: Sequelize.STRING,
+    allowNull: true,
   },
   year: {
     type: Sequelize.INTEGER,
+    allowNull: true,
   },
   height: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.REAL,
+    allowNull: true,
   },
   medium: {
     type: Sequelize.STRING,
+    allowNull: true,
   },
   width: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.REAL,
+    allowNull: true,
   },
   status: {
     type: Sequelize.STRING,
+    allowNull: true,
   },
   imgId: {
     type: Sequelize.STRING,
     allowNull: false,
-  },
-  hidden: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false,
   },
   order: {
     type: Sequelize.REAL,

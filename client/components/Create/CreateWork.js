@@ -63,8 +63,6 @@ export default function CreateWork(props) {
     worksData?.length && setPrimary(worksData[0].title);
   }, [worksData]);
 
-  console.log("user", user, "worksData", worksData);
-
   useEffect(() => {
     collection = dispatch(fetchCollection(userId, primary));
   }, [primary]);
@@ -92,10 +90,10 @@ export default function CreateWork(props) {
   const editHandler = (e) => {
     e.preventDefault();
     setDisplayName("Edit Work");
+    setModalCollection(e.target.id);
     let imgId = e.target.src.split("/").slice(-1).join();
     setImgId(imgId);
-    setModalCollection(e.target.id);
-    console.log(modalCollection);
+
     setShow(true);
   };
   // Optimization needed: ModalCollection and Primary/Secondary are redundant. Replace
@@ -111,11 +109,11 @@ export default function CreateWork(props) {
     evt.preventDefault();
     if (evt.target.id === "primary") {
       setPrimary(evt.target.value);
-      setModalCollection(evt.target.value);
+      setModalCollection("");
       // dispatch(fetchCollection(userId, evt.target.value));
     } else if (evt.target.id === "secondary") {
       setSecondary(evt.target.value);
-      setModalCollection(evt.target.value);
+      setModalCollection("");
     }
   };
 
