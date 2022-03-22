@@ -31,8 +31,12 @@ export default function CollectionSettings(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    for (let i = 0; i < props.collections.length; i++) {
-      if (props.collections[i] === state.title) {
+    let others = props.collections.filter(
+      (collection) => collection !== props.collectionTitle
+    );
+
+    for (let i = 0; i < others.length; i++) {
+      if (others[i] === state.title) {
         setUnique(false);
         return;
       }
