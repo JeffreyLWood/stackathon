@@ -67,7 +67,7 @@ export const Navbar = (props) => {
               Selected Work
             </Link>
             <div className={workDropdown}>
-              <div className="hidden sm:block w-full flex text-center h-content m-10">
+              <div className="hidden sm:block w-full flex text-center h-content">
                 <ul className="w-full h-full">
                   <span className="w-full h-full">
                     <li className="w-full h-full">
