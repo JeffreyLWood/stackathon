@@ -36,7 +36,7 @@ var checkUser = subdomain("*", async (req, res, next) => {
   } else next();
 });
 
-app.use(checkUser);
+// app.use(checkUser);
 // app.use(subdomain("*", require("./sub")));
 
 // auth and api routes

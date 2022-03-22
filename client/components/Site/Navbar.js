@@ -21,7 +21,18 @@ export const Navbar = (props) => {
   let collections = props.user && props.user.collections;
   console.log("collections", collections);
 
-  let [preview, setPreview] = useState({});
+  let [preview, setPreview] = useState("");
+
+  useEffect(() => {
+    let visible =
+      collections &&
+      collections
+        .filter((collection) => !collection.hidden)
+        .sort((a, b) => a.order - b.order);
+    visible && visible[0]?.works
+      ? setPreview(visible[0]?.works[0]?.imgId)
+      : setPreview("");
+  }, [collections]);
 
   let [workDropdown, setWorkDropdown] = useState("hidden");
 
@@ -35,7 +46,8 @@ export const Navbar = (props) => {
 
   const previewHandler = (e) => {
     e.preventDefault();
-    // setPreview(e.target.value?.works[0]);
+    console.log(e.target.value);
+    setPreview(e.target.value?.works[0]?.imgId);
   };
 
   console.log(props);
@@ -56,103 +68,107 @@ export const Navbar = (props) => {
               Selected Work
             </Link>
             <div className={workDropdown}>
-              <div className="hidden sm:block h-56 w-56 m-20 bg-neutral-400 m-5">
-                {/* <Image
+              <div className="hidden sm:block w-full flex justify-center h-content m-20">
+                <Image
                   cloudName="jeffreywood"
-                  publicId={preview.imgId}
-                  className="hover:cursor-pointer"
-                  id={preview.collectionTitle}
-                  value={preview.id}
+                  publicId={preview}
+                  className="hover:cursor-pointer h-64"
                   // onClick={(e) => props.editHandler(e)}
-                /> */}
+                />
               </div>
-              <div className="flex w-1/6 md:justify-end md:flex-row">
-                <ul>
-                  {collections &&
-                    collections
-                      .filter(
-                        (collection) =>
-                          collection.hidden === false &&
-                          collection.category === "Primary"
-                      )
-                      .sort(function (a, b) {
-                        return a.order - b.order;
-                      })
-                      .map((collection, idx) =>
-                        props.setCollection ? (
-                          <li
-                            value={collection}
-                            key={idx}
-                            className="cursor-pointer text-neutral-500"
-                            onMouseOver={(e) => previewHandler(e)}
-                            onClick={() => {
-                              props.setCollection(collection);
-                            }}
-                          >
-                            <Link
-                              to={`/${props.user.userName}/work/${collection.title}`}
-                            >
-                              {collection.title}
-                            </Link>
-                          </li>
-                        ) : (
-                          <li
-                            key={idx}
-                            className="cursor-pointer text-neutral-500"
-                            onMouseOver={(e) => previewHandler(e)}
-                          >
-                            <Link
-                              to={`/${props.user.userName}/work/${collection.title}`}
-                            >
-                              {collection.title}
-                            </Link>
-                          </li>
+              <div className="flex flex-col justify-center items-start h-full w-screen sm:justify-start sm:w-2/6 md:flex-row">
+                <span className="w-full flex justify-center sm:justify-start sm:w-3/6">
+                  <ul>
+                    {collections &&
+                      collections
+                        .filter(
+                          (collection) =>
+                            collection.hidden === false &&
+                            collection.category === "Primary"
                         )
-                      )}
-                </ul>
-                <ul>
-                  {collections &&
-                    collections
-                      .filter(
-                        (collection) =>
-                          collection.hidden === false &&
-                          collection.category === "Secondary"
-                      )
-                      .sort(function (a, b) {
-                        return a.order - b.order;
-                      })
-                      .map((collection, idx) =>
-                        props.setCollection ? (
-                          <li
-                            value={collection}
-                            key={idx}
-                            className="cursor-pointer text-neutral-400 tracking-widest"
-                            onMouseOver={(e) => previewHandler(e)}
-                            onClick={() => {
-                              props.setCollection(collection);
-                            }}
-                          >
-                            <Link
-                              to={`/${props.user.userName}/work/${collection.title}`}
+                        .sort(function (a, b) {
+                          return a.order - b.order;
+                        })
+                        .map((collection, idx) =>
+                          props.setCollection ? (
+                            <li
+                              value={collection}
+                              key={idx}
+                              className="cursor-pointer text-xl sm:text-sm text-neutral-500"
+                              onMouseOver={(e) => previewHandler(e)}
+                              onClick={() => {
+                                props.setCollection(collection);
+                              }}
                             >
-                              {collection.title}
-                            </Link>
-                          </li>
-                        ) : (
-                          <li
-                            key={idx}
-                            className="cursor-pointer  text-neutral-400 tracking-widest"
-                            onMouseOver={(e) => previewHandler(e)}
-                          >
-                            <Link
-                              to={`/${props.user.userName}/work/${collection.title}`}
+                              <Link
+                                to={`/${props.user.userName}/work/${collection.title}`}
+                              >
+                                {collection.title}
+                              </Link>
+                            </li>
+                          ) : (
+                            <li
+                              key={idx}
+                              value={collection}
+                              className="cursor-pointer text-xl sm:text-sm"
+                              onMouseOver={(e) => previewHandler(e)}
                             >
-                              {collection.title}
-                            </Link>
-                          </li>
+                              <Link
+                                to={`/${props.user.userName}/work/${collection.title}`}
+                              >
+                                {collection.title}
+                              </Link>
+                            </li>
+                          )
+                        )}
+                  </ul>
+                </span>
+                <span className="w-full flex justify-center sm:justify-start sm:w-3/6 mr-4">
+                  <ul>
+                    {collections &&
+                      collections
+                        .filter(
+                          (collection) =>
+                            collection.hidden === false &&
+                            collection.category === "Secondary"
                         )
-                      )}
-                </ul>
+                        .sort(function (a, b) {
+                          return a.order - b.order;
+                        })
+                        .map((collection, idx) =>
+                          props.setCollection ? (
+                            <li
+                              value={collection}
+                              key={idx}
+                              className="cursor-pointer text-xl sm:text-sm text-neutral-400 tracking-widest"
+                              onMouseOver={(e) => previewHandler(e)}
+                              onClick={() => {
+                                props.setCollection(collection);
+                              }}
+                            >
+                              <Link
+                                to={`/${props.user.userName}/work/${collection.title}`}
+                              >
+                                {collection.title}
+                              </Link>
+                            </li>
+                          ) : (
+                            <li
+                              value={collection}
+                              key={idx}
+                              className="cursor-pointer text-xl sm:text-sm  text-neutral-400 tracking-widest"
+                              onMouseOver={(e) => previewHandler(e)}
+                            >
+                              <Link
+                                to={`/${props.user.userName}/work/${collection.title}`}
+                              >
+                                {collection.title}
+                              </Link>
+                            </li>
+                          )
+                        )}
+                  </ul>
+                </span>
               </div>
             </div>
           </div>
