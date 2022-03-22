@@ -110,6 +110,21 @@ html.has-scroll-dragging {
   right: 0;
   padding: 1rem;
 }
+
+.toggle {
+  top: 1.5%;
+  right: 3%;
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  background: url("menu.png");
+  background-repeat: no-repeat;
+  background-size: 30px;
+  background-position: center;
+  cursor: pointer;
+  display: none;
+}
+
 .container {
   height: 100vh;
   width: 100vw;
@@ -433,6 +448,9 @@ textarea {
 .aboutImage {
   max-height: 495px;
 }
+.nav {
+  display: flex;
+}
 
 /* .fade-in {
   animation: fadeIn ease-in-out 0.3s;
@@ -465,20 +483,21 @@ textarea {
 .drop-down-up {
   animation: growUp 300ms ease-in-out forwards;
   transform-origin: top center;
+  animation-delay: 0.2s;
 }
 
 .drop-down-up li {
   animation-name: fadeout;
   animation-fill-mode: forwards;
-  animation-duration: 0.4s;
+  animation-duration: 0.2s;
 }
 
 @keyframes fadeout {
   0% {
-    opacity: 0;
+    opacity: 1;
   }
   100% {
-    opacity: 1;
+    opacity: 0;
   }
 }
 
@@ -503,6 +522,14 @@ textarea {
     background-size: auto;
     padding: 2rem;
   }
+
+  .toggle {
+    display: block;
+  }
+  .nav {
+    display: none;
+  }
+
   .phoneimg {
     right: auto;
     position: relative;

@@ -537,48 +537,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   position: sticky;
 }
 
-.top-0 {
-  top: 0px;
-}
-
-.left-0 {
-  left: 0px;
-}
-
-.right-0 {
-  right: 0px;
-}
-
-.top-2 {
-  top: 0.5rem;
-}
-
-.bottom-5 {
-  bottom: 1.25rem;
-}
-
-.top-20 {
-  top: 5rem;
-}
-
-.top-5 {
-  top: 1.25rem;
-}
-
-.top-10 {
-  top: 2.5rem;
-}
-
-.top-12 {
-  top: 3rem;
-}
-
 .z-10 {
   z-index: 10;
-}
-
-.z-0 {
-  z-index: 0;
 }
 
 .col-span-2 {
@@ -647,10 +607,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .m-10 {
   margin: 2.5rem;
-}
-
-.m-20 {
-  margin: 5rem;
 }
 
 .mx-4 {
@@ -759,10 +715,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .mr-4 {
   margin-right: 1rem;
-}
-
-.mb-8 {
-  margin-bottom: 2rem;
 }
 
 .mb-6 {
@@ -1291,6 +1243,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(79 70 229 / var(--tw-text-opacity));
 }
 
+.text-neutral-300 {
+  --tw-text-opacity: 1;
+  color: rgb(212 212 212 / var(--tw-text-opacity));
+}
+
 .text-gray-500 {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -1334,11 +1291,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-amber-400 {
   --tw-text-opacity: 1;
   color: rgb(251 191 36 / var(--tw-text-opacity));
-}
-
-.text-neutral-300 {
-  --tw-text-opacity: 1;
-  color: rgb(212 212 212 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -1507,6 +1459,20 @@ html.has-scroll-dragging {
   left: 0;
   right: 0;
   padding: 1rem;
+}
+
+.toggle {
+  top: 1.5%;
+  right: 3%;
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  background: url("menu.png");
+  background-repeat: no-repeat;
+  background-size: 30px;
+  background-position: center;
+  cursor: pointer;
+  display: none;
 }
 
 .container {
@@ -1854,6 +1820,10 @@ textarea {
   max-height: 495px;
 }
 
+.nav {
+  display: flex;
+}
+
 /* .fade-in {
   animation: fadeIn ease-in-out 0.3s;
 } */
@@ -1908,6 +1878,8 @@ textarea {
   -webkit-animation: growUp 300ms ease-in-out forwards;
           animation: growUp 300ms ease-in-out forwards;
   transform-origin: top center;
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
 }
 
 .drop-down-up li {
@@ -1915,27 +1887,27 @@ textarea {
           animation-name: fadeout;
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
-  -webkit-animation-duration: 0.4s;
-          animation-duration: 0.4s;
+  -webkit-animation-duration: 0.2s;
+          animation-duration: 0.2s;
 }
 
 @-webkit-keyframes fadeout {
   0% {
-    opacity: 0;
+    opacity: 1;
   }
 
   100% {
-    opacity: 1;
+    opacity: 0;
   }
 }
 
 @keyframes fadeout {
   0% {
-    opacity: 0;
+    opacity: 1;
   }
 
   100% {
-    opacity: 1;
+    opacity: 0;
   }
 }
 
@@ -1969,6 +1941,14 @@ textarea {
   .welcome {
     background-size: auto;
     padding: 2rem;
+  }
+
+  .toggle {
+    display: block;
+  }
+
+  .nav {
+    display: none;
   }
 
   .phoneimg {
@@ -2056,10 +2036,6 @@ textarea {
 @media (min-width: 640px) {
   .sm\:absolute {
     position: absolute;
-  }
-
-  .sm\:relative {
-    position: relative;
   }
 
   .sm\:m-0 {
