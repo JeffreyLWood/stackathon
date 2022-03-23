@@ -17,9 +17,11 @@ export default function Onboard() {
                 View Demo Site
               </a>
             </button>
-            <button type="button" className="pillDark my-4">
-              Get Started
-            </button>
+            <a href="#auth">
+              <button type="button" className="pillDark my-4">
+                Get Started
+              </button>
+            </a>
           </li>
         </ul>
       </div>

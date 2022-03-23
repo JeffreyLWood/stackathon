@@ -1355,6 +1355,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 body,
 html {
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 :root {
