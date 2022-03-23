@@ -45,7 +45,8 @@ export default function CVGroup(props) {
                     {
                       <>
                         <span id="place" className="font-medium text-gray-600">
-                          {data[1]},
+                          {data[1]}
+                          {data[2] !== " " ? "," : null}
                         </span>
                         <span id="title" className="italic">
                           {" "}
