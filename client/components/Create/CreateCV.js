@@ -22,7 +22,11 @@ const CV = (props) => {
 
   useEffect(() => {
     setText(user && user.cv ? user.cv.education : {});
-    setData(user && user.cv ? user.cv.education.split("\n") : []);
+    setData(
+      user && user.cv && user.cv.education?.length
+        ? user.cv.education.split("\n")
+        : []
+    );
   }, [user]);
 
   let changeHandler = async (evt) => {
