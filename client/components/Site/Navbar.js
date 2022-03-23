@@ -64,7 +64,7 @@ export const Navbar = (props) => {
           onClick={() =>
             mobileNav === "hidden"
               ? setMobileNav(
-                  "fixed top-10 h-screen flex justify-center text-center mt-20 w-screen bg-white"
+                  "fixed top-8 h-screen flex justify-center text-center mt-20 w-screen bg-white"
                 )
               : setMobileNav("hidden")
           }
