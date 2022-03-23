@@ -7,19 +7,25 @@ export default function ArtworkModal(props) {
   }
 
   return (
-    <div className="workModal">
+    <div className="workModal fade-in">
       <div className="workModalHeader"></div>
       <span
         className="workModalClose cursor-pointer"
-        onClick={() => props.setShow(false)}
+        onClick={(e) => {
+          props.closeHandler(e);
+        }}
       >
         <img src="/icons8-close-16.png" className="w-6" />
       </span>
       <div className="workModalBody ">
         <div className="workModalImgContainer mb-2 sm:my-5">
-          <Image cloudName="jeffreywood" publicId={props.data.imgId} />
+          <Image
+            className="opacity-0 fade-in-down"
+            cloudName="jeffreywood"
+            publicId={props.data.imgId}
+          />
         </div>
-        <div className="workModalTextContainer">
+        <div className="workModalTextContainer opacity-0 fade-in-left">
           <ul className="tracking-wider">
             <li className="text-xl text-neutral-600 mb-2">
               {props.data.title}

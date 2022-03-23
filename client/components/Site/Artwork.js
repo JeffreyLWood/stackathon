@@ -1,9 +1,28 @@
 import React from "react";
 import { Image } from "cloudinary-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ArtworkModal from "./ArtworkModal";
 export default function Artwork(props) {
   let [show, setShow] = useState(false);
+
+  //Disable scrolling when menu is open
+  let [body, setBody] = useState("");
+  let [scrollPos, setScrollPos] = useState("");
+
+  useEffect(() => {
+    show ? setBody("fixed") : setBody("");
+    setScrollPos(`-${window.scrollY}px`);
+  }, [show]);
+
+  document.body.style.position = body;
+  document.body.style.top = scrollPos;
+
+  const closeHandler = (e) => {
+    e.preventDefault();
+
+    window.scrollTo(0, parseInt(scrollPos || "0") * -1);
+    setShow(false);
+  };
 
   return (
     <>
@@ -32,6 +51,7 @@ export default function Artwork(props) {
         </div>
       </div>
       <ArtworkModal
+        closeHandler={closeHandler}
         show={show}
         setShow={setShow}
         user={props.user}

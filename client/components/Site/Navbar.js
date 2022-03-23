@@ -52,10 +52,19 @@ export const Navbar = (props) => {
 
   let [mobileNav, setMobileNav] = useState("hidden");
   let [collectionsMobile, setCollectionsMobile] = useState("hidden");
+
+  //Disable scrolling when menu is open
+  let [body, setBody] = useState("");
+  useEffect(() => {
+    mobileNav !== "hidden" ? setBody("fixed") : setBody("");
+  }, [mobileNav]);
+  document.body.style.position = body;
+  //  document.body.style.top = `-${window.scrollY}px`;
+
   return (
     <>
       <nav className="flex flex-row justify-between h-18 items-end mx-2 sm:mx-12 mt-10 tracking-widest">
-        <div className="text-sm sm:text-xl">
+        <div className="text-xl">
           <Link to={`/${props.user.userName}`}>{siteTitle}</Link>
         </div>
         {/* Mobile Nav */}
