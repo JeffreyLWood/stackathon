@@ -7,7 +7,7 @@ export default function CVGroup(props) {
     margins = "";
   }
 
-  if (!props.data) {
+  if (!props.data?.length) {
     return null;
   } else {
     return (
