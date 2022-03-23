@@ -94,7 +94,7 @@ router.post("/update", async (req, res) => {
         collectionId: origin.id,
       },
     });
-
+    let newWork = {};
     // if req.body.data, then there is a new image, else, skip the image update and just update the data
     if (req.body.newImage) {
       const fileStr = req.body.data;
@@ -102,29 +102,38 @@ router.post("/update", async (req, res) => {
         upload_preset: "stackathon",
       });
 
-      await work.update({
-        imgId: uploadedResponse.public_id,
-        collectionId: collection.id,
-        // userId: req.body.userId,
-        title: req.body.title,
-        year: req.body.year,
-        height: req.body.height,
-        width: req.body.width,
-        medium: req.body.medium,
-        hidden: req.body.hidden,
+      await Work.update(
+        {
+          imgId: uploadedResponse.public_id,
+          collectionId: collection.id,
+          // userId: req.body.userId,
+          title: req.body.title,
+          year: req.body.year,
+          height: req.body.height,
+          width: req.body.width,
+          medium: req.body.medium,
+          hidden: req.body.hidden,
+        },
+        { where: { imgId: req.body.imgId, collectionId: origin.id } }
+      );
+      newWork = await Work.findOne({
+        where: { imgId: uploadedResponse.public_id },
       });
     } else {
-      await work.update({
-        // userId: req.body.userId,
-        collectionId: collection.id,
-        title: req.body.title,
-        year: req.body.year,
-        height: req.body.height,
-        width: req.body.width,
-        medium: req.body.medium,
-        hidden: req.body.hidden,
-      });
-    }
+      work = await Work.update(
+        {
+          // userId: req.body.userId,
+          collectionId: collection.id,
+          title: req.body.title,
+          year: req.body.year,
+          height: req.body.height,
+          width: req.body.width,
+          medium: req.body.medium,
+          hidden: req.body.hidden,
+        },
+        { where: { imgId: req.body.imgId, collectionId: origin.id } }
+      );
+    } //MISSING LOGIC FOR SWITCHING COLLECTION AND NEW IMAGE!!!
     // If request is switch collection, send back origin and destination collections
     if (req.body.origin && req.body.destination) {
       let origin = await Collection.findAll({
@@ -142,7 +151,8 @@ router.post("/update", async (req, res) => {
       destination = JSON.stringify(destination, null, 2);
       res.status(200).send({ work, origin, destination });
     } else {
-      res.status(200).send(work.dataValues);
+      console.log(work, newWork);
+      res.status(200).send({ work, newWork });
     }
   } catch (error) {
     console.log(error);

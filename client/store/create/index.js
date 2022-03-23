@@ -73,8 +73,8 @@ const uploadWork = (data, snapshotId) => {
   return { type: UPLOAD_WORK, data, snapshotId };
 };
 
-const updateWork = (data) => {
-  return { type: UPDATE_WORK, data };
+const updateWork = (data, snapshotId) => {
+  return { type: UPDATE_WORK, data, snapshotId };
 };
 
 const switchCollection = (data, origin, destination) => {
@@ -255,7 +255,7 @@ export const update = (body) =>
   async function (dispatch) {
     try {
       let { data } = await axios.post(`/api/update`, body);
-      dispatch(updateWork(data));
+      dispatch(updateWork(data, body.snapshotId));
     } catch (err) {
       return err;
     }
@@ -410,9 +410,19 @@ export default function (state = {}, action) {
     }
 
     case UPDATE_WORK: {
-      let newState = {
-        ...state,
-      };
+      let snapshotId = `${action.snapshotId}Collection`;
+      let newCollection = state[snapshotId].filter(
+        (work) => work.imgId !== action.data.work.imgId
+      );
+      newCollection.push(action.data.newWork);
+
+      let newState =
+        snapshotId !== "nullCollection"
+          ? {
+              ...state,
+              [snapshotId]: newCollection,
+            }
+          : { ...state };
       return newState;
     }
 

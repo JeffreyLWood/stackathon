@@ -172,6 +172,8 @@ export default function CreateUploader(props) {
         height: state.height,
         width: state.width,
         medium: state.medium,
+        snapshotId:
+          props.collection === props.primary ? "primary" : "secondary",
       };
       dispatch(update(body));
       setPreviewSource("");
