@@ -112,7 +112,6 @@ export default function Footer(props) {
                     className="w-6 mx-1"
                     src="../social/email.png"
                     alt="email"
-                    alt="email"
                   />
                 </a>
               ) : null}
@@ -141,7 +140,6 @@ export default function Footer(props) {
                   <img
                     className="w-6 mx-1"
                     src="../social/etsy.png"
-                    alt="etsy"
                     alt="etsy"
                   />
                 </a>
