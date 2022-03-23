@@ -59,6 +59,7 @@ export default function AuthForm(props) {
             </label>
             <input
               name="username"
+              placeholder=""
               type="text"
               className="border-b-2 mx-4 w-4/6"
             />

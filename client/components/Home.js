@@ -22,11 +22,11 @@ export default function Home(props) {
   return (
     <section>
       <Navbar />
-      <Welcome />
-      <Onboard />
+      {/* <Welcome />
+      <Onboard /> */}
       {/* <Features /> */}
       <AuthForm displayName={displayName} setDisplayName={setDisplayName} />
-      <HomeFooter />
+      {/* <HomeFooter /> */}
     </section>
   );
 }

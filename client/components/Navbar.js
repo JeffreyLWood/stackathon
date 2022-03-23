@@ -57,7 +57,7 @@ export const Navbar = (props) => {
           <span className="text-sm sm:text-lg">
             <Link to="/">Selected-Work</Link>
           </span>
-          <div>
+          {/* <div>
             <button type="button" className="pillDark mx-2">
               <a href="#auth">Login</a>
             </button>
@@ -65,7 +65,7 @@ export const Navbar = (props) => {
             <button type="button" className="pill mx-2" onClick={handleClick}>
               Sign Up
             </button>
-          </div>
+          </div> */}
         </>
       )}
       {/* </div> */}
