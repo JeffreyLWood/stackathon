@@ -43,7 +43,7 @@ export const Contact = (props) => {
   let linkedin = user.contact && user.contact.linkedin;
   let etsy = user.contact && user.contact.etsy;
   let tiktok = user.contact && user.contact.tiktok;
-
+  let [confirmed, setConfirmed] = useState(false);
   const sendEmail = (e) => {
     e.preventDefault();
     emailjs
@@ -61,6 +61,8 @@ export const Contact = (props) => {
       .then(
         (result) => {
           console.log(result.text);
+
+          setConfirmed(true);
         },
         (error) => {
           console.log(error.text, e.target);
@@ -195,6 +197,9 @@ export const Contact = (props) => {
             <button type="submit" className="pill" value="Submit">
               Submit
             </button>
+            {confirmed ? (
+              <span className="italic mx-4">Your message has been sent.</span>
+            ) : null}
           </form>
         </div>
       </div>
