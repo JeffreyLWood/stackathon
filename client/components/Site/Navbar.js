@@ -279,7 +279,7 @@ export const Navbar = (props) => {
                               className="cursor-pointer text-xl sm:text-sm"
                             >
                               <Link
-                                id={collection.works[0].imgId}
+                                id={collection.works[0]?.imgId}
                                 onMouseOver={(e) => previewHandler(e)}
                                 to={`/${props.user.userName}/work/${collection.title}`}
                               >
@@ -313,7 +313,7 @@ export const Navbar = (props) => {
                             >
                               <Link
                                 onMouseOver={(e) => previewHandler(e)}
-                                id={collection.works[0].imgId}
+                                id={collection.works[0]?.imgId}
                                 to={`/${props.user.userName}/work/${collection.title}`}
                               >
                                 {collection.title}
@@ -326,7 +326,7 @@ export const Navbar = (props) => {
                             >
                               <Link
                                 onMouseOver={(e) => previewHandler(e)}
-                                id={collection.works[0].imgId}
+                                id={collection.works[0]?.imgId}
                                 to={`/${props.user.userName}/work/${collection.title}`}
                               >
                                 {collection.title}
