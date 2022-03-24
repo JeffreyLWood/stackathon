@@ -21,9 +21,10 @@ export const Navbar = (props) => {
   let collections = props.user && props.user.collections;
 
   let [preview, setPreview] = useState("");
+  let visible = [];
 
   useEffect(() => {
-    let visible =
+    visible =
       collections &&
       collections
         .filter((collection) => !collection.hidden)
@@ -36,13 +37,21 @@ export const Navbar = (props) => {
   let [workDropdown, setWorkDropdown] = useState("hidden");
 
   const show = () => {
-    setWorkDropdown(
-      "flex flex-row justify-between dropdown drop-down drop-shadow-xl"
-    );
+    let visible =
+      collections && collections.filter((collection) => !collection.hidden);
+    visible.length > 1
+      ? setWorkDropdown(
+          "flex flex-row justify-between dropdown drop-down drop-shadow-xl"
+        )
+      : null;
   };
 
   const hide = () => {
-    setWorkDropdown("flex flex-row justify-between dropdown drop-down-up");
+    let visible =
+      collections && collections.filter((collection) => !collection.hidden);
+    visible.length > 1
+      ? setWorkDropdown("flex flex-row justify-between dropdown drop-down-up")
+      : null;
   };
 
   const previewHandler = (e) => {
