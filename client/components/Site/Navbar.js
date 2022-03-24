@@ -29,7 +29,7 @@ export const Navbar = (props) => {
         .filter((collection) => !collection.hidden)
         .sort((a, b) => a.order - b.order);
     props.collection && props.collection?.works
-      ? setPreview(props.collection.works[0].imgId)
+      ? setPreview(props.collection.works[0]?.imgId)
       : visible && visible[0]?.works && setPreview(visible[0]?.works[0]?.imgId);
   }, [props]);
 
@@ -257,7 +257,7 @@ export const Navbar = (props) => {
                               }}
                             >
                               <Link
-                                id={collection.works[0].imgId}
+                                id={collection.works[0]?.imgId}
                                 onMouseOver={(e) => previewHandler(e)}
                                 to={`/${props.user.userName}/work/${collection.title}`}
                               >
