@@ -613,10 +613,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin: 2.5rem;
 }
 
-.m-6 {
-  margin: 1.5rem;
-}
-
 .mx-4 {
   margin-left: 1rem;
   margin-right: 1rem;
@@ -717,10 +713,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 1rem;
 }
 
-.mr-20 {
-  margin-right: 5rem;
-}
-
 .mr-4 {
   margin-right: 1rem;
 }
@@ -811,10 +803,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-4\/6 {
   height: 66.666667%;
-}
-
-.h-2 {
-  height: 0.5rem;
 }
 
 .max-h-full {
@@ -1091,10 +1079,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding: 1.25rem;
 }
 
-.p-6 {
-  padding: 1.5rem;
-}
-
 .py-10 {
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
@@ -1103,6 +1087,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
 .py-4 {
@@ -1118,11 +1107,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .px-8 {
   padding-left: 2rem;
   padding-right: 2rem;
-}
-
-.py-6 {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
 }
 
 .pb-10 {
@@ -2328,11 +2312,6 @@ textarea {
   .md\:mx-0 {
     margin-left: 0px;
     margin-right: 0px;
-  }
-
-  .md\:mx-60 {
-    margin-left: 15rem;
-    margin-right: 15rem;
   }
 
   .md\:mx-auto {
