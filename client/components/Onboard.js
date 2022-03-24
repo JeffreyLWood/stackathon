@@ -6,10 +6,9 @@ export default function Onboard() {
       <div className="h-2/6 flex space-y-4 flex-wrap sm:justify-center sm:w-3/6 sm:h-full sm:flex-col">
         <span className="text-4xl pb-4">Putting Artists First</span>
         <ul className="text-lg sm:space-y-2">
-          <li>Custom Templates</li>
           <li>Designed Specifically for Artists</li>
           <li>No Advertising</li>
-          <li>Custom Domains</li>
+          {/* <li>Custom Domains</li> */}
           <li>Free to Use</li>
           <li>
             <button type="button" className="pill mr-4 my-4">
