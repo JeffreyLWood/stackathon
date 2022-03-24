@@ -8,7 +8,7 @@ import emailjs from "emailjs-com";
 export const Contact = (props) => {
   let user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  // let [userData, setUser] = useState(user);
+
   let env = {
     MAILJS_SERVICE_ID: null,
     MAILJS_TEMPLATE_ID: null,
