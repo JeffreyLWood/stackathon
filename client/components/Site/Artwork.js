@@ -30,7 +30,7 @@ export default function Artwork(props) {
   return (
     <>
       <div className="flex flex-col flex-wrap w-full my-8 md:my-0 sm:w-2/4 lg:w-1/4 md:h-96 px-8 md:mt-4 md:mx-0">
-        <span className="min-h-70">
+        <span>
           <Image
             cloudName="jeffreywood"
             publicId={props.data.imgId}
