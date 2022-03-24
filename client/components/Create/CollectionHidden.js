@@ -14,7 +14,6 @@ export default function CollectionHidden(props) {
       collection = await dispatch(fetchCollection(props.userId, props.primary));
     };
     load();
-    console.log("fire");
   }, [props.primary]);
 
   useEffect(() => {
@@ -24,7 +23,7 @@ export default function CollectionHidden(props) {
   const hiddenHandler = async (e) => {
     e.preventDefault();
     hidden ? setHidden(false) : setHidden(true);
-    console.log("hiddenhandler", hidden);
+
     dispatch(
       hiddenCollection(props.userId, props.primary, hidden ? false : true)
     );

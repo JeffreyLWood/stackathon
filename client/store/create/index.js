@@ -487,9 +487,11 @@ export default function (state = {}, action) {
     case ADD_COLLECTION: {
       let newState = {
         ...state,
+        collection: action.data.newCollection,
         primaryCollection: [],
-        collections: [...state.collections, action.data.newCollection],
+        collections: [...state.collections],
       };
+      newState.collections.unshift(action.data.newCollection);
       return newState;
     }
 
@@ -497,18 +499,30 @@ export default function (state = {}, action) {
       let newState = {
         ...state,
         primaryCollection: action.data.newCollection[0].works,
-        collection: action.data.newCollection,
-        collections: action.data.collections,
+        collection: action.data.newCollection[0],
       };
+      newState.collections.unshift(action.data.newCollection[0]);
       return newState;
     }
 
     case HIDDEN_COLLECTION: {
-      let collection = action.data;
+      let newCollection = action.data;
       let newState = {
         ...state,
-        // collection: { ...collection, hidden: collection.hidden ? false : true },
+        collection: newCollection,
+        primaryCollection: newCollection.works,
+
+        collections: [
+          ...state.collections.filter(
+            (collection) => collection.title !== newCollection.title
+          ),
+        ],
       };
+      //Doing unshift prevents the re render from going to a different collection
+      //It is not ideal as it changes the order of the select option in the
+      //work view, but that is temporary, as work view loads collections[0]
+      //as primary when state.create.collections changes
+      newState.collections.unshift(newCollection);
       return newState;
     }
 

@@ -119,10 +119,15 @@ export default function CreateWork(props) {
 
   const addCollection = (evt) => {
     evt.preventDefault();
-    setModalCollection(primary);
-    setPrimary("New Collection");
+    let count = 1;
+    for (let i = 0; i < collections.length; i++) {
+      if ([collections[i]].includes("New Collection ")) {
+        count += 1;
+      }
+    }
+    setPrimary(`New Collection ${count}`);
+    setModalCollection(`New Collection ${count}`);
     dispatch(newCollection(userId));
-    dispatch(fetchUserData(username));
   };
 
   return (

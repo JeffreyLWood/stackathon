@@ -32,7 +32,8 @@ export default function CollectionSettings(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     let others = props.collections.filter(
-      (collection) => collection !== props.collectionTitle
+      (collection) =>
+        collection !== props.collectionTitle && collection !== "Hidden"
     );
 
     for (let i = 0; i < others.length; i++) {
@@ -40,6 +41,10 @@ export default function CollectionSettings(props) {
         setUnique(false);
         return;
       }
+    }
+    if (state.title === "Hidden") {
+      setUnique(false);
+      return;
     }
     props.setPrimary(state.title);
     dispatch(updateCollectionData(props.userId, props.collectionTitle, state));

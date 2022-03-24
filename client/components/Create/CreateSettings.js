@@ -8,14 +8,14 @@ export default function CreateSettings(props) {
   let user = useSelector((state) => state.user);
   let dispatch = useDispatch();
 
-  let [title, setTitle] = useState(user?.siteTitle);
-
   useEffect(() => {
     user = dispatch(fetchUserData(props.match.params.username));
   }, []);
 
+  let [title, setTitle] = useState(user?.siteTitle);
+
   useEffect(() => {
-    setTitle(user.siteTitle);
+    setTitle(user.siteTitle || `${user.firstName} ${user.lastName}`);
   }, [user]);
 
   let changeHandler = (evt) => {
@@ -37,8 +37,8 @@ export default function CreateSettings(props) {
   return (
     <>
       <Navbar user={user} />
-      <div className="h-full p-10">
-        <form className="flex flex-col" onSubmit={submitHandler}>
+      <div className="h-full mt-10 p-10">
+        <form className="flex flex-col space-y-4" onSubmit={submitHandler}>
           <label htmlFor="name">
             Your full name as it will appear on your site
           </label>
