@@ -43,6 +43,7 @@ var checkUser = subdomain("*", async (req, res, next) => {
 app.use("/auth", require("./auth"));
 app.use("/api/collections/", require("./api/collections"));
 app.use("/api/users/", require("./api/users"));
+app.use("/api/env", require("./api/env"));
 app.use("/api", require("./api"));
 
 app.get("/", (req, res) =>
