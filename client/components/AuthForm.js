@@ -34,15 +34,14 @@ export default function AuthForm(props) {
       className="container auth flex flex-col items-center sm:flex-row"
       data-scroll-section
     >
-      <div className="h-1/6 flex items-center sm:w-3/6 sm:h-screen sm:p-4">
-        <span className="text-4xl font-semibold">Lets Get Started.</span>
+      <div className="h-1/6 flex items-center w-screen sm:w-3/6 sm:h-screen sm:p-4">
+        <span className="mt-10 mx-auto text-4xl font-semibold">
+          Lets Get Started.
+        </span>
       </div>
       <div className="h-5/6 space-y-2 flex flex-col justify-center sm:w-3/6 sm:space-y-4">
         <span>
-          <label
-            htmlFor={displayName}
-            className="text-lg text-white sm:text-black"
-          >
+          <label htmlFor={displayName} className="text-sm sm:text-lg">
             {displayName === "Sign Up"
               ? "Sign up to create a beautiful website for your work."
               : "Login to your Selected-Work account"}
@@ -111,7 +110,7 @@ export default function AuthForm(props) {
             </>
           ) : null}
 
-          <div className="py-10 flex flex-row justify-between">
+          <div className="py-10 flex flex-col sm:flex-row justify-between">
             <button className="pill" type="submit">
               {displayName}
             </button>
