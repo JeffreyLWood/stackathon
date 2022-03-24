@@ -172,9 +172,26 @@ export default function CreateSnapshot(props) {
             />
           </div>
         ) : props.collectionTitle === "Hidden" ? (
-          "Works you have marked as hidden will appear here and not be visible on your site"
+          <div className="py-6 italic text-neutral-400">
+            Works you have marked as hidden will appear here and not be visible
+            on your site
+          </div>
         ) : (
-          "Collection is empty"
+          <div className="py-6  flex flex-row">
+            <span className="italic text-neutral-400">
+              Collection is empty. Click
+            </span>
+            <span>
+              <img
+                src="../../../newworkactive.png"
+                onClick={(e) => props.addHandler(e)}
+                id="Add a Work"
+                className="w-6 mx-2 hover:cursor-pointer"
+                title="Add a Work"
+              />
+            </span>
+            <span className="italic text-neutral-400"> to add a work.</span>
+          </div>
         )}
       </div>
     );
