@@ -34,7 +34,6 @@ export default function Artwork(props) {
           <Image
             cloudName="jeffreywood"
             publicId={props.data.imgId}
-            loading="lazy"
             onClick={() => (window.outerWidth > 638 ? setShow(true) : null)}
             className="min-h-70 max-h-full object-contain mx-auto  md:h-64 cursor-pointer"
           />

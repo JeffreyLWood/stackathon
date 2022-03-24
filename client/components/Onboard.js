@@ -11,11 +11,11 @@ export default function Onboard() {
           {/* <li>Custom Domains</li> */}
           <li>Free to Use</li>
           <li>
-            <button type="button" className="pill mr-4 my-4">
-              <a href="http://www.selected-work.com/janeisidor" target="_blank">
+            <a href="http://www.selected-work.com/janeisidor" target="_blank">
+              <button type="button" className="pill mr-4 my-4 hover:text-white">
                 View Demo Site
-              </a>
-            </button>
+              </button>
+            </a>
             <a href="#auth">
               <button type="button" className="pillDark my-4">
                 Get Started
