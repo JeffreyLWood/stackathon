@@ -95,16 +95,18 @@ const CV = (props) => {
                 YYYY, Heading 1, Heading 2, Location, Link and/or Description 1,
                 Description 2, Description 3
               </span>
-              <span className="italic text-sm text-neutral-400">
+              {/* <span className="italic text-sm text-neutral-400">
                 If there is a comma in your title, use double-comma. eg. "Me,,
                 Myself,, and Irene" would be "Me, Myself, and Irene"
-              </span>
+              </span> */}
               <span className="italic mb-2 text-sm font-semibold">
                 Links must begin with 'https://'
               </span>
               <span className="text-indigo-600">
                 Having trouble? See the examples below. Copy and paste them into
-                the input field and hit enter to see how they render.
+                the input field{" "}
+                <span className="underline text-indigo-600">and hit enter</span>{" "}
+                to see how they render.
               </span>
               <ul className="text-sm italic list-disc">
                 <li>2020, Columbia University, MFA Painting, New York NY</li>
@@ -116,6 +118,7 @@ const CV = (props) => {
                   2022, New York Times, 30 Artists Under 30 by Jean Sullivan, ,
                   https://nytimes.com/notarealarticle
                 </li>
+                <li>2022, Fullbright Scholarship, , Berlin</li>
               </ul>
             </label>
           </div>

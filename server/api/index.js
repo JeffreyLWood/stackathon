@@ -133,7 +133,7 @@ router.post("/update", async (req, res) => {
         },
         { where: { imgId: req.body.imgId, collectionId: origin.id } }
       );
-    } //MISSING LOGIC FOR SWITCHING COLLECTION AND NEW IMAGE!!!
+    }
     // If request is switch collection, send back origin and destination collections
     if (req.body.origin && req.body.destination) {
       let origin = await Collection.findAll({
@@ -149,9 +149,8 @@ router.post("/update", async (req, res) => {
       });
       origin = JSON.stringify(origin, null, 2);
       destination = JSON.stringify(destination, null, 2);
-      res.status(200).send({ work, origin, destination });
+      res.status(200).send({ work, newWork, origin, destination });
     } else {
-      console.log(work, newWork);
       res.status(200).send({ work, newWork });
     }
   } catch (error) {

@@ -468,7 +468,9 @@ export default function (state = {}, action) {
               [origin]: data.origin[0].works.filter(
                 (work) => work.imgId !== data.work.imgId
               ),
-              [destination]: [...state[destination], data.work],
+              [destination]: data.newWork
+                ? [...state[destination], data.newWork]
+                : [...state[destination], data.work],
             };
       return newState;
     }
