@@ -510,7 +510,6 @@ export default function (state = {}, action) {
       let newState = {
         ...state,
         collection: newCollection,
-        primaryCollection: newCollection.works,
 
         collections: [
           ...state.collections.filter(
