@@ -61,7 +61,6 @@ export const Contact = (props) => {
       .then(
         (result) => {
           console.log(result.text);
-
           setConfirmed(true);
         },
         (error) => {
