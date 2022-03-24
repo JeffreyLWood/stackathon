@@ -35,8 +35,8 @@ export default function AuthForm(props) {
       data-scroll-section
     >
       <div className="h-1/6 flex items-center w-screen sm:w-3/6 sm:h-screen sm:p-4">
-        <span className="mt-10 mx-auto text-4xl font-semibold">
-          Lets Get Started.
+        <span className="mt-10 mx-auto text-6xl break-words font-semibold">
+          <p className="break-words">Lets Get Started.</p>
         </span>
       </div>
       <div className="h-5/6 space-y-2 flex flex-col justify-center sm:w-3/6 sm:space-y-4">

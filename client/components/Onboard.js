@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Onboard() {
   return (
-    <section className="container flex-col md:flex-row" data-scroll-section>
+    <section className="container mt-10 flex-col md:flex-row">
       <div className="h-2/6 flex space-y-4 flex-wrap sm:justify-center sm:w-3/6 sm:h-full sm:flex-col">
         <span className="text-4xl pb-4">Putting Artists First</span>
         <ul className="text-lg sm:space-y-2">
