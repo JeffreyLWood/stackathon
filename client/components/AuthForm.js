@@ -126,11 +126,13 @@ export default function AuthForm(props) {
             />
           </div>
           <label htmlFor="username" className="italic text-neutral-400">
-            <small>{`Your site url will be www.selected-work.com/${
-              state.username
-                ? state.username
-                : state.firstName.toLowerCase() + state.lastName.toLowerCase()
-            }`}</small>
+            {displayName === "Sign Up" ? (
+              <small>{`Your site url will be www.selected-work.com/${
+                state.username
+                  ? state.username
+                  : state.firstName.toLowerCase() + state.lastName.toLowerCase()
+              }`}</small>
+            ) : null}
           </label>
           <div className="flex justify-between flex-row">
             <label htmlFor="password">
