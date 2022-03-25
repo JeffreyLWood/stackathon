@@ -267,6 +267,7 @@ export default function CreateUploader(props) {
                   id="image"
                   name="image"
                   type="file"
+                  accept="image/*"
                   onChange={changeHandler}
                   value={fileInputState}
                   style={{ display: "none" }}
