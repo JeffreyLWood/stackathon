@@ -1,10 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { authenticate } from "../store";
+import { authenticate, me, oauth } from "../store";
 import { Navbar } from "./Navbar";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { GoogleLogin } from "react-google-login";
 
 /**
  * COMPONENT
@@ -46,6 +47,24 @@ export default function AuthForm(props) {
       setUnique(false);
     }
   };
+
+  const handleLogin = async (googleData) => {
+    const res = await fetch("/auth/google", {
+      method: "POST",
+      body: JSON.stringify({
+        token: googleData.tokenId,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    // store returned user somehow
+    console.log(data);
+    window.localStorage.setItem("TOKEN", data.token);
+    dispatch(oauth());
+  };
+
   return (
     <section
       id="auth"
@@ -177,6 +196,15 @@ export default function AuthForm(props) {
           </div>
           {mapSignup && <div> {mapSignup.error.response.data} </div>}
         </form>
+        <GoogleLogin
+          clientId={
+            "870629171736-ko6l7n5dhihbuekagkrkf4mon0mlc1u2.apps.googleusercontent.com"
+          }
+          buttonText="Log in with Google"
+          onSuccess={handleLogin}
+          onFailure={handleLogin}
+          cookiePolicy={"single_host_origin"}
+        />
       </div>
     </section>
   );

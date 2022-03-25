@@ -1,8 +1,48 @@
 const router = require("express").Router();
+const { OAuth2Client } = require("google-auth-library");
 const {
   models: { User },
 } = require("../db");
 module.exports = router;
+const { Op } = require("sequelize");
+const client = new OAuth2Client(process.env.CLIENT_ID);
+
+router.post("/google", async (req, res) => {
+  try {
+    const { token } = req.body;
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.CLIENT_ID,
+    });
+    const { name, email, picture } = ticket.getPayload();
+    let username = name.toLowerCase().split(" ").join("");
+
+    let user = await User.findOne({ where: { email: email } });
+
+    if (!user) {
+      console.log(true);
+      user = await User.create({
+        email: email,
+        username: username,
+        firstName: name.split(" ")[0],
+        lastName: name.split(" ")[1],
+      });
+    }
+    res.status(201);
+    res.json({ user, token: user.generateToken() });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.get("/oauth", async (req, res, next) => {
+  try {
+    let user = await User.findByToken(req.headers.authorization);
+    res.send(user);
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.post("/login", async (req, res, next) => {
   try {
@@ -34,7 +74,7 @@ router.post("/signup", async (req, res, next) => {
 
 router.get("/me", async (req, res, next) => {
   try {
-    console.log("req.headers.authorization", req.headers.authorization);
+    console.log(await User.findByToken(req.headers.authorization));
     res.send(await User.findByToken(req.headers.authorization));
   } catch (ex) {
     next(ex);

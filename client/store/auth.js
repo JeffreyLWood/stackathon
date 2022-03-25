@@ -20,6 +20,17 @@ const setAuth = (auth) => ({ type: SET_AUTH, auth });
 /**
  * THUNK CREATORS
  */
+export const oauth = () => async (dispatch) => {
+  const token = window.localStorage.getItem(TOKEN);
+  const res = await axios.get("/auth/oauth", {
+    headers: {
+      authorization: token,
+    },
+  });
+
+  // history.push("/create/in");
+  return dispatch(setAuth(res.data));
+};
 export const me = () => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN);
   if (token) {

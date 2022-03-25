@@ -1,4 +1,4 @@
-const Sequelize = require("sequelize");
+const { Sequelize, Op } = require("sequelize");
 const db = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -13,7 +13,7 @@ const SALT_ROUNDS = 5;
 const User = db.define("user", {
   username: {
     type: Sequelize.STRING,
-    unique: true,
+
     allowNull: false,
   },
   password: {
@@ -21,6 +21,7 @@ const User = db.define("user", {
   },
   email: {
     type: Sequelize.STRING,
+    unique: true,
     validate: {
       isEmail: true,
     },
@@ -297,6 +298,17 @@ const defaultVals = async (user) => {
   }
 };
 
+const unique = async (user) => {
+  let username = user.username;
+  let count = await User.count({
+    where: { username: { [Op.startsWith]: username } },
+  });
+  if (count >= 1) {
+    user.username = username + count;
+  }
+};
+
+// User.beforeCreate(unique);
 User.beforeCreate(hashPassword);
 User.beforeUpdate(hashPassword);
 User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));
