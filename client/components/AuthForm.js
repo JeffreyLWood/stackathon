@@ -15,19 +15,33 @@ export default function AuthForm(props) {
   let { name, displayName, error, setDisplayName } = props;
   const dispatch = useDispatch();
 
-  const submitHandler = (evt) => {
+  let [invalid, setInvalid] = useState(false);
+
+  let formName = displayName === "Sign Up" ? "signup" : "login";
+
+  let [state, setState] = useState({
+    username: undefined,
+    password: "",
+    email: "",
+    firstName: "",
+    lastName: "",
+  });
+
+  const changeHandler = (evt) => {
     evt.preventDefault();
-    const formName = displayName === "Sign Up" ? "signup" : "login";
-    const username = evt.target.username.value;
-    const password = evt.target.password.value;
-    const email = evt.target.email?.value;
-    const firstName = evt.target.firstName?.value;
-    const lastName = evt.target.lastName?.value;
-    dispatch(
-      authenticate(username, password, email, firstName, lastName, formName)
-    );
+    setState({ ...state, [evt.target.name]: evt.target.value });
   };
 
+  const submitHandler = (evt) => {
+    evt.preventDefault();
+
+    if (/[^a-zA-Z]/.test(state.username)) {
+      setInvalid(true);
+      return;
+    }
+
+    dispatch(authenticate(state, formName));
+  };
   return (
     <section
       id="auth"
@@ -52,46 +66,14 @@ export default function AuthForm(props) {
           onSubmit={submitHandler}
           name={displayName}
         >
-          <div className="flex justify-between flex-row">
-            <label htmlFor="username">
-              <small>Username</small>
-            </label>
-            <input
-              name="username"
-              placeholder=""
-              type="text"
-              className="border-b-2 mx-4 w-4/6"
-            />
-          </div>
-          <div className="flex justify-between flex-row">
-            <label htmlFor="password">
-              <small>Password</small>
-            </label>
-            <input
-              name="password"
-              type="password"
-              className="border-b-2 mx-4 w-4/6"
-            />
-          </div>
           {displayName === "Sign Up" ? (
             <>
-              <div className="flex justify-between flex-row">
-                <label htmlFor="email">
-                  <small>Email</small>
-                </label>
-
-                <input
-                  name="email"
-                  type="text"
-                  className="border-b-2 mx-4 w-4/6"
-                />
-              </div>
-
               <div className="flex justify-between flex-row">
                 <label htmlFor="firstName">
                   <small>First Name</small>
                 </label>
                 <input
+                  onChange={changeHandler}
                   name="firstName"
                   type="text"
                   className="border-b-2 mx-4 w-4/6"
@@ -102,18 +84,69 @@ export default function AuthForm(props) {
                   <small>Last Name</small>
                 </label>
                 <input
+                  onChange={changeHandler}
                   name="lastName"
+                  type="text"
+                  className="border-b-2 mx-4 w-4/6"
+                />
+              </div>
+              <div className="flex justify-between flex-row">
+                <label htmlFor="email">
+                  <small>Email</small>
+                </label>
+
+                <input
+                  onChange={changeHandler}
+                  name="email"
                   type="text"
                   className="border-b-2 mx-4 w-4/6"
                 />
               </div>
             </>
           ) : null}
+          <div className="flex justify-between flex-row">
+            <label htmlFor="username">
+              <small>Username / Site Url</small>
+            </label>
+            <input
+              onChange={changeHandler}
+              name="username"
+              placeholder=""
+              type="text"
+              value={
+                state.username
+                  ? state.username
+                  : state.firstName.toLowerCase() + state.lastName.toLowerCase()
+              }
+              className="border-b-2 mx-4 w-4/6"
+            />
+          </div>
+          <label htmlFor="username" className="italic text-neutral-400">
+            <small>{`Your site url will be www.selected-work.com/${
+              state.username
+                ? state.username
+                : state.firstName.toLowerCase() + state.lastName.toLowerCase()
+            }`}</small>
+          </label>
+          <div className="flex justify-between flex-row">
+            <label htmlFor="password">
+              <small>Password</small>
+            </label>
+            <input
+              onChange={changeHandler}
+              name="password"
+              type="password"
+              className="border-b-2 mx-4 w-4/6"
+            />
+          </div>
 
           <div className="py-10 flex flex-col sm:flex-row justify-between">
             <button className="pill" type="submit">
               {displayName}
-            </button>
+            </button>{" "}
+            {invalid
+              ? "Invalid username. Only a-z letters are allowed, no spaces or special characters"
+              : null}
             {displayName === "Sign Up" ? (
               <button
                 type="button"
