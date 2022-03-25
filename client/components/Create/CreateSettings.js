@@ -27,9 +27,9 @@ export default function CreateSettings(props) {
     setTitle(evt.target.value);
   };
 
-  let changeHandler1 = (evt) => {
+  let changeHandlerUsername = (evt) => {
     evt.preventDefault();
-    console.log(username);
+    setInvalid(false);
     setUsername(evt.target.value);
   };
 
@@ -38,9 +38,14 @@ export default function CreateSettings(props) {
     dispatch(updateTitleData(user.id, { title }));
   };
 
+  let [invalid, setInvalid] = useState(false);
+
   let updateUsername = (evt) => {
     evt.preventDefault();
-
+    if (/[^a-zA-Z]/.test(username)) {
+      setInvalid(true);
+      return;
+    }
     dispatch(changeUsername(user, username));
   };
 
@@ -67,25 +72,31 @@ export default function CreateSettings(props) {
             </button>
           </div>
         </form>
-        <form className="flex flex-col space-y-4" onSubmit={updateUsername}>
-          <label htmlFor="username">
-            Your username, it will be used to access your site.
-            www.selectedwork.com/username. If changed you may need to log out
-            and log back in again with your new username to avoid issues.
-          </label>
-          <div>
-            <input
-              className="p-1 border-2 w-2/6"
-              name="username"
-              type="text"
-              onChange={changeHandler1}
-              value={username}
-            />
+        <form className="flex flex-col  space-y-4" onSubmit={updateUsername}>
+          <labe htmlFor="username" />
+          Warning: Change your username only when necessary. You will be logged
+          out and will need to log in again with your new username. This will
+          change your url so remember to update your records to
+          www.selected-work.com/newusername
+          <div className="flex flex-row items-baseline">
+            <label htmlFor="username">www.selectedwork.com/</label>
+            <div>
+              <input
+                className="p-1 border-2 w-full"
+                name="username"
+                type="text"
+                onChange={changeHandlerUsername}
+                value={username}
+              />
+            </div>
           </div>
           <div>
             <button type="submit" className="pill my-2">
               Submit
             </button>
+            {invalid
+              ? "Invalid username. Only a-z letters are allowed, no spaces or special characters"
+              : null}
           </div>
         </form>
       </div>

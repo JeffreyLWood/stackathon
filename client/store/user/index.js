@@ -69,7 +69,6 @@ export default function (state = {}, action) {
       console.log(action.data);
       let newState = state;
       newState.user = { ...state.user, userName: action.data };
-      newState.auth = { ...state.auth, username: action.data };
       return newState;
     }
     default:
