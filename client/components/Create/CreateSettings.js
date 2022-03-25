@@ -2,10 +2,11 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTitleData } from "../../store/create";
 import { useEffect, useState } from "react";
-import { fetchUserData } from "../../store/user";
+import { fetchUserData, changeUsername } from "../../store/user";
 import { Navbar } from "../Navbar";
 export default function CreateSettings(props) {
   let user = useSelector((state) => state.user);
+
   let dispatch = useDispatch();
 
   useEffect(() => {
@@ -14,8 +15,11 @@ export default function CreateSettings(props) {
 
   let [title, setTitle] = useState(user?.siteTitle);
 
+  let [username, setUsername] = useState(user?.userName);
+
   useEffect(() => {
     setTitle(user.siteTitle || `${user.firstName} ${user.lastName}`);
+    setUsername(user?.userName);
   }, [user]);
 
   let changeHandler = (evt) => {
@@ -23,15 +27,21 @@ export default function CreateSettings(props) {
     setTitle(evt.target.value);
   };
 
+  let changeHandler1 = (evt) => {
+    evt.preventDefault();
+    console.log(username);
+    setUsername(evt.target.value);
+  };
+
   let submitHandler = (evt) => {
     evt.preventDefault();
     dispatch(updateTitleData(user.id, { title }));
   };
 
-  const deleteCollection = (evt) => {
+  let updateUsername = (evt) => {
     evt.preventDefault();
-    dispatch(destroyCollection(userId, collectionId));
-    dispatch(fetchUserData(username));
+
+    dispatch(changeUsername(user, username));
   };
 
   return (
@@ -49,6 +59,27 @@ export default function CreateSettings(props) {
               type="text"
               onChange={changeHandler}
               value={title}
+            />
+          </div>
+          <div>
+            <button type="submit" className="pill my-2">
+              Submit
+            </button>
+          </div>
+        </form>
+        <form className="flex flex-col space-y-4" onSubmit={updateUsername}>
+          <label htmlFor="username">
+            Your username, it will be used to access your site.
+            www.selectedwork.com/username. If changed you may need to log out
+            and log back in again with your new username to avoid issues.
+          </label>
+          <div>
+            <input
+              className="p-1 border-2 w-2/6"
+              name="username"
+              type="text"
+              onChange={changeHandler1}
+              value={username}
             />
           </div>
           <div>

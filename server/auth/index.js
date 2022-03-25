@@ -36,15 +36,18 @@ router.get("/me", async (req, res, next) => {
 });
 
 //change username
-router.put("/:userId", async (req, res, next) => {
+router.put("/:userId/username", async (req, res, next) => {
   try {
     let user = await User.findByPk(req.params.userId);
 
-    await user.update({
-      username: req.body.title,
-    });
+    await User.update(
+      {
+        username: req.body.newUsername,
+      },
+      { where: { id: req.params.userId } }
+    );
 
-    res.status(200).send(user.username);
+    res.status(200).send(user);
   } catch (err) {
     next(err);
   }
