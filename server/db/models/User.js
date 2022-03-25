@@ -279,10 +279,19 @@ const defaultVals = async (user) => {
       text: "Reach out to me at one of the following:",
     });
 
+    let newCollection = await Collection.create({
+      title: "New Collection",
+    });
+    let hidden = await Collection.create({
+      title: "Hidden",
+    });
+
     await about.setUser(user);
     await exhibition.setUser(user);
     await education.setUser(user);
     await contact.setUser(user);
+    await newCollection.setUser(user);
+    await hidden.setUser(user);
   } catch (error) {
     console.log(error);
   }
