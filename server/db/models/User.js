@@ -154,16 +154,7 @@ const defaultImages = async (user) => {
       status: "available",
       hidden: false,
     });
-    // let default6 = await Work.create({
-    //   title: "A Street in Brooklyn",
-    //   medium: "photograph",
-    //   year: 2021,
-    //   imgId: "stackathonImgs/xv4pownj9m3mtx7ljjzc",
-    //   height: 4,
-    //   width: 5,
-    //   status: "available",
-    //   hidden:false,
-    // });
+
     let default7 = await Work.create({
       title: "Street 1",
       medium: "photograph",
@@ -301,4 +292,4 @@ User.beforeCreate(hashPassword);
 User.beforeUpdate(hashPassword);
 User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));
 User.afterCreate(defaultVals);
-User.afterCreate(defaultImages);
+// User.afterCreate(defaultImages);

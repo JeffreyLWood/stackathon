@@ -4,6 +4,7 @@ import { updateTitleData } from "../../store/create";
 import { useEffect, useState } from "react";
 import { fetchUserData, changeUsername } from "../../store/user";
 import { Navbar } from "../Navbar";
+import { logout } from "../../store";
 export default function CreateSettings(props) {
   let user = useSelector((state) => state.user);
 
@@ -46,13 +47,13 @@ export default function CreateSettings(props) {
       setInvalid(true);
       return;
     }
-    dispatch(changeUsername(user, username));
+    dispatch(changeUsername(user, username)).then(dispatch(logout()));
   };
 
   return (
     <>
       <Navbar user={user} />
-      <div className="h-full mt-10 p-10">
+      <div className="h-full mt-10 p-10 space-y-8">
         <form className="flex flex-col space-y-4" onSubmit={submitHandler}>
           <label htmlFor="name">
             Your full name as it will appear on your site
@@ -72,14 +73,17 @@ export default function CreateSettings(props) {
             </button>
           </div>
         </form>
-        <form className="flex flex-col  space-y-4" onSubmit={updateUsername}>
+        <form
+          className="flex flex-col w-full sm:w-3/6  space-y-4"
+          onSubmit={updateUsername}
+        >
           <labe htmlFor="username" />
           Warning: Change your username only when necessary. You will be logged
           out and will need to log in again with your new username. This will
           change your url so remember to update your records to
           www.selected-work.com/newusername
           <div className="flex flex-row items-baseline">
-            <label htmlFor="username">www.selectedwork.com/</label>
+            <label htmlFor="username">www.selected-work.com/</label>
             <div>
               <input
                 className="p-1 border-2 w-full"
