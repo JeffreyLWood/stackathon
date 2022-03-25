@@ -16,7 +16,7 @@ export default function AuthForm(props) {
   const dispatch = useDispatch();
 
   let [invalid, setInvalid] = useState(false);
-
+  let [unique, setUnique] = useState(true);
   let formName = displayName === "Sign Up" ? "signup" : "login";
 
   let [state, setState] = useState({
@@ -29,18 +29,22 @@ export default function AuthForm(props) {
 
   const changeHandler = (evt) => {
     evt.preventDefault();
+    setUnique(true);
     setState({ ...state, [evt.target.name]: evt.target.value });
   };
 
   const submitHandler = (evt) => {
     evt.preventDefault();
 
-    if (/[^a-zA-Z]/.test(state.username)) {
-      setInvalid(true);
-      return;
+    // if (/[^a-zA-Z]/.test(state.username)) {
+    //   setInvalid(true);
+    //   return;
+    // }
+    try {
+      dispatch(authenticate(state, formName));
+    } catch (error) {
+      setUnique(false);
     }
-
-    dispatch(authenticate(state, formName));
   };
   return (
     <section
@@ -147,6 +151,7 @@ export default function AuthForm(props) {
             {invalid
               ? "Invalid username. Only a-z letters are allowed, no spaces or special characters"
               : null}
+            {!unique ? "Username is taken already. Please try another." : null}
             {displayName === "Sign Up" ? (
               <button
                 type="button"
