@@ -9,20 +9,6 @@ export const Contact = (props) => {
   let user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  let env = {
-    MAILJS_SERVICE_ID: null,
-    MAILJS_TEMPLATE_ID: null,
-    MAILJS_USER_ID: null,
-  };
-
-  fetch("/api/env").then(async function (response) {
-    let res = await response.text();
-    res = res.split(" ");
-    env.MAILJS_SERVICE_ID = res[0];
-    env.MAILJS_TEMPLATE_ID = res[1];
-    env.MAILJS_USER_ID = res[2];
-  });
-
   useEffect(() => {
     async function loadUserData() {
       await dispatch(fetchUserData(props.match.params.username));
@@ -48,15 +34,15 @@ export const Contact = (props) => {
     e.preventDefault();
     emailjs
       .send(
-        env.MAILJS_SERVICE_ID,
-        env.MAILJS_TEMPLATE_ID,
+        process.env.MAILJS_SERVICE_ID,
+        process.env.MAILJS_TEMPLATE_ID,
         {
           from_name: e.target.from_name.value,
           reply_to: e.target.reply_to.value,
           message: e.target.message.value,
           to_email: email,
         },
-        env.MAILJS_USER_ID
+        process.env.MAILJS_USER_ID
       )
       .then(
         (result) => {
