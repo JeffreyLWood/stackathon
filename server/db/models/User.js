@@ -13,7 +13,7 @@ const SALT_ROUNDS = 5;
 const User = db.define("user", {
   username: {
     type: Sequelize.STRING,
-
+    unique: true,
     allowNull: false,
   },
   password: {
@@ -308,7 +308,7 @@ const unique = async (user) => {
   }
 };
 
-// User.beforeCreate(unique);
+User.beforeCreate(unique);
 User.beforeCreate(hashPassword);
 User.beforeUpdate(hashPassword);
 User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));

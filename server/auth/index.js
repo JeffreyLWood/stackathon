@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { OAuth2Client } = require("google-auth-library");
 const {
-  models: { User },
+  models: { User, About, Contact, CV, Collection },
 } = require("../db");
 module.exports = router;
 const { Op } = require("sequelize");
@@ -20,16 +20,50 @@ router.post("/google", async (req, res) => {
     let user = await User.findOne({ where: { email: email } });
 
     if (!user) {
-      console.log(true);
       user = await User.create({
         email: email,
         username: username,
         firstName: name.split(" ")[0],
         lastName: name.split(" ")[1],
       });
+      await user.save();
+      const defaultVals = async () => {
+        await About.create({
+          userId: user.id,
+          text: null,
+          header: null,
+          imgId: null,
+          caption: null,
+        });
+        await CV.create({
+          userId: user.id,
+          header: "Exhibition",
+          text: null,
+        });
+        await CV.create({
+          userId: user.id,
+          header: "Education",
+          text: null,
+        });
+        await Contact.create({
+          userId: user.id,
+          text: "Reach out to me at one of the following:",
+        });
+
+        await Collection.create({
+          userId: user.id,
+          title: "New Collection",
+        });
+        await Collection.create({
+          userId: user.id,
+          title: "Hidden",
+        });
+      };
+      // defaultVals();
     }
-    res.status(201);
-    res.json({ user, token: user.generateToken() });
+
+    console.log("token /google", user.generateToken());
+    res.status(201).send({ token: user.generateToken() });
   } catch (error) {
     console.log(error);
   }
@@ -37,8 +71,8 @@ router.post("/google", async (req, res) => {
 
 router.get("/oauth", async (req, res, next) => {
   try {
-    let user = await User.findByToken(req.headers.authorization);
-    res.send(user);
+    console.log("token /oauth", req.headers.authorization);
+    res.send(await User.findByToken(req.headers.authorization));
   } catch (err) {
     next(err);
   }
@@ -74,7 +108,7 @@ router.post("/signup", async (req, res, next) => {
 
 router.get("/me", async (req, res, next) => {
   try {
-    console.log(await User.findByToken(req.headers.authorization));
+    console.log("/me", await User.findByToken(req.headers.authorization));
     res.send(await User.findByToken(req.headers.authorization));
   } catch (ex) {
     next(ex);

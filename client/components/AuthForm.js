@@ -21,7 +21,7 @@ export default function AuthForm(props) {
   let formName = displayName === "Sign Up" ? "signup" : "login";
 
   let [state, setState] = useState({
-    username: undefined,
+    username: "",
     password: "",
     email: "",
     firstName: "",
@@ -32,6 +32,7 @@ export default function AuthForm(props) {
     evt.preventDefault();
     setUnique(true);
     setState({ ...state, [evt.target.name]: evt.target.value });
+    console.log(state);
   };
 
   const submitHandler = (evt) => {
@@ -48,6 +49,7 @@ export default function AuthForm(props) {
     }
   };
 
+  //Google
   const handleLogin = async (googleData) => {
     const res = await fetch("/auth/google", {
       method: "POST",
@@ -59,8 +61,6 @@ export default function AuthForm(props) {
       },
     });
     const data = await res.json();
-    // store returned user somehow
-    console.log(data);
     window.localStorage.setItem("TOKEN", data.token);
     dispatch(oauth());
   };
@@ -77,7 +77,7 @@ export default function AuthForm(props) {
         </span>
       </div>
       <div className="h-5/6 space-y-2 flex flex-col justify-center sm:w-3/6 sm:space-y-4">
-        <span>
+        {/* <span>
           <label htmlFor={displayName} className="text-sm sm:text-lg">
             {displayName === "Sign Up"
               ? "Sign up to create a beautiful website for your work."
@@ -195,12 +195,12 @@ export default function AuthForm(props) {
             )}
           </div>
           {mapSignup && <div> {mapSignup.error.response.data} </div>}
-        </form>
+        </form> */}
+
         <GoogleLogin
-          clientId={
-            "870629171736-ko6l7n5dhihbuekagkrkf4mon0mlc1u2.apps.googleusercontent.com"
-          }
-          buttonText="Log in with Google"
+          className="w-3/6"
+          clientId={process.env.CLIENT_ID}
+          buttonText="Continue with Google"
           onSuccess={handleLogin}
           onFailure={handleLogin}
           cookiePolicy={"single_host_origin"}
