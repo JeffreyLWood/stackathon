@@ -67,7 +67,7 @@ export default function AuthForm(props) {
     window.localStorage.setItem("TOKEN", data.token);
     dispatch(oauth());
   };
-
+  console.log("process.env", process.env.CLIENT_ID);
   return (
     <section
       id="auth"
