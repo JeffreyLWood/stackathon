@@ -62,7 +62,7 @@ export const authenticate = (userInfo, method) => async (dispatch) => {
 };
 
 export const logout = () => {
-  window.localStorage.removeItem(TOKEN);
+  window.localStorage.removeItem("TOKEN");
   history.push("/");
   return {
     type: SET_AUTH,
