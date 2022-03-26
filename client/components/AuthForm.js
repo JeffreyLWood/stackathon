@@ -69,16 +69,39 @@ export default function AuthForm(props) {
   return (
     <section
       id="auth"
-      className="container auth flex flex-col items-center sm:flex-row"
-      data-scroll-section
+      className="h-screen w-screen auth flex flex-col items-center sm:flex-row"
     >
-      <div className="h-1/6 flex items-center w-screen sm:w-3/6 sm:h-screen sm:p-4">
-        <span className="mt-10 mx-auto text-6xl break-words font-semibold">
-          <p className="break-words">Lets Get Started.</p>
+      <div className="h-1/6 flex items-center w-screen sm:w-2/6 sm:h-screen sm:p-4">
+        <span className="mt-10 text-4xl mx-auto font-semibold">
+          Lets Get Started.
         </span>
       </div>
-      <div className="h-5/6 space-y-2 flex flex-col justify-center sm:w-3/6 sm:space-y-4">
-        {/* <span>
+
+      <div className="w-4/6  bg-neutral-50 space-y-4  h-full flex  items-center ">
+        <div className="w-3/6 mx-auto h-3/6 bg-white border-t-1 flex items-center flex-col justify-center rounded-md drop-shadow-lg border-l-2 border-r-2">
+          <span className="text-lg">
+            {" "}
+            Create a beautiful website for your work
+          </span>
+          <span>
+            <GoogleLogin
+              className="mx-auto my-4 border-2"
+              clientId={process.env.CLIENT_ID}
+              buttonText="Continue with Google"
+              onSuccess={handleLogin}
+              onFailure={handleLogin}
+              cookiePolicy={"single_host_origin"}
+            />
+          </span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+{
+  /*  <div className="h-5/6 space-y-2 flex flex-col justify-center sm:w-3/6 sm:space-y-4">
+         <span>
           <label htmlFor={displayName} className="text-sm sm:text-lg">
             {displayName === "Sign Up"
               ? "Sign up to create a beautiful website for your work."
@@ -196,17 +219,5 @@ export default function AuthForm(props) {
             )}
           </div>
           {mapSignup && <div> {mapSignup.error.response.data} </div>}
-        </form> */}
-
-        <GoogleLogin
-          className="w-3/6"
-          clientId={process.env.CLIENT_ID}
-          buttonText="Continue with Google"
-          onSuccess={handleLogin}
-          onFailure={handleLogin}
-          cookiePolicy={"single_host_origin"}
-        />
-      </div>
-    </section>
-  );
+        </form> */
 }
