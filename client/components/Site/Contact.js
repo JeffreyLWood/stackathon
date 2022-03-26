@@ -30,6 +30,7 @@ export const Contact = (props) => {
   let etsy = user.contact && user.contact.etsy;
   let tiktok = user.contact && user.contact.tiktok;
   let [confirmed, setConfirmed] = useState(false);
+
   const sendEmail = (e) => {
     e.preventDefault();
     emailjs
