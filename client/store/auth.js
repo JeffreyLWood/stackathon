@@ -35,7 +35,7 @@ export const oauth = () => async (dispatch) => {
 };
 export const me = () => async (dispatch) => {
   const token = window.localStorage.getItem("TOKEN");
-  console.log("me", token);
+
   if (token) {
     const res = await axios.get("/auth/me", {
       headers: {

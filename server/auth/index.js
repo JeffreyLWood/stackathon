@@ -62,7 +62,6 @@ router.post("/google", async (req, res) => {
       // defaultVals();
     }
 
-    console.log("token /google", user.generateToken());
     res.status(201).send({ token: user.generateToken() });
   } catch (error) {
     console.log(error);
@@ -71,7 +70,6 @@ router.post("/google", async (req, res) => {
 
 router.get("/oauth", async (req, res, next) => {
   try {
-    console.log("token /oauth", req.headers.authorization);
     res.send(await User.findByToken(req.headers.authorization));
   } catch (err) {
     next(err);
@@ -108,7 +106,6 @@ router.post("/signup", async (req, res, next) => {
 
 router.get("/me", async (req, res, next) => {
   try {
-    console.log("/me", await User.findByToken(req.headers.authorization));
     res.send(await User.findByToken(req.headers.authorization));
   } catch (ex) {
     next(ex);

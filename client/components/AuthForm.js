@@ -32,7 +32,6 @@ export default function AuthForm(props) {
     evt.preventDefault();
     setUnique(true);
     setState({ ...state, [evt.target.name]: evt.target.value });
-    console.log(state);
   };
 
   const submitHandler = (evt) => {

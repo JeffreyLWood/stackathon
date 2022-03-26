@@ -12,7 +12,7 @@ import { fetchUserData } from "../store/user";
 export const Navbar = (props) => {
   // Logged in user data
   let user = useSelector((state) => state.auth);
-  console.log("navbar", user);
+
   const dispatch = useDispatch();
 
   const handleClick = () => {

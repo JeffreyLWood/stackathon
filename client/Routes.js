@@ -33,15 +33,10 @@ const Routes = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   user = dispatch(fetchUserData(auth.username));
-  // });
-
   return (
     <div>
       {user.username ? (
         <Switch>
-          {console.log(true)}
           <Route exact path="/create/in/:username" component={CreateWork} />
           <Route exact path="/" component={CreateWork} />
           <Route exact path="/:username" component={Work} data={user} />
