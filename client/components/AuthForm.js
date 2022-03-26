@@ -58,16 +58,16 @@ export default function AuthForm(props) {
       }),
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
     });
 
     const data = await res.json();
-    console.log("data", data, "process.env", process.env.CLIENT_ID);
 
     window.localStorage.setItem("TOKEN", data.token);
     dispatch(oauth());
   };
-  console.log("process.env", process.env.CLIENT_ID);
+
   return (
     <section
       id="auth"
