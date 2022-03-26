@@ -8,11 +8,15 @@ const TOKEN = "token";
  */
 const SET_AUTH = "SET_AUTH";
 // const TITLE = "TITLE";
-
+const DELETE_ACCOUNT = "DELETE_ACCOUNT";
 /**
  * ACTION CREATORS
  */
 const setAuth = (auth) => ({ type: SET_AUTH, auth });
+
+const deleteUser = (data) => {
+  return { type: DELETE_ACCOUNT, data };
+};
 
 // const updateTitle = (titleData) => {
 //   return { type: TITLE, titleData };
@@ -70,6 +74,17 @@ export const logout = () => {
   };
 };
 
+export const destroyAccount = (userId) =>
+  async function (dispatch) {
+    try {
+      let token = window.localStorage("TOKEN");
+      await axios
+        .delete(`/api/users/${userId}/delete`, { token })
+        .then(dispatch(logout()));
+    } catch (err) {
+      return err;
+    }
+  };
 /**
  * REDUCER
  */
@@ -81,7 +96,12 @@ export default function (state = {}, action) {
     //   let newState = state;
     //   newState.username = action.titleData;
     //   return newState;
+
     // }
+    case DELETE_ACCOUNT: {
+      let newState = [];
+      return newState;
+    }
     default:
       return state;
   }

@@ -120,7 +120,7 @@ router.post("/update", async (req, res) => {
         where: { imgId: uploadedResponse.public_id },
       });
     } else {
-      work = await Work.update(
+      await Work.update(
         {
           // userId: req.body.userId,
           collectionId: collection.id,
@@ -133,6 +133,7 @@ router.post("/update", async (req, res) => {
         },
         { where: { imgId: req.body.imgId, collectionId: origin.id } }
       );
+      work = await Work.findOne({ where: { imgId: req.body.imgId } });
     }
     // If request is switch collection, send back origin and destination collections
     if (req.body.origin && req.body.destination) {
@@ -149,6 +150,7 @@ router.post("/update", async (req, res) => {
       });
       origin = JSON.stringify(origin, null, 2);
       destination = JSON.stringify(destination, null, 2);
+      console.log(work);
       res.status(200).send({ work, newWork, origin, destination });
     } else {
       res.status(200).send({ work, newWork });

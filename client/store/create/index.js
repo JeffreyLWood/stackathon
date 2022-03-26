@@ -446,11 +446,13 @@ export default function (state = {}, action) {
 
       let origin = `${action.origin.snapshotId}Collection`;
       let destination = `${action.destination.snapshotId}Collection`;
+
       let data = {
         ...action.data,
         origin: JSON.parse(action.data.origin),
         destination: JSON.parse(action.data.destination),
       };
+
       /* The Following Ternary Operator Explained:
       If destination is nullCollection then our destination is NOT a primary or secondary snapshot and we should
       not add it to one of them, but only filter it from our origin. Otherwise, it IS primary or secondary
@@ -468,9 +470,9 @@ export default function (state = {}, action) {
               [origin]: data.origin[0].works.filter(
                 (work) => work.imgId !== data.work.imgId
               ),
-              [destination]: data.newWork
-                ? [...state[destination], data.newWork]
-                : [...state[destination], data.work],
+              [destination]:
+                //data.newWork ? [...state[destination], data.newWork] :
+                [...state[destination], data.work],
             };
       return newState;
     }

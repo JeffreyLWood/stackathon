@@ -244,3 +244,18 @@ router.delete("/:userId/:collection/:imgId", async (req, res, next) => {
     next(err);
   }
 });
+
+router.delete("/:userId/delete", async (req, res, next) => {
+  try {
+    console.log(req.body);
+
+    await User.destroy({
+      where: { id: req.params.userId },
+      include: { all: true, nested: true },
+    });
+
+    res.status(200);
+  } catch (err) {
+    next(err);
+  }
+});

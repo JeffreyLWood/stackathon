@@ -4,6 +4,7 @@ import axios from "axios";
 const GET_USER_DATA = "GET_USER_DATA";
 // const GET_SINGLE_WORK = "GET_SINGLE_WORK";
 const GET_COLLECTION = "GET_COLLECTION";
+// const DELETE_ACCOUNT = "DELETE_ACCOUNT";
 
 const USERNAME = "USERNAME";
 //action creators
@@ -24,6 +25,9 @@ const updateUsername = (data) => {
   return { type: USERNAME, data };
 };
 
+// const deleteUser = (data) => {
+//   return { type: DELETE_ACCOUNT, data };
+// };
 export const fetchUserData = (username) =>
   async function (dispatch) {
     try {
@@ -53,6 +57,17 @@ export const fetchCollection = (userId, title) =>
     }
   };
 
+// export const destroyAccount = (userId) =>
+//   async function (dispatch) {
+//     try {
+//       let { data } = await axios.delete(`/api/users/${userId}/delete`);
+//       dispatch(deleteUser(data));
+//       window.localStorage.removeItem("TOKEN");
+//     } catch (err) {
+//       return err;
+//     }
+//   };
+
 //reducer
 export default function (state = {}, action) {
   switch (action.type) {
@@ -71,6 +86,10 @@ export default function (state = {}, action) {
       newState.user = { ...state.user, userName: action.data };
       return newState;
     }
+    // case DELETE_ACCOUNT: {
+    //   let newState = [];
+    //   return newState;
+    // }
     default:
       return state;
   }

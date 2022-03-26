@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateTitleData } from "../../store/create";
 import { useEffect, useState } from "react";
 import { fetchUserData, changeUsername } from "../../store/user";
+
+import { destroyAccount } from "../../store/auth";
 import { Navbar } from "../Navbar";
 import { logout } from "../../store";
 export default function CreateSettings(props) {
-  let user = useSelector((state) => state.user);
+  let user = useSelector((state) => state.auth);
 
   let dispatch = useDispatch();
 
@@ -14,15 +16,17 @@ export default function CreateSettings(props) {
     user = dispatch(fetchUserData(props.match.params.username));
   }, []);
 
-  let [title, setTitle] = useState(user?.siteTitle);
+  let [title, setTitle] = useState("");
 
-  let [username, setUsername] = useState(user?.userName);
+  let [username, setUsername] = useState(user?.username);
 
   useEffect(() => {
-    setTitle(user.siteTitle || `${user.firstName} ${user.lastName}`);
-    setUsername(user?.userName);
+    user.siteTitle
+      ? setTitle(user.siteTitle)
+      : setTitle(`${user.firstName} ${user.lastName}`);
+    setUsername(user?.username);
   }, [user]);
-
+  console.log(user);
   let changeHandler = (evt) => {
     evt.preventDefault();
     setTitle(evt.target.value);
@@ -48,6 +52,10 @@ export default function CreateSettings(props) {
       return;
     }
     dispatch(changeUsername(user, username)).then(dispatch(logout()));
+  };
+
+  const deleteHandler = () => {
+    dispatch(destroyAccount(user.id));
   };
 
   return (
@@ -103,6 +111,19 @@ export default function CreateSettings(props) {
               : null}
           </div>
         </form>
+        <div>
+          <form onSubmit={deleteHandler}>
+            <label htmlFor="delete">
+              Delete Your Account. This cannot be undone.
+            </label>
+            <button
+              type="submit"
+              className="pill hover:bg-red-500 hover:border-red-500"
+            >
+              Delete Account
+            </button>
+          </form>
+        </div>
       </div>
     </>
   );
