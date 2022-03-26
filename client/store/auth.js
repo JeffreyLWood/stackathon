@@ -20,15 +20,29 @@ const setAuth = (auth) => ({ type: SET_AUTH, auth });
 /**
  * THUNK CREATORS
  */
-export const me = () => async (dispatch) => {
-  const token = window.localStorage.getItem(TOKEN);
+export const oauth = () => async (dispatch) => {
+  const token = window.localStorage.getItem("TOKEN");
+
   if (token) {
     const res = await axios.get("/auth/me", {
       headers: {
         authorization: token,
       },
     });
-    // history.push("/create/in");
+    history.push("/");
+    return dispatch(setAuth(res.data));
+  }
+};
+export const me = () => async (dispatch) => {
+  const token = window.localStorage.getItem("TOKEN");
+  console.log("me", token);
+  if (token) {
+    const res = await axios.get("/auth/me", {
+      headers: {
+        authorization: token,
+      },
+    });
+    // history.push("/");
     return dispatch(setAuth(res.data));
   }
 };
@@ -39,9 +53,9 @@ export const authenticate = (userInfo, method) => async (dispatch) => {
       userInfo,
     });
     window.localStorage.setItem(TOKEN, res.data.token);
-    // history.push(`/create/in/${username}`);
-    history.push(`/`);
-    dispatch(me());
+    // history.push(`/create/in/${userInfo.username}`);
+    // history.push(`/`);
+    dispatch(oauth());
   } catch (authError) {
     return dispatch(setAuth({ error: authError }));
   }
