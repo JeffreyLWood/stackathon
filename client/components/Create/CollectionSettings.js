@@ -105,7 +105,7 @@ export default function CollectionSettings(props) {
         <button
           type="button"
           onClick={deleteCollection}
-          className="pillDark hover:bg-red-700"
+          className="pill"
           id="primary"
           value="Work"
         >

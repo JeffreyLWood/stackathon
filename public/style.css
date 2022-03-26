@@ -1707,34 +1707,37 @@ html.has-scroll-dragging {
 }
 
 .pill {
-  padding-left: 0.7rem;
-  padding-right: 0.7rem;
+  font-size: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   padding-top: 0.1rem;
   padding-bottom: 0.1rem;
   border-width: 1px;
   border-radius: 9999px;
-  border-color: black;
+  border-color: var(--primary);
+}
+
+.red {
+  background-color: red;
+  border-color: red;
 }
 
 .pill:hover {
-  padding-left: 0.7rem;
-  padding-right: 0.7rem;
-  padding-top: 0.1rem;
-  padding-bottom: 0.1rem;
-  border-width: 1px;
-  border-radius: 9999px;
-  border-color: black;
-  background-color: black;
+  border-color: var(--primary);
+  background-color: var(--primary);
   color: white;
 }
 
 .pillDark {
-  padding-left: 0.7rem;
-  padding-right: 0.7rem;
+  font-size: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   padding-top: 0.1rem;
   padding-bottom: 0.1rem;
   border-radius: 9999px;
-  background-color: black;
+  border-width: 1px;
+  background-color: var(--primary);
+  border-color: var(--primary);
   color: white;
 }
 
@@ -2109,11 +2112,6 @@ textarea {
 .hover\:border-red-500:hover {
   --tw-border-opacity: 1;
   border-color: rgb(239 68 68 / var(--tw-border-opacity));
-}
-
-.hover\:bg-red-700:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(185 28 28 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-red-500:hover {
