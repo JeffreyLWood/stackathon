@@ -53,7 +53,9 @@ export default function AuthForm(props) {
   const handleLogin = async (googleData) => {
     const res = await fetch("/auth/google", {
       method: "POST",
-      body: googleData.tokenId,
+      body: JSON.stringify({
+        token: googleData.tokenId,
+      }),
       headers: {
         "Content-Type": "application/json",
       },
