@@ -26,7 +26,11 @@ const Routes = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(me());
+    try {
+      dispatch(me());
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   // useEffect(() => {
@@ -37,6 +41,7 @@ const Routes = () => {
     <div>
       {user.username ? (
         <Switch>
+          {console.log(true)}
           <Route exact path="/create/in/:username" component={CreateWork} />
           <Route exact path="/" component={CreateWork} />
           <Route exact path="/:username" component={Work} data={user} />
