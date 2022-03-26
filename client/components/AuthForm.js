@@ -55,7 +55,7 @@ export default function AuthForm(props) {
       method: "POST",
       body: googleData.tokenId,
       headers: {
-        "Content-Type": "text/html",
+        "Content-Type": "application/json",
       },
     });
 
