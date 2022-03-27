@@ -48,7 +48,6 @@ export default function AuthForm(props) {
     }
   };
 
-  console.log(process.env.CLIENT_ID);
   //Google
   const handleLogin = async (googleData) => {
     const res = await fetch("/auth/google", {
