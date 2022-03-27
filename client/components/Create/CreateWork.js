@@ -64,7 +64,9 @@ export default function CreateWork(props) {
   }, [worksData]);
 
   useEffect(() => {
-    collection = dispatch(fetchCollection(userId, primary));
+    collection = primary.length
+      ? dispatch(fetchCollection(userId, primary))
+      : [];
   }, [primary]);
 
   // Load collection headings to pass to snapshot views.

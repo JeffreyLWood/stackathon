@@ -304,7 +304,7 @@ const unique = async (user) => {
     where: { username: { [Op.startsWith]: username } },
   });
   if (count >= 1) {
-    user.username = username + count;
+    user.username = username + (count += 1);
   }
 };
 

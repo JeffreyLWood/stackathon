@@ -76,9 +76,9 @@ export default function CollectionSettings(props) {
         onChange={changeHandler}
         required
       ></input>
-      <label htmlFor="description" className="text-gray-400">
+      {/* <label htmlFor="description" className="text-gray-400">
         Description:
-      </label>
+      </label> */}
       <textarea
         rows="10"
         cols="40"
@@ -87,7 +87,7 @@ export default function CollectionSettings(props) {
         className="border-b-2"
         value={state?.description || ""}
         style={{ resize: "none", outline: "none" }}
-        placeholder=""
+        placeholder="Description"
       ></textarea>
       <div className="flex flex-row justify-between w-3/6">
         {!unique ? (
