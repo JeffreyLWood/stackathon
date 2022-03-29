@@ -40,6 +40,12 @@ const User = db.define("user", {
   // picture: {
   //   type: Sequelize.STRING,
   // },
+  cname: {
+    type: Sequelize.STRING,
+  },
+  domain: {
+    type: Sequelize.STRING,
+  },
 });
 
 module.exports = User;

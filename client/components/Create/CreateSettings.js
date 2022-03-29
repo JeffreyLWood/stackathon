@@ -4,7 +4,7 @@ import { updateTitleData } from "../../store/create";
 import { useEffect, useState } from "react";
 import { fetchUserData, changeUsername } from "../../store/user";
 
-import { destroyAccount } from "../../store/auth";
+import { destroyAccount, useCustomDomain } from "../../store/auth";
 import { Navbar } from "../Navbar";
 import { logout } from "../../store";
 export default function CreateSettings(props) {
@@ -58,26 +58,34 @@ export default function CreateSettings(props) {
     dispatch(destroyAccount(user.id));
   };
 
-  let [customDomain, setCustomDomain] = useState("");
+  let [customDomain, setCustomDomain] = useState(user.cname || "");
+  let message = user.cname
+    ? `Your Cname record for ${user.domain} is:`
+    : "Enter your custom domain eg. yourname.com";
+
+  let [cname, setCname] = useState("");
+  let [disabled, setDisabled] = useState("false");
+  useEffect(() => {
+    user.domain ? setCustomDomain(user.domain) : null;
+    user.cname ? setCname(user.cname) : null;
+    user.cname ? setDisabled("true") : setDisabled("false");
+  }, []);
 
   const customDomainChangeHandler = (e) => {
     e.preventDefault();
+    if (user.cname) {
+      return;
+    }
     setCustomDomain(e.target.value);
   };
 
   const submitCustomDomain = async () => {
-    const res = await fetch("/heroku", {
-      method: "GET",
-    });
-    const data = await res.json();
-    console.log("data", data);
+    try {
+      dispatch(useCustomDomain(user, customDomain));
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-  //  https://api.heroku.com/apps/$APP_ID_OR_NAME/domains/$DOMAIN_ID_OR_HOSTNAME
-  //    # Store the CNAME value for this custom domain from Heroku in your database
-  //   @account.update(:heroku_dns_target => @domain["cname"])
-  // # redirect back to the previous form once completed
-  //   redirect_back(fallback_location: root_path, notice: 'Custom domain saved.')
 
   return (
     <>
@@ -106,7 +114,7 @@ export default function CreateSettings(props) {
           className="flex flex-col w-full sm:w-3/6  space-y-4"
           onSubmit={updateUsername}
         >
-          <labe htmlFor="username" />
+          <label htmlFor="username" />
           Warning: Change your username only when necessary. You will be logged
           out and will need to log in again with your new username. This will
           change your url so remember to update your records to
@@ -132,14 +140,56 @@ export default function CreateSettings(props) {
               : null}
           </div>
         </form>
-        <form onSubmit={submitCustomDomain}>
-          <label htmlFor="domain">Use a Custom Domain</label>
-          <input
-            type="text"
-            value={customDomain}
-            onChange={(e) => customDomainChangeHandler(e)}
-          ></input>
-          <button type="submit">Submit</button>
+
+        <form
+          name="customdomains"
+          onSubmit={submitCustomDomain}
+          className="w-3/6 bg-neutral-50 p-5 flex flex-col space-y-4"
+        >
+          <label htmlFor="customdomains" className="text-2xl" />
+          Custom Domains
+          <span>
+            <label htmlFor="domain">{message}</label>
+          </span>
+          <span>
+            <input
+              type="text"
+              className="w-full"
+              value={customDomain}
+              onChange={(e) => customDomainChangeHandler(e)}
+              required="true"
+            ></input>
+          </span>
+          <button type="submit" disabled={disabled}>
+            Submit
+          </button>
+          <div className="space-y-4">
+            <p> Using Custom Domains:</p>
+            <ul className="mb-4">
+              <li>
+                1. Go to your web hosting service settings (eg. Bluehost,
+                Godaddy)
+              </li>
+              <li>2. Go to DNS settings</li>
+              <li>
+                3. Enter or edit your CNAME record associated with your domain
+                name
+              </li>
+              <li> 4. Copy and paste your Cname record from above.</li>
+              <li> 5. Enter a host record of "www" (no quotes).</li>
+              <li>
+                {" "}
+                6. Select TTL or Time To Live if it is displayed of your desired
+                time until the domain name points to your Selected-Work site.
+              </li>
+              <li> 7. Save </li>
+            </ul>
+            <p>
+              Changing a Cname record can take between a few minutes and a few
+              hours. Check back again by entering your domain url in your
+              browser and refresh the page.
+            </p>
+          </div>
         </form>
         <div>
           <form onSubmit={deleteHandler}>

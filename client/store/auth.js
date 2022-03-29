@@ -9,6 +9,7 @@ const TOKEN = "token";
 const SET_AUTH = "SET_AUTH";
 // const TITLE = "TITLE";
 const DELETE_ACCOUNT = "DELETE_ACCOUNT";
+const USE_CUSTOM_DOMAIN = "USE_CUSTOM_DOMAIN";
 /**
  * ACTION CREATORS
  */
@@ -16,6 +17,10 @@ const setAuth = (auth) => ({ type: SET_AUTH, auth });
 
 const deleteUser = (data) => {
   return { type: DELETE_ACCOUNT, data };
+};
+
+const customDomain = (data) => {
+  return { type: USE_CUSTOM_DOMAIN, data };
 };
 
 // const updateTitle = (titleData) => {
@@ -73,7 +78,16 @@ export const logout = () => {
     auth: {},
   };
 };
-
+export const useCustomDomain = (user, domain) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.post(`/heroku`, { user, domain });
+      console.log("store", data);
+      dispatch(customDomain(data));
+    } catch (err) {
+      return err;
+    }
+  };
 export const destroyAccount = (userId) =>
   async function (dispatch) {
     try {
@@ -90,14 +104,14 @@ export const destroyAccount = (userId) =>
  */
 export default function (state = {}, action) {
   switch (action.type) {
-    case SET_AUTH:
+    case SET_AUTH: {
       return action.auth;
-    // case TITLE: {
-    //   let newState = state;
-    //   newState.username = action.titleData;
-    //   return newState;
+    }
 
-    // }
+    case USE_CUSTOM_DOMAIN: {
+      return { ...state, cname: action.data.cname, domain: action.data.domain };
+    }
+
     case DELETE_ACCOUNT: {
       let newState = [];
       return newState;

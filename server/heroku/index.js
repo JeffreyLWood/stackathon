@@ -1,14 +1,33 @@
 const Heroku = require("heroku-client");
-const heroku = new Heroku({ token: process.env.HEROKU_API_TOKEN });
+
+const {
+  models: { User, About, Contact, CV, Collection },
+} = require("../db");
+
 const router = require("express").Router();
 
 module.exports = router;
 
-router.get("/", async (res) => {
-  // do something with apps
-  await heroku.get("/apps").then((apps) => {
-    res.send(apps);
-  });
+router.post("/", async (req, res) => {
+  try {
+    const heroku = new Heroku({ token: process.env.HEROKU_API_TOKEN });
+    let domain = await heroku.post("/apps/slctdwork/domains", {
+      body: {
+        hostname: req.body.domain,
+        sni_endpoint: null,
+      },
+    });
+
+    await User.update(
+      { cname: domain.cname, domain: req.body.domain },
+      { where: { id: req.body.user.id } }
+    );
+    let user = await User.findByPk(req.body.user.id);
+
+    res.status(200).send({ cname: user.cname, domain: user.domain });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 // POST requests
