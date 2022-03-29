@@ -25,41 +25,18 @@ router.post("/google", async (req, res) => {
         username: username,
         firstName: name.split(" ")[0],
         lastName: name.split(" ")[1],
+        picture: picture,
       });
       await user.save();
-      const defaultVals = async () => {
-        await About.create({
-          userId: user.id,
-          text: null,
-          header: null,
-          imgId: null,
-          caption: null,
-        });
-        await CV.create({
-          userId: user.id,
-          header: "Exhibition",
-          text: null,
-        });
-        await CV.create({
-          userId: user.id,
-          header: "Education",
-          text: null,
-        });
-        await Contact.create({
-          userId: user.id,
-          text: "Reach out to me at one of the following:",
-        });
-
-        await Collection.create({
-          userId: user.id,
-          title: "New Collection",
-        });
-        await Collection.create({
-          userId: user.id,
-          title: "Hidden",
-        });
-      };
-      // defaultVals();
+    } else if (user) {
+      await User.update(
+        {
+          firstName: name.split(" ")[0],
+          lastName: name.split(" ")[1],
+          picture: picture,
+        },
+        { where: { email: email } }
+      );
     }
 
     res.status(201).send({ token: user.generateToken() });

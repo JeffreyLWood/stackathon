@@ -18,7 +18,8 @@ export const Navbar = (props) => {
   const handleClick = () => {
     dispatch(logout());
   };
-
+  console.log(user.picture);
+  let picture = user && user.picture;
   return (
     <div className="navbar flex justify-between py-4 px-2 font-light bg-white">
       {/* <div className="flex flex-row justify-between space-x-5"> */}
@@ -26,14 +27,15 @@ export const Navbar = (props) => {
       {user.username ? (
         <>
           <div className="text-xs md:text-sm sm:text-md flex flex-wrap sm:flex-row space-x-2 sm:space-x-4 items-center">
-            <span className="">
-              <Link to="/">Selected-Work</Link>
-            </span>
-            <span className="italic  text-indigo-600">
+            <span className="italic">
               <Link to={`/create/in/${user.username}/settings`}>
-                Hello, {user.firstName}. Manage your site here.
+                <img src={picture} className="w-8 mx-5 rounded-full" />
               </Link>
             </span>
+            {/* <span className="">
+              <Link to="/">Selected-Work</Link>
+            </span> */}
+
             <div className="space-x-4">
               <Link to={`/create/in/${user.username}/work`}>Work</Link>
               <Link to={`/create/in/${user.username}/about`}> About</Link>
