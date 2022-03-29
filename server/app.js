@@ -18,25 +18,13 @@ app.use(express.json({ limit: "50mb" }));
 app.use(
   wildcardSubdomains({
     namespace: "_sub",
-    whitelist: ["www", "app"],
+    whitelist: ["www"],
   })
 );
+
 app.get("/_sub/:firstSubdomain/*", function (req, res) {
-  res.send(
-    "First Subdomain: " +
-      req.params.firstSubdomain +
-      "\n" +
-      "Original Url: " +
-      req.originalUrl +
-      "\n" +
-      "New Url: " +
-      req.url +
-      "\n" +
-      "Query string: " +
-      JSON.stringify(req.query)
-  );
+  res.redirect(`https://www.selected-work.com/${req.params.firstSubdomain}/`);
 });
-// app.use(subdomain("*", require("./sub")));
 
 // auth and api routes
 app.use("/auth", require("./auth"));
