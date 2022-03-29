@@ -17,7 +17,7 @@ app.use(morgan("dev"));
 app.use(express.json({ limit: "50mb" }));
 
 app.get("/_sub/:firstSubdomain/*", function (req, res) {
-  res.end(
+  res.send(
     "First Subdomain: " +
       req.params.firstSubdomain +
       "\n" +
