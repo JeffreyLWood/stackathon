@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateTitleData } from "../../store/create";
 import { useEffect, useState } from "react";
 import { fetchUserData, changeUsername } from "../../store/user";
-import Heroku from "heroku-client";
+
 import { destroyAccount } from "../../store/auth";
 import { Navbar } from "../Navbar";
 import { logout } from "../../store";
@@ -66,7 +66,7 @@ export default function CreateSettings(props) {
   };
 
   const submitCustomDomain = () => {
-    const heroku = new Heroku({ token: process.env.HEROKU_API_TOKEN });
+    // const heroku = new Heroku({ token: process.env.HEROKU_API_TOKEN });
     // heroku.domain.create(
     //   slctdwork.herokuapp.com,
     //   (body = {
@@ -74,7 +74,7 @@ export default function CreateSettings(props) {
     //   })
     // );
     // let domain = heroku.domain.info(slctdwork.herokuapp.com, customDomain);
-    console.log(heroku);
+    // console.log(heroku);
     //  https://api.heroku.com/apps/$APP_ID_OR_NAME/domains/$DOMAIN_ID_OR_HOSTNAME
     //    # Store the CNAME value for this custom domain from Heroku in your database
     //   @account.update(:heroku_dns_target => @domain["cname"])
