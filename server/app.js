@@ -31,6 +31,7 @@ app.use("/auth", require("./auth"));
 app.use("/api/collections/", require("./api/collections"));
 app.use("/api/users/", require("./api/users"));
 app.use("/api", require("./api"));
+app.use("/heroku", require("./heroku"));
 
 app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "..", "public/index.html"))

@@ -66,21 +66,24 @@ export default function CreateSettings(props) {
   };
 
   const submitCustomDomain = () => {
-    // const heroku = new Heroku({ token: process.env.HEROKU_API_TOKEN });
-    // heroku.domain.create(
-    //   slctdwork.herokuapp.com,
-    //   (body = {
-    //     hostname: customDomain,
-    //   })
-    // );
-    // let domain = heroku.domain.info(slctdwork.herokuapp.com, customDomain);
-    // console.log(heroku);
-    //  https://api.heroku.com/apps/$APP_ID_OR_NAME/domains/$DOMAIN_ID_OR_HOSTNAME
-    //    # Store the CNAME value for this custom domain from Heroku in your database
-    //   @account.update(:heroku_dns_target => @domain["cname"])
-    // # redirect back to the previous form once completed
-    //   redirect_back(fallback_location: root_path, notice: 'Custom domain saved.')
+    const res = await fetch("/heroku/apps", {
+      method: "GET",
+      // body: JSON.stringify({
+      //   token: googleData.tokenId,
+      // }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    console.log(data);
   };
+
+  //  https://api.heroku.com/apps/$APP_ID_OR_NAME/domains/$DOMAIN_ID_OR_HOSTNAME
+  //    # Store the CNAME value for this custom domain from Heroku in your database
+  //   @account.update(:heroku_dns_target => @domain["cname"])
+  // # redirect back to the previous form once completed
+  //   redirect_back(fallback_location: root_path, notice: 'Custom domain saved.')
 
   return (
     <>
