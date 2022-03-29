@@ -6,7 +6,9 @@ module.exports = router;
 
 router.get("/apps", async (res) => {
   // do something with apps
-  res.send(heroku.get("/apps"));
+  heroku.get("/apps").then((apps) => {
+    res.send(apps);
+  });
 });
 
 // POST requests
