@@ -33,7 +33,7 @@ router.post("/google", async (req, res) => {
         {
           firstName: name.split(" ")[0],
           lastName: name.split(" ")[1],
-          picture: picture,
+          // picture: picture,
         },
         { where: { email: email } }
       );
