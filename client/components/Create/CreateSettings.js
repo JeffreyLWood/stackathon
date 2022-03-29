@@ -65,12 +65,9 @@ export default function CreateSettings(props) {
     setCustomDomain(e.target.value);
   };
 
-  const submitCustomDomain = () => {
+  const submitCustomDomain = async () => {
     const res = await fetch("/heroku/apps", {
       method: "GET",
-      // body: JSON.stringify({
-      //   token: googleData.tokenId,
-      // }),
       headers: {
         "Content-Type": "application/json",
       },
