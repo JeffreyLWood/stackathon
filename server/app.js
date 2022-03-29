@@ -7,6 +7,7 @@ const User = require("./db/models/User");
 const Collection = require("./db/models/Collection");
 const app = express();
 const url = require("url");
+
 const { database } = require("pg/lib/defaults");
 module.exports = app;
 

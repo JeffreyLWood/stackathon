@@ -1,10 +1,13 @@
 const Heroku = require("heroku-client");
 const heroku = new Heroku({ token: process.env.HEROKU_API_TOKEN });
+const router = require("express").Router();
 
-// GET requests
-heroku.get("/apps").then((apps) => {
+router.get("/apps", (res) => {
   // do something with apps
-  console.log(apps);
+  heroku.get("/apps").then((apps) => {
+    // do something with apps
+    res.status(200).send(apps);
+  });
 });
 
 // POST requests

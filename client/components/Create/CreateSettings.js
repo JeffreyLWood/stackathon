@@ -68,9 +68,6 @@ export default function CreateSettings(props) {
   const submitCustomDomain = async () => {
     const res = await fetch("/heroku/apps", {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
     });
     const data = await res.json();
     console.log(data);
