@@ -25,13 +25,11 @@ var checkUser = subdomain("*", async (req, res, next) => {
     if (user) {
       res.redirect(
         url.format({
-          protocol: "http",
+          protocol: "https",
           hostname: "selected-work.com",
           pathname: `/${username}`,
         })
       );
-    } else {
-      next();
     }
   } else next();
 });
