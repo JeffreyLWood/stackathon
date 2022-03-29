@@ -61,7 +61,7 @@ export default function CreateSettings(props) {
   let [customDomain, setCustomDomain] = useState("");
 
   const customDomainChangeHandler = (e) => {
-    e.target.preventDefault();
+    e.preventDefault();
     setCustomDomain(e.target.value);
   };
 
