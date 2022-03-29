@@ -4,7 +4,7 @@ const Work = require("../db/models/Work");
 const About = require("../db/models/About");
 const Collection = require("../db/models/Collection");
 const { cloudinary } = require("../utils/cloudinary");
-const res = require("express/lib/response");
+
 router.use("/users", require("./users"));
 
 // Used for uploading images. Image data goes to Cloudinary, image information including Cloudinary link goes to DB
