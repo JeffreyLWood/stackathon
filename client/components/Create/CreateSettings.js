@@ -58,6 +58,30 @@ export default function CreateSettings(props) {
     dispatch(destroyAccount(user.id));
   };
 
+  let [customDomain, setCustomDomain] = useState("");
+
+  const customDomainChangeHandler = (e) => {
+    e.target.preventDefault();
+    setCustomDomain(e.target.value);
+  };
+
+  const submitCustomDomain = () => {
+    heroku = PlatformAPI.connect_oauth(process.env.HEROKU_OAUTH_TOKEN);
+    heroku.domain.create(
+      slctdwork.herokuapp.com,
+      (body = {
+        hostname: customDomain,
+      })
+    );
+    let domain = heroku.domain.info(slctdwork.herokuapp.com, customDomain);
+    console.log(domain);
+    //  https://api.heroku.com/apps/$APP_ID_OR_NAME/domains/$DOMAIN_ID_OR_HOSTNAME
+    //    # Store the CNAME value for this custom domain from Heroku in your database
+    //   @account.update(:heroku_dns_target => @domain["cname"])
+    // # redirect back to the previous form once completed
+    //   redirect_back(fallback_location: root_path, notice: 'Custom domain saved.')
+  };
+
   return (
     <>
       <Navbar user={user} />
@@ -110,6 +134,15 @@ export default function CreateSettings(props) {
               ? "Invalid username. Only a-z letters are allowed, no spaces or special characters"
               : null}
           </div>
+        </form>
+        <form onSubmit={submitCustomDomain}>
+          <label htmlFor="domain">Use a Custom Domain</label>
+          <input
+            type="text"
+            value={customDomain}
+            onChange={(e) => customDomainChangeHandler(e)}
+          ></input>
+          <button type="submit">Submit</button>
         </form>
         <div>
           <form onSubmit={deleteHandler}>
