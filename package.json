@@ -1,10 +1,10 @@
 {
-  "name": "Selected-Work",
+  "name": "stackathon",
   "version": "2.0.0",
   "engines": {
     "node": "14.17.5"
   },
-  "description": "Portfolio Website Creator",
+  "description": "Selected-Work",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
