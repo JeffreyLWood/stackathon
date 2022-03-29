@@ -36,7 +36,7 @@ const Work = db.define("work", {
   description: {
     type: Sequelize.STRING,
   },
-  thumnails: {
+  thumbnails: {
     type: Sequelize.STRING,
   },
   status: {
