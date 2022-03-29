@@ -37,9 +37,9 @@ const User = db.define("user", {
   siteTitle: {
     type: Sequelize.STRING,
   },
-  picture: {
-    type: Sequelize.STRING,
-  },
+  // picture: {
+  //   type: Sequelize.STRING,
+  // },
 });
 
 module.exports = User;
