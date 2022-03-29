@@ -27,10 +27,11 @@ export const Navbar = (props) => {
       {user.username ? (
         <>
           <div className="text-xs md:text-sm sm:text-md flex flex-wrap sm:flex-row space-x-2 sm:space-x-4 items-center">
-            <span className="italic">
-              {/* <Link to={`/create/in/${user.username}/settings`}>
-                <img src={picture} className="w-8 mx-5 rounded-full" />
-              </Link> */}
+            <span className="italic text-indigo-600">
+              <Link to={`/create/in/${user.username}/settings`}>
+                Hello, {user.firstName}.
+                {/*  <img src={picture} className="w-8 mx-5 rounded-full" />*/}
+              </Link>
             </span>
             <span className="">
               <Link to="/">Selected-Work</Link>
