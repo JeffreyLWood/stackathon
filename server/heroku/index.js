@@ -4,9 +4,9 @@ const router = require("express").Router();
 
 module.exports = router;
 
-router.get("/apps", async (res) => {
+router.get("/", async (res) => {
   // do something with apps
-  heroku.get("/apps").then((apps) => {
+  await heroku.get("/apps").then((apps) => {
     res.send(apps);
   });
 });

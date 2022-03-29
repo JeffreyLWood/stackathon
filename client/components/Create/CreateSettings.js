@@ -26,7 +26,7 @@ export default function CreateSettings(props) {
       : setTitle(`${user.firstName} ${user.lastName}`);
     setUsername(user?.username);
   }, [user]);
-  console.log(user);
+
   let changeHandler = (evt) => {
     evt.preventDefault();
     setTitle(evt.target.value);
@@ -66,11 +66,11 @@ export default function CreateSettings(props) {
   };
 
   const submitCustomDomain = async () => {
-    const res = await fetch("/heroku/apps", {
+    const res = await fetch("/heroku", {
       method: "GET",
     });
     const data = await res.json();
-    console.log(data);
+    console.log("data", data);
   };
 
   //  https://api.heroku.com/apps/$APP_ID_OR_NAME/domains/$DOMAIN_ID_OR_HOSTNAME
