@@ -30,7 +30,7 @@ export const Navbar = (props) => {
             <span className="italic text-indigo-600">
               <Link to={`/create/in/${user.username}/settings`}>
                 Hello, {user.firstName}.
-                {/*  <img src={picture} className="w-8 mx-5 rounded-full" />*/}
+                <img src={picture} className="w-8 mx-5 rounded-full" />
               </Link>
             </span>
             <span className="">

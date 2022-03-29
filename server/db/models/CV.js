@@ -15,6 +15,9 @@ const CV = db.define("cv", {
   experience: {
     type: Sequelize.TEXT(10000),
   },
+  teaching: {
+    type: Sequelize.TEXT(10000),
+  },
   awards: {
     type: Sequelize.TEXT(10000),
   },

@@ -37,13 +37,16 @@ const User = db.define("user", {
   siteTitle: {
     type: Sequelize.STRING,
   },
-  // picture: {
-  //   type: Sequelize.STRING,
-  // },
+  picture: {
+    type: Sequelize.STRING,
+  },
   cname: {
     type: Sequelize.STRING,
   },
   domain: {
+    type: Sequelize.STRING,
+  },
+  template: {
     type: Sequelize.STRING,
   },
 });

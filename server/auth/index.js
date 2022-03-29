@@ -25,7 +25,7 @@ router.post("/google", async (req, res) => {
         username: username,
         firstName: name.split(" ")[0],
         lastName: name.split(" ")[1],
-        // picture: picture,
+        picture: picture,
       });
       await user.save();
     } else if (user) {
@@ -33,7 +33,7 @@ router.post("/google", async (req, res) => {
         {
           firstName: name.split(" ")[0],
           lastName: name.split(" ")[1],
-          // picture: picture,
+          picture: picture,
         },
         { where: { email: email } }
       );

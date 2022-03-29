@@ -27,6 +27,18 @@ const Work = db.define("work", {
     type: Sequelize.REAL,
     allowNull: true,
   },
+  depth: {
+    type: Sequelize.REAL,
+  },
+  metric: {
+    type: Sequelize.STRING,
+  },
+  description: {
+    type: Sequelize.STRING,
+  },
+  thumnails: {
+    type: Sequelize.STRING,
+  },
   status: {
     type: Sequelize.STRING,
     allowNull: true,
