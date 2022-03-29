@@ -15,7 +15,12 @@ app.use(morgan("dev"));
 
 // // body parsing middleware
 app.use(express.json({ limit: "50mb" }));
-
+app.use(
+  wildcardSubdomains({
+    namespace: "_sub",
+    whitelist: ["www", "app"],
+  })
+);
 app.get("/_sub/:firstSubdomain/*", function (req, res) {
   res.send(
     "First Subdomain: " +
