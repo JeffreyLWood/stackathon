@@ -64,8 +64,8 @@ export default function CreateSettings(props) {
 
   let [customDomain, setCustomDomain] = useState(user.cname || "");
   let message = user.cname
-    ? `Your Cname record for ${user.domain} is:`
-    : "Enter your custom domain eg. www.yourname.com";
+    ? `Your CNAME record for ${user.domain} is:`
+    : "Enter your custom domain to generate a CNAME";
 
   let [cname, setCname] = useState("");
 
@@ -188,7 +188,7 @@ export default function CreateSettings(props) {
                 className="w-full my-4"
                 value={customDomain}
                 onChange={(e) => customDomainChangeHandler(e)}
-                required={true}
+                placeholder="www.yourdomain.com"
               ></input>
 
               <button type="submit" className={submitDomainButton}>
@@ -196,31 +196,28 @@ export default function CreateSettings(props) {
               </button>
             </span>
             <div className="space-y-4">
-              <p> Using Custom Domains:</p>
-              <ul className="mb-4">
+              <p>Using Custom Domains:</p>
+              <ul className="mb-4 space-y-2">
                 <li>
-                  1. Go to your web hosting service settings (eg. Bluehost,
-                  Godaddy)
+                  1. After generating your CNAME, go to your web hosting service
+                  website (eg. Bluehost, Godaddy)
                 </li>
-                <li>2. Go to DNS settings</li>
+                <li>2. Go to DNS Settings</li>
                 <li>
-                  3. Enter or edit your CNAME record associated with your domain
-                  name
+                  3. Make a new CNAME record or edit your current one. Copy your
+                  CNAME here and paste it in the field Points To or DNS Target.
                 </li>
-                <li> 4. Copy and paste your Cname record from above.</li>
-                <li> 5. Enter a host record of "www" (no quotes).</li>
+                <li>4. Enter "www" (no quotes) for the Host Record or Name.</li>
                 <li>
-                  {" "}
-                  6. Select TTL or Time To Live if it is displayed of your
-                  desired time until the domain name points to your
-                  Selected-Work site.
+                  5. Set Time To Live (TTL) to your desired time until the
+                  domain name points to your Selected-Work site.
                 </li>
-                <li> 7. Save </li>
+                <li>6. Save</li>
               </ul>
               <p>
-                Changing a Cname record can take between a few minutes and a few
-                hours. Check back again by entering your domain url in your
-                browser and refresh the page.
+                Changing a CNAME record can take, at minimum, between a few
+                minutes and a few hours. Check back again by entering your
+                domain url in your browser and refreshing the page.
               </p>
             </div>
           </form>
