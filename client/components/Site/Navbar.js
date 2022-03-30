@@ -83,7 +83,7 @@ export const Navbar = (props) => {
   document.body.style.position = body;
   //  document.body.style.top = `-${window.scrollY}px`;
 
-  let url = user.domain ? `${user.domain}` : `/${user.userName}`;
+  let url = user.domain ? `` : `/${user.userName}`;
 
   console.log("navbar", user);
   return (
