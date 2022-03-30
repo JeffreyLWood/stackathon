@@ -83,8 +83,9 @@ export const Navbar = (props) => {
   document.body.style.position = body;
   //  document.body.style.top = `-${window.scrollY}px`;
 
-  let url = user.domain ? `` : `/${user.userName}`;
+  let url = user.domain ? `${user.domain}` : `/${user.userName}`;
 
+  console.log("navbar", user);
   return (
     <>
       <nav className="flex flex-row justify-between h-18 items-end mx-2 sm:mx-12 mt-10 tracking-widest">
