@@ -65,7 +65,7 @@ export default function CreateSettings(props) {
   let [customDomain, setCustomDomain] = useState(user.cname || "");
   let message = user.cname
     ? `Your Cname record for ${user.domain} is:`
-    : "Enter your custom domain eg. yourname.com";
+    : "Enter your custom domain eg. www.yourname.com";
 
   let [cname, setCname] = useState("");
 
@@ -98,26 +98,29 @@ export default function CreateSettings(props) {
   return (
     <>
       <Navbar user={user} />
-      <div className="h-full  mt-10 p-10 space-y-8">
-        <section className="w-full h-content py-10 flex">
+      <div className="h-full mt-20">
+        <section className="w-full bg-neutral-50 space-y-4 flex flex-col p-10">
+          <span>
+            <label htmlFor="title" className="text-xl">
+              Site Title
+            </label>
+          </span>
           <form
-            className="w-full flex flex-row space-y-4 py-6"
+            name="title"
+            className="flex flex-col w-full sm:w-3/6  space-y-4"
             onSubmit={submitHandler}
           >
-            <div className="space-y-4">
-              <label htmlFor="name" className="my-4">
-                Your full name as it will appear on your site
-              </label>
-              <div>
-                <input
-                  className="p-1 border-2"
-                  name="name"
-                  type="text"
-                  onChange={changeHandler}
-                  value={title}
-                />
-              </div>
-            </div>
+            <label htmlFor="name" className="">
+              Your full name as it will appear on your site
+            </label>
+
+            <input
+              className="p-1 border-2"
+              name="name"
+              type="text"
+              onChange={changeHandler}
+              value={title}
+            />
             <div>
               <button type="submit" className="pill my-4">
                 Submit
@@ -126,13 +129,18 @@ export default function CreateSettings(props) {
           </form>
         </section>
 
-        <section className="w-full h-content py-10 flex">
-          {" "}
+        <section className="w-full space-y-4 flex-col  p-10 flex">
+          <span>
+            <label htmlFor="url" className="mb-2 text-xl">
+              URL
+            </label>
+          </span>
           <form
+            name="url"
             className="flex flex-col w-full sm:w-3/6  space-y-4"
             onSubmit={updateUsername}
           >
-            <label htmlFor="username" />
+            <label htmlFor="urlinput" />
             Warning: Change your url path only when necessary. You will be
             logged out and need to log in again. Remember to update your records
             to www.selected-work.com/newusername
@@ -141,7 +149,7 @@ export default function CreateSettings(props) {
               <div>
                 <input
                   className="p-1 border-2 w-full"
-                  name="username"
+                  name="urlinput"
                   type="text"
                   onChange={changeHandlerUsername}
                   value={username}
@@ -159,7 +167,7 @@ export default function CreateSettings(props) {
           </form>
         </section>
 
-        <section className="w-full bg-neutral-50 p-5 flex flex-col h-content">
+        <section className="w-full bg-neutral-50 flex-col space-y-4 p-10 flex">
           <span>
             <label htmlFor="customdomains" className="mb-2 text-xl">
               Custom Domains
@@ -218,20 +226,29 @@ export default function CreateSettings(props) {
           </form>
         </section>
 
-        <section>
-          <div>
-            <form onSubmit={deleteHandler}>
-              <label htmlFor="delete">
-                Delete Your Account. This cannot be undone.
-              </label>
+        <section className="w-full flex-col space-y-4 p-10 flex">
+          <span>
+            <label htmlFor="delete" className="mb-2 text-xl">
+              Delete Account
+            </label>
+          </span>
+
+          <form
+            onSubmit={deleteHandler}
+            className="flex-col w-full sm:w-3/6 min-h-72 space-y-4"
+          >
+            <label htmlFor="delete">
+              Delete Your Account. This cannot be undone.
+            </label>
+            <div>
               <button
                 type="submit"
                 className="pill hover:bg-red-500 hover:border-red-500"
               >
                 Delete Account
               </button>
-            </form>
-          </div>
+            </div>
+          </form>
         </section>
       </div>
     </>

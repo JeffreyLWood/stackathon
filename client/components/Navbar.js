@@ -28,16 +28,14 @@ export const Navbar = (props) => {
       {user.username ? (
         <>
           <div className="text-xs md:text-sm sm:text-md flex flex-wrap sm:flex-row space-x-2 sm:space-x-4 items-center">
-            <span className="italic text-indigo-600">
-              <Link to={`/create/in/${user.username}/settings`}>
-                Hello, {user.firstName}.
-                <img src={picture} className="w-8 mx-5 rounded-full" />
-              </Link>
-            </span>
             <span className="">
               <Link to="/">Selected-Work</Link>
             </span>
-
+            <div className="pl-4 pr-10">
+              <Link to={`/create/in/${user.username}/settings`}>
+                <img src={picture} className="w-8 h-8 rounded-full" />
+              </Link>
+            </div>
             <div className="space-x-4">
               <Link to={`/create/in/${user.username}/work`}>Work</Link>
               <Link to={`/create/in/${user.username}/about`}> About</Link>

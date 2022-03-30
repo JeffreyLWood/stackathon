@@ -810,6 +810,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 11rem;
 }
 
+.h-8 {
+  height: 2rem;
+}
+
 .max-h-full {
   max-height: 100%;
 }
@@ -1181,6 +1185,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pr-4 {
   padding-right: 1rem;
+}
+
+.pr-6 {
+  padding-right: 1.5rem;
+}
+
+.pl-4 {
+  padding-left: 1rem;
+}
+
+.pr-10 {
+  padding-right: 2.5rem;
 }
 
 .text-center {
