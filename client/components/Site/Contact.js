@@ -10,10 +10,10 @@ export const Contact = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    async function loadUserData() {
-      await dispatch(fetchUserData(props.match.params.username));
-    }
-    loadUserData();
+    // async function loadUserData() {
+    //   await dispatch(fetchUserData(props.match.params.username));
+    // }
+    // loadUserData();
   }, []);
   let defaultEmail = user.email;
 

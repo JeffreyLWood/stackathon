@@ -7,10 +7,23 @@ import { Image } from "cloudinary-react";
 
 export const Navbar = (props) => {
   const dispatch = useDispatch();
-  let user = [];
-  useEffect(() => {
-    user = dispatch(fetchUserData(props?.user.username));
-  }, []);
+  let user = useSelector((state) => state.user);
+  // let customDomain = window.location.hostname;
+
+  // useEffect(() => {
+  //   async function load() {
+  //     await fetch(`/api/users/custom/${customDomain}`, {
+  //       method: "GET",
+  //       headers: { "Content-Type": "application/json" },
+  //     }).then(async (res) => setUser(await res.json()));
+  //   }
+  //   try {
+  //     // load();
+  //   } catch (error) {
+
+  //     console.log(user);
+  //   }
+  // }, []);
 
   let siteTitle = props?.user.siteTitle
     ? `${props?.user.siteTitle}`
@@ -70,11 +83,13 @@ export const Navbar = (props) => {
   document.body.style.position = body;
   //  document.body.style.top = `-${window.scrollY}px`;
 
+  let url = user.domain ? `` : `/${user.userName}`;
+
   return (
     <>
       <nav className="flex flex-row justify-between h-18 items-end mx-2 sm:mx-12 mt-10 tracking-widest">
         <div className="text-xl">
-          <Link to={`/${props.user.userName}`}>{siteTitle}</Link>
+          <Link to={`${url}`}>{siteTitle}</Link>
         </div>
         {/* Mobile Nav */}
         <div
@@ -126,9 +141,7 @@ export const Navbar = (props) => {
                               props.setCollection(collection);
                           }}
                         >
-                          <Link
-                            to={`/${props.user.userName}/work/${collection.title}`}
-                          >
+                          <Link to={`${url}/work/${collection.title}`}>
                             {collection.title}
                           </Link>
                         </li>
@@ -137,9 +150,7 @@ export const Navbar = (props) => {
                           key={idx}
                           className="cursor-pointer text-xl sm:text-sm"
                         >
-                          <Link
-                            to={`/${props.user.userName}/work/${collection.title}`}
-                          >
+                          <Link to={`${url}/work/${collection.title}`}>
                             {collection.title}
                           </Link>
                         </li>
@@ -168,9 +179,7 @@ export const Navbar = (props) => {
                               props.setCollection(collection);
                           }}
                         >
-                          <Link
-                            to={`/${props.user.userName}/work/${collection.title}`}
-                          >
+                          <Link to={`${url}/work/${collection.title}`}>
                             {collection.title}
                           </Link>
                         </li>
@@ -182,9 +191,7 @@ export const Navbar = (props) => {
                           }}
                           className="cursor-pointer text-xl sm:text-sm  text-neutral-400 tracking-widest"
                         >
-                          <Link
-                            to={`/${props.user.userName}/work/${collection.title}`}
-                          >
+                          <Link to={`${url}/work/${collection.title}`}>
                             {collection.title}
                           </Link>
                         </li>
@@ -195,20 +202,17 @@ export const Navbar = (props) => {
             {/* Collections Mobile End */}
 
             <li>
-              <Link to={`/${props.user.userName}/about`} className="subHeader">
+              <Link to={`${url}/about`} className="subHeader">
                 <div>About</div>
               </Link>
             </li>
             <li>
-              <Link to={`/${props.user.userName}/cv`} className="subHeader">
+              <Link to={`${url}/cv`} className="subHeader">
                 <div>CV</div>
               </Link>
             </li>
             <li>
-              <Link
-                to={`/${props.user.userName}/contact`}
-                className="subHeader"
-              >
+              <Link to={`${url}/contact`} className="subHeader">
                 <div>Contact</div>
               </Link>
             </li>
@@ -223,7 +227,7 @@ export const Navbar = (props) => {
             onMouseLeave={() => hide()}
             onClick={hide}
           >
-            <Link to={`/${props.user.userName}`} onClick={hide}>
+            <Link to={`${url}`} onClick={hide}>
               Selected Work
             </Link>
 
@@ -268,7 +272,7 @@ export const Navbar = (props) => {
                               <Link
                                 id={collection.works[0]?.imgId}
                                 onMouseOver={(e) => previewHandler(e)}
-                                to={`/${props.user.userName}/work/${collection.title}`}
+                                to={`${url}/work/${collection.title}`}
                               >
                                 {collection.title}
                               </Link>
@@ -281,7 +285,7 @@ export const Navbar = (props) => {
                               <Link
                                 id={collection.works[0]?.imgId}
                                 onMouseOver={(e) => previewHandler(e)}
-                                to={`/${props.user.userName}/work/${collection.title}`}
+                                to={`${url}/work/${collection.title}`}
                               >
                                 {collection.title}
                               </Link>
@@ -314,7 +318,7 @@ export const Navbar = (props) => {
                               <Link
                                 onMouseOver={(e) => previewHandler(e)}
                                 id={collection.works[0]?.imgId}
-                                to={`/${props.user.userName}/work/${collection.title}`}
+                                to={`${url}/work/${collection.title}`}
                               >
                                 {collection.title}
                               </Link>
@@ -327,7 +331,7 @@ export const Navbar = (props) => {
                               <Link
                                 onMouseOver={(e) => previewHandler(e)}
                                 id={collection.works[0]?.imgId}
-                                to={`/${props.user.userName}/work/${collection.title}`}
+                                to={`${url}/work/${collection.title}`}
                               >
                                 {collection.title}
                               </Link>
@@ -339,13 +343,13 @@ export const Navbar = (props) => {
               </div>
             </div>
           </div>
-          <Link to={`/${props.user.userName}/about`} className="subHeader">
+          <Link to={`${url}/about`} className="subHeader">
             <div>About</div>
           </Link>
-          <Link to={`/${props.user.userName}/cv`} className="subHeader">
+          <Link to={`${url}/cv`} className="subHeader">
             <div>CV</div>
           </Link>
-          <Link to={`/${props.user.userName}/contact`} className="subHeader">
+          <Link to={`${url}/contact`} className="subHeader">
             <div>Contact</div>
           </Link>
         </div>

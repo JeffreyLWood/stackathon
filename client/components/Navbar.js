@@ -20,6 +20,7 @@ export const Navbar = (props) => {
   };
 
   let picture = user && user.picture;
+  let url = `/${user.username}`;
   return (
     <div className="navbar flex justify-between py-4 px-2 font-light bg-white">
       {/* <div className="flex flex-row justify-between space-x-5"> */}
@@ -45,7 +46,7 @@ export const Navbar = (props) => {
             </div>
           </div>
           <div className="space-x-2">
-            <Link to={`/${user.username}`} target="_blank">
+            <Link to={`${url}`} target="_blank">
               <button type="button" className="pillDark">
                 View Site
               </button>

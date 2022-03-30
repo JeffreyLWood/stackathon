@@ -122,6 +122,23 @@ router.post("/:userId/contact", async (req, res, next) => {
   }
 });
 
+router.get("/custom/:customDomain", async (req, res) => {
+  try {
+    let user = await User.findOne({
+      where: {
+        domain: req.params.customDomain,
+      },
+      include: { all: true, nested: true },
+    });
+    if (!user) {
+      res.status(404).send();
+    }
+    res.status(200).send(user);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 // Get User Data
 router.get("/:username", async (req, res, next) => {
   try {
@@ -129,23 +146,28 @@ router.get("/:username", async (req, res, next) => {
       where: { username: req.params.username },
       include: { all: true, nested: true },
     });
-
-    let userData = {
-      id: allData.dataValues.id,
-      userName: allData.dataValues.username,
-      siteTitle: allData.dataValues.siteTitle,
-      email: allData.dataValues.email,
-      firstName: allData.dataValues.firstName,
-      lastName: allData.dataValues.lastName,
-      about: allData.dataValues.about,
-      contact: allData.dataValues.contact,
-      cv: allData.dataValues.cv,
-      collections: allData.dataValues.collections,
-    };
-
-    res.status(200).send(userData);
+    if (!allData) {
+      res.status(404).send("User not found");
+    } else if (allData) {
+      let userData = {
+        id: allData.dataValues.id,
+        userName: allData.dataValues.username,
+        siteTitle: allData.dataValues.siteTitle,
+        email: allData.dataValues.email,
+        firstName: allData.dataValues.firstName,
+        lastName: allData.dataValues.lastName,
+        about: allData.dataValues.about,
+        contact: allData.dataValues.contact,
+        cv: allData.dataValues.cv,
+        collections: allData.dataValues.collections,
+        domain: allData.dataValues.domain,
+        cname: allData.dataValues.cname,
+        template: allData.dataValues.template,
+      };
+      res.status(200).send(userData);
+    }
   } catch (err) {
-    next(err);
+    console.log("==>", err);
   }
 });
 

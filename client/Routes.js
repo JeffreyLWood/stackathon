@@ -8,7 +8,7 @@ import CreateAbout from "./components/Create/CreateAbout";
 import CreateWork from "./components/Create/CreateWork";
 import CreateContact from "./components/Create/CreateContact";
 import CreateCV from "./components/Create/CreateCV";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Work } from "./components/Site/Work";
 import { About } from "./components/Site/About";
@@ -22,7 +22,7 @@ import CreateSettings from "./components/Create/CreateSettings";
  */
 const Routes = () => {
   let user = useSelector((state) => state.auth);
-
+  let profile = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,9 +33,39 @@ const Routes = () => {
     }
   }, []);
 
+  let customDomain = window.location.hostname;
+
+  let [custom, setCustom] = useState(false);
+  useEffect(() => {
+    async function load() {
+      const res =
+        customDomain !== "selected-work" && customDomain !== "localhost"
+          ? await fetch(`/api/users/custom/${customDomain}`, {
+              method: "GET",
+            })
+          : null;
+      profile = res !== null && (await res.json());
+      profile.username ? setCustom(true) : setCustom(false);
+      profile.username ? dispatch(fetchUserData(profile.username)) : null;
+      !profile.username
+        ? dispatch(fetchUserData(window.location.pathname.split("/")[3]))
+        : null;
+    }
+    load();
+  }, []);
+
   return (
     <div>
-      {user.username ? (
+      {custom ? (
+        <Switch>
+          <Route exact path="/" component={Work} />
+          <Route exact path="/work" component={Work} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/cv" component={CV} />
+          <Route exact path="/contact" component={Contact} />
+          <Route exact path="/work/:collection" component={Work} />
+        </Switch>
+      ) : user.username ? (
         <Switch>
           <Route exact path="/create/in/:username" component={CreateWork} />
           <Route exact path="/" component={CreateWork} />

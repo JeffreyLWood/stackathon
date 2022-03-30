@@ -4,7 +4,11 @@ import { updateTitleData } from "../../store/create";
 import { useEffect, useState } from "react";
 import { fetchUserData, changeUsername } from "../../store/user";
 
-import { destroyAccount, useCustomDomain } from "../../store/auth";
+import {
+  destroyAccount,
+  useCustomDomain,
+  deleteCustomDomain,
+} from "../../store/auth";
 import { Navbar } from "../Navbar";
 import { logout } from "../../store";
 export default function CreateSettings(props) {
@@ -13,7 +17,7 @@ export default function CreateSettings(props) {
   let dispatch = useDispatch();
 
   useEffect(() => {
-    user = dispatch(fetchUserData(props.match.params.username));
+    // user = dispatch(fetchUserData(props.match.params.username));
   }, []);
 
   let [title, setTitle] = useState("");
@@ -47,7 +51,7 @@ export default function CreateSettings(props) {
 
   let updateUsername = (evt) => {
     evt.preventDefault();
-    if (/[^a-zA-Z]/.test(username)) {
+    if (/[^a-z0-9]/.test(username)) {
       setInvalid(true);
       return;
     }
@@ -64,11 +68,10 @@ export default function CreateSettings(props) {
     : "Enter your custom domain eg. yourname.com";
 
   let [cname, setCname] = useState("");
-  let [disabled, setDisabled] = useState("false");
+
   useEffect(() => {
     user.domain ? setCustomDomain(user.domain) : null;
-    user.cname ? setCname(user.cname) : null;
-    user.cname ? setDisabled("true") : setDisabled("false");
+    user.cname ? setCustomDomain(user.cname) : null;
   }, []);
 
   const customDomainChangeHandler = (e) => {
@@ -81,12 +84,17 @@ export default function CreateSettings(props) {
 
   const submitCustomDomain = async () => {
     try {
-      dispatch(useCustomDomain(user, customDomain));
+      user.domain
+        ? dispatch(deleteCustomDomain(user))
+        : dispatch(useCustomDomain(user, customDomain));
     } catch (error) {
       console.log(error);
     }
   };
-
+  let submitDomainButton = user.domain
+    ? "pill text-white border-red-600 bg-red-600 my-4"
+    : "pill my-4";
+  let submitDomainButtonText = user.domain ? "Delete Record" : "Add Domain";
   return (
     <>
       <Navbar user={user} />
@@ -141,56 +149,64 @@ export default function CreateSettings(props) {
           </div>
         </form>
 
-        <form
-          name="customdomains"
-          onSubmit={submitCustomDomain}
-          className="w-3/6 bg-neutral-50 p-5 flex flex-col space-y-4"
-        >
-          <label htmlFor="customdomains" className="text-2xl" />
-          Custom Domains
+        <section className="w-full bg-neutral-50 p-5 flex flex-col h-content">
           <span>
-            <label htmlFor="domain">{message}</label>
+            <label htmlFor="customdomains" className="mb-2 text-xl">
+              Custom Domains
+            </label>
           </span>
-          <span>
-            <input
-              type="text"
-              className="w-full"
-              value={customDomain}
-              onChange={(e) => customDomainChangeHandler(e)}
-              required="true"
-            ></input>
-          </span>
-          <button type="submit" disabled={disabled}>
-            Submit
-          </button>
-          <div className="space-y-4">
-            <p> Using Custom Domains:</p>
-            <ul className="mb-4">
-              <li>
-                1. Go to your web hosting service settings (eg. Bluehost,
-                Godaddy)
-              </li>
-              <li>2. Go to DNS settings</li>
-              <li>
-                3. Enter or edit your CNAME record associated with your domain
-                name
-              </li>
-              <li> 4. Copy and paste your Cname record from above.</li>
-              <li> 5. Enter a host record of "www" (no quotes).</li>
-              <li>
-                {" "}
-                6. Select TTL or Time To Live if it is displayed of your desired
-                time until the domain name points to your Selected-Work site.
-              </li>
-              <li> 7. Save </li>
-            </ul>
-            <p>
-              Changing a Cname record can take between a few minutes and a few
-              hours. Check back again by entering your domain url in your
-              browser and refresh the page.
-            </p>
-          </div>
-        </form>
+          <form
+            name="customdomains"
+            onSubmit={submitCustomDomain}
+            className="flex flex-row space-x-6 "
+          >
+            <span>
+              <label htmlFor="domain" className="my-4">
+                {message}
+              </label>
+
+              <input
+                type="text"
+                className="w-full my-4"
+                value={customDomain}
+                onChange={(e) => customDomainChangeHandler(e)}
+                required={true}
+              ></input>
+
+              <button type="submit" className={submitDomainButton}>
+                {submitDomainButtonText}
+              </button>
+            </span>
+            <div className="space-y-4">
+              <p> Using Custom Domains:</p>
+              <ul className="mb-4">
+                <li>
+                  1. Go to your web hosting service settings (eg. Bluehost,
+                  Godaddy)
+                </li>
+                <li>2. Go to DNS settings</li>
+                <li>
+                  3. Enter or edit your CNAME record associated with your domain
+                  name
+                </li>
+                <li> 4. Copy and paste your Cname record from above.</li>
+                <li> 5. Enter a host record of "www" (no quotes).</li>
+                <li>
+                  {" "}
+                  6. Select TTL or Time To Live if it is displayed of your
+                  desired time until the domain name points to your
+                  Selected-Work site.
+                </li>
+                <li> 7. Save </li>
+              </ul>
+              <p>
+                Changing a Cname record can take between a few minutes and a few
+                hours. Check back again by entering your domain url in your
+                browser and refresh the page.
+              </p>
+            </div>
+          </form>
+        </section>
         <div>
           <form onSubmit={deleteHandler}>
             <label htmlFor="delete">

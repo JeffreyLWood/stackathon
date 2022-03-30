@@ -30,6 +30,22 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.put("/", async (req, res) => {
+  try {
+    const heroku = new Heroku({ token: process.env.HEROKU_API_TOKEN });
+    await heroku.delete(`/apps/slctdwork/domains/${req.body.domain}`);
+    await User.update(
+      { cname: null, domain: null },
+      { where: { id: req.body.id } }
+    );
+    let user = await User.findByPk(req.body.user.id);
+
+    res.status(200).send(user);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 // POST requests
 // heroku.post("/apps").then((app) => {});
 

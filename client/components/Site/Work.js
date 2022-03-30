@@ -13,8 +13,20 @@ export const Work = (props) => {
 
   let [collection, setCollection] = useState({});
 
+  let customDomain = window.location.hostname;
+
   useEffect(() => {
-    user = dispatch(fetchUserData(props?.match.params.username));
+    async function load() {
+      await fetch(`/api/users/custom/${customDomain}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }).then(async (res) => setUser(await res.json()));
+    }
+    try {
+      // load();
+    } catch (error) {
+      // setUser(dispatch(fetchUserData(props?.match.params.username)));
+    }
   }, []);
 
   useEffect(() => {
@@ -41,7 +53,7 @@ export const Work = (props) => {
       user.collections && !paramsCollectionTitle && setCollection(visible[0]);
     }
   }, [user]);
-
+  console.log("work", user.collections, collection);
   return (
     <>
       <Navbar
