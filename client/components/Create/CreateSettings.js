@@ -98,56 +98,66 @@ export default function CreateSettings(props) {
   return (
     <>
       <Navbar user={user} />
-      <div className="h-full mt-10 p-10 space-y-8">
-        <form className="flex flex-col space-y-4" onSubmit={submitHandler}>
-          <label htmlFor="name">
-            Your full name as it will appear on your site
-          </label>
-          <div>
-            <input
-              className="p-1 border-2 w-2/6"
-              name="title"
-              type="text"
-              onChange={changeHandler}
-              value={title}
-            />
-          </div>
-          <div>
-            <button type="submit" className="pill my-2">
-              Submit
-            </button>
-          </div>
-        </form>
-        <form
-          className="flex flex-col w-full sm:w-3/6  space-y-4"
-          onSubmit={updateUsername}
-        >
-          <label htmlFor="username" />
-          Warning: Change your username only when necessary. You will be logged
-          out and will need to log in again with your new username. This will
-          change your url so remember to update your records to
-          www.selected-work.com/newusername
-          <div className="flex flex-row items-baseline">
-            <label htmlFor="username">www.selected-work.com/</label>
-            <div>
-              <input
-                className="p-1 border-2 w-full"
-                name="username"
-                type="text"
-                onChange={changeHandlerUsername}
-                value={username}
-              />
+      <div className="h-full  mt-10 p-10 space-y-8">
+        <section className="w-full h-content py-10 flex">
+          <form
+            className="w-full flex flex-row space-y-4 py-6"
+            onSubmit={submitHandler}
+          >
+            <div className="space-y-4">
+              <label htmlFor="name" className="my-4">
+                Your full name as it will appear on your site
+              </label>
+              <div>
+                <input
+                  className="p-1 border-2"
+                  name="name"
+                  type="text"
+                  onChange={changeHandler}
+                  value={title}
+                />
+              </div>
             </div>
-          </div>
-          <div>
-            <button type="submit" className="pill my-2">
-              Submit
-            </button>
-            {invalid
-              ? "Invalid username. Only a-z letters are allowed, no spaces or special characters"
-              : null}
-          </div>
-        </form>
+            <div>
+              <button type="submit" className="pill my-4">
+                Submit
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <section className="w-full h-content py-10 flex">
+          {" "}
+          <form
+            className="flex flex-col w-full sm:w-3/6  space-y-4"
+            onSubmit={updateUsername}
+          >
+            <label htmlFor="username" />
+            Warning: Change your url path only when necessary. You will be
+            logged out and need to log in again. Remember to update your records
+            to www.selected-work.com/newusername
+            <div className="flex flex-row items-baseline">
+              <label htmlFor="username">www.selected-work.com/</label>
+              <div>
+                <input
+                  className="p-1 border-2 w-full"
+                  name="username"
+                  type="text"
+                  onChange={changeHandlerUsername}
+                  value={username}
+                />
+              </div>
+            </div>
+            <div>
+              <button type="submit" className="pill my-2">
+                Submit
+              </button>
+              {invalid
+                ? "Invalid username. Only a-z letters are allowed, no spaces or special characters"
+                : null}
+            </div>
+          </form>
+        </section>
 
         <section className="w-full bg-neutral-50 p-5 flex flex-col h-content">
           <span>
@@ -207,19 +217,22 @@ export default function CreateSettings(props) {
             </div>
           </form>
         </section>
-        <div>
-          <form onSubmit={deleteHandler}>
-            <label htmlFor="delete">
-              Delete Your Account. This cannot be undone.
-            </label>
-            <button
-              type="submit"
-              className="pill hover:bg-red-500 hover:border-red-500"
-            >
-              Delete Account
-            </button>
-          </form>
-        </div>
+
+        <section>
+          <div>
+            <form onSubmit={deleteHandler}>
+              <label htmlFor="delete">
+                Delete Your Account. This cannot be undone.
+              </label>
+              <button
+                type="submit"
+                className="pill hover:bg-red-500 hover:border-red-500"
+              >
+                Delete Account
+              </button>
+            </form>
+          </div>
+        </section>
       </div>
     </>
   );
