@@ -11,6 +11,7 @@ html {
 
 :root {
   --primary: rgb(63 63 70);
+  --red: rgb(239 68 68);
 }
 
 * {
@@ -291,7 +292,6 @@ html.has-scroll-dragging {
   padding: 4rem;
   display: flex;
   align-items: center;
-  background-color: red;
 }
 .modal-footer button {
   border: none;
@@ -320,7 +320,6 @@ html.has-scroll-dragging {
 }
 
 .pill {
-  font-size: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 0.1rem;
@@ -329,10 +328,18 @@ html.has-scroll-dragging {
   border-radius: 9999px;
   border-color: var(--primary);
 }
-.red {
-  background-color: red;
-  border-color: red;
+.pillRed {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  border-width: 1px;
+  border-radius: 9999px;
+  color: white;
+  background-color: var(--red);
+  border-color: var(--red);
 }
+
 .pill:hover {
   border-color: var(--primary);
   background-color: var(--primary);
@@ -340,7 +347,6 @@ html.has-scroll-dragging {
 }
 
 .pillDark {
-  font-size: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 0.1rem;

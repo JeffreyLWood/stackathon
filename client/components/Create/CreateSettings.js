@@ -91,9 +91,7 @@ export default function CreateSettings(props) {
       console.log(error);
     }
   };
-  let submitDomainButton = user.domain
-    ? "pill text-white border-red-600 bg-red-600 my-4"
-    : "pill my-4";
+  let submitDomainButton = user.domain ? "pillRed my-4" : "pill my-4";
   let submitDomainButtonText = user.domain ? "Delete Record" : "Add Domain";
   return (
     <>
@@ -238,10 +236,7 @@ export default function CreateSettings(props) {
               Delete Your Account. This cannot be undone.
             </label>
             <div>
-              <button
-                type="submit"
-                className="pill hover:bg-red-500 hover:border-red-500"
-              >
+              <button type="submit" className="pillRed">
                 Delete Account
               </button>
             </div>

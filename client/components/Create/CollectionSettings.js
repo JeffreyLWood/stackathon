@@ -105,7 +105,7 @@ export default function CollectionSettings(props) {
         <button
           type="button"
           onClick={deleteCollection}
-          className="pill"
+          className="pillRed"
           id="primary"
           value="Work"
         >
