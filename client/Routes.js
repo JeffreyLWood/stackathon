@@ -39,7 +39,7 @@ const Routes = () => {
   useEffect(() => {
     async function load() {
       const res =
-        customDomain !== "selected-work" && customDomain !== "localhost"
+        customDomain !== "www.selected-work.com" && customDomain !== "localhost"
           ? await fetch(`/api/users/custom/${customDomain}`, {
               method: "GET",
             })
