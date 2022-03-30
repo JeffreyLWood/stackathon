@@ -85,7 +85,7 @@ export default function AuthForm(props) {
           </span>
           <span>
             <GoogleLogin
-              className="mx-auto my-4 border-2"
+              className="mx-auto my-4 border-2 z-0"
               clientId={process.env.CLIENT_ID}
               buttonText="Continue with Google"
               onSuccess={handleLogin}

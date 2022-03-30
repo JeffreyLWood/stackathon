@@ -11,7 +11,9 @@ html {
 
 :root {
   --primary: rgb(63 63 70);
+  --stone: rgb(28 25 23);
   --red: rgb(239 68 68);
+  --green: rgb(22 163 74);
 }
 
 * {
@@ -328,6 +330,7 @@ html.has-scroll-dragging {
   border-radius: 9999px;
   border-color: var(--primary);
 }
+
 .pillRed {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -339,10 +342,14 @@ html.has-scroll-dragging {
   background-color: var(--red);
   border-color: var(--red);
 }
-
+.pillRed:hover {
+  color: var(--red);
+  background-color: white;
+  border-color: var(--red);
+}
 .pill:hover {
   border-color: var(--primary);
-  background-color: var(--primary);
+  background-color: var(--stone);
   color: white;
 }
 
@@ -353,9 +360,32 @@ html.has-scroll-dragging {
   padding-bottom: 0.1rem;
   border-radius: 9999px;
   border-width: 1px;
-  background-color: var(--primary);
-  border-color: var(--primary);
+  background-color: var(--stone);
+  border-color: var(--stone);
   color: white;
+}
+
+.pillGreen {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  border-radius: 9999px;
+  border-width: 1px;
+  background-color: var(--green);
+  border-color: var(--green);
+  color: white;
+}
+.pillGreen:hover {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  border-radius: 9999px;
+  border-width: 1px;
+  background-color: white;
+  border-color: var(--green);
+  color: var(--green);
 }
 
 .contact input,
@@ -431,6 +461,21 @@ textarea {
   min-height: 50vh;
   display: flex;
   padding: 5rem;
+}
+
+.homeFooter {
+  min-height: 60vh;
+  display: flex;
+  padding: 5rem;
+  color: white;
+  background-color: rgb(28 25 23);
+}
+.homeFooter li {
+  color: white;
+}
+.homeFooter a:hover {
+  text-decoration: underline;
+  color: white;
 }
 
 .footer ul {
