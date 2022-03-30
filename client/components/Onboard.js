@@ -8,7 +8,7 @@ export default function Onboard() {
         <ul className="text-lg sm:space-y-2">
           <li>Designed Specifically for Artists</li>
           <li>No Advertising</li>
-          {/* <li>Custom Domains</li> */}
+          <li>Custom Domains</li>
           <li>Free to Use</li>
           <li>
             <a href="http://www.selected-work.com/janeisidor" target="_blank">

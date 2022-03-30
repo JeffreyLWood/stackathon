@@ -20,7 +20,10 @@ export const Navbar = (props) => {
   };
 
   let picture = user && user.picture;
-  let url = `/${user.username}`;
+  let url = user.domain
+    ? `https://${user.domain}`
+    : `https://selected-work.com/${user.username}`;
+  console.log(user);
   return (
     <div className="navbar flex justify-between py-4 px-2 font-light bg-white">
       {/* <div className="flex flex-row justify-between space-x-5"> */}
@@ -44,11 +47,11 @@ export const Navbar = (props) => {
             </div>
           </div>
           <div className="space-x-2">
-            <Link to={`${url}`} target="_blank">
+            <a href={url} target="_blank">
               <button type="button" className="pillDark">
                 View Site
               </button>
-            </Link>
+            </a>
             <a href="#" className="pill" onClick={handleClick}>
               Logout
             </a>
