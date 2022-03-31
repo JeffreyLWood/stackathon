@@ -821,8 +821,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 2rem;
 }
 
+.h-96 {
+  height: 24rem;
+}
+
 .max-h-full {
   max-height: 100%;
+}
+
+.max-h-96 {
+  max-height: 24rem;
 }
 
 .min-h-screen {
@@ -907,6 +915,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .flex-col {
   flex-direction: column;
+}
+
+.flex-col-reverse {
+  flex-direction: column-reverse;
 }
 
 .flex-wrap {
@@ -1083,6 +1095,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(22 78 99 / var(--tw-bg-opacity));
 }
 
+.bg-red-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 226 226 / var(--tw-bg-opacity));
+}
+
+.bg-green-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 252 231 / var(--tw-bg-opacity));
+}
+
 .object-contain {
   -o-object-fit: contain;
      object-fit: contain;
@@ -1106,6 +1128,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .p-4 {
   padding: 1rem;
+}
+
+.p-20 {
+  padding: 5rem;
 }
 
 .py-10 {
@@ -1178,6 +1204,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-right: 1rem;
 }
 
+.pb-6 {
+  padding-bottom: 1.5rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -1219,6 +1249,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 
 .font-semibold {
@@ -2205,6 +2240,10 @@ textarea {
 }
 
 @media (min-width: 640px) {
+  .sm\:absolute {
+    position: absolute;
+  }
+
   .sm\:m-0 {
     margin: 0px;
   }
@@ -2231,6 +2270,21 @@ textarea {
   .sm\:mx-5 {
     margin-left: 1.25rem;
     margin-right: 1.25rem;
+  }
+
+  .sm\:my-10 {
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .sm\:mx-4 {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .sm\:my-20 {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
   }
 
   .sm\:mt-0 {
@@ -2297,6 +2351,26 @@ textarea {
     width: 50%;
   }
 
+  .sm\:w-4\/12 {
+    width: 33.333333%;
+  }
+
+  .sm\:w-8\/12 {
+    width: 66.666667%;
+  }
+
+  .sm\:w-5\/12 {
+    width: 41.666667%;
+  }
+
+  .sm\:w-7\/12 {
+    width: 58.333333%;
+  }
+
+  .sm\:w-6\/12 {
+    width: 50%;
+  }
+
   .sm\:flex-row {
     flex-direction: row;
   }
@@ -2305,8 +2379,16 @@ textarea {
     align-items: center;
   }
 
+  .sm\:items-baseline {
+    align-items: baseline;
+  }
+
   .sm\:justify-start {
     justify-content: flex-start;
+  }
+
+  .sm\:justify-center {
+    justify-content: center;
   }
 
   .sm\:space-y-4 > :not([hidden]) ~ :not([hidden]) {
@@ -2346,6 +2428,10 @@ textarea {
     padding: 1.25rem;
   }
 
+  .sm\:p-10 {
+    padding: 2.5rem;
+  }
+
   .sm\:px-10 {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
@@ -2374,6 +2460,10 @@ textarea {
 
   .sm\:pl-10 {
     padding-left: 2.5rem;
+  }
+
+  .sm\:text-left {
+    text-align: left;
   }
 
   .sm\:text-lg {
@@ -2470,6 +2560,10 @@ textarea {
 
   .md\:flex-row {
     flex-direction: row;
+  }
+
+  .md\:items-end {
+    align-items: flex-end;
   }
 
   .md\:justify-start {

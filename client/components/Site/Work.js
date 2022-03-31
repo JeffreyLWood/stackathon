@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Artwork from "./Artwork";
 import Footer from "./Footer";
 import { fetchCollection } from "../../store/user";
+import Description from "./Description";
 export const Work = (props) => {
   let user = useSelector((state) => state.user);
 
@@ -53,7 +54,13 @@ export const Work = (props) => {
       user.collections && !paramsCollectionTitle && setCollection(visible[0]);
     }
   }, [user]);
-  console.log("work", user.collections, collection);
+
+  let works =
+    collection?.works &&
+    collection?.works.sort(function (a, b) {
+      return a.order - b.order;
+    });
+
   return (
     <>
       <Navbar
@@ -61,14 +68,26 @@ export const Work = (props) => {
         collection={collection}
         setCollection={setCollection}
       />
-      <div className="min-h-screen mt-8 flex justify-center sm:mx-5">
-        <div className="flex w-full h-full overflow-visible flex-wrap">
+      <div className="min-h-screen items-start mt-8 flex flex-col sm:mx-5">
+        {collection?.description ? (
+          <Description
+            title={collection?.title}
+            description={collection?.description}
+            imgId={works[0]?.imgId}
+            workTitle={works[0]?.title}
+            workYear={works[0]?.year}
+            workHeight={works[0]?.height}
+            workWidth={works[0]?.width}
+            workDepth={works[0]?.depth}
+            data={works[0]}
+          />
+        ) : null}
+        <div className="flex  w-full h-full overflow-visible flex-wrap">
           {collection?.works
-            ? collection.works
-                .sort(function (a, b) {
-                  return a.order - b.order;
-                })
-                .filter((collection) => !collection.hidden) //?
+            ? works
+                .filter((work) =>
+                  collection?.description ? work.imgId !== works[0].imgId : work
+                )
                 .map((work, index) => {
                   return <Artwork key={index} data={work} user={user} />;
                 })
