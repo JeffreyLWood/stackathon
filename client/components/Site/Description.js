@@ -30,12 +30,19 @@ export default function Description(props) {
     setShow(false);
   };
 
+  const text = props.description.split("\n").map((str, idx) => (
+    <p key={idx}>
+      {str}
+      <br />
+    </p>
+  ));
+
   return (
     <section className="w-screen h-content sm:my-20 sm:h-96 flex flex-col-reverse items-start sm:flex-row">
       <div className="w-full h-4/6 sm:h-full sm:w-5/12 sm:pr-10 flex flex-col px-2 sm:p-10 space-y-4">
         <span className="text-3xl tracking-widest ">{props.title}</span>
         <span>
-          <p className="pb-6 sm:pb-0">{props.description}</p>
+          <p className="pb-6 sm:pb-0 text-sm">{text}</p>
         </span>
       </div>
       <div className="w-full h-auto sm:h-full sm:w-7/12 flex flex-col md:flex-row sm:items-baseline md:items-end sm:justify-center">
