@@ -2343,6 +2343,10 @@ textarea {
     width: 58.333333%;
   }
 
+  .sm\:max-w-lg {
+    max-width: 32rem;
+  }
+
   .sm\:flex-row {
     flex-direction: row;
   }
@@ -2408,6 +2412,11 @@ textarea {
   .sm\:py-10 {
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
+  }
+
+  .sm\:px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
   .sm\:pt-0 {
