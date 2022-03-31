@@ -3,8 +3,8 @@ import React from "react";
 export default function Onboard() {
   return (
     <section className="container mt-10 flex-col md:flex-row">
-      <div className="h-2/6 flex space-y-4 flex-wrap sm:justify-center sm:w-3/6 sm:h-full sm:flex-col">
-        <span className="text-4xl pb-4">Putting Artists First</span>
+      <div className="h-2/6 w-screen z-20 p-4 flex space-y-4 md:justify-center md:w-3/6 md:h-full flex-col">
+        <span className="text-4xl  ">Putting Artists First</span>
         <ul className="text-lg sm:space-y-2">
           <li>Designed Specifically for Artists</li>
           <li>No Advertising</li>
@@ -27,17 +27,17 @@ export default function Onboard() {
           </li>
         </ul>
       </div>
-      <div className="h-3/6 flex flex-row justify-between space-x-4 items-start sm:items-center sm:h-full sm:w-3/6">
-        <span className="h-full flex items-end sm:items-center">
+      <div className="h-3/6 flex flex-row justify-between space-x-4 items-center md:h-full sm:w-3/6">
+        <span className="flex  sm:items-center">
           <img
             src="mobile.png"
-            className="phoneimg z-10 h-3/6 sm:absolute sm:h-2/6"
+            className="phoneimg z-10 h-5/6 sm:absolute sm:h-2/6"
           />
         </span>
-        <span className="h-full flex items-end sm:items-center">
+        <span className=" flex  sm:items-center">
           <img
             src="desktop.png"
-            className="desktopimg h-3/6 sm:absolute sm:h-3/6 z-0"
+            className="desktopimg h-5/6 sm:absolute sm:h-3/6 z-0"
           />
         </span>
       </div>

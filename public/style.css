@@ -2104,6 +2104,18 @@ textarea {
   .mobileArtDescription {
     display: block;
   }
+
+  .phoneimg {
+    right: auto;
+    max-height: 20%;
+    position: relative;
+  }
+
+  .desktopimg {
+    right: auto;
+    max-height: 20%;
+    position: relative;
+  }
 }
 
 @media (max-width: 768px) {
@@ -2118,16 +2130,6 @@ textarea {
 
   .nav {
     display: none;
-  }
-
-  .phoneimg {
-    right: auto;
-    position: relative;
-  }
-
-  .desktopimg {
-    right: auto;
-    position: relative;
   }
 
   .container {
@@ -2203,10 +2205,6 @@ textarea {
 }
 
 @media (min-width: 640px) {
-  .sm\:absolute {
-    position: absolute;
-  }
-
   .sm\:m-0 {
     margin: 0px;
   }
@@ -2271,16 +2269,16 @@ textarea {
     height: 100%;
   }
 
+  .sm\:h-96 {
+    height: 24rem;
+  }
+
   .sm\:h-2\/6 {
     height: 33.333333%;
   }
 
   .sm\:h-3\/6 {
     height: 50%;
-  }
-
-  .sm\:h-96 {
-    height: 24rem;
   }
 
   .sm\:w-2\/6 {
@@ -2303,20 +2301,12 @@ textarea {
     flex-direction: row;
   }
 
-  .sm\:flex-col {
-    flex-direction: column;
-  }
-
   .sm\:items-center {
     align-items: center;
   }
 
   .sm\:justify-start {
     justify-content: flex-start;
-  }
-
-  .sm\:justify-center {
-    justify-content: center;
   }
 
   .sm\:space-y-4 > :not([hidden]) ~ :not([hidden]) {
@@ -2403,6 +2393,10 @@ textarea {
 }
 
 @media (min-width: 768px) {
+  .md\:absolute {
+    position: absolute;
+  }
+
   .md\:m-4 {
     margin: 1rem;
   }
@@ -2442,6 +2436,18 @@ textarea {
     height: 9rem;
   }
 
+  .md\:h-full {
+    height: 100%;
+  }
+
+  .md\:h-2\/6 {
+    height: 33.333333%;
+  }
+
+  .md\:h-3\/6 {
+    height: 50%;
+  }
+
   .md\:h-64 {
     height: 16rem;
   }
@@ -2456,6 +2462,10 @@ textarea {
 
   .md\:w-4\/6 {
     width: 66.666667%;
+  }
+
+  .md\:w-3\/6 {
+    width: 50%;
   }
 
   .md\:flex-row {
