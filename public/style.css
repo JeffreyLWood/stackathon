@@ -821,10 +821,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 2rem;
 }
 
-.h-96 {
-  height: 24rem;
-}
-
 .max-h-full {
   max-height: 100%;
 }
@@ -1085,16 +1081,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
-.bg-green-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(220 252 231 / var(--tw-bg-opacity));
-}
-
-.bg-red-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 226 226 / var(--tw-bg-opacity));
-}
-
 .bg-stone-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(245 245 244 / var(--tw-bg-opacity));
@@ -1128,10 +1114,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .p-4 {
   padding: 1rem;
-}
-
-.p-20 {
-  padding: 5rem;
 }
 
 .py-10 {
@@ -1246,14 +1228,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 2.5rem;
 }
 
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
-
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 .font-semibold {
@@ -1290,6 +1272,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .leading-8 {
   line-height: 2rem;
+}
+
+.leading-6 {
+  line-height: 1.5rem;
 }
 
 .tracking-widest {
@@ -2272,21 +2258,6 @@ textarea {
     margin-right: 1.25rem;
   }
 
-  .sm\:my-10 {
-    margin-top: 2.5rem;
-    margin-bottom: 2.5rem;
-  }
-
-  .sm\:mx-4 {
-    margin-left: 1rem;
-    margin-right: 1rem;
-  }
-
-  .sm\:my-20 {
-    margin-top: 5rem;
-    margin-bottom: 5rem;
-  }
-
   .sm\:mt-0 {
     margin-top: 0px;
   }
@@ -2307,12 +2278,8 @@ textarea {
     margin-top: 5rem;
   }
 
-  .sm\:mb-40 {
-    margin-bottom: 10rem;
-  }
-
-  .sm\:mb-32 {
-    margin-bottom: 8rem;
+  .sm\:mb-28 {
+    margin-bottom: 7rem;
   }
 
   .sm\:block {
@@ -2363,24 +2330,12 @@ textarea {
     width: 50%;
   }
 
-  .sm\:w-4\/12 {
-    width: 33.333333%;
-  }
-
-  .sm\:w-8\/12 {
-    width: 66.666667%;
-  }
-
   .sm\:w-5\/12 {
     width: 41.666667%;
   }
 
   .sm\:w-7\/12 {
     width: 58.333333%;
-  }
-
-  .sm\:w-6\/12 {
-    width: 50%;
   }
 
   .sm\:flex-row {
@@ -2438,10 +2393,6 @@ textarea {
 
   .sm\:p-5 {
     padding: 1.25rem;
-  }
-
-  .sm\:p-10 {
-    padding: 2.5rem;
   }
 
   .sm\:px-10 {

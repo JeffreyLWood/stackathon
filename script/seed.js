@@ -18,7 +18,7 @@ async function seed() {
     const users = await Promise.all([
       User.create({
         username: "janeisidor",
-        email: "jisidor@janeisidor.com",
+        email: "jeffreywood.dev@gmail.com",
         password: "123",
         firstName: "Jane",
         lastName: "Isidor",
@@ -41,7 +41,7 @@ async function seed() {
         instagram: "https://instagram.com/",
         facebook: "https://facebook.com",
         linkedin: "https://linkedin.com",
-        email: "jisidor@janeisidor.com",
+        email: "jeffreywood.dev@gmail.com",
         twitter: "https://twitter.com",
       },
       { where: { userId: 1 } }
@@ -63,13 +63,168 @@ async function seed() {
     });
 
     await cv.setUser(users[0]);
+    let default0 = await Work.create({
+      title: "A Brewery in Brooklyn",
+      year: 2021,
+      medium: "photograph",
+      imgId: "stackathonImgs/IMG_7154_x8snqb",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: false,
+    });
+
+    let default1 = await Work.create({
+      title: "Capote's House",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/IMG_7112_gbspsm",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: false,
+    });
+    let default2 = await Work.create({
+      title: "Ice Cream",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/IMG_7139_ge5z2c",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: false,
+    });
+    let default3 = await Work.create({
+      title: "Brooklyn Heights",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/IMG_7144_zmq2mk",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: false,
+    });
+    let default4 = await Work.create({
+      title: "Sidewalk",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/IMG_7153_mkpd70",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: false,
+    });
+    let default5 = await Work.create({
+      title: "Corner",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/IMG_7150_wrnlwf",
+      height: 4,
+      width: 5,
+      status: "available",
+      hidden: false,
+    });
+
+    let default7 = await Work.create({
+      title: "Street 1",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/IMG_7170_wkrsd8",
+      height: 5,
+      width: 4,
+      status: "available",
+    });
+    let default8 = await Work.create({
+      title: "Street 2",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/IMG_7149_fci6ka",
+      height: 5,
+      width: 4,
+      status: "available",
+    });
+
+    // Put defaults into array for mapping
+    let array = [
+      default0,
+      default1,
+      default2,
+      default3,
+      default4,
+      default5,
+      default7,
+      default8,
+    ];
+    // Map over works array and setUser to the new user.
+    // Sets default images in the user's database and displays them on their new site.
+    let workCollection = await Collection.create({
+      title: "Rose",
+      hidden: false,
+    });
+    await Collection.create({
+      title: "Hidden",
+      hidden: true,
+    });
+    let default9 = await Work.create({
+      title: "Court Street",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/IMG_8549_z45itv",
+      height: 4,
+      width: 5,
+      status: "available",
+    });
+    let default10 = await Work.create({
+      title: "Brick",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/IMG_8622_otmj6a",
+      height: 4,
+      width: 5,
+      status: "available",
+    });
+    let default11 = await Work.create({
+      title: "Grand Central",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/IMG_8757_b93blk",
+      height: 4,
+      width: 5,
+      status: "available",
+    });
+    let default12 = await Work.create({
+      title: "Canal",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/IMG_8744_1_hnb1c5",
+      height: 4,
+      width: 5,
+      status: "available",
+    });
+    let blueWork = [default9, default10, default11, default12];
+
+    let Blue = await Collection.create({
+      title: "Blue",
+      hidden: false,
+    });
+
+    array.map(async (work) => {
+      return await work.setCollection(workCollection);
+    });
+
+    blueWork.map(async (work) => {
+      await work.setCollection(Blue);
+    });
+
+    await Blue.setUser(1);
+    await workCollection.setUser(1);
 
     console.log(`seeded ${users.length} users`);
     console.log(`seeded successfully`);
+
     return {
       users: {
         jane: users[0],
-        // murphy: users[1],
       },
     };
   } catch (error) {
