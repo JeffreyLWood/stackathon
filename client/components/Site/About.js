@@ -56,7 +56,7 @@ export const About = (props) => {
               <Image
                 cloudName="jeffreywood"
                 publicId={imgId}
-                className="flex object-contain max-w-lg aboutImage mx-auto"
+                className="flex object-contain max-w-lg aboutImage mx-4 sm:mx-auto"
               />
               <figcaption className="text-sm mt-2 italic text-neutral-400 text-center">
                 {caption}

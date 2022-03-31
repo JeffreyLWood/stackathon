@@ -57,13 +57,10 @@ export default function Description(props) {
         <span className="pt-5 text-right sm:text-left mx-4 tracking-widest">
           <ul className="text-xs space-y-2  uppercase text-neutral-400">
             <li className="text-neutral-400">{user.siteTitle}</li>
+            <li>{props.data.title} </li>
             <li>
-              {props.data.title}{" "}
-              {props.data.year ? (
-                <span className="text-neutral-400">{props.data.year}</span>
-              ) : null}
+              <span className="text-neutral-400">{props.data.year}</span>
             </li>
-
             <li>
               {props.data.height}
               {props.data.width ? ` x ${props.data.width}` : null}
