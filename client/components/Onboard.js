@@ -12,12 +12,15 @@ export default function Onboard() {
           <li>Free to Use</li>
           <li>
             <a href="http://www.selected-work.com/janeisidor" target="_blank">
-              <button type="button" className="pill mr-4 my-4 hover:text-white">
+              <button
+                type="button"
+                className="pill mr-4 my-4 hover:text-white z-20"
+              >
                 View Demo Site
               </button>
             </a>
             <a href="#auth">
-              <button type="button" className="pillDark my-4">
+              <button type="button" className="pillDark my-4 z-20">
                 Get Started
               </button>
             </a>
@@ -34,7 +37,7 @@ export default function Onboard() {
         <span className="h-full flex items-end sm:items-center">
           <img
             src="desktop.png"
-            className="desktopimg h-3/6 sm:absolute sm:h-3/6"
+            className="desktopimg h-3/6 sm:absolute sm:h-3/6 z-0"
           />
         </span>
       </div>
