@@ -38,7 +38,7 @@ export default function Description(props) {
   ));
 
   return (
-    <section className="w-screen h-content sm:my-20 sm:h-96 flex flex-col-reverse items-start sm:flex-row">
+    <section className="w-screen h-content sm:mt-20 sm:mb-32 sm:h-96 flex flex-col-reverse items-start sm:flex-row">
       <div className="w-full h-4/6 sm:h-full sm:w-5/12 sm:pr-10 flex flex-col px-2 sm:p-10 space-y-4">
         <span className="text-3xl tracking-widest ">{props.title}</span>
         <span>

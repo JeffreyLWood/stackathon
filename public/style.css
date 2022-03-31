@@ -2303,6 +2303,18 @@ textarea {
     margin-bottom: 2.5rem;
   }
 
+  .sm\:mt-20 {
+    margin-top: 5rem;
+  }
+
+  .sm\:mb-40 {
+    margin-bottom: 10rem;
+  }
+
+  .sm\:mb-32 {
+    margin-bottom: 8rem;
+  }
+
   .sm\:block {
     display: block;
   }
