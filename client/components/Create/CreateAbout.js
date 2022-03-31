@@ -172,7 +172,7 @@ const About = (props) => {
             </button>
             <button
               type="button"
-              className="pill m-4"
+              className="pillRed m-4"
               onClick={(e) => removeAboutImage(e)}
             >
               Clear Image

@@ -71,21 +71,20 @@ export default function AuthForm(props) {
       id="auth"
       className="h-screen w-screen auth flex flex-col items-center sm:flex-row"
     >
-      <div className="h-1/6 flex items-center w-screen sm:w-2/6 sm:h-screen sm:p-4">
-        <span className="mt-10 text-4xl mx-auto font-semibold">
+      <div className="h-2/6 flex items-center w-screen sm:w-2/6 sm:h-screen sm:p-4">
+        <span className="mt-20 sm:mt-0 text-5xl mx-auto font-semibold">
           Lets Get Started.
         </span>
       </div>
 
-      <div className="w-4/6  bg-neutral-50 space-y-4  h-full flex  items-center ">
-        <div className="w-3/6 mx-auto h-3/6 bg-white border-t-1 flex items-center flex-col justify-center rounded-md drop-shadow-lg border-l-2 border-r-2">
-          <span className="text-lg">
-            {" "}
+      <div className="w-screen h-4/6 space-y-4 flex sm:bg-neutral-50  sm:w-4/6 sm:h-screen   sm:items-center ">
+        <div className="z-0 p-5 w-5/6 sm:w-3/6 mx-auto h-3/6 bg-white  border-t-1 flex items-center flex-col justify-center rounded-md drop-shadow-lg border-l-2 border-r-2">
+          <span className="text-lg text-stone-900">
             Create a beautiful website for your work
           </span>
           <span>
             <GoogleLogin
-              className="mx-auto my-4 border-2 z-0"
+              className="mx-auto my-4 "
               clientId={process.env.CLIENT_ID}
               buttonText="Continue with Google"
               onSuccess={handleLogin}

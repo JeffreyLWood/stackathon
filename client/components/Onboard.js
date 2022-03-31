@@ -27,13 +27,13 @@ export default function Onboard() {
       <div className="h-3/6 flex flex-row justify-between space-x-4 items-start sm:items-center sm:h-full sm:w-3/6">
         <span className="h-full flex items-end sm:items-center">
           <img
-            src="phonescreenshot.png"
+            src="mobile.png"
             className="phoneimg z-10 h-3/6 sm:absolute sm:h-2/6"
           />
         </span>
         <span className="h-full flex items-end sm:items-center">
           <img
-            src="desktopscreenshot.png"
+            src="desktop.png"
             className="desktopimg h-3/6 sm:absolute sm:h-3/6"
           />
         </span>
