@@ -68,7 +68,7 @@ export const Work = (props) => {
         collection={collection}
         setCollection={setCollection}
       />
-      <div className="min-h-screen items-start mt-8 flex flex-col sm:mx-5">
+      <div className="min-h-screen w-screen items-start mt-8 flex flex-col sm:mx-5">
         {collection?.description ? (
           <Description
             title={collection?.title}
