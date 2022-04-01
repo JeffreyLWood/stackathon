@@ -49,8 +49,8 @@ export const About = (props) => {
   return (
     <>
       <Navbar user={user} />
-      <div className="font-light h-full my-10 md:h-90vh sm:mx-10 sm:my-20  flex flex-col items-start md:justify-center sm:py-10 md:flex-row md:justify-start">
-        <div className="w-full flex justify-center flex-col pb-4 sm:pb-0 sm:w-3/6 sm:h-full ">
+      <div className="font-light h-full flex flex-col items-start my-10 sm:mx-10 sm:my-20 md:flex-row md:justify-center">
+        <div className="w-full flex justify-center flex-col pb-4 sm:pb-0 sm:w-3/6 sm:h-full">
           <span className="w-full sm:h-96 flex justify-center">
             <figure>
               <Image
@@ -65,9 +65,9 @@ export const About = (props) => {
           </span>
         </div>
 
-        <div className="w-full h-full flex flex-col px-2 text-sm leading-8 sm:w-3/6 sm:pr-10">
+        <div className="w-full h-full flex flex-col px-2 text-sm leading-8 sm:w-3/6">
           {newHeader ? (
-            <span className="border-l-2 border-r-2 mb-6 mx-auto tracking-widest min-w-full h-full flex flex-col text-lg leading-8 sm:w-3/6 sm:pr-10">
+            <span className="border-l-2 border-r-2 mb-6 mx-auto tracking-widest w-4/6 sm:w-full px-4 h-full flex flex-col text-lg leading-8">
               {newHeader}
             </span>
           ) : null}
