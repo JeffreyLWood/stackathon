@@ -52,6 +52,12 @@ export default function Artwork(props) {
           <span className="mobileArtDescription text-neutral-500">
             <Dimensions data={props.data} />
           </span>
+          <span className="mobileArtDescription text-neutral-500">
+            {props.data.status}
+          </span>
+          <span className="mobileArtDescription text-neutral-500">
+            {props.data.price}
+          </span>
         </div>
       </div>
       <ArtworkModal

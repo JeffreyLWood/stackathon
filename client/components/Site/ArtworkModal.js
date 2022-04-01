@@ -41,6 +41,10 @@ export default function ArtworkModal(props) {
             <li className="text-sm text-neutral-500">
               <Dimensions data={props.data} />
             </li>
+            <li className="text-sm text-neutral-500 my-2">
+              {props.data.status}
+            </li>
+            <li className="text-sm text-neutral-500">{props.data.price}</li>
             <li className="md:py-10">
               {/* <button type="button" className="border-2 p-2 ">
                 Enquire
