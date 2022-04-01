@@ -50,7 +50,7 @@ export default function Artwork(props) {
             {props.data.medium}
           </span>
           <span className="mobileArtDescription text-neutral-500">
-            <Dimensions data={props.data}
+            <Dimensions data={props.data} />
           </span>
         </div>
       </div>
