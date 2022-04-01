@@ -30,22 +30,22 @@ export default function CollectionHidden(props) {
   };
 
   return (
-    <div>
+    <span>
       {hidden ? (
         <img
           onClick={(e) => hiddenHandler(e)}
           src={"../../../hiddenactive.png"}
-          className="w-6  hover:cursor-pointer"
+          className="w-6 mx-2  hover:cursor-pointer"
           title="Set to Visible"
         />
       ) : (
         <img
           onClick={(e) => hiddenHandler(e)}
           src={"../../../hiddeninactive.png"}
-          className="w-6  hover:cursor-pointer"
+          className="w-6 mx-2  hover:cursor-pointer"
           title="Set to Hidden"
         />
       )}
-    </div>
+    </span>
   );
 }

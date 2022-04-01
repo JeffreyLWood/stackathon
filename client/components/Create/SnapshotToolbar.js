@@ -2,9 +2,9 @@ import React from "react";
 import CollectionHidden from "./CollectionHidden";
 export default function SnapshotToolbar(props) {
   return (
-    <span className="mx-10 space-x-5 mx-auto flex flex-row justify-between items-center">
+    <span className="sm:mx-10 sm:space-x-5 mx-auto flex sm:flex-row justify-between items-center">
       {/* View collections Not functional */}
-      <span className="flex flex-row">
+      <span className="flex flex-row py-2">
         <img
           src="../../../collectionactive.png"
           id="Collections"
@@ -29,28 +29,30 @@ export default function SnapshotToolbar(props) {
           title="New Collection"
         />
       </span>
-      {props.settings ? (
-        <span onClick={() => props.setSettings(false)}>
-          <img
-            src="../../../collection.png"
-            className="w-4 hover:cursor-pointer"
-            title="Works"
-          />
-        </span>
-      ) : (
-        <span onClick={() => props.setSettings(true)}>
-          <img
-            src="../../../edit.png "
-            className="w-4 hover:cursor-pointer"
-            title="Edit Collection"
-          />
-        </span>
-      )}
-      <CollectionHidden
-        userId={props.userId}
-        collection={props.collectionTitle}
-        primary={props.primary}
-      />
+      <span className="flex flex-row space-x-2">
+        {props.settings ? (
+          <span onClick={() => props.setSettings(false)}>
+            <img
+              src="../../../collection.png"
+              className="w-4 mx-2 hover:cursor-pointer"
+              title="Works"
+            />
+          </span>
+        ) : (
+          <span onClick={() => props.setSettings(true)}>
+            <img
+              src="../../../edit.png "
+              className="w-4 mx-2 hover:cursor-pointer"
+              title="Edit Collection"
+            />
+          </span>
+        )}
+        <CollectionHidden
+          userId={props.userId}
+          collection={props.collectionTitle}
+          primary={props.primary}
+        />
+      </span>
     </span>
   );
 }

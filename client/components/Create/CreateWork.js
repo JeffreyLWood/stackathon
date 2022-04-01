@@ -139,7 +139,7 @@ export default function CreateWork(props) {
 
       {/* Primary Snapshot. Shows Work collection thumbnails by default. Allows for editing collection data such
           as collection title, description, viisbility status and allows for delete entire collection functionality. */}
-      <div className="h-3/6 mt-24 mb-4 sm:h-5/6 sm:mt-18 md:mt-10 sm:mb-0 md:w-4/6">
+      <div className="h-4/6 mt-24 mb-4 sm:h-5/6 sm:mt-18 md:mt-10 sm:mb-0 md:w-4/6">
         <CreateSnapshot
           // Id used to identify through props whether the work clicked for example is from the primary or
           // secondary snapshot for triggering a refresh in the redux store.
@@ -172,7 +172,7 @@ export default function CreateWork(props) {
           addCollection={addCollection}
         />
       </div>
-      <div className="h-2/6  sm:h-5/6  sm:mt-10 md:w-2/6">
+      <div className="h-1/6  sm:h-5/6  sm:mt-10 md:w-2/6">
         <CreateSnapshot
           id={"secondary"}
           collectionTitle={secondary}

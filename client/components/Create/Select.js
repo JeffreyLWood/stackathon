@@ -39,7 +39,6 @@ export default function Select(props) {
   worksData && loadCollections();
   return (
     <span>
-      <span className="text-gray-400">Collection: </span>
       {props.settings ? (
         <select
           id={props.id}

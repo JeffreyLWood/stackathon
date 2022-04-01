@@ -57,7 +57,7 @@ const CV = (props) => {
   return (
     <>
       <Navbar user={user} />
-      <div className="w-full min-h-screen justify-center bg-neutral-50 mt-10 p-10 flex">
+      <div className="w-full min-h-screen justify-center px-2 pt-12 bg-neutral-50 mt-20 sm:mt-10 sm:p-10 flex">
         <form
           className="w-full min-h-screen space-y-5"
           onSubmit={submitHandler}
@@ -122,18 +122,19 @@ const CV = (props) => {
               </ul>
             </label>
           </div>
-          <div className="w-full h-72 flex flex-row space-x-4">
-            <textarea
-              id="#inputBox"
-              name="cv"
-              className="h-auto w-3/6 border-b-2 outline-hidden"
-              placeholder="YYYY, Heading 1, Heading 2, City ST, https://google.com, Description 1, Desciption 2, Description 3"
-              onChange={textHandler}
-              style={{ resize: "none" }}
-              value={text ? text : ""}
-            ></textarea>
-
-            <div className="w-3/6">
+          <div className="w-full  flex flex-col sm:flex-row space-x-4">
+            <div className="w-full h-36 sm:h-72 sm:w-3/6">
+              <textarea
+                id="#inputBox"
+                name="cv"
+                className="h-auto w-full border-b-2 outline-hidden"
+                placeholder="YYYY, Heading 1, Heading 2, City ST, https://google.com, Description 1, Desciption 2, Description 3"
+                onChange={textHandler}
+                style={{ resize: "none" }}
+                value={text ? text : ""}
+              ></textarea>
+            </div>
+            <div className="w-full sm:w-3/6">
               <CVGroup title={null} data={data} />
             </div>
           </div>

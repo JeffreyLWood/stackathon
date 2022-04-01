@@ -117,28 +117,32 @@ export default function CreateSnapshot(props) {
   } else {
     return (
       <div className="snapshot shadow-xl mx-2 p-2 sm:p-5 font-light">
-        <div className="flex flex-row justify-between">
-          <Select
-            changeHandler={props.changeHandler}
-            collectionTitle={props.collectionTitle}
-            collections={props.collections}
-            id={props.id}
-            primary={props.primary}
-            secondary={props.secondary}
-            settings={settings}
-            userId={props.userId}
-          />
-          {props.id === "primary" ? (
-            <SnapshotToolbar
+        <div className="flex flex-col sm:flex-row sm:justify-between">
+          <span>
+            <Select
+              changeHandler={props.changeHandler}
+              collectionTitle={props.collectionTitle}
+              collections={props.collections}
               id={props.id}
-              settings={settings}
-              setSettings={setSettings}
               primary={props.primary}
+              secondary={props.secondary}
+              settings={settings}
               userId={props.userId}
-              setShowCollections={props.setShowCollections}
-              addHandler={props.addHandler}
-              addCollection={props.addCollection}
             />
+          </span>
+          {props.id === "primary" ? (
+            <span>
+              <SnapshotToolbar
+                id={props.id}
+                settings={settings}
+                setSettings={setSettings}
+                primary={props.primary}
+                userId={props.userId}
+                setShowCollections={props.setShowCollections}
+                addHandler={props.addHandler}
+                addCollection={props.addCollection}
+              />
+            </span>
           ) : null}
         </div>
         {/* If settings, show CollectionSettings, if false show the thumbnails (ListManager) */}
@@ -162,7 +166,7 @@ export default function CreateSnapshot(props) {
                 <Image
                   cloudName="jeffreywood"
                   publicId={work.imgId}
-                  className="h-24 m-2 md:h-36 md:m-4 hover:cursor-pointer"
+                  className="h-16 sm:h-24 m-2 md:h-36 md:m-4 hover:cursor-pointer"
                   id={props.collectionTitle}
                   value={props.id}
                   onClick={(e) => props.editHandler(e)}

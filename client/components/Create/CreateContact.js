@@ -34,7 +34,7 @@ export default function CreateContact(props) {
       <Navbar user={user} />
 
       <form
-        className="contact h-full mt-10 w-full bg-neutral-50 flex flex-col mx-2 md:flex-row md:p-10 md:space-x-5 font-light text-gray-500"
+        className="contact h-full mt-24 w-full bg-neutral-50 flex flex-col mx-2 md:flex-row md:p-10 md:space-x-5 font-light text-gray-500"
         onSubmit={submitHandler}
       >
         <div className="w-full flex flex-col">
@@ -42,7 +42,6 @@ export default function CreateContact(props) {
             Contact Text:
           </label>
           <textarea
-            className=""
             rows="5"
             className="w-5/6"
             style={{ resize: "none" }}
@@ -61,7 +60,7 @@ export default function CreateContact(props) {
             name="email"
             type="text"
             onChange={changeHandler}
-            value={state?.email || ""}
+            value={state?.email || user.email}
           ></input>
           <label htmlFor="email">Phone</label>
           <input
