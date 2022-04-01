@@ -2279,6 +2279,16 @@ textarea {
     margin-right: 1.25rem;
   }
 
+  .sm\:mx-10 {
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
+  }
+
+  .sm\:my-20 {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+  }
+
   .sm\:mt-0 {
     margin-top: 0px;
   }

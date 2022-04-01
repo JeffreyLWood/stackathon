@@ -49,7 +49,7 @@ export const About = (props) => {
   return (
     <>
       <Navbar user={user} />
-      <div className="font-light h-full md:h-90vh sm:m-10 flex flex-col items-start md:justify-center sm:py-10 md:flex-row md:justify-start">
+      <div className="font-light h-full my-10 md:h-90vh sm:mx-10 sm:my-20  flex flex-col items-start md:justify-center sm:py-10 md:flex-row md:justify-start">
         <div className="w-full flex justify-center flex-col pb-4 sm:pb-0 sm:w-3/6 sm:h-full ">
           <span className="w-full sm:h-96 flex justify-center">
             <figure>
