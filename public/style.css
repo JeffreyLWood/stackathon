@@ -1664,6 +1664,10 @@ html.has-scroll-dragging {
   max-width: 24rem;
 }
 
+.h-70vh {
+  min-height: 70vh;
+}
+
 .h-80vh {
   min-height: 80vh;
 }
