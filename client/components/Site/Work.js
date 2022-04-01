@@ -68,7 +68,7 @@ export const Work = (props) => {
         collection={collection}
         setCollection={setCollection}
       />
-      <div className="min-h-screen w-screen items-start mt-8 flex flex-col sm:mx-5">
+      <div className="min-h-screen items-start mt-8 flex flex-col sm:mx-5">
         {collection?.description ? (
           <Description
             title={collection?.title}
@@ -79,7 +79,7 @@ export const Work = (props) => {
             workHeight={works[0]?.height}
             workWidth={works[0]?.width}
             workDepth={works[0]?.depth}
-            data={works[0]}
+            data={works}
           />
         ) : null}
         <div className="flex  w-full h-full overflow-visible flex-wrap">
