@@ -102,13 +102,15 @@ const CV = (props) => {
               <span className="italic mb-2 text-sm font-semibold">
                 Links must begin with 'https://'
               </span>
-              <span className="text-indigo-600">
+              <span className="hidden sm:block text-indigo-600">
                 Having trouble? See the examples below. Copy and paste them into
                 the input field{" "}
-                <span className="underline text-indigo-600">and hit enter</span>{" "}
+                <span className=" hidden sm:blockunderline text-indigo-600">
+                  and hit enter
+                </span>{" "}
                 to see how they render.
               </span>
-              <ul className="text-sm italic list-disc">
+              <ul className="hidden sm:block text-sm italic list-disc">
                 <li>2020, Columbia University, MFA Painting, New York NY</li>
                 <li>
                   2013-2015, New York University, Adjunct Faculty, New York NY,
