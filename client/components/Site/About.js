@@ -56,7 +56,7 @@ export const About = (props) => {
               <Image
                 cloudName="jeffreywood"
                 publicId={imgId}
-                className="flex object-contain sm:max-w-lg aboutImage px-4 sm:px-0 sm:mx-auto"
+                className="flex object-contain sm:max-w-lg aboutImage px-2 sm:px-0 sm:mx-auto"
               />
               <figcaption className="text-sm mt-2 italic text-neutral-400 text-center">
                 {caption}
@@ -65,9 +65,9 @@ export const About = (props) => {
           </span>
         </div>
 
-        <div className="w-full h-full flex flex-col mx-auto text-sm leading-8 sm:w-3/6 sm:pr-10">
+        <div className="w-full h-full flex flex-col px-2 text-sm leading-8 sm:w-3/6 sm:pr-10">
           {newHeader ? (
-            <span className="border-l-2 border-r-2 mb-6 px-4 tracking-widest min-w-full h-full flex flex-col text-lg leading-8 sm:w-3/6 sm:pr-10">
+            <span className="border-l-2 border-r-2 mb-6 mx-auto tracking-widest min-w-full h-full flex flex-col text-lg leading-8 sm:w-3/6 sm:pr-10">
               {newHeader}
             </span>
           ) : null}
