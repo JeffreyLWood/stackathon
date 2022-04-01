@@ -60,7 +60,7 @@ export const Contact = (props) => {
   return (
     <>
       <Navbar user={user} />
-      <div className="font-light text-sm leading-8 h-full mt-10 mx-3 sm:m-10 flex flex-col items-start justify-center sm:px-10 sm:py-5git sm:flex-row md:h-90vh md:pt-10 md:px-10 md:justify-start">
+      <div className="font-light text-sm leading-8 h-full mt-10 mx-2 sm:m-10 flex flex-col items-start justify-center sm:px-10 sm:py-5git sm:flex-row md:h-90vh md:pt-10 md:px-10 md:justify-start">
         <div className="w-full flex flex-col mb-5 pr-4 sm:w-2/6">
           <span className="pageTitle mb-5">Contact</span>
           {text ? <p>{text}</p> : null}
