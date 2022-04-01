@@ -41,7 +41,11 @@ router.post("/upload", async (req, res) => {
         height: req.body.height,
         width: req.body.width,
         medium: req.body.medium,
-        hidden: req.body.hidden,
+        depth: req.body.depth,
+        metric: req.body.metric,
+        status: req.body.status,
+        price: req.body.price,
+        description: req.body.description,
       });
     }
     let response = await Collection.findAll({
@@ -112,7 +116,11 @@ router.post("/update", async (req, res) => {
           height: req.body.height,
           width: req.body.width,
           medium: req.body.medium,
-          hidden: req.body.hidden,
+          depth: req.body.depth,
+          metric: req.body.metric,
+          status: req.body.status,
+          price: req.body.price,
+          description: req.body.description,
         },
         { where: { imgId: req.body.imgId, collectionId: origin.id } }
       );
@@ -129,7 +137,11 @@ router.post("/update", async (req, res) => {
           height: req.body.height,
           width: req.body.width,
           medium: req.body.medium,
-          hidden: req.body.hidden,
+          depth: req.body.depth,
+          metric: req.body.metric,
+          status: req.body.status,
+          price: req.body.price,
+          description: req.body.description,
         },
         { where: { imgId: req.body.imgId, collectionId: origin.id } }
       );
@@ -151,9 +163,18 @@ router.post("/update", async (req, res) => {
       origin = JSON.stringify(origin, null, 2);
       destination = JSON.stringify(destination, null, 2);
       console.log(work);
-      res.status(200).send({ work, newWork, origin, destination });
+
+      if (req.body.newImage) {
+        res.status(200).send({ work, newWork, origin, destination });
+      } else {
+        res.status(200).send({ work, origin, destination });
+      }
     } else {
-      res.status(200).send({ work, newWork });
+      if (req.body.newImage) {
+        res.status(200).send({ work, newWork });
+      } else {
+        res.status(200).send({ work });
+      }
     }
   } catch (error) {
     console.log(error);

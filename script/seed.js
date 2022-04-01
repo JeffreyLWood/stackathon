@@ -70,7 +70,7 @@ async function seed() {
       imgId: "stackathonImgs/IMG_7154_x8snqb",
       height: 4,
       width: 5,
-      status: "available",
+      status: null,
       hidden: false,
     });
 
@@ -81,7 +81,7 @@ async function seed() {
       imgId: "stackathonImgs/IMG_7112_gbspsm",
       height: 4,
       width: 5,
-      status: "available",
+      status: null,
       hidden: false,
     });
     let default2 = await Work.create({
@@ -91,7 +91,7 @@ async function seed() {
       imgId: "stackathonImgs/IMG_7139_ge5z2c",
       height: 4,
       width: 5,
-      status: "available",
+      status: null,
       hidden: false,
     });
     let default3 = await Work.create({
@@ -101,7 +101,7 @@ async function seed() {
       imgId: "stackathonImgs/IMG_7144_zmq2mk",
       height: 4,
       width: 5,
-      status: "available",
+      status: null,
       hidden: false,
     });
     let default4 = await Work.create({
@@ -111,7 +111,7 @@ async function seed() {
       imgId: "stackathonImgs/IMG_7153_mkpd70",
       height: 4,
       width: 5,
-      status: "available",
+      status: null,
       hidden: false,
     });
     let default5 = await Work.create({
@@ -121,7 +121,7 @@ async function seed() {
       imgId: "stackathonImgs/IMG_7150_wrnlwf",
       height: 4,
       width: 5,
-      status: "available",
+      status: null,
       hidden: false,
     });
 
@@ -132,7 +132,7 @@ async function seed() {
       imgId: "stackathonImgs/IMG_7170_wkrsd8",
       height: 5,
       width: 4,
-      status: "available",
+      status: null,
     });
     let default8 = await Work.create({
       title: "Street 2",
@@ -141,7 +141,7 @@ async function seed() {
       imgId: "stackathonImgs/IMG_7149_fci6ka",
       height: 5,
       width: 4,
-      status: "available",
+      status: null,
     });
 
     // Put defaults into array for mapping
@@ -172,7 +172,7 @@ async function seed() {
       imgId: "stackathonImgs/IMG_8549_z45itv",
       height: 4,
       width: 5,
-      status: "available",
+      status: null,
     });
     let default10 = await Work.create({
       title: "Brick",
@@ -181,7 +181,7 @@ async function seed() {
       imgId: "stackathonImgs/IMG_8622_otmj6a",
       height: 4,
       width: 5,
-      status: "available",
+      status: null,
     });
     let default11 = await Work.create({
       title: "Grand Central",
@@ -190,7 +190,7 @@ async function seed() {
       imgId: "stackathonImgs/IMG_8757_b93blk",
       height: 4,
       width: 5,
-      status: "available",
+      status: null,
     });
     let default12 = await Work.create({
       title: "Canal",
@@ -199,7 +199,7 @@ async function seed() {
       imgId: "stackathonImgs/IMG_8744_1_hnb1c5",
       height: 4,
       width: 5,
-      status: "available",
+      status: null,
     });
     let blueWork = [default9, default10, default11, default12];
 

@@ -36,6 +36,12 @@ export default function CreateUploader(props) {
     height: null,
     width: null,
     medium: "",
+    depth: null,
+    metric: "",
+    status: "",
+    medium: "",
+    price: "",
+    description: "",
   });
 
   // Not needed
@@ -55,6 +61,12 @@ export default function CreateUploader(props) {
           height: null,
           width: null,
           medium: "",
+          depth: "",
+          metric: "",
+          status: "",
+          medium: "",
+          price: "",
+          description: "",
         });
       }
       if (props.displayName === "Edit Work") {
@@ -76,6 +88,12 @@ export default function CreateUploader(props) {
           height: work.height,
           width: work.width,
           medium: work.medium,
+          depth: work.depth,
+          metric: work.metric,
+          status: work.status,
+          medium: work.medium,
+          price: work.price,
+          description: work.description,
         })
       : null;
   }, [work]);
@@ -125,9 +143,15 @@ export default function CreateUploader(props) {
       title: "",
       collection: props.collection,
       year: "",
-      height: "",
-      width: "",
+      height: null,
+      width: null,
+      depth: null,
       medium: "",
+      metric: "",
+      status: "",
+      medium: "",
+      price: "",
+      description: "",
     });
     //Closes modal
     props.setShow(false);
@@ -144,6 +168,12 @@ export default function CreateUploader(props) {
         height: state.height,
         width: state.width,
         medium: state.medium,
+        depth: state.depth,
+        metric: state.metric,
+        status: state.status,
+        medium: state.medium,
+        price: state.price,
+        description: state.description,
       };
       let snapshotId =
         props.primary === state.collection
@@ -172,6 +202,12 @@ export default function CreateUploader(props) {
         height: state.height,
         width: state.width,
         medium: state.medium,
+        depth: state.depth,
+        metric: state.metric,
+        status: state.status,
+        medium: state.medium,
+        price: state.price,
+        description: state.description,
         snapshotId:
           props.collection === props.primary ? "primary" : "secondary",
       };
@@ -213,6 +249,12 @@ export default function CreateUploader(props) {
         height: state.height,
         width: state.width,
         medium: state.medium,
+        depth: state.depth,
+        metric: state.metric,
+        status: state.status,
+        medium: state.medium,
+        price: state.price,
+        description: state.description,
       };
       dispatch(switcher(body));
     } catch (error) {
@@ -237,7 +279,12 @@ export default function CreateUploader(props) {
       year: "",
       height: "",
       width: "",
+      depth: "",
+      metric: "",
+      status: "",
       medium: "",
+      price: "",
+      description: "",
     });
     setPreviewSource("");
   };
@@ -247,52 +294,50 @@ export default function CreateUploader(props) {
   }
 
   return (
-    <div className="modal">
+    <div className="modal z-40">
       <div className="modal-content">
-        <div className="modal-collection flex justify-between">
-          <h2>{props.displayName}</h2>
+        <div className="flex justify-between">
+          <span className="text-lg">{props.displayName}</span>
           <h2 onClick={closeHandler}>
             <img src="/icons8-close-16.png"></img>
           </h2>
         </div>
         {/* Modal Body */}
-        <div className="h-full flex flex-col justify-center items-center md:mt-20 md:flex-row">
+        <div className="h-full flex flex-col justify-between items-center md:mt-20 md:flex-row">
           <form
-            className="h-full w-5/6 bg-white flex flex-col items-center md:flex-row justify-between"
+            className="w-full flex flex-col items-center md:flex-row  justify-center"
             onSubmit={submitHandler}
           >
-            <div>
-              <div>
-                <input
-                  id="image"
-                  name="image"
-                  type="file"
-                  accept="image/*"
-                  onChange={changeHandler}
-                  value={fileInputState}
-                  style={{ display: "none" }}
-                />
+            <div className="sm:w-3/6 flex justify-center">
+              <input
+                id="image"
+                name="image"
+                type="file"
+                accept="image/*"
+                onChange={changeHandler}
+                value={fileInputState}
+                style={{ display: "none" }}
+              />
 
-                <label htmlFor="image">
-                  {previewSource ? (
-                    <img
-                      src={previewSource}
-                      alt="chosen"
-                      className="h-44 my-4 sm:m-0 sm:h-56"
-                    />
-                  ) : work ? (
-                    <Image
-                      cloudName={"jeffreywood"}
-                      publicId={work.imgId}
-                      className="h-44 my-4 sm:m-0 sm:h-56"
-                    />
-                  ) : (
-                    <img src="../../../placeholderadd.png"></img>
-                  )}
-                </label>
-              </div>
+              <label htmlFor="image">
+                {previewSource ? (
+                  <img
+                    src={previewSource}
+                    alt="chosen"
+                    className="h-56 my-4 sm:m-0 sm:h-72"
+                  />
+                ) : work ? (
+                  <Image
+                    cloudName={"jeffreywood"}
+                    publicId={work.imgId}
+                    className="h-56 my-4 sm:m-0 sm:h-72"
+                  />
+                ) : (
+                  <img src="../../../placeholderadd.png"></img>
+                )}
+              </label>
             </div>
-            <div className="flex flex-col justify-around space-y-2">
+            <div className="flex flex-col space-y-2 sm:w-3/6 sm:px-10">
               <input
                 type="text"
                 name="title"
@@ -319,20 +364,59 @@ export default function CreateUploader(props) {
               />
               <div className="flex flex-row">
                 <input
-                  type="text"
+                  type="number"
                   name="height"
-                  className="my-1 border-b-2"
-                  placeholder="Height"
+                  className="w-16 my-1 border-b-2"
+                  placeholder="H"
                   onChange={changeHandler}
                   value={state.height}
                 />
                 <input
-                  type="text"
+                  type="number"
                   name="width"
-                  className="my-1 border-b-2"
-                  placeholder="Width"
+                  className="w-16 m-1 border-b-2"
+                  placeholder="W"
                   onChange={changeHandler}
                   value={state.width}
+                />
+                <input
+                  type="number"
+                  name="depth"
+                  className="w-16 m-1 border-b-2"
+                  placeholder="D"
+                  onChange={changeHandler}
+                  value={state.depth}
+                />
+                <select
+                  type="select"
+                  name="metric"
+                  className="m-1 border-b-2"
+                  placeholder="Inches"
+                  onChange={changeHandler}
+                  value={state.metric}
+                >
+                  <option>Inches</option>
+                  <option>Feet</option>
+                  <option>Centimeters</option>
+                  <option>Meters</option>
+                </select>
+              </div>
+              <div className="flex flex-row space-x-4">
+                <input
+                  type="text"
+                  name="price"
+                  className="w-1/6 my-1 border-b-2"
+                  placeholder="Price"
+                  onChange={changeHandler}
+                  value={state.price}
+                />
+                <input
+                  type="text"
+                  name="status"
+                  className="w-3/6 my-1 border-b-2"
+                  placeholder="Status"
+                  onChange={changeHandler}
+                  value={state.status}
                 />
               </div>
               <label
@@ -362,29 +446,27 @@ export default function CreateUploader(props) {
                   ) : null}
                 </select>
               </label>
-
-              <button
-                type="submit"
-                className="bg-black text-white text-uppercase p-1 my-3"
-              >
-                Submit
-              </button>
-              {work ? (
-                <button
-                  className="border-2 text-uppercase p-1"
-                  type="button"
-                  onClick={() =>
-                    destroyHandler(
-                      user.id,
-                      props.collection,
-                      work.imgId,
-                      props.snapshotId
-                    )
-                  }
-                >
-                  Delete
+              <div className="flex flex-row justify-between py-5">
+                <button type="submit" className="pillDark">
+                  Submit
                 </button>
-              ) : null}
+                {work ? (
+                  <button
+                    className="pill"
+                    type="button"
+                    onClick={() =>
+                      destroyHandler(
+                        user.id,
+                        props.collection,
+                        work.imgId,
+                        props.snapshotId
+                      )
+                    }
+                  >
+                    Delete Work
+                  </button>
+                ) : null}
+              </div>
             </div>
           </form>
         </div>

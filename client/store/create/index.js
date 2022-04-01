@@ -410,11 +410,14 @@ export default function (state = {}, action) {
     }
 
     case UPDATE_WORK: {
+      console.log(action);
       let snapshotId = `${action.snapshotId}Collection`;
       let newCollection = state[snapshotId].filter(
         (work) => work.imgId !== action.data.work.imgId
       );
-      newCollection.push(action.data.newWork);
+      action.data.newWork.length
+        ? newCollection.push(action.data.newWork)
+        : newCollection.push(action.work);
 
       let newState =
         snapshotId !== "nullCollection"

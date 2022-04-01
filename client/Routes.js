@@ -34,7 +34,7 @@ const Routes = () => {
   }, []);
 
   let customDomain = window.location.hostname;
-  console.log(window.location);
+
   let [custom, setCustom] = useState(false);
   useEffect(() => {
     async function load() {

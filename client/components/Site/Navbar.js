@@ -85,7 +85,6 @@ export const Navbar = (props) => {
 
   let url = user.domain ? `` : `/${user.userName}`;
 
-  console.log("navbar", user);
   return (
     <>
       <nav className="flex flex-row justify-between h-18 items-end mx-2 sm:mx-12 mt-10 tracking-widest">

@@ -14,17 +14,21 @@ export default function HomeFooter() {
         <li className="text-lg ">
           <span className="text-neutral-500">Selected-Work</span>
         </li>
-        <li className="">Log In</li>
-        <li className="">Contact</li>
-        <li className="">team@selected-work.com</li>
         <li className="">
-          <a href="https://www.janeisidor.com" target="_blank">
+          <a href="#auth">Log In</a>
+        </li>
+
+        <li className="">
+          <a href="mailto:team@selected-work.com">team@selected-work.com</a>
+        </li>
+        <li className="">
+          <a href="https://www.selected-work.com/janeisidor" target="_blank">
             View Demo Site
           </a>
         </li>
         <li className="">
           <a href="https://github.com/JeffreyLWood/stackathon" target="_blank">
-            View on GitHub
+            GitHub
           </a>
         </li>
         <li>

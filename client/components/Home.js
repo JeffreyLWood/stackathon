@@ -26,7 +26,7 @@ export default function Home(props) {
       <Onboard />
       {/* <Features /> */}
       <AuthForm displayName={displayName} setDisplayName={setDisplayName} />
-      {/* <HomeFooter /> */}
+      <HomeFooter />
     </section>
   );
 }

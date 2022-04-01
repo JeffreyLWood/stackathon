@@ -9,23 +9,18 @@ const Work = db.define("work", {
   // },
   title: {
     type: Sequelize.STRING,
-    allowNull: true,
   },
   year: {
     type: Sequelize.INTEGER,
-    allowNull: true,
   },
   height: {
     type: Sequelize.REAL,
-    allowNull: true,
   },
   medium: {
     type: Sequelize.STRING,
-    allowNull: true,
   },
   width: {
     type: Sequelize.REAL,
-    allowNull: true,
   },
   depth: {
     type: Sequelize.REAL,
@@ -41,11 +36,13 @@ const Work = db.define("work", {
   },
   status: {
     type: Sequelize.STRING,
-    allowNull: true,
   },
   imgId: {
     type: Sequelize.STRING,
     allowNull: false,
+  },
+  price: {
+    type: Sequelize.STRING,
   },
   order: {
     type: Sequelize.REAL,

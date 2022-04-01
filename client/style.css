@@ -295,6 +295,7 @@ html.has-scroll-dragging {
   display: flex;
   align-items: center;
 }
+
 .modal-footer button {
   border: none;
   text-transform: uppercase;
@@ -621,6 +622,17 @@ textarea {
 
   .container {
     padding: 2rem;
+  }
+  .modal-body {
+    padding: 0rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .modal-content {
+    width: 100vw;
+    min-height: 70%;
+    padding: 1rem;
   }
 
   .workModalHeader {

@@ -4,14 +4,14 @@ export default function Onboard() {
   return (
     <section className="container mt-10 flex-col md:flex-row">
       <div className="h-2/6 w-screen z-20 p-4 flex space-y-4 md:justify-center md:w-3/6 md:h-full flex-col">
-        <span className="text-4xl  ">Putting Artists First</span>
+        <span className="text-4xl">Putting Artists First</span>
         <ul className="text-lg sm:space-y-2">
-          <li>Designed Specifically for Artists</li>
+          <li>Websites Designed Specifically for Artists</li>
           <li>No Advertising</li>
           <li>Custom Domains</li>
           <li>Free to Use</li>
           <li>
-            <a href="http://www.selected-work.com/janeisidor" target="_blank">
+            <a href="https://www.selected-work.com/janeisidor" target="_blank">
               <button
                 type="button"
                 className="pill mr-4 my-4 hover:text-white z-20"
