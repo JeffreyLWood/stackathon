@@ -60,7 +60,7 @@ export const Contact = (props) => {
   return (
     <>
       <Navbar user={user} />
-      <div className="font-light text-sm leading-8 h-full mt-10 mx-2 sm:m-10 flex flex-col items-start justify-center sm:px-10 sm:py-5git sm:flex-row md:h-90vh md:pt-10 md:px-10 md:justify-start">
+      <div className="font-light text-sm leading-8 h-full my-10 mx-2 md:m-20 md:mb-0 flex flex-col items-start justify-center sm:px-10 sm:py-5 sm:flex-row md:h-80vh md:pt-10 md:px-10 md:justify-start">
         <div className="w-full flex flex-col mb-5 pr-4 sm:w-2/6">
           <span className="pageTitle mb-5">Contact</span>
           {text ? <p>{text}</p> : null}
@@ -116,7 +116,7 @@ export const Contact = (props) => {
             ) : null}
             {email ? (
               <a href={`mailto:${email} `}>
-                <img src="../social/email.png" alt="email" alt="email" />
+                <img src="../social/email.png" alt="email" />
               </a>
             ) : null}
             {youtube ? (
@@ -158,7 +158,7 @@ export const Contact = (props) => {
             ) : null}
           </div>
         </div>
-        <div className="w-full flex flex-col space-y-2 sm:w-4/6 sm:pr-10 sm:pl-10">
+        <div className="w-full flex flex-col space-y-4 sm:w-4/6 sm:pr-12 sm:pl-12">
           <form className="contact block" onSubmit={sendEmail}>
             <label htmlFor="name">Name: *</label>
             <input required className="w-3/6" name="from_name" type="text" />
@@ -180,12 +180,14 @@ export const Contact = (props) => {
             {/* <label htmlFor="emailList">Subscribe to Email List:</label>
             <input name="emailList" type="checkbox" /> */}
             {/* <input className="w-3/6" name="to_email" type="text"></input> */}
-            <button type="submit" className="pill" value="Submit">
-              Submit
-            </button>
-            {confirmed ? (
-              <span className="italic mx-4">Your message has been sent.</span>
-            ) : null}
+            <span>
+              <button type="submit" className="pill" value="Submit">
+                Submit
+              </button>
+              {confirmed ? (
+                <span className="italic mx-4">Your message has been sent.</span>
+              ) : null}
+            </span>
           </form>
         </div>
       </div>

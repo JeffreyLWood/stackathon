@@ -2265,6 +2265,10 @@ textarea {
     margin: 2.5rem;
   }
 
+  .sm\:m-20 {
+    margin: 5rem;
+  }
+
   .sm\:mx-10 {
     margin-left: 2.5rem;
     margin-right: 2.5rem;
@@ -2482,6 +2486,11 @@ textarea {
     padding-right: 2rem;
   }
 
+  .sm\:py-5 {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+
   .sm\:pt-0 {
     padding-top: 0px;
   }
@@ -2500,6 +2509,14 @@ textarea {
 
   .sm\:pl-10 {
     padding-left: 2.5rem;
+  }
+
+  .sm\:pr-12 {
+    padding-right: 3rem;
+  }
+
+  .sm\:pl-12 {
+    padding-left: 3rem;
   }
 
   .sm\:text-left {
@@ -2527,6 +2544,10 @@ textarea {
     margin: 1rem;
   }
 
+  .md\:m-20 {
+    margin: 5rem;
+  }
+
   .md\:my-0 {
     margin-top: 0px;
     margin-bottom: 0px;
@@ -2552,6 +2573,10 @@ textarea {
 
   .md\:mt-4 {
     margin-top: 1rem;
+  }
+
+  .md\:mb-0 {
+    margin-bottom: 0px;
   }
 
   .md\:h-96 {
@@ -2584,6 +2609,10 @@ textarea {
 
   .md\:w-3\/6 {
     width: 50%;
+  }
+
+  .md\:w-5\/6 {
+    width: 83.333333%;
   }
 
   .md\:flex-row {
@@ -2629,6 +2658,14 @@ textarea {
   .md\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
+  }
+
+  .md\:h-70vh {
+    min-height: 70vh;
+  }
+
+  .md\:h-80vh {
+    min-height: 80vh;
   }
 
   .md\:h-90vh {
