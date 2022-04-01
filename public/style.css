@@ -2324,6 +2324,10 @@ textarea {
     margin-bottom: 7rem;
   }
 
+  .sm\:mt-24 {
+    margin-top: 6rem;
+  }
+
   .sm\:block {
     display: block;
   }

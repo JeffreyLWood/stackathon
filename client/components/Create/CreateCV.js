@@ -127,7 +127,7 @@ const CV = (props) => {
               <textarea
                 id="#inputBox"
                 name="cv"
-                className="h-auto w-full border-b-2 outline-hidden"
+                className="h-full w-full border-b-2 outline-hidden"
                 placeholder="YYYY, Heading 1, Heading 2, City ST, https://google.com, Description 1, Desciption 2, Description 3"
                 onChange={textHandler}
                 style={{ resize: "none" }}
