@@ -395,10 +395,10 @@ export default function CreateUploader(props) {
                   onChange={changeHandler}
                   value={state.metric}
                 >
-                  <option>Inches</option>
-                  <option>Feet</option>
-                  <option>Centimeters</option>
-                  <option>Meters</option>
+                  <option value='"'>Inches</option>
+                  <option value="'">Feet</option>
+                  <option value="cm">Centimeters</option>
+                  <option value="m">Meters</option>
                 </select>
               </div>
               <div className="flex flex-row space-x-4">

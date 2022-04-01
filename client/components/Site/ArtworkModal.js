@@ -1,6 +1,6 @@
 import React from "react";
 import { Image } from "cloudinary-react";
-
+import Dimensions from "./Dimensions";
 export default function ArtworkModal(props) {
   if (!props.show) {
     return null;
@@ -39,7 +39,7 @@ export default function ArtworkModal(props) {
               {props.data.medium}
             </li>
             <li className="text-sm text-neutral-500">
-              {props.data.height} x {props.data.width} "
+              <Dimensions data={props.data} />
             </li>
             <li className="md:py-10">
               {/* <button type="button" className="border-2 p-2 ">

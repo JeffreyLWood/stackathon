@@ -2,6 +2,7 @@ import React from "react";
 import { Image } from "cloudinary-react";
 import { useState, useEffect } from "react";
 import ArtworkModal from "./ArtworkModal";
+import Dimensions from "./Dimensions";
 export default function Artwork(props) {
   let [show, setShow] = useState(false);
 
@@ -49,8 +50,7 @@ export default function Artwork(props) {
             {props.data.medium}
           </span>
           <span className="mobileArtDescription text-neutral-500">
-            {props.data.height ? props.data.height : null}
-            {props.data.width ? ` x  ${props.data.width}` : null}
+            <Dimensions data={props.data} />
           </span>
         </div>
       </div>

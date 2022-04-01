@@ -3,6 +3,7 @@ import { Image } from "cloudinary-react";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import ArtworkModal from "./ArtworkModal";
+import Dimensions from "./Dimensions";
 export default function Description(props) {
   let user = useSelector((state) => state.user);
 
@@ -62,9 +63,7 @@ export default function Description(props) {
               <span className="text-neutral-400">{props.data.year}</span>
             </li>
             <li>
-              {props.data.height}
-              {props.data.width ? ` x ${props.data.width}` : null}
-              {props.data.depth ? ` x ${props.data.depth}` : null}
+              <Dimensions data={props.data} />
             </li>
           </ul>
         </span>
