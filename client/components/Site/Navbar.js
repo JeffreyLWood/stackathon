@@ -33,10 +33,6 @@ export const Navbar = (props) => {
       : visible && visible[0]?.works && setPreview(visible[0]?.works[0]?.imgId);
   }, [props]);
 
-  let [workDropdown, setWorkDropdown] = useState(
-    "flex flex-row justify-between dropdown drop-shadow-xl"
-  );
-
   const show = () => {
     let visible =
       collections && collections.filter((collection) => !collection.hidden);
@@ -69,6 +65,7 @@ export const Navbar = (props) => {
   // GSAP
   const link = (e, destination) => {
     e.preventDefault();
+    hide();
     if (destination === window.location.pathname) {
       return;
     }
