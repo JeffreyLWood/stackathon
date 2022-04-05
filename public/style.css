@@ -1611,7 +1611,7 @@ html.has-scroll-dragging {
 .dropdown {
   position: fixed;
   z-index: 20;
-  top: -50vh;
+  top: -55vh;
   left: 0;
   right: 0;
   background-color: #fff;
