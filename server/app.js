@@ -2,13 +2,10 @@ const path = require("path");
 const express = require("express");
 const router = require("express").Router();
 const morgan = require("morgan");
-const wildcardSubdomains = require("wildcard-subdomains");
 const User = require("./db/models/User");
 const Collection = require("./db/models/Collection");
 const app = express();
-const url = require("url");
 
-const { database } = require("pg/lib/defaults");
 module.exports = app;
 
 // // logging middleware
@@ -16,16 +13,6 @@ app.use(morgan("dev"));
 
 // // body parsing middleware
 app.use(express.json({ limit: "50mb" }));
-app.use(
-  wildcardSubdomains({
-    namespace: "_sub",
-    whitelist: ["www"],
-  })
-);
-
-app.get("/_sub/:firstSubdomain/*", function (req, res) {
-  res.redirect(`https://www.selected-work.com/${req.params.firstSubdomain}/`);
-});
 
 // auth and api routes
 app.use("/auth", require("./auth"));

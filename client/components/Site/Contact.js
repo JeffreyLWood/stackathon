@@ -5,16 +5,12 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Footer from "./Footer";
 import emailjs from "emailjs-com";
+import { gsap } from "gsap";
+import { useRef } from "react";
 export const Contact = (props) => {
   let user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    // async function loadUserData() {
-    //   await dispatch(fetchUserData(props.match.params.username));
-    // }
-    // loadUserData();
-  }, []);
   let defaultEmail = user.email;
 
   let text = user.contact && user.contact.text;
@@ -57,11 +53,31 @@ export const Contact = (props) => {
     e.target.reset();
   };
 
+  let content = useRef();
+  const q = gsap.utils.selector(content);
+  let tl = new gsap.timeline();
+  const fadeOut = () => {
+    gsap.to(content.current, { opacity: 0, duration: 1, ease: "expo" });
+  };
+
+  useEffect(() => {
+    tl.to(q(".stagger"), {
+      opacity: 1,
+      stagger: 0.1,
+      duration: 2,
+      ease: "expo",
+      y: -10,
+    });
+  });
+
   return (
     <>
-      <Navbar user={user} />
-      <div className="font-light text-sm leading-8 h-full my-10 mx-2 md:m-20 md:mb-0 flex flex-col items-start justify-center sm:px-10 sm:py-5 sm:flex-row md:h-80vh md:pt-10 md:px-10 md:justify-start">
-        <div className="w-full flex flex-col mb-5 pr-4 sm:w-2/6">
+      <Navbar fadeOut={fadeOut} user={user} />
+      <div
+        ref={content}
+        className="font-light text-sm leading-8 h-full my-10 mx-2 md:m-20 md:mb-0 flex flex-col items-start justify-center sm:px-10 sm:py-5 sm:flex-row md:h-screen md:py-24 md:px-10 md:justify-start"
+      >
+        <div className="stagger w-full flex flex-col mb-5 pr-4 sm:w-2/6">
           <span className="pageTitle mb-5">Contact</span>
           {text ? <p>{text}</p> : null}
           <ul className="mt-2 space-y-2">
@@ -158,7 +174,7 @@ export const Contact = (props) => {
             ) : null}
           </div>
         </div>
-        <div className="w-full flex flex-col space-y-4 sm:w-4/6 sm:pr-12 sm:pl-12">
+        <div className="stagger w-full flex flex-col space-y-4 sm:w-4/6 sm:pr-12 sm:pl-12">
           <form className="contact block" onSubmit={sendEmail}>
             <label htmlFor="name">Name: *</label>
             <input required className="w-3/6" name="from_name" type="text" />

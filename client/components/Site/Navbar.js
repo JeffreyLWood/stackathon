@@ -4,26 +4,12 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Image } from "cloudinary-react";
-
+import history from "../../history";
+import { gsap } from "gsap";
+import { useRef } from "react";
 export const Navbar = (props) => {
   const dispatch = useDispatch();
   let user = useSelector((state) => state.user);
-  // let customDomain = window.location.hostname;
-
-  // useEffect(() => {
-  //   async function load() {
-  //     await fetch(`/api/users/custom/${customDomain}`, {
-  //       method: "GET",
-  //       headers: { "Content-Type": "application/json" },
-  //     }).then(async (res) => setUser(await res.json()));
-  //   }
-  //   try {
-  //     // load();
-  //   } catch (error) {
-
-  //     console.log(user);
-  //   }
-  // }, []);
 
   let siteTitle = props?.user.siteTitle
     ? `${props?.user.siteTitle}`
@@ -47,24 +33,16 @@ export const Navbar = (props) => {
       : visible && visible[0]?.works && setPreview(visible[0]?.works[0]?.imgId);
   }, [props]);
 
-  let [workDropdown, setWorkDropdown] = useState("hidden");
-
   const show = () => {
     let visible =
       collections && collections.filter((collection) => !collection.hidden);
-    visible.length > 1
-      ? setWorkDropdown(
-          "flex flex-row justify-between dropdown drop-down drop-shadow-xl"
-        )
-      : null;
+    visible.length > 1 ? dropDown() : null;
   };
 
   const hide = () => {
     let visible =
       collections && collections.filter((collection) => !collection.hidden);
-    visible.length > 1
-      ? setWorkDropdown("flex flex-row justify-between dropdown drop-down-up")
-      : null;
+    visible.length > 1 ? dropDownUp() : null;
   };
 
   const previewHandler = (e) => {
@@ -81,17 +59,40 @@ export const Navbar = (props) => {
     mobileNav !== "hidden" ? setBody("fixed") : setBody("");
   }, [mobileNav]);
   document.body.style.position = body;
-  //  document.body.style.top = `-${window.scrollY}px`;
 
   let url = user.domain ? `` : `/${user.userName}`;
 
+  // GSAP
+  const link = (e, destination) => {
+    e.preventDefault();
+    hide();
+    if (destination === window.location.pathname) {
+      return;
+    }
+    props.fadeOut();
+    setTimeout(() => {
+      history.push(destination);
+    }, 1000);
+  };
+  let nav = useRef();
+  const el = gsap.utils.selector(nav);
+  const fade = () => {
+    gsap.to(el(".nav"), { opacity: 1, duration: 1, ease: "expo" }, 0.5);
+  };
+  const dropDown = () =>
+    gsap.to(el(".dropdown"), { yPercent: 115, duration: 2, ease: "expo" });
+  const dropDownUp = () =>
+    gsap.to(el(".dropdown"), { yPercent: -115, duration: 2, ease: "expo" });
+  useEffect(() => {
+    fade();
+  });
   return (
-    <>
-      <nav className="flex flex-row justify-between h-18 items-end mx-2 sm:mx-12 mt-10 tracking-widest">
+    <div ref={nav}>
+      <nav className="nav fixed flex flex-row justify-between items-end px-4 tracking-widest">
         <div className="text-xl">
           <Link to={`${url}`}>{siteTitle}</Link>
         </div>
-        {/* Mobile Nav */}
+        {/* Mobile Nav Hamburger*/}
         <div
           className="toggle"
           onClick={() =>
@@ -102,7 +103,6 @@ export const Navbar = (props) => {
               : setMobileNav("hidden")
           }
         ></div>
-
         {/* Mobile Nav */}
         <nav className={mobileNav}>
           <ul className="text-xl space-y-4 ">
@@ -112,7 +112,7 @@ export const Navbar = (props) => {
                   ? setCollectionsMobile("flex flex-col")
                   : setCollectionsMobile("hidden")
               }
-              className="subHeader"
+              className="subHeader cursor-pointer"
             >
               Selected Work
             </li>
@@ -202,159 +202,177 @@ export const Navbar = (props) => {
             {/* Collections Mobile End */}
 
             <li>
-              <Link to={`${url}/about`} className="subHeader">
+              <Link to={`${url}/about`} className="subHeader cursor-pointer">
                 <div>About</div>
               </Link>
             </li>
             <li>
-              <Link to={`${url}/cv`} className="subHeader">
+              <Link to={`${url}/cv`} className="subHeader cursor-pointer">
                 <div>CV</div>
               </Link>
             </li>
             <li>
-              <Link to={`${url}/contact`} className="subHeader">
-                <div>Contact</div>
-              </Link>
+              <div
+                onClick={(e) => link(e, `${url}/contact`)}
+                className="subHeader cursor-pointer"
+              >
+                Contact
+              </div>
             </li>
           </ul>
         </nav>
         {/* Mobile Nav End */}
 
-        <div className="nav flex flex-row space-x-3 text-xs sm:text-sm pe-5">
-          <div
+        <span className="flex flex-row space-x-3 text-xs sm:text-sm pe-5">
+          <span
             className="subHeader cursor-pointer"
             onMouseOver={() => show()}
             onMouseLeave={() => hide()}
-            onClick={hide}
+            onClick={(e) => link(e, `${url}/`)}
           >
-            <Link to={`${url}`} onClick={hide}>
-              Selected Work
-            </Link>
+            Selected Work
+          </span>
 
-            <div className={workDropdown}>
-              <div className="hidden sm:block w-full flex text-center h-content">
-                <ul className="w-full h-full">
-                  <span className="w-full h-full">
-                    <li className="w-full h-full">
-                      <Image
-                        cloudName="jeffreywood"
-                        publicId={preview}
-                        className="hover:cursor-pointer h-72 mx-auto "
-                        // onClick={(e) => props.editHandler(e)}
-                      />
-                    </li>
-                  </span>
-                </ul>
-              </div>
+          <span
+            className="subHeader cursor-pointer"
+            onClick={(e) => link(e, `${url}/about`)}
+          >
+            About
+          </span>
 
-              <div className="flex flex-col justify-center items-start h-full w-screen sm:justify-start sm:w-2/6 md:flex-row">
-                <span className="w-full flex justify-center sm:justify-start sm:w-3/6">
-                  <ul>
-                    {collections &&
-                      collections
-                        .filter(
-                          (collection) =>
-                            collection.hidden === false &&
-                            collection.category === "Primary"
-                        )
-                        .sort(function (a, b) {
-                          return a.order - b.order;
-                        })
-                        .map((collection, idx) =>
-                          props.setCollection ? (
-                            <li
-                              key={idx}
-                              className="cursor-pointer text-xl sm:text-sm text-neutral-500"
-                              onClick={() => {
-                                props.setCollection(collection);
-                              }}
-                            >
-                              <Link
-                                id={collection.works[0]?.imgId}
-                                onMouseOver={(e) => previewHandler(e)}
-                                to={`${url}/work/${collection.title}`}
-                              >
-                                {collection.title}
-                              </Link>
-                            </li>
-                          ) : (
-                            <li
-                              key={idx}
-                              className="cursor-pointer text-xl sm:text-sm"
-                            >
-                              <Link
-                                id={collection.works[0]?.imgId}
-                                onMouseOver={(e) => previewHandler(e)}
-                                to={`${url}/work/${collection.title}`}
-                              >
-                                {collection.title}
-                              </Link>
-                            </li>
-                          )
-                        )}
-                  </ul>
-                </span>
-                <span className="w-full flex justify-center sm:justify-start sm:w-3/6 mr-4">
-                  <ul>
-                    {collections &&
-                      collections
-                        .filter(
-                          (collection) =>
-                            collection.hidden === false &&
-                            collection.category === "Secondary"
-                        )
-                        .sort(function (a, b) {
-                          return a.order - b.order;
-                        })
-                        .map((collection, idx) =>
-                          props.setCollection ? (
-                            <li
-                              key={idx}
-                              className="cursor-pointer text-xl sm:text-sm text-neutral-400 tracking-widest"
-                              onClick={() => {
-                                props.setCollection(collection);
-                              }}
-                            >
-                              <Link
-                                onMouseOver={(e) => previewHandler(e)}
-                                id={collection.works[0]?.imgId}
-                                to={`${url}/work/${collection.title}`}
-                              >
-                                {collection.title}
-                              </Link>
-                            </li>
-                          ) : (
-                            <li
-                              key={idx}
-                              className="cursor-pointer text-xl sm:text-sm  text-neutral-400 tracking-widest"
-                            >
-                              <Link
-                                onMouseOver={(e) => previewHandler(e)}
-                                id={collection.works[0]?.imgId}
-                                to={`${url}/work/${collection.title}`}
-                              >
-                                {collection.title}
-                              </Link>
-                            </li>
-                          )
-                        )}
-                  </ul>
-                </span>
-              </div>
-            </div>
-          </div>
-          <Link to={`${url}/about`} className="subHeader">
-            <div>About</div>
-          </Link>
-          <Link to={`${url}/cv`} className="subHeader">
-            <div>CV</div>
-          </Link>
-          <Link to={`${url}/contact`} className="subHeader">
-            <div>Contact</div>
-          </Link>
-        </div>
+          <span
+            className="subHeader cursor-pointer"
+            onClick={(e) => link(e, `${url}/cv`)}
+          >
+            CV
+          </span>
+
+          <span
+            onClick={(e) => link(e, `${url}/contact`)}
+            className="subHeader cursor-pointer"
+          >
+            Contact
+          </span>
+        </span>
       </nav>
-    </>
+      {/* Drop Down Nav */}
+      <div
+        className="flex flex-row justify-between dropdown drop-shadow-xl"
+        onMouseOver={() => show()}
+        onMouseLeave={() => hide()}
+        onClick={() => hide()}
+      >
+        <div className="hidden sm:block w-full flex text-center h-content">
+          <ul className="w-full h-full">
+            <span className="w-full h-full">
+              <li className="w-full h-full">
+                <Image
+                  cloudName={process.env.CLOUDINARY_NAME}
+                  publicId={preview}
+                  className="hover:cursor-pointer h-72 mx-auto "
+                  // onClick={(e) => props.editHandler(e)}
+                />
+              </li>
+            </span>
+          </ul>
+        </div>
+        <div className="flex flex-col justify-center items-start h-full w-screen sm:justify-start sm:w-2/6 md:flex-row">
+          <span className="w-full flex justify-center sm:justify-start sm:w-3/6">
+            <ul>
+              {collections &&
+                collections
+                  .filter(
+                    (collection) =>
+                      collection.hidden === false &&
+                      collection.category === "Primary"
+                  )
+                  .sort(function (a, b) {
+                    return a.order - b.order;
+                  })
+                  .map((collection, idx) =>
+                    props.setCollection ? (
+                      <li
+                        key={idx}
+                        className="cursor-pointer text-xl sm:text-sm text-neutral-500"
+                        onClick={() => {
+                          props.setCollection(collection);
+                        }}
+                      >
+                        <Link
+                          id={collection.works[0]?.imgId}
+                          onMouseOver={(e) => previewHandler(e)}
+                          to={`${url}/work/${collection.title}`}
+                        >
+                          {collection.title}
+                        </Link>
+                      </li>
+                    ) : (
+                      <li
+                        key={idx}
+                        className="cursor-pointer text-xl sm:text-sm"
+                      >
+                        <Link
+                          id={collection.works[0]?.imgId}
+                          onMouseOver={(e) => previewHandler(e)}
+                          to={`${url}/work/${collection.title}`}
+                        >
+                          {collection.title}
+                        </Link>
+                      </li>
+                    )
+                  )}
+            </ul>
+          </span>
+          <span className="w-full flex justify-center sm:justify-start sm:w-3/6 mr-4">
+            <ul>
+              {collections &&
+                collections
+                  .filter(
+                    (collection) =>
+                      collection.hidden === false &&
+                      collection.category === "Secondary"
+                  )
+                  .sort(function (a, b) {
+                    return a.order - b.order;
+                  })
+                  .map((collection, idx) =>
+                    props.setCollection ? (
+                      <li
+                        key={idx}
+                        className="cursor-pointer text-xl sm:text-sm text-neutral-400 tracking-widest"
+                        onClick={() => {
+                          props.setCollection(collection);
+                        }}
+                      >
+                        <Link
+                          onMouseOver={(e) => previewHandler(e)}
+                          id={collection.works[0]?.imgId}
+                          to={`${url}/work/${collection.title}`}
+                        >
+                          {collection.title}
+                        </Link>
+                      </li>
+                    ) : (
+                      <li
+                        key={idx}
+                        className="cursor-pointer text-xl sm:text-sm  text-neutral-400 tracking-widest"
+                      >
+                        <Link
+                          onMouseOver={(e) => previewHandler(e)}
+                          id={collection.works[0]?.imgId}
+                          to={`${url}/work/${collection.title}`}
+                        >
+                          {collection.title}
+                        </Link>
+                      </li>
+                    )
+                  )}
+            </ul>
+          </span>
+        </div>
+      </div>
+      {/* Drop Down Nav End */}
+    </div>
   );
 };
 

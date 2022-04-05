@@ -11,7 +11,7 @@ const App = (props) => {
     // <div data-scroll-container>
     <div>
       {/* <Navbar user={user} history={props.history} /> */}
-      <Routes user={user} />
+      <Routes user={user} history={props.history} />
     </div>
   );
 };

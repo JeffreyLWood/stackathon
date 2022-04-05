@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Footer from "./Footer";
 import CVGroup from "./CVGroup";
+import { gsap } from "gsap";
+import { useRef } from "react";
 export const CV = (props) => {
   let user = useSelector((state) => state.user);
 
@@ -35,11 +37,28 @@ export const CV = (props) => {
   let communityInvolvement =
     cv && cv.communityInvolvement ? cv.communityInvolvement.split("\n") : null;
 
+  let content = useRef();
+  const q = gsap.utils.selector(content);
+  let tl = new gsap.timeline();
+  const fadeOut = () => {
+    gsap.to(content.current, { opacity: 0, duration: 1, ease: "expo" });
+  };
+  useEffect(() => {
+    tl.to(
+      q(".stagger"),
+      { opacity: 1, stagger: 0.1, duration: 2, ease: "expo", y: -10 },
+      1
+    );
+  });
+
   return (
     <>
-      <Navbar user={user} />
+      <Navbar fadeOut={fadeOut} user={user} />
       {/* Container */}
-      <div className="h-90vh w-screen px-2 sm:mx-0 w-full flex flex-col pt-20 pb-20">
+      <div
+        ref={content}
+        className="h-90vh w-screen px-2 sm:mx-0 w-full flex flex-col pt-32 pb-20"
+      >
         {education ? <CVGroup title={"Education"} data={education} /> : null}
         {soloExhibition ? (
           <CVGroup title={"Solo Exhibitions"} data={soloExhibition} />

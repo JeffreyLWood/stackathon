@@ -79,39 +79,28 @@ const Routes = () => {
             exact
             path="/create/in/:username/work"
             component={CreateWork}
-            user={user}
           />
           <Route
             exact
             path="/create/in/:username/about"
             component={CreateAbout}
-            user={user}
           />
-          <Route
-            exact
-            path="/create/in/:username/cv"
-            component={CreateCV}
-            user={user}
-          />
+          <Route exact path="/create/in/:username/cv" component={CreateCV} />
           <Route
             exact
             path="/create/in/:username/contact"
             component={CreateContact}
-            user={user}
           />
           <Route
             exact
             path="/create/in/:username/settings"
             component={CreateSettings}
-            user={user}
           />
         </Switch>
       ) : (
         <Switch>
-          <Route exact path="/" component={Home} displayName="login" />
-
-          <Route exact path="/:username" component={Work} data={user} />
-
+          <Route exact path="/" component={Home} />
+          <Route exact path="/:username" component={Work} />
           <Route exact path="/:username/about" component={About} />
           <Route exact path="/:username/cv" component={CV} />
           <Route exact path="/:username/contact" component={Contact} />

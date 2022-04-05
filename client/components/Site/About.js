@@ -1,11 +1,12 @@
 import React from "react";
 import { Navbar } from "./Navbar";
-
 import { fetchUserData } from "../../store/user";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Footer from "./Footer";
 import { Image } from "cloudinary-react";
+import { gsap } from "gsap";
+import { useRef } from "react";
 export const About = (props) => {
   let user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -46,17 +47,38 @@ export const About = (props) => {
 
   let caption = user.about && user.about.caption;
   let imgId = user.about && user.about.imgId;
+
+  // GSAP
+  let content = useRef();
+  const fadeOut = () => {
+    gsap.to(content.current, { opacity: 0, duration: 1, ease: "expo" });
+  };
+
+  const q = gsap.utils.selector(content);
+  let tl = new gsap.timeline();
+  useEffect(() => {
+    tl.to(
+      q(".stagger"),
+
+      { opacity: 1, stagger: 0.1, duration: 2, ease: "expo", y: -10 },
+      1
+    );
+  });
+
   return (
     <>
-      <Navbar user={user} />
-      <div className="font-light h-70vh flex flex-col items-start pt-10 sm:mx-10 sm:my-20 md:flex-row md:justify-center">
+      <Navbar fadeOut={fadeOut} user={user} />
+      <div
+        ref={content}
+        className="font-light h-70vh flex flex-col items-start pt-24 sm:mx-10 sm:my-20 md:flex-row md:justify-center"
+      >
         <div className="w-full flex justify-center flex-col pb-4 sm:pb-0 sm:w-3/6 sm:h-full">
           <span className="w-full sm:h-96 flex justify-center">
             <figure>
               <Image
                 cloudName="jeffreywood"
                 publicId={imgId}
-                className="flex object-contain sm:max-w-lg aboutImage px-2 sm:px-0 sm:mx-auto"
+                className="stagger flex object-contain sm:max-w-lg aboutImage px-2 sm:px-0 sm:mx-auto"
               />
               <figcaption className="text-sm mt-2 italic text-neutral-400 text-center">
                 {caption}
@@ -65,13 +87,13 @@ export const About = (props) => {
           </span>
         </div>
 
-        <div className="w-full h-full flex flex-col px-2 text-sm leading-8 sm:w-3/6 sm:px-10">
+        <div className="stagger w-full h-full flex flex-col px-2 text-sm leading-8 sm:w-3/6 sm:px-10">
           {newHeader ? (
-            <span className="border-l-2 border-r-2 mb-6 mx-auto tracking-widest w-4/6 sm:w-full px-4 h-full flex flex-col text-lg leading-8">
+            <span className="stagger border-l-2 border-r-2 mb-6 mx-auto tracking-widest w-4/6 sm:w-full px-4 h-full flex flex-col text-lg leading-8">
               {newHeader}
             </span>
           ) : null}
-          {newText}
+          <div className="stagger"> {newText}</div>
         </div>
       </div>
       <Footer user={user} userName={props.match.params.username} />

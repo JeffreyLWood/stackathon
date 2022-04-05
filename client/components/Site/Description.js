@@ -40,9 +40,8 @@ export default function Description(props) {
 
   return (
     <section className="w-screen min-h-content sm:mt-20 sm:mb-28 sm:h-96 flex flex-col-reverse items-start sm:flex-row">
-      <div className="w-full h-4/6 sm:h-full sm:w-5/12  flex flex-col px-2 sm:px-10 space-y-4">
+      <div className="stagger w-full h-4/6 sm:h-full sm:w-5/12  flex flex-col px-2 sm:px-10 space-y-4">
         <span className="text-3xl tracking-widest ">{props.title}</span>
-
         {text}
       </div>
       <div className="w-full h-auto sm:h-full sm:w-7/12 flex flex-col md:flex-row sm:items-baseline md:items-end sm:justify-center">
@@ -50,11 +49,11 @@ export default function Description(props) {
           <Image
             cloudName={process.env.CLOUDINARY_NAME}
             publicId={props.data.imgId}
-            className="max-h-96 cursor-pointer"
+            className="stagger max-h-96 cursor-pointer"
             onClick={() => (window.outerWidth > 638 ? setShow(true) : null)}
           />
         </span>
-        <span className="pt-5 text-right sm:text-left mx-4 tracking-widest">
+        <span className="stagger pt-5 text-right sm:text-left mx-4 tracking-widest">
           <ul className="text-xs space-y-2  uppercase text-neutral-400">
             <li className="text-neutral-400">{user.siteTitle}</li>
             <li>{props.data.title} </li>

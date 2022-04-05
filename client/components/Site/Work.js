@@ -7,6 +7,9 @@ import Artwork from "./Artwork";
 import Footer from "./Footer";
 import { fetchCollection } from "../../store/user";
 import Description from "./Description";
+import { gsap } from "gsap";
+import { useRef } from "react";
+
 export const Work = (props) => {
   let user = useSelector((state) => state.user);
 
@@ -61,14 +64,39 @@ export const Work = (props) => {
       return a.order - b.order;
     });
 
+  let content = useRef();
+  const q = gsap.utils.selector(content);
+  let tl = new gsap.timeline();
+  const fadeOut = () => {
+    gsap.to(content.current, { opacity: 0, duration: 1, ease: "expo" });
+  };
+
+  useEffect(() => {
+    tl.to(
+      q(".stagger"),
+      {
+        opacity: 1,
+        stagger: 0.1,
+        duration: 3,
+        ease: "expo",
+        y: -20,
+      },
+      2
+    );
+  });
+
   return (
-    <>
+    <div>
       <Navbar
+        fadeOut={fadeOut}
         user={user}
         collection={collection}
         setCollection={setCollection}
       />
-      <div className="min-h-screen items-start mt-8 flex flex-col sm:mx-5">
+      <div
+        ref={content}
+        className="min-h-screen items-start pt-28 flex flex-col sm:mx-5"
+      >
         {collection?.description ? (
           <Description
             title={collection?.title}
@@ -76,7 +104,7 @@ export const Work = (props) => {
             data={works[0]}
           />
         ) : null}
-        <div className="flex  w-full h-full overflow-visible flex-wrap">
+        <div className="flex w-full h-full overflow-visible flex-wrap">
           {collection?.works
             ? works
                 .filter((work) =>
@@ -90,6 +118,6 @@ export const Work = (props) => {
       </div>
 
       <Footer user={user} userName={props.match.params.username} />
-    </>
+    </div>
   );
 };
