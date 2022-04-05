@@ -23,7 +23,7 @@ export const Navbar = (props) => {
   let url = user.domain
     ? `https://${user.domain}`
     : `https://selected-work.com/${user.username}`;
-  console.log(user);
+
   return (
     <div className="navbar flex justify-between py-4 px-2 font-light bg-white z-30">
       {/* <div className="flex flex-row justify-between space-x-5"> */}
