@@ -83,9 +83,9 @@ export const Navbar = (props) => {
     gsap.to(el(".nav"), { opacity: 1, duration: 1, ease: "expo" }, 0.5);
   };
   const dropDown = () =>
-    gsap.to(el(".dropdown"), { yPercent: 120, duration: 2, ease: "expo" });
+    gsap.to(el(".dropdown"), { yPercent: 115, duration: 2, ease: "expo" });
   const dropDownUp = () =>
-    gsap.to(el(".dropdown"), { yPercent: -120, duration: 2, ease: "expo" });
+    gsap.to(el(".dropdown"), { yPercent: -115, duration: 2, ease: "expo" });
   useEffect(() => {
     fade();
   });
