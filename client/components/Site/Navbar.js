@@ -7,6 +7,7 @@ import { Image } from "cloudinary-react";
 import history from "../../history";
 import { gsap } from "gsap";
 import { useRef } from "react";
+import MobileNav from "./MobileNav";
 export const Navbar = (props) => {
   const dispatch = useDispatch();
   let user = useSelector((state) => state.user);
@@ -50,16 +51,6 @@ export const Navbar = (props) => {
     setPreview(e.target.id);
   };
 
-  let [mobileNav, setMobileNav] = useState("hidden");
-  let [collectionsMobile, setCollectionsMobile] = useState("hidden");
-
-  //Disable scrolling when menu is open
-  let [body, setBody] = useState("");
-  useEffect(() => {
-    mobileNav !== "hidden" ? setBody("fixed") : setBody("");
-  }, [mobileNav]);
-  document.body.style.position = body;
-
   let url = user.domain ? `` : `/${user.userName}`;
 
   // GSAP
@@ -88,140 +79,11 @@ export const Navbar = (props) => {
   });
   return (
     <div ref={nav}>
-      <nav className="nav fixed flex flex-row justify-between items-end px-4 tracking-widest">
+      <nav className="nav fixed flex flex-row justify-between items-end sm:px-14 tracking-widest">
         <div className="text-xl">
           <Link to={`${url}`}>{siteTitle}</Link>
         </div>
         {/* Mobile Nav Hamburger*/}
-        <div
-          className="toggle"
-          onClick={() =>
-            mobileNav === "hidden"
-              ? setMobileNav(
-                  "fixed top-8 h-screen flex justify-center text-center mt-20 w-screen bg-white"
-                )
-              : setMobileNav("hidden")
-          }
-        ></div>
-        {/* Mobile Nav */}
-        <nav className={mobileNav}>
-          <ul className="text-xl space-y-4 ">
-            <li
-              onClick={() =>
-                collectionsMobile === "hidden"
-                  ? setCollectionsMobile("flex flex-col")
-                  : setCollectionsMobile("hidden")
-              }
-              className="subHeader cursor-pointer"
-            >
-              Selected Work
-            </li>
-
-            {/* Collections Mobile */}
-            <span className={collectionsMobile}>
-              <ul>
-                {collections &&
-                  collections
-                    .filter(
-                      (collection) =>
-                        collection.hidden === false &&
-                        collection.category === "Primary"
-                    )
-                    .sort(function (a, b) {
-                      return a.order - b.order;
-                    })
-                    .map((collection, idx) =>
-                      props.setCollection ? (
-                        <li
-                          key={idx}
-                          className="cursor-pointer text-xl sm:text-sm text-neutral-500"
-                          onClick={() => {
-                            setMobileNav("hidden"),
-                              setCollectionsMobile("hidden"),
-                              props.setCollection(collection);
-                          }}
-                        >
-                          <Link to={`${url}/work/${collection.title}`}>
-                            {collection.title}
-                          </Link>
-                        </li>
-                      ) : (
-                        <li
-                          key={idx}
-                          className="cursor-pointer text-xl sm:text-sm"
-                        >
-                          <Link to={`${url}/work/${collection.title}`}>
-                            {collection.title}
-                          </Link>
-                        </li>
-                      )
-                    )}
-              </ul>
-              <ul>
-                {collections &&
-                  collections
-                    .filter(
-                      (collection) =>
-                        collection.hidden === false &&
-                        collection.category === "Secondary"
-                    )
-                    .sort(function (a, b) {
-                      return a.order - b.order;
-                    })
-                    .map((collection, idx) =>
-                      props.setCollection ? (
-                        <li
-                          key={idx}
-                          className="cursor-pointer text-xl sm:text-sm text-neutral-400 tracking-widest"
-                          onClick={() => {
-                            setMobileNav("hidden"),
-                              setCollectionsMobile("hidden"),
-                              props.setCollection(collection);
-                          }}
-                        >
-                          <Link to={`${url}/work/${collection.title}`}>
-                            {collection.title}
-                          </Link>
-                        </li>
-                      ) : (
-                        <li
-                          key={idx}
-                          onClick={() => {
-                            setCollectionsMobile("hidden");
-                          }}
-                          className="cursor-pointer text-xl sm:text-sm  text-neutral-400 tracking-widest"
-                        >
-                          <Link to={`${url}/work/${collection.title}`}>
-                            {collection.title}
-                          </Link>
-                        </li>
-                      )
-                    )}
-              </ul>
-            </span>
-            {/* Collections Mobile End */}
-
-            <li>
-              <Link to={`${url}/about`} className="subHeader cursor-pointer">
-                <div>About</div>
-              </Link>
-            </li>
-            <li>
-              <Link to={`${url}/cv`} className="subHeader cursor-pointer">
-                <div>CV</div>
-              </Link>
-            </li>
-            <li>
-              <div
-                onClick={(e) => link(e, `${url}/contact`)}
-                className="subHeader cursor-pointer"
-              >
-                Contact
-              </div>
-            </li>
-          </ul>
-        </nav>
-        {/* Mobile Nav End */}
 
         <span className="flex flex-row space-x-3 text-xs sm:text-sm pe-5">
           <span
@@ -255,6 +117,7 @@ export const Navbar = (props) => {
           </span>
         </span>
       </nav>
+      <MobileNav url={url} collections={collections} />
       {/* Drop Down Nav */}
       <div
         className="flex flex-row justify-between dropdown drop-shadow-xl"

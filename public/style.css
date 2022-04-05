@@ -537,10 +537,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   position: sticky;
 }
 
-.top-8 {
-  top: 2rem;
-}
-
 .z-0 {
   z-index: 0;
 }
@@ -813,10 +809,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .max-h-96 {
   max-height: 24rem;
-}
-
-.max-h-full {
-  max-height: 100%;
 }
 
 .min-h-screen {
@@ -1180,10 +1172,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pt-28 {
   padding-top: 7rem;
-
-
-.pt-20 {
-  padding-top: 5rem;
 }
 
 .text-center {
@@ -1535,11 +1523,11 @@ html.has-scroll-dragging {
 }
 
 .toggle {
-  width: 30px;
-  height: 30px;
+  width: 2rem;
+  height: 2rem;
   background: url("menu.png");
   background-repeat: no-repeat;
-  background-size: 30px;
+  background-size: 2rem;
   background-position: center;
   cursor: pointer;
   display: none;
@@ -1954,6 +1942,10 @@ textarea {
   max-height: 495px;
 }
 
+.mobileHead {
+  display: none;
+}
+
 .nav {
   background-color: white;
   z-index: 40;
@@ -1964,174 +1956,16 @@ textarea {
   opacity: 0;
 }
 
-.fade-in {
-  -webkit-animation: fadeIn ease-in-out 0.4s;
-          animation: fadeIn ease-in-out 0.4s;
-}
-
-@-webkit-keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-.fade-in-down {
-  -webkit-animation: fadeDown 1.2s ease-in-out 0.2s;
-          animation: fadeDown 1.2s ease-in-out 0.2s;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-}
-
-@-webkit-keyframes fadeDown {
-  0% {
-    transform: translateY(-50px);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes fadeDown {
-  0% {
-    transform: translateY(-50px);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.fade-in-left {
-  -webkit-animation: fadeLeft 0.8s ease-in-out 0.2s;
-          animation: fadeLeft 0.8s ease-in-out 0.2s;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-}
-
-@-webkit-keyframes fadeLeft {
-  0% {
-    transform: translateX(50px);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes fadeLeft {
-  0% {
-    transform: translateX(50px);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-.drop-down {
-  -webkit-animation: growDown 300ms ease-in-out forwards;
-          animation: growDown 300ms ease-in-out forwards;
-  transform-origin: top center;
-}
-
-@-webkit-keyframes growDown {
-  0% {
-    transform: scaleY(0);
-  }
-
-  100% {
-    transform: scaleY(1);
-  }
-}
-
-@keyframes growDown {
-  0% {
-    transform: scaleY(0);
-  }
-
-  100% {
-    transform: scaleY(1);
-  }
-}
-
-.drop-down-up {
-  -webkit-animation: growUp 300ms ease-in-out forwards;
-          animation: growUp 300ms ease-in-out forwards;
-  transform-origin: top center;
-  -webkit-animation-delay: 0.2s;
-          animation-delay: 0.2s;
-}
-
-.drop-down-up li {
-  -webkit-animation-name: fadeout;
-          animation-name: fadeout;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-  -webkit-animation-duration: 0.2s;
-          animation-duration: 0.2s;
-}
-
-@-webkit-keyframes fadeout {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes fadeout {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
-
-@-webkit-keyframes growUp {
-  0% {
-    transform: scaleY(1);
-  }
-
-  100% {
-    transform: scaleY(0);
-  }
-}
-
-@keyframes growUp {
-  0% {
-    transform: scaleY(1);
-  }
-
-  100% {
-    transform: scaleY(0);
-  }
+.mobileNav {
+  display: none;
+  z-index: 50;
+  position: fixed;
+  top: 4rem;
+  padding: 1rem;
+  width: 100vw;
+  height: 100vh;
+  right: -375px;
+  background-color: #fff;
 }
 
 @media (max-width: 638px) {
@@ -2150,12 +1984,28 @@ textarea {
     max-height: 20%;
     position: relative;
   }
+
+  .mobileNav {
+    display: block;
+    z-index: 50;
+    position: fixed;
+    top: 4rem;
+    padding: 1rem;
+    width: 100vw;
+    height: 100vh;
+    right: -100vw;
+    background-color: #fff;
+  }
 }
 
 @media (max-width: 768px) {
   .welcome {
     background-size: auto;
     padding: 2rem;
+  }
+
+  .mobileHead {
+    display: block;
   }
 
   .toggle {
@@ -2289,9 +2139,8 @@ textarea {
     margin-right: 1.25rem;
   }
 
-  .sm\:mx-12 {
-    margin-left: 3rem;
-    margin-right: 3rem;
+  .sm\:mt-0 {
+    margin-top: 0px;
   }
 
   .sm\:mt-10 {
@@ -2473,6 +2322,11 @@ textarea {
     padding-bottom: 1.25rem;
   }
 
+  .sm\:px-14 {
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
+  }
+
   .sm\:pt-0 {
     padding-top: 0px;
   }
@@ -2633,10 +2487,6 @@ textarea {
   .md\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
-  }
-
-  .md\:h-80vh {
-    min-height: 80vh;
   }
 }
 

@@ -116,11 +116,11 @@ html.has-scroll-dragging {
 }
 
 .toggle {
-  width: 30px;
-  height: 30px;
+  width: 2rem;
+  height: 2rem;
   background: url("menu.png");
   background-repeat: no-repeat;
-  background-size: 30px;
+  background-size: 2rem;
   background-position: center;
   cursor: pointer;
   display: none;
@@ -508,6 +508,11 @@ textarea {
 .aboutImage {
   max-height: 495px;
 }
+
+.mobileHead {
+  display: none;
+}
+
 .nav {
   background-color: white;
   z-index: 40;
@@ -518,92 +523,16 @@ textarea {
   opacity: 0;
 }
 
-.fade-in {
-  animation: fadeIn ease-in-out 0.4s;
-}
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.fade-in-down {
-  animation: fadeDown 1.2s ease-in-out 0.2s;
-  animation-fill-mode: forwards;
-}
-@keyframes fadeDown {
-  0% {
-    transform: translateY(-50px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.fade-in-left {
-  animation: fadeLeft 0.8s ease-in-out 0.2s;
-  animation-fill-mode: forwards;
-}
-@keyframes fadeLeft {
-  0% {
-    transform: translateX(50px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-.drop-down {
-  animation: growDown 300ms ease-in-out forwards;
-  transform-origin: top center;
-}
-
-@keyframes growDown {
-  0% {
-    transform: scaleY(0);
-  }
-
-  100% {
-    transform: scaleY(1);
-  }
-}
-
-.drop-down-up {
-  animation: growUp 300ms ease-in-out forwards;
-  transform-origin: top center;
-  animation-delay: 0.2s;
-}
-
-.drop-down-up li {
-  animation-name: fadeout;
-  animation-fill-mode: forwards;
-  animation-duration: 0.2s;
-}
-
-@keyframes fadeout {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes growUp {
-  0% {
-    transform: scaleY(1);
-  }
-
-  100% {
-    transform: scaleY(0);
-  }
+.mobileNav {
+  display: none;
+  z-index: 50;
+  position: fixed;
+  top: 4rem;
+  padding: 1rem;
+  width: 100vw;
+  height: 100vh;
+  right: -375px;
+  background-color: #fff;
 }
 
 @media (max-width: 638px) {
@@ -620,6 +549,17 @@ textarea {
     max-height: 20%;
     position: relative;
   }
+  .mobileNav {
+    display: block;
+    z-index: 50;
+    position: fixed;
+    top: 4rem;
+    padding: 1rem;
+    width: 100vw;
+    height: 100vh;
+    right: -100vw;
+    background-color: #fff;
+  }
 }
 
 @media (max-width: 768px) {
@@ -628,9 +568,14 @@ textarea {
     padding: 2rem;
   }
 
+  .mobileHead {
+    display: block;
+  }
+
   .toggle {
     display: block;
   }
+
   .nav {
     display: none;
   }
