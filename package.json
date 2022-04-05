@@ -36,6 +36,7 @@
     "express-session": "^1.17.2",
     "express-subdomain": "^1.0.5",
     "google-auth-library": "^7.14.1",
+    "gsap": "^3.10.2",
     "heroku-client": "^3.1.0",
     "history": "^4.9.0",
     "jsonwebtoken": "^8.5.1",

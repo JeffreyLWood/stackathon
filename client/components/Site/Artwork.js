@@ -3,6 +3,8 @@ import { Image } from "cloudinary-react";
 import { useState, useEffect } from "react";
 import ArtworkModal from "./ArtworkModal";
 import Dimensions from "./Dimensions";
+import { useRef } from "react";
+import { gsap } from "gsap";
 export default function Artwork(props) {
   let [show, setShow] = useState(false);
 
@@ -30,13 +32,13 @@ export default function Artwork(props) {
 
   return (
     <>
-      <div className="flex flex-col flex-wrap w-full mx-2 my-8 md:my-0 sm:w-2/4 lg:w-1/4 md:h-96 sm:px-8 md:mt-4 md:mx-0">
+      <div className="stagger z-10 flex flex-col flex-wrap w-full mx-2 my-8 md:my-0 sm:w-2/4 lg:w-1/4 md:h-96 sm:px-8 md:mt-4 md:mx-0">
         <span>
           <Image
             cloudName="jeffreywood"
             publicId={props.data.imgId}
             onClick={() => (window.outerWidth > 638 ? setShow(true) : null)}
-            className="min-h-70 max-h-full object-contain mx-auto  md:h-64 cursor-pointer"
+            className="min-h-70 object-contain mx-auto  md:h-64 cursor-pointer"
           />
         </span>
         <div className="pt-4 sm:pt-8 text-xs flex flex-col space-y-2 sm:space-y-0 justify-end font-light tracking-widest uppercase text-right cursor-pointer text-neutral-500">

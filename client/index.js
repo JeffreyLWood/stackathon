@@ -8,7 +8,7 @@ import App from "./App";
 // import LocomotiveScroll from "locomotive-scroll";
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={store} history={history}>
     <Router history={history}>
       <App history={history} />
     </Router>

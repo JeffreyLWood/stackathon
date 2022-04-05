@@ -11,7 +11,7 @@ export default function CVGroup(props) {
     return;
   } else {
     return (
-      <>
+      <span className="stagger">
         <div className={`pageTitle text-gray-500  ${margins}`}>
           {props.title}
         </div>
@@ -99,7 +99,7 @@ export default function CVGroup(props) {
               );
             })}
         </ul>
-      </>
+      </span>
     );
   }
 }
