@@ -73,13 +73,7 @@ export const Work = (props) => {
           <Description
             title={collection?.title}
             description={collection?.description}
-            imgId={works[0]?.imgId}
-            workTitle={works[0]?.title}
-            workYear={works[0]?.year}
-            workHeight={works[0]?.height}
-            workWidth={works[0]?.width}
-            workDepth={works[0]?.depth}
-            data={works}
+            data={works[0]}
           />
         ) : null}
         <div className="flex  w-full h-full overflow-visible flex-wrap">
