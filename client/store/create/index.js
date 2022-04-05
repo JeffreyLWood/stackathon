@@ -410,7 +410,6 @@ export default function (state = {}, action) {
     }
 
     case UPDATE_WORK: {
-      console.log(action);
       let snapshotId = `${action.snapshotId}Collection`;
       let newCollection = state[snapshotId].filter(
         (work) => work.imgId !== action.data.work.imgId
@@ -506,6 +505,9 @@ export default function (state = {}, action) {
         primaryCollection: action.data.newCollection[0].works,
         collection: action.data.newCollection[0],
       };
+      newState.collections = newState.collections.filter(
+        (collection) => collection.id !== action.data.newCollection[0].id
+      );
       newState.collections.unshift(action.data.newCollection[0]);
       return newState;
     }
