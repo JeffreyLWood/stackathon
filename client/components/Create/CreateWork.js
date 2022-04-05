@@ -60,7 +60,10 @@ export default function CreateWork(props) {
   }, []);
 
   useEffect(() => {
-    worksData?.length && setPrimary(worksData[0].title);
+    let collections =
+      worksData?.length &&
+      worksData.filter((collection) => collection.title !== "Hidden");
+    collections && setPrimary(collections[0].title);
   }, [worksData]);
 
   useEffect(() => {
