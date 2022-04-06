@@ -75,7 +75,7 @@ export const Contact = (props) => {
       <Navbar fadeOut={fadeOut} user={user} />
       <div
         ref={content}
-        className="font-light text-sm leading-8 h-full my-10 mx-2 md:m-20 md:mb-0 flex flex-col items-start justify-center sm:px-10 sm:py-5 sm:flex-row md:h-screen md:py-24 md:px-10 md:justify-start"
+        className="font-light text-sm leading-8 h-full my-14 mx-2 md:m-20 md:mb-0 flex flex-col items-start justify-center sm:px-10 sm:py-5 sm:flex-row md:h-screen md:py-24 md:px-10 md:justify-start"
       >
         <div className="stagger w-full flex flex-col mb-5 pr-4 sm:w-2/6">
           <span className="pageTitle mb-5">Contact</span>
