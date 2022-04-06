@@ -36,12 +36,14 @@ export default function MobileNav(props) {
           ease: "expo",
         });
   };
+
   useEffect(() => {
     show ? setBody("fixed") : setBody("");
   }, [show]);
+
   return (
     <div ref={nav}>
-      <nav className="mobileHead fixed w-screen bg-white z-20 h-18 flex flex-row justify-between px-2 items-end tracking-widest">
+      <nav className="mobile fixed top-0 w-screen bg-white z-20 h-18 flex flex-row justify-between p-2 tracking-widest">
         <div className="text-xl">
           <Link to={`${props.url}`}>
             {user.siteTitle || `${user.firstName} ${user.lastName}`}
@@ -76,32 +78,17 @@ export default function MobileNav(props) {
                   .sort(function (a, b) {
                     return a.order - b.order;
                   })
-                  .map((collection, idx) =>
-                    props.setCollection ? (
-                      <li
-                        key={idx}
-                        className="cursor-pointer text-xl sm:text-sm text-neutral-500"
-                        onClick={() => {
-                          setMobileNav("hidden"),
-                            setCollectionsMobile("hidden"),
-                            props.setCollection(collection);
-                        }}
-                      >
-                        <Link to={`${props.url}/work/${collection.title}`}>
-                          {collection.title}
-                        </Link>
-                      </li>
-                    ) : (
-                      <li
-                        key={idx}
-                        className="cursor-pointer text-xl sm:text-sm"
-                      >
-                        <Link to={`${props.url}/work/${collection.title}`}>
-                          {collection.title}
-                        </Link>
-                      </li>
-                    )
-                  )}
+                  .map((collection, idx) => (
+                    <li
+                      key={idx}
+                      className="cursor-pointer text-xl sm:text-sm text-neutral-500"
+                      onClick={(e) => {
+                        props.collectionClickHandler(e, collection), toggle();
+                      }}
+                    >
+                      {collection.title}
+                    </li>
+                  ))}
             </ul>
             <ul>
               {props.collections &&
@@ -148,17 +135,20 @@ export default function MobileNav(props) {
           {/* Collections Mobile End */}
 
           <li>
-            <Link
-              to={`${props.url}/about`}
+            <div
+              onClick={(e) => props.link(e, `${props.url}/about`)}
               className="subHeader cursor-pointer"
             >
-              <div>About</div>
-            </Link>
+              About
+            </div>
           </li>
           <li>
-            <Link to={`${props.url}/cv`} className="subHeader cursor-pointer">
-              <div>CV</div>
-            </Link>
+            <div
+              onClick={(e) => props.link(e, `${props.url}/cv`)}
+              className="subHeader cursor-pointer"
+            >
+              CV
+            </div>
           </li>
           <li>
             <div

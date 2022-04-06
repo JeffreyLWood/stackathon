@@ -102,11 +102,17 @@ export const Navbar = (props) => {
 
   return (
     <div ref={nav}>
-      <nav className="nav fixed flex flex-row justify-between items-end sm:px-14 tracking-widest">
+      {/* Mobile Nav Hamburger*/}
+      <MobileNav
+        url={url}
+        collections={collections}
+        link={link}
+        collectionClickHandler={collectionClickHandler}
+      />
+      <nav className="nav navbar fixed flex flex-row justify-between items-end sm:px-14 tracking-widest">
         <div className="text-xl">
           <Link to={`${url}`}>{siteTitle}</Link>
         </div>
-        {/* Mobile Nav Hamburger*/}
 
         <span className="flex flex-row space-x-3 text-xs sm:text-sm pe-5">
           <span
@@ -140,7 +146,7 @@ export const Navbar = (props) => {
           </span>
         </span>
       </nav>
-      <MobileNav url={url} collections={collections} />
+
       {/* Drop Down Nav */}
       <div
         className="flex flex-row justify-between dropdown drop-shadow-md"

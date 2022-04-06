@@ -537,6 +537,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   position: sticky;
 }
 
+.top-0 {
+  top: 0px;
+}
+
 .z-0 {
   z-index: 0;
 }
@@ -1942,7 +1946,7 @@ textarea {
   max-height: 495px;
 }
 
-.mobileHead {
+.mobile {
   display: none;
 }
 
@@ -2004,8 +2008,8 @@ textarea {
     background-color: #fff;
   }
 
-  .mobileHead {
-    display: block;
+  .mobile {
+    display: flex;
   }
 
   .toggle {
