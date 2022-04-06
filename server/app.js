@@ -4,10 +4,18 @@ const router = require("express").Router();
 const morgan = require("morgan");
 const User = require("./db/models/User");
 const Collection = require("./db/models/Collection");
-import sslRedirect from "heroku-ssl-redirect";
+
 const app = express();
 
 module.exports = app;
+
+if (process.env.NODE_ENV === "production") {
+  app.use((req, res, next) => {
+    if (req.header("x-forwarded-proto") !== "https")
+      res.redirect(`https://${req.header("host")}${req.url}`);
+    else next();
+  });
+}
 
 // // logging middleware
 app.use(morgan("dev"));
@@ -15,7 +23,6 @@ app.use(morgan("dev"));
 // // body parsing middleware
 app.use(express.json({ limit: "50mb" }));
 
-app.use(sslRedirect());
 // auth and api routes
 app.use("/auth", require("./auth"));
 app.use("/api/collections/", require("./api/collections"));
