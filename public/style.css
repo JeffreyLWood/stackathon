@@ -670,14 +670,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 2rem;
 }
 
-.mx-1 {
-  margin-left: 0.25rem;
-  margin-right: 0.25rem;
-}
-
 .my-14 {
   margin-top: 3.5rem;
   margin-bottom: 3.5rem;
+}
+
+.mx-1 {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
 }
 
 .mt-20 {
@@ -1967,10 +1967,9 @@ textarea {
 
 .mobileNav {
   display: none;
-  z-index: 50;
+  z-index: 40;
   position: fixed;
-  top: 4rem;
-  padding: 1rem;
+  padding: 4rem 0 0 1rem;
   width: 100vw;
   height: 100vh;
   right: -375px;

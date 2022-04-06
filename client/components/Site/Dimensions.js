@@ -39,6 +39,9 @@ export default function Dimensions(props) {
   }
 
   let x = "x";
+  if (!height && !width && !depth) {
+    return null;
+  }
   return (
     <span className="text-xs text-neutral-500 tracking-widest">
       {height ? `${height}` : null}
