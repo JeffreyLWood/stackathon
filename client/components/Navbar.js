@@ -26,8 +26,6 @@ export const Navbar = (props) => {
 
   return (
     <div className="navbar flex justify-between py-4 px-2 font-light bg-white z-30">
-      {/* <div className="flex flex-row justify-between space-x-5"> */}
-
       {user.username ? (
         <>
           <div className="text-xs md:text-sm sm:text-md flex flex-wrap sm:flex-row space-x-2 sm:space-x-4 items-center">
@@ -47,11 +45,19 @@ export const Navbar = (props) => {
             </div>
           </div>
           <div className="space-x-2">
-            <a href={url} target="_blank">
-              <button type="button" className="pillDark">
-                View Site
-              </button>
-            </a>
+            {process.env.ENVIRONMENT === "development" ? (
+              <Link to={`/${user.username}`}>
+                <button type="button" className="pillDark">
+                  View Site
+                </button>{" "}
+              </Link>
+            ) : (
+              <a href={url} target="_blank">
+                <button type="button" className="pillDark">
+                  View Site
+                </button>
+              </a>
+            )}
             <button type="button" className="pill" onClick={handleClick}>
               Logout
             </button>
