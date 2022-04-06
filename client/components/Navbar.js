@@ -22,7 +22,7 @@ export const Navbar = (props) => {
   let picture = user && user.picture;
   let url = user.domain
     ? `https://${user.domain}`
-    : `https://selected-work.com/${user.username}`;
+    : `https://www.selected-work.com/${user.username}`;
 
   return (
     <div className="navbar flex justify-between py-4 px-2 font-light bg-white z-30">

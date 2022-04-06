@@ -94,9 +94,12 @@ export const Navbar = (props) => {
 
   const collectionClickHandler = (e, collection) => {
     e.preventDefault();
-    link(e, `${url}/work/${collection.title}`);
-    props.setCollection(collection);
+    props.setCollection
+      ? props.setCollection(collection)
+      : link(e, `${url}/work/${collection.title}`);
+    history.push(`${url}/work/${collection.title}`);
   };
+
   return (
     <div ref={nav}>
       <nav className="nav fixed flex flex-row justify-between items-end sm:px-14 tracking-widest">
@@ -140,7 +143,7 @@ export const Navbar = (props) => {
       <MobileNav url={url} collections={collections} />
       {/* Drop Down Nav */}
       <div
-        className="flex flex-row justify-between dropdown drop-shadow-xl"
+        className="flex flex-row justify-between dropdown drop-shadow-md"
         onMouseOver={() => show()}
         onMouseLeave={() => hide()}
         onClick={() => hide()}
@@ -176,14 +179,11 @@ export const Navbar = (props) => {
                     <li
                       key={idx}
                       className="cursor-pointer text-xl sm:text-sm text-neutral-500"
+                      id={collection.works[0]?.imgId}
+                      onMouseOver={(e) => previewHandler(e)}
+                      onClick={(e) => collectionClickHandler(e, collection)}
                     >
-                      <span
-                        id={collection.works[0]?.imgId}
-                        onMouseOver={(e) => previewHandler(e)}
-                        onClick={(e) => collectionClickHandler(e, collection)}
-                      >
-                        {collection.title}
-                      </span>
+                      {collection.title}
                     </li>
                   ))}
             </ul>
