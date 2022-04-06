@@ -15,7 +15,7 @@ app.use(morgan("dev"));
 // // body parsing middleware
 app.use(express.json({ limit: "50mb" }));
 
-app.use(sslRedirect(["production"], 301));
+app.use(sslRedirect());
 // auth and api routes
 app.use("/auth", require("./auth"));
 app.use("/api/collections/", require("./api/collections"));
