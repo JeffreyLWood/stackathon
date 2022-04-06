@@ -38,6 +38,7 @@
     "google-auth-library": "^7.14.1",
     "gsap": "^3.10.2",
     "heroku-client": "^3.1.0",
+    "heroku-ssl-redirect": "^0.1.1",
     "history": "^4.9.0",
     "jsonwebtoken": "^8.5.1",
     "locomotive-scroll": "^4.1.4",

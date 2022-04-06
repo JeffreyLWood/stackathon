@@ -26,16 +26,6 @@ const Routes = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (
-      window.location.host === "selected-work" &&
-      window.location.protocol !== "https:"
-    ) {
-      location.replace(
-        `https:${location.href.substring(location.protocol.length)}`
-      );
-    }
-  });
-  useEffect(() => {
     try {
       dispatch(me());
     } catch (error) {
