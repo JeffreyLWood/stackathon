@@ -65,18 +65,21 @@ export const Navbar = (props) => {
       history.push(destination);
     }, 1000);
   };
+
   let nav = useRef();
   const el = gsap.utils.selector(nav);
   const fade = () => {
     gsap.to(el(".nav"), { opacity: 1, duration: 1, ease: "expo" }, 0.5);
   };
+
   const dropDown = () =>
     gsap.to(el(".dropdown"), {
       yPercent: 125,
-      delay: 0.1,
+      delay: 0.5,
       duration: 2,
       ease: "expo",
     });
+
   const dropDownUp = () =>
     gsap.to(el(".dropdown"), {
       yPercent: -125,
@@ -84,9 +87,16 @@ export const Navbar = (props) => {
       delay: 0.5,
       ease: "expo",
     });
+
   useEffect(() => {
     fade();
   });
+
+  const collectionClickHandler = (e, collection) => {
+    e.preventDefault();
+    link(e, `${url}/work/${collection.title}`);
+    props.setCollection(collection);
+  };
   return (
     <div ref={nav}>
       <nav className="nav fixed flex flex-row justify-between items-end sm:px-14 tracking-widest">
@@ -162,38 +172,20 @@ export const Navbar = (props) => {
                   .sort(function (a, b) {
                     return a.order - b.order;
                   })
-                  .map((collection, idx) =>
-                    props.setCollection ? (
-                      <li
-                        key={idx}
-                        className="cursor-pointer text-xl sm:text-sm text-neutral-500"
-                        onClick={() => {
-                          props.setCollection(collection);
-                        }}
+                  .map((collection, idx) => (
+                    <li
+                      key={idx}
+                      className="cursor-pointer text-xl sm:text-sm text-neutral-500"
+                    >
+                      <span
+                        id={collection.works[0]?.imgId}
+                        onMouseOver={(e) => previewHandler(e)}
+                        onClick={(e) => collectionClickHandler(e, collection)}
                       >
-                        <Link
-                          id={collection.works[0]?.imgId}
-                          onMouseOver={(e) => previewHandler(e)}
-                          to={`${url}/work/${collection.title}`}
-                        >
-                          {collection.title}
-                        </Link>
-                      </li>
-                    ) : (
-                      <li
-                        key={idx}
-                        className="cursor-pointer text-xl sm:text-sm"
-                      >
-                        <Link
-                          id={collection.works[0]?.imgId}
-                          onMouseOver={(e) => previewHandler(e)}
-                          to={`${url}/work/${collection.title}`}
-                        >
-                          {collection.title}
-                        </Link>
-                      </li>
-                    )
-                  )}
+                        {collection.title}
+                      </span>
+                    </li>
+                  ))}
             </ul>
           </span>
           <span className="w-full flex justify-center sm:justify-start sm:w-3/6 mr-4">
