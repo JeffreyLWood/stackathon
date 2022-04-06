@@ -41,9 +41,7 @@ export const Navbar = (props) => {
   };
 
   const hide = () => {
-    let visible =
-      collections && collections.filter((collection) => !collection.hidden);
-    visible.length > 1 ? dropDownUp() : null;
+    dropDownUp();
   };
 
   const previewHandler = (e) => {
@@ -74,17 +72,17 @@ export const Navbar = (props) => {
 
   const dropDown = () =>
     gsap.to(el(".dropdown"), {
-      yPercent: 125,
-      delay: 0.5,
+      yPercent: 120,
+
       duration: 2,
       ease: "expo",
     });
 
   const dropDownUp = () =>
     gsap.to(el(".dropdown"), {
-      yPercent: -125,
+      yPercent: -120,
       duration: 2,
-      delay: 0.5,
+
       ease: "expo",
     });
 
@@ -118,7 +116,6 @@ export const Navbar = (props) => {
           <span
             className="subHeader cursor-pointer"
             onMouseOver={() => show()}
-            onMouseLeave={() => hide()}
             onClick={(e) => link(e, `${url}/`)}
           >
             Selected Work
@@ -126,6 +123,7 @@ export const Navbar = (props) => {
 
           <span
             className="subHeader cursor-pointer"
+            onMouseOver={() => hide()}
             onClick={(e) => link(e, `${url}/about`)}
           >
             About
@@ -133,6 +131,7 @@ export const Navbar = (props) => {
 
           <span
             className="subHeader cursor-pointer"
+            onMouseOver={() => hide()}
             onClick={(e) => link(e, `${url}/cv`)}
           >
             CV
@@ -140,6 +139,7 @@ export const Navbar = (props) => {
 
           <span
             onClick={(e) => link(e, `${url}/contact`)}
+            onMouseOver={() => hide()}
             className="subHeader cursor-pointer"
           >
             Contact

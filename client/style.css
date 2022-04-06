@@ -112,7 +112,6 @@ html.has-scroll-dragging {
   top: 0;
   left: 0;
   right: 0;
-  padding: 1rem;
 }
 
 .toggle {
@@ -200,10 +199,11 @@ html.has-scroll-dragging {
 .stagger {
   opacity: 0;
 }
+
 .dropdown {
   position: fixed;
   z-index: 20;
-  top: -55vh;
+  top: -450px;
   left: 0;
   right: 0;
   background-color: #fff;
@@ -521,6 +521,7 @@ textarea {
   right: 0;
   height: 4rem;
   opacity: 0;
+  padding: 1rem;
 }
 
 .mobileNav {

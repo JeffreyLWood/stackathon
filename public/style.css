@@ -816,6 +816,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: auto;
 }
 
+.h-12 {
+  height: 3rem;
+}
+
 .max-h-96 {
   max-height: 24rem;
 }
@@ -866,6 +870,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-8 {
   width: 2rem;
+}
+
+.w-12 {
+  width: 3rem;
 }
 
 .shrink {
@@ -1065,6 +1073,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-cyan-900 {
   --tw-bg-opacity: 1;
   background-color: rgb(22 78 99 / var(--tw-bg-opacity));
+}
+
+.bg-red-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 226 226 / var(--tw-bg-opacity));
 }
 
 .object-contain {
@@ -1528,7 +1541,6 @@ html.has-scroll-dragging {
   top: 0;
   left: 0;
   right: 0;
-  padding: 1rem;
 }
 
 .toggle {
@@ -1620,7 +1632,7 @@ html.has-scroll-dragging {
 .dropdown {
   position: fixed;
   z-index: 20;
-  top: -55vh;
+  top: -450px;
   left: 0;
   right: 0;
   background-color: #fff;
@@ -1963,6 +1975,7 @@ textarea {
   right: 0;
   height: 4rem;
   opacity: 0;
+  padding: 1rem;
 }
 
 .mobileNav {
