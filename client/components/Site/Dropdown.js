@@ -2,14 +2,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Image } from "cloudinary-react";
-import history from "../../history";
 import { gsap } from "gsap";
 import { useRef } from "react";
 export default function Dropdown(props) {
-  let user = useSelector((state) => state.user);
-  let collections = props.collections;
-
-  let url = props.url;
   let [preview, setPreview] = useState(props.preview);
   let visible = props.visible;
 
@@ -18,8 +13,27 @@ export default function Dropdown(props) {
     setPreview(e.target.id);
   };
 
+  let nav = useRef();
+  const el = gsap.utils.selector(nav);
+
+  const enterPreview = () => {
+    gsap.fromTo(
+      el(".preview"),
+      { opacity: 0, x: -20 },
+      {
+        x: 20,
+        opacity: 1,
+        duration: 1,
+        ease: "expo",
+      }
+    );
+  };
+
   return (
-    <div className="flex flex-row justify-between dropdown drop-shadow-md">
+    <div
+      ref={nav}
+      className="flex flex-row justify-between dropdown drop-shadow-md"
+    >
       <div className="hidden sm:block w-full flex text-center h-content">
         <ul className="w-full h-full">
           <span className="w-full h-full">
@@ -27,7 +41,7 @@ export default function Dropdown(props) {
               <Image
                 cloudName={process.env.CLOUDINARY_NAME}
                 publicId={preview}
-                className="hover:cursor-pointer h-72 mx-auto "
+                className="preview hover:cursor-pointer h-72 mx-auto "
               />
             </li>
           </span>
@@ -48,6 +62,7 @@ export default function Dropdown(props) {
                     className="cursor-pointer text-xl sm:text-sm text-neutral-500"
                     id={collection.works[0]?.imgId}
                     onMouseOver={(e) => previewHandler(e)}
+                    onMouseEnter={enterPreview}
                     onClick={(e) => props.collectionClickHandler(e, collection)}
                   >
                     {collection.title}

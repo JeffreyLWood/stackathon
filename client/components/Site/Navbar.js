@@ -42,7 +42,6 @@ export const Navbar = (props) => {
     if (destination === window.location.pathname) {
       return;
     }
-
     props.fadeOut();
     setTimeout(() => {
       history.push(destination);
@@ -93,8 +92,8 @@ export const Navbar = (props) => {
         collectionClickHandler={collectionClickHandler}
       />
       <nav className="nav navbar fixed flex flex-row justify-between items-end sm:px-14 tracking-widest">
-        <div className="text-xl">
-          <Link to={`${url}`}>{siteTitle}</Link>
+        <div className="text-xl" onClick={(e) => link(e, `${url}/`)}>
+          {siteTitle}
         </div>
 
         <span className="flex flex-row space-x-3 text-xs sm:text-sm pe-5">
