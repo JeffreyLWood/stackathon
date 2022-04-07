@@ -51,7 +51,7 @@ export const Navbar = (props) => {
   console.log(window.location);
   let url =
     window.location.host === "selected-work"
-      ? ``
+      ? `/${user.userName}`
       : user.domain
       ? ""
       : `/${user.userName}`;
