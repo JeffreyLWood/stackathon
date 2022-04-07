@@ -1619,13 +1619,14 @@ html.has-scroll-dragging {
 .dropdown {
   position: fixed;
   z-index: 20;
-  top: -450px;
   left: 0;
   right: 0;
   background-color: #fff;
   width: 100vw;
   /* border-bottom: rgb(39 39 42) 1px solid; */
-  min-height: 50vh;
+  height: 24rem;
+  opacity: 0;
+  display: none;
 }
 
 .dropdown ul {
@@ -2482,18 +2483,14 @@ textarea {
     padding-bottom: 2.5rem;
   }
 
-  .md\:px-10 {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
-  }
-
   .md\:py-24 {
     padding-top: 6rem;
     padding-bottom: 6rem;
   }
 
-  .md\:pt-24 {
-    padding-top: 6rem;
+  .md\:px-10 {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
   }
 
   .md\:text-sm {

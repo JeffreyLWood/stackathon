@@ -1,15 +1,13 @@
 import React from "react";
-import { fetchUserData } from "../../store/user";
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Image } from "cloudinary-react";
 import history from "../../history";
 import { gsap } from "gsap";
 import { useRef } from "react";
 import MobileNav from "./MobileNav";
+import Dropdown from "./Dropdown";
 export const Navbar = (props) => {
-  const dispatch = useDispatch();
   let user = useSelector((state) => state.user);
 
   let siteTitle = props?.user.siteTitle
@@ -18,35 +16,16 @@ export const Navbar = (props) => {
 
   document.title = siteTitle;
 
-  let collections = props.user && props.user.collections;
+  let collections = user.collections;
 
-  let [preview, setPreview] = useState("");
-  let visible = [];
-
-  useEffect(() => {
-    visible =
-      collections &&
-      collections
-        .filter((collection) => !collection.hidden)
-        .sort((a, b) => a.order - b.order);
-    props.collection && props.collection?.works
-      ? setPreview(props.collection.works[0]?.imgId)
-      : visible && visible[0]?.works && setPreview(visible[0]?.works[0]?.imgId);
-  }, [props]);
-
-  const show = () => {
-    let visible =
-      collections && collections.filter((collection) => !collection.hidden);
-    visible.length > 1 ? dropDown() : null;
-  };
+  let visible =
+    collections &&
+    collections
+      .filter((collection) => !collection.hidden)
+      .sort((a, b) => a.order - b.order);
 
   const hide = () => {
     dropDownUp();
-  };
-
-  const previewHandler = (e) => {
-    e.preventDefault();
-    setPreview(e.target.id);
   };
 
   let url =
@@ -63,6 +42,7 @@ export const Navbar = (props) => {
     if (destination === window.location.pathname) {
       return;
     }
+
     props.fadeOut();
     setTimeout(() => {
       history.push(destination);
@@ -71,22 +51,25 @@ export const Navbar = (props) => {
 
   let nav = useRef();
   const el = gsap.utils.selector(nav);
+
   const fade = () => {
     gsap.to(el(".nav"), { opacity: 1, duration: 1, ease: "expo" }, 0.5);
   };
 
   const dropDown = () =>
     gsap.to(el(".dropdown"), {
-      yPercent: 120,
+      display: "flex",
+      opacity: 1,
       duration: 1,
       ease: "expo",
     });
 
   const dropDownUp = () =>
     gsap.to(el(".dropdown"), {
-      yPercent: -120,
-      duration: 1,
+      display: "none",
       ease: "expo",
+      duration: 0.5,
+      opacity: 0,
     });
 
   useEffect(() => {
@@ -105,7 +88,7 @@ export const Navbar = (props) => {
       {/* Mobile Nav Hamburger*/}
       <MobileNav
         url={url}
-        collections={collections}
+        collections={visible}
         link={link}
         collectionClickHandler={collectionClickHandler}
       />
@@ -117,15 +100,26 @@ export const Navbar = (props) => {
         <span className="flex flex-row space-x-3 text-xs sm:text-sm pe-5">
           <span
             className="subHeader cursor-pointer"
-            onMouseOver={() => show()}
+            onMouseEnter={dropDown}
+            onMouseLeave={dropDownUp}
             onClick={(e) => link(e, `${url}/`)}
           >
             Selected Work
+            {/* Drop Down Nav For Collections */}
+            <Dropdown
+              url={url}
+              preview={
+                props.collection?.works && props.collection?.works[0].imgId
+              }
+              collection={props.collection}
+              visible={visible}
+              collections={collections}
+              collectionClickHandler={collectionClickHandler}
+            />
           </span>
 
           <span
             className="subHeader cursor-pointer"
-            onMouseOver={() => hide()}
             onClick={(e) => link(e, `${url}/about`)}
           >
             About
@@ -133,7 +127,6 @@ export const Navbar = (props) => {
 
           <span
             className="subHeader cursor-pointer"
-            onMouseOver={() => hide()}
             onClick={(e) => link(e, `${url}/cv`)}
           >
             CV
@@ -141,112 +134,12 @@ export const Navbar = (props) => {
 
           <span
             onClick={(e) => link(e, `${url}/contact`)}
-            onMouseOver={() => hide()}
             className="subHeader cursor-pointer"
           >
             Contact
           </span>
         </span>
       </nav>
-
-      {/* Drop Down Nav */}
-      <div
-        className="flex flex-row justify-between dropdown drop-shadow-md"
-        onMouseOver={() => show()}
-        onMouseLeave={() => hide()}
-        onClick={() => hide()}
-      >
-        <div className="hidden sm:block w-full flex text-center h-content">
-          <ul className="w-full h-full">
-            <span className="w-full h-full">
-              <li className="w-full h-full">
-                <Image
-                  cloudName={process.env.CLOUDINARY_NAME}
-                  publicId={preview}
-                  className="hover:cursor-pointer h-72 mx-auto "
-                  // onClick={(e) => props.editHandler(e)}
-                />
-              </li>
-            </span>
-          </ul>
-        </div>
-        <div className="flex flex-col justify-center items-start h-full w-screen sm:justify-start sm:w-2/6 md:flex-row">
-          <span className="w-full flex justify-center sm:justify-start sm:w-3/6">
-            <ul>
-              {collections &&
-                collections
-                  .filter(
-                    (collection) =>
-                      collection.hidden === false &&
-                      collection.category === "Primary"
-                  )
-                  .sort(function (a, b) {
-                    return a.order - b.order;
-                  })
-                  .map((collection, idx) => (
-                    <li
-                      key={idx}
-                      className="cursor-pointer text-xl sm:text-sm text-neutral-500"
-                      id={collection.works[0]?.imgId}
-                      onMouseOver={(e) => previewHandler(e)}
-                      onClick={(e) => collectionClickHandler(e, collection)}
-                    >
-                      {collection.title}
-                    </li>
-                  ))}
-            </ul>
-          </span>
-          <span className="w-full flex justify-center sm:justify-start sm:w-3/6 mr-4">
-            <ul>
-              {collections &&
-                collections
-                  .filter(
-                    (collection) =>
-                      collection.hidden === false &&
-                      collection.category === "Secondary"
-                  )
-                  .sort(function (a, b) {
-                    return a.order - b.order;
-                  })
-                  .map((collection, idx) =>
-                    props.setCollection ? (
-                      <li
-                        key={idx}
-                        className="cursor-pointer text-xl sm:text-sm text-neutral-400 tracking-widest"
-                        onClick={() => {
-                          props.setCollection(collection);
-                        }}
-                      >
-                        <Link
-                          onMouseOver={(e) => previewHandler(e)}
-                          id={collection.works[0]?.imgId}
-                          to={`${url}/work/${collection.title}`}
-                        >
-                          {collection.title}
-                        </Link>
-                      </li>
-                    ) : (
-                      <li
-                        key={idx}
-                        className="cursor-pointer text-xl sm:text-sm  text-neutral-400 tracking-widest"
-                      >
-                        <Link
-                          onMouseOver={(e) => previewHandler(e)}
-                          id={collection.works[0]?.imgId}
-                          to={`${url}/work/${collection.title}`}
-                        >
-                          {collection.title}
-                        </Link>
-                      </li>
-                    )
-                  )}
-            </ul>
-          </span>
-        </div>
-      </div>
-      {/* Drop Down Nav End */}
     </div>
   );
 };
-
-// import React from "react";
