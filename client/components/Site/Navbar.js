@@ -78,14 +78,14 @@ export const Navbar = (props) => {
   const dropDown = () =>
     gsap.to(el(".dropdown"), {
       yPercent: 120,
-      duration: 2,
+      duration: 1,
       ease: "expo",
     });
 
   const dropDownUp = () =>
     gsap.to(el(".dropdown"), {
       yPercent: -120,
-      duration: 2,
+      duration: 1,
       ease: "expo",
     });
 
