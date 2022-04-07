@@ -49,7 +49,10 @@ export const Navbar = (props) => {
     setPreview(e.target.id);
   };
 
-  let url = user.domain ? `` : `/${user.userName}`;
+  let url =
+    user.domain && window.location.host !== "selected-work"
+      ? ``
+      : `/${user.userName}`;
 
   // GSAP
   const link = (e, destination) => {
