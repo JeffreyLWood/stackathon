@@ -48,7 +48,7 @@ export const Navbar = (props) => {
     e.preventDefault();
     setPreview(e.target.id);
   };
-  console.log(window.location);
+
   let url =
     window.location.host === "www.selected-work.com"
       ? `/${user.userName}`
@@ -78,7 +78,6 @@ export const Navbar = (props) => {
   const dropDown = () =>
     gsap.to(el(".dropdown"), {
       yPercent: 120,
-
       duration: 2,
       ease: "expo",
     });
@@ -87,7 +86,6 @@ export const Navbar = (props) => {
     gsap.to(el(".dropdown"), {
       yPercent: -120,
       duration: 2,
-
       ease: "expo",
     });
 
@@ -97,10 +95,9 @@ export const Navbar = (props) => {
 
   const collectionClickHandler = (e, collection) => {
     e.preventDefault();
-    props.setCollection
-      ? props.setCollection(collection)
-      : link(e, `${url}/work/${collection.title}`);
-    history.push(`${url}/work/${collection.title}`);
+    props.setCollection && props.setCollection(collection);
+
+    link(e, `${url}/work/${collection.title}`);
   };
 
   return (

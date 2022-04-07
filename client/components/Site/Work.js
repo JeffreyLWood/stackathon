@@ -17,21 +17,22 @@ export const Work = (props) => {
 
   let [collection, setCollection] = useState({});
 
-  let customDomain = window.location.hostname;
+  //Not needed?
+  // let customDomain = window.location.hostname;
 
-  useEffect(() => {
-    async function load() {
-      await fetch(`/api/users/custom/${customDomain}`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      }).then(async (res) => setUser(await res.json()));
-    }
-    try {
-      // load();
-    } catch (error) {
-      // setUser(dispatch(fetchUserData(props?.match.params.username)));
-    }
-  }, []);
+  // useEffect(() => {
+  //   async function load() {
+  //     await fetch(`/api/users/custom/${customDomain}`, {
+  //       method: "GET",
+  //       headers: { "Content-Type": "application/json" },
+  //     }).then(async (res) => setUser(await res.json()));
+  //   }
+  //   try {
+  //     // load();
+  //   } catch (error) {
+  //     // setUser(dispatch(fetchUserData(props?.match.params.username)));
+  //   }
+  // }, []);
 
   useEffect(() => {
     let paramsCollectionTitle =
@@ -67,11 +68,13 @@ export const Work = (props) => {
   let content = useRef();
   const q = gsap.utils.selector(content);
   let tl = new gsap.timeline();
+
   const fadeOut = () => {
     gsap.to(content.current, { opacity: 0, duration: 1, ease: "expo" });
   };
 
   useEffect(() => {
+    gsap.to(content.current, { opacity: 1, duration: 1, ease: "expo" });
     tl.to(
       q(".stagger"),
       {
@@ -83,11 +86,12 @@ export const Work = (props) => {
       },
       2
     );
-  });
+  }, [collection]);
 
   return (
     <div>
       <Navbar
+        tl={tl}
         fadeOut={fadeOut}
         user={user}
         collection={collection}
