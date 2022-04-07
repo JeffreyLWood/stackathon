@@ -48,10 +48,12 @@ export const Navbar = (props) => {
     e.preventDefault();
     setPreview(e.target.id);
   };
-
+  console.log(window.location);
   let url =
-    user.domain && window.location.host !== "selected-work"
+    window.location.host === "selected-work"
       ? ``
+      : user.domain
+      ? ""
       : `/${user.userName}`;
 
   // GSAP
