@@ -7,13 +7,13 @@ import { gsap } from "gsap";
 import { useRef } from "react";
 import MobileNav from "./MobileNav";
 import Dropdown from "./Dropdown";
+import useQ from "./useQ";
 export const Navbar = (props) => {
   let user = useSelector((state) => state.user);
 
-  let siteTitle = props?.user.siteTitle
-    ? `${props?.user.siteTitle}`
-    : `${props.user.firstName} ${props.user.lastName}`;
-
+  let siteTitle = user?.siteTitle
+    ? `${user?.siteTitle}`
+    : `${user.firstName} ${user.lastName}`;
   document.title = siteTitle;
 
   let collections = user.collections;
@@ -23,10 +23,6 @@ export const Navbar = (props) => {
     collections
       .filter((collection) => !collection.hidden)
       .sort((a, b) => a.order - b.order);
-
-  const hide = () => {
-    dropDownUp();
-  };
 
   let url =
     window.location.host === "www.selected-work.com"
@@ -38,9 +34,9 @@ export const Navbar = (props) => {
   // GSAP
   const link = (e, destination) => {
     e.preventDefault();
-    hide();
+    dropDownUp();
     if (destination === window.location.pathname) {
-      return;
+      return null;
     }
     props.fadeOut();
     setTimeout(() => {
@@ -48,15 +44,16 @@ export const Navbar = (props) => {
     }, 1000);
   };
 
-  let nav = useRef();
-  const el = gsap.utils.selector(nav);
+  let [q, ref] = useQ();
 
   const fade = () => {
-    gsap.to(el(".nav"), { opacity: 1, duration: 1, ease: "expo" }, 0.5);
+    gsap.to(q(".nav"), { opacity: 1, duration: 1, ease: "expo" }, 0.5);
   };
-
+  useEffect(() => {
+    fade();
+  });
   const dropDown = () =>
-    gsap.to(el(".dropdown"), {
+    gsap.to(q(".dropdown"), {
       display: "flex",
       opacity: 1,
       duration: 1,
@@ -64,33 +61,17 @@ export const Navbar = (props) => {
     });
 
   const dropDownUp = () =>
-    gsap.to(el(".dropdown"), {
+    gsap.to(q(".dropdown"), {
       display: "none",
       ease: "expo",
       duration: 0.5,
       opacity: 0,
     });
 
-  useEffect(() => {
-    fade();
-  });
-
-  const collectionClickHandler = (e, collection) => {
-    e.preventDefault();
-    props.setCollection && props.setCollection(collection);
-
-    link(e, `${url}/work/${collection.title}`);
-  };
-
   return (
-    <div ref={nav}>
+    <div ref={ref}>
       {/* Mobile Nav Hamburger*/}
-      <MobileNav
-        url={url}
-        collections={visible}
-        link={link}
-        collectionClickHandler={collectionClickHandler}
-      />
+      <MobileNav url={url} collections={visible} link={link} />
       <nav className="nav navbar fixed flex flex-row justify-between items-end sm:px-14 tracking-widest">
         <div className="text-xl" onClick={(e) => link(e, `${url}/`)}>
           {siteTitle}
@@ -101,9 +82,8 @@ export const Navbar = (props) => {
             className="subHeader cursor-pointer"
             onMouseEnter={dropDown}
             onMouseLeave={dropDownUp}
-            onClick={(e) => link(e, `${url}/`)}
           >
-            Selected Work
+            <span onClick={(e) => link(e, `${url}/`)}>Selected Work</span>
             {/* Drop Down Nav For Collections */}
             <Dropdown
               url={url}
@@ -113,7 +93,7 @@ export const Navbar = (props) => {
               collection={props.collection}
               visible={visible}
               collections={collections}
-              collectionClickHandler={collectionClickHandler}
+              link={link}
             />
           </span>
 

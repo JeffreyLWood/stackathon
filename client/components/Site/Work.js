@@ -1,43 +1,21 @@
 import React from "react";
 import { Navbar } from "./Navbar";
-import { fetchUserData } from "../../store/user";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Artwork from "./Artwork";
 import Footer from "./Footer";
-import { fetchCollection } from "../../store/user";
 import Description from "./Description";
 import { gsap } from "gsap";
 import { useRef } from "react";
-
+import useQ from "./useQ";
 export const Work = (props) => {
   let user = useSelector((state) => state.user);
 
-  const dispatch = useDispatch();
-
   let [collection, setCollection] = useState({});
-
-  //Not needed?
-  // let customDomain = window.location.hostname;
-
-  // useEffect(() => {
-  //   async function load() {
-  //     await fetch(`/api/users/custom/${customDomain}`, {
-  //       method: "GET",
-  //       headers: { "Content-Type": "application/json" },
-  //     }).then(async (res) => setUser(await res.json()));
-  //   }
-  //   try {
-  //     // load();
-  //   } catch (error) {
-  //     // setUser(dispatch(fetchUserData(props?.match.params.username)));
-  //   }
-  // }, []);
 
   useEffect(() => {
     let paramsCollectionTitle =
       props.match.params?.collection && props.match.params.collection;
-
     if (paramsCollectionTitle) {
       let paramsCollection =
         user.collections &&
@@ -45,19 +23,19 @@ export const Work = (props) => {
           (collection) => collection.title === paramsCollectionTitle
         );
       paramsCollection && setCollection(paramsCollection[0]);
-      return;
-    } else {
-      let visible =
-        user.collections &&
-        user.collections
-          .filter((collection) => !collection.hidden)
-          .sort(function (a, b) {
-            return a.order - b.order;
-          });
-
-      user.collections && !paramsCollectionTitle && setCollection(visible[0]);
     }
-  }, [user]);
+    // else {
+    //   let visible =
+    //     user.collections &&
+    //     user.collections
+    //       .filter((collection) => !collection.hidden)
+    //       .sort(function (a, b) {
+    //         return a.order - b.order;
+    //       });
+    //   user.collections && !paramsCollectionTitle && setCollection(visible[0]);
+    // }
+    //
+  });
 
   let works =
     collection?.works &&
@@ -65,16 +43,19 @@ export const Work = (props) => {
       return a.order - b.order;
     });
 
-  let content = useRef();
-  const q = gsap.utils.selector(content);
+  let [q, ref] = useQ();
   let tl = new gsap.timeline();
 
   const fadeOut = () => {
-    gsap.to(content.current, { opacity: 0, duration: 1, ease: "expo" });
+    gsap.to(ref.current, { opacity: 0, duration: 1, ease: "expo" });
   };
 
-  useEffect(() => {
-    gsap.to(content.current, { opacity: 1, duration: 1, ease: "expo" });
+  const fadeIn = () => {
+    gsap.to(ref.current, { opacity: 1, duration: 1, ease: "expo" });
+  };
+
+  useLayoutEffect(() => {
+    fadeIn();
     tl.to(
       q(".stagger"),
       {
@@ -84,9 +65,9 @@ export const Work = (props) => {
         ease: "expo",
         y: -20,
       },
-      2
+      1
     );
-  }, [collection]);
+  });
 
   return (
     <div>
@@ -98,7 +79,7 @@ export const Work = (props) => {
         setCollection={setCollection}
       />
       <div
-        ref={content}
+        ref={ref}
         className="min-h-screen items-start pt-28 flex flex-col sm:mx-5"
       >
         {collection?.description ? (
