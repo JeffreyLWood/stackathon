@@ -1,6 +1,11 @@
 import React from "react";
 
-export default function Collections(props) {
+export default function CollectionsMobile(props) {
+  const mobileCollectionClickHandler = (e, collection) => {
+    e.preventDefault();
+    props.link(e, `${props.url}/work/${collection.title}`);
+    props.toggle();
+  };
   return (
     <ul>
       {props.collections &&
@@ -13,12 +18,7 @@ export default function Collections(props) {
             <li
               key={idx}
               className="cursor-pointer text-xl sm:text-sm text-neutral-500"
-              id={collection.works[0]?.imgId}
-              onMouseOver={(e) => props.previewHandler(e)}
-              onMouseEnter={props.enterPreview}
-              onClick={(e) =>
-                props.link(e, `${props.url}/work/${collection.title}`)
-              }
+              onClick={(e) => mobileCollectionClickHandler(e, collection)}
             >
               {collection.title}
             </li>

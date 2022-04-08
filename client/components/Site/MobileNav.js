@@ -8,7 +8,7 @@ import history from "../../history";
 import { gsap } from "gsap";
 import { useRef } from "react";
 import Collections from "./Collections";
-
+import CollectionsMobile from "./CollectionsMobile";
 export default function MobileNav(props) {
   let user = useSelector((state) => state.user);
 
@@ -68,84 +68,20 @@ export default function MobileNav(props) {
 
           {/* Collections Mobile */}
           <span className={collectionsMobile}>
-            <Collections
+            <CollectionsMobile
               url={props.url}
               toggle={toggle}
               id={"Primary"}
               link={props.link}
               collections={props.collections}
             />
-            <Collections
+            <CollectionsMobile
               url={props.url}
               toggle={toggle}
               id={"Secondary"}
               link={props.link}
               collections={props.collections}
             />
-            {/* <ul>
-              {props.collections &&
-                props.collections
-                  .filter(
-                    (collection) =>
-                      collection.hidden === false &&
-                      collection.category === "Primary"
-                  )
-                  .sort(function (a, b) {
-                    return a.order - b.order;
-                  })
-                  .map((collection, idx) => (
-                    <li
-                      key={idx}
-                      className="cursor-pointer text-xl sm:text-sm text-neutral-500"
-                      onClick={(e) => {
-                        props.link(e, collection), toggle();
-                      }}
-                    >
-                      {collection.title}
-                    </li>
-                  ))}
-            </ul>
-            <ul>
-              {props.collections &&
-                props.collections
-                  .filter(
-                    (collection) =>
-                      collection.hidden === false &&
-                      collection.category === "Secondary"
-                  )
-                  .sort(function (a, b) {
-                    return a.order - b.order;
-                  })
-                  .map((collection, idx) =>
-                    props.setCollection ? (
-                      <li
-                        key={idx}
-                        className="cursor-pointer text-xl sm:text-sm text-neutral-400 tracking-widest"
-                        onClick={() => {
-                          setMobileNav("hidden"),
-                            setCollectionsMobile("hidden"),
-                            props.setCollection(collection);
-                        }}
-                      >
-                        <Link to={`${props.url}/work/${collection.title}`}>
-                          {collection.title}
-                        </Link>
-                      </li>
-                    ) : (
-                      <li
-                        key={idx}
-                        onClick={() => {
-                          setCollectionsMobile("hidden");
-                        }}
-                        className="cursor-pointer text-xl sm:text-sm  text-neutral-400 tracking-widest"
-                      >
-                        <Link to={`${props.url}/work/${collection.title}`}>
-                          {collection.title}
-                        </Link>
-                      </li>
-                    )
-                  )}
-            </ul> */}
           </span>
           {/* Collections Mobile End */}
 
