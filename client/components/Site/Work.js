@@ -47,11 +47,16 @@ export const Work = (props) => {
   let tl = new gsap.timeline();
 
   const fadeOut = () => {
-    gsap.to(ref.current, { opacity: 0, duration: 1, ease: "expo" });
+    gsap.to(q(".stagger"), {
+      opacity: 0,
+      stagger: 0.1,
+      duration: 2,
+      ease: "expo",
+    });
   };
-
   const fadeIn = () => {
     gsap.to(ref.current, { opacity: 1, duration: 1, ease: "expo" });
+    gsap.set(q(".stagger"), { y: 20 });
   };
 
   useLayoutEffect(() => {
@@ -65,7 +70,7 @@ export const Work = (props) => {
         ease: "expo",
         y: -20,
       },
-      1
+      2
     );
   });
 

@@ -41,7 +41,7 @@ export const Navbar = (props) => {
     props.fadeOut();
     setTimeout(() => {
       history.push(destination);
-    }, 1000);
+    }, 2000);
   };
 
   let [q, ref] = useQ();
