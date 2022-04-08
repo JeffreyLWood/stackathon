@@ -13,9 +13,11 @@ export default function Collections(props) {
             <li
               key={idx}
               className="cursor-pointer text-xl sm:text-sm text-neutral-500"
-              id={collection.works[0]?.imgId}
-              onMouseOver={(e) => props.previewHandler(e)}
-              onMouseEnter={props.enterPreview}
+              id={props.collection && collection.works[0]?.imgId}
+              onMouseOver={(e) =>
+                props.previewHandler && props.previewHandler(e)
+              }
+              onMouseEnter={props.enterPreview && props.enterPreview}
               onClick={(e) =>
                 props.link(e, `${props.url}/work/${collection.title}`)
               }

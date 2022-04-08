@@ -7,6 +7,7 @@ import { Image } from "cloudinary-react";
 import history from "../../history";
 import { gsap } from "gsap";
 import { useRef } from "react";
+import Collections from "./Collections";
 
 export default function MobileNav(props) {
   let user = useSelector((state) => state.user);
@@ -67,7 +68,21 @@ export default function MobileNav(props) {
 
           {/* Collections Mobile */}
           <span className={collectionsMobile}>
-            <ul>
+            <Collections
+              url={props.url}
+              toggle={toggle}
+              id={"Primary"}
+              link={props.link}
+              collections={props.collections}
+            />
+            <Collections
+              url={props.url}
+              toggle={toggle}
+              id={"Secondary"}
+              link={props.link}
+              collections={props.collections}
+            />
+            {/* <ul>
               {props.collections &&
                 props.collections
                   .filter(
@@ -83,7 +98,7 @@ export default function MobileNav(props) {
                       key={idx}
                       className="cursor-pointer text-xl sm:text-sm text-neutral-500"
                       onClick={(e) => {
-                        props.collectionClickHandler(e, collection), toggle();
+                        props.link(e, collection), toggle();
                       }}
                     >
                       {collection.title}
@@ -130,7 +145,7 @@ export default function MobileNav(props) {
                       </li>
                     )
                   )}
-            </ul>
+            </ul> */}
           </span>
           {/* Collections Mobile End */}
 
