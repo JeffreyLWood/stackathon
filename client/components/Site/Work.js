@@ -23,18 +23,16 @@ export const Work = (props) => {
           (collection) => collection.title === paramsCollectionTitle
         );
       paramsCollection && setCollection(paramsCollection[0]);
+    } else {
+      let visible =
+        user.collections &&
+        user.collections
+          .filter((collection) => !collection.hidden)
+          .sort(function (a, b) {
+            return a.order - b.order;
+          });
+      user.collections && !paramsCollectionTitle && setCollection(visible[0]);
     }
-    // else {
-    //   let visible =
-    //     user.collections &&
-    //     user.collections
-    //       .filter((collection) => !collection.hidden)
-    //       .sort(function (a, b) {
-    //         return a.order - b.order;
-    //       });
-    //   user.collections && !paramsCollectionTitle && setCollection(visible[0]);
-    // }
-    //
   });
 
   let works =
