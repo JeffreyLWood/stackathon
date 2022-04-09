@@ -2001,13 +2001,17 @@ textarea {
     padding: 2rem;
   }
 
+  /* !!!!!!!!!!!!!!!!!! ? */
+
   .mobileNav {
-    display: block;
+    display: flex;
     z-index: 50;
     padding: 1rem;
+    position: fixed;
     top: 2rem;
     width: 100vw;
     height: 100vh;
+    right: -375px;
     background-color: #fff;
   }
 
