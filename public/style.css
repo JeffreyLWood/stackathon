@@ -1159,8 +1159,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-top: 1rem;
 }
 
-.pt-32 {
-  padding-top: 8rem;
+.pt-16 {
+  padding-top: 4rem;
 }
 
 .pb-20 {
@@ -1181,14 +1181,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pt-28 {
   padding-top: 7rem;
-}
-
-.pt-8 {
-  padding-top: 2rem;
-}
-
-.pt-16 {
-  padding-top: 4rem;
 }
 
 .text-center {
@@ -1976,12 +1968,12 @@ textarea {
 
 .mobileNav {
   display: none;
-  z-index: 40;
-  position: fixed;
-  padding: 4rem 0 0 1rem;
+  z-index: 50;
+  position: absolute;
+  padding: 2rem 0 0 1rem;
   width: 100vw;
-  height: 100vh;
   right: -375px;
+  top: 0;
   background-color: #fff;
 }
 
@@ -2012,12 +2004,10 @@ textarea {
   .mobileNav {
     display: block;
     z-index: 50;
-    position: fixed;
-    top: 4rem;
     padding: 1rem;
+    top: 2rem;
     width: 100vw;
     height: 100vh;
-    right: -100vw;
     background-color: #fff;
   }
 

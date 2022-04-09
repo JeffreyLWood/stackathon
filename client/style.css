@@ -527,13 +527,12 @@ textarea {
 
 .mobileNav {
   display: none;
-  z-index: 40;
-  position: fixed;
-
-  padding: 4rem 0 0 1rem;
+  z-index: 50;
+  position: absolute;
+  padding: 2rem 0 0 1rem;
   width: 100vw;
-  height: 100vh;
   right: -375px;
+  top: 0;
   background-color: #fff;
 }
 
@@ -561,12 +560,10 @@ textarea {
   .mobileNav {
     display: block;
     z-index: 50;
-    position: fixed;
-    top: 4rem;
     padding: 1rem;
+    top: 2rem;
     width: 100vw;
     height: 100vh;
-    right: -100vw;
     background-color: #fff;
   }
 
