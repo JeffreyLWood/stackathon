@@ -1183,6 +1183,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-top: 7rem;
 }
 
+.pt-8 {
+  padding-top: 2rem;
+}
+
+.pt-16 {
+  padding-top: 4rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -2491,6 +2499,10 @@ textarea {
   .md\:px-10 {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
+  }
+
+  .md\:pt-32 {
+    padding-top: 8rem;
   }
 
   .md\:text-sm {

@@ -57,7 +57,7 @@ export const CV = (props) => {
       {/* Container */}
       <div
         ref={content}
-        className="h-90vh w-screen px-2 sm:mx-0 w-full flex flex-col pt-32 pb-20"
+        className="h-90vh w-screen px-2 pt-16 sm:mx-0 w-full flex flex-col md:pt-32 pb-20"
       >
         {education ? <CVGroup title={"Education"} data={education} /> : null}
         {soloExhibition ? (
