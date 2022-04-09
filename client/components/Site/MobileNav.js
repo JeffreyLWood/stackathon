@@ -42,6 +42,12 @@ export default function MobileNav(props) {
     show ? setBody("fixed") : setBody("");
   }, [show]);
 
+  const clickHandler = (e, destination) => {
+    e.preventDefault();
+    toggle();
+    props.link(e, destination);
+  };
+
   return (
     <div ref={nav}>
       <nav className="mobile fixed top-0 w-screen bg-white z-20 h-18 flex flex-row justify-between p-2 tracking-widest">
@@ -87,7 +93,7 @@ export default function MobileNav(props) {
 
           <li>
             <div
-              onClick={(e) => props.link(e, `${props.url}/about`)}
+              onClick={(e) => clickHandler(e, `${props.url}/about`)}
               className="subHeader cursor-pointer"
             >
               About
@@ -95,7 +101,7 @@ export default function MobileNav(props) {
           </li>
           <li>
             <div
-              onClick={(e) => props.link(e, `${props.url}/cv`)}
+              onClick={(e) => clickHandler(e, `${props.url}/cv`)}
               className="subHeader cursor-pointer"
             >
               CV
@@ -103,7 +109,7 @@ export default function MobileNav(props) {
           </li>
           <li>
             <div
-              onClick={(e) => props.link(e, `${props.url}/contact`)}
+              onClick={(e) => clickHandler(e, `${props.url}/contact`)}
               className="subHeader cursor-pointer"
             >
               Contact
