@@ -30,10 +30,7 @@ export default function Dropdown(props) {
   };
 
   return (
-    <div
-      ref={ref}
-      className="flex flex-row justify-between dropdown drop-shadow-md"
-    >
+    <div ref={ref} className="flex flex-row justify-between dropdown shadow-md">
       <div className="hidden sm:block w-full flex text-center h-content">
         <ul className="w-full h-full">
           <span className="w-full h-full">
