@@ -26,6 +26,7 @@ export default function Description(props) {
       q(".artwork"),
       {
         opacity: 0,
+        y: 20,
       },
       {
         opacity: 1,
@@ -55,11 +56,23 @@ export default function Description(props) {
   const fadeOut = () => {
     document.body.style.position = "";
     window.scrollTo({ top: scrollPos, behavior: "auto" });
+    gsap.to(q(".artwork"), {
+      opacity: 0,
+      duration: 2,
+      ease: "expo",
+    });
+    gsap.to(q(".description"), {
+      opacity: 0,
+      zIndex: -1,
+      duration: 2,
+      ease: "expo",
+    });
     gsap.to(q(".workModal"), {
       opacity: 0,
       zIndex: -1,
       duration: 2,
       ease: "expo",
+      delay: 1,
     });
   };
 

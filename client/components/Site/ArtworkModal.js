@@ -20,7 +20,7 @@ export default function ArtworkModal(props) {
             publicId={props.data.imgId}
           />
         </div>
-        <div className="workModalTextContainer  description">
+        <div className="workModalTextContainer description">
           <ul className="tracking-wider">
             <li className="text-xl text-neutral-600 mb-2">
               {props.data.title}

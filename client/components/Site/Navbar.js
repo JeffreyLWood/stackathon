@@ -73,7 +73,10 @@ export const Navbar = (props) => {
       {/* Mobile Nav Hamburger*/}
       <MobileNav url={url} collections={visible} link={link} />
       <nav className="nav navbar fixed flex flex-row justify-between items-end sm:px-14 tracking-widest">
-        <div className="text-xl" onClick={(e) => link(e, `${url}/`)}>
+        <div
+          className="text-xl cursor-pointer"
+          onClick={(e) => link(e, `${url}/`)}
+        >
           {siteTitle}
         </div>
 

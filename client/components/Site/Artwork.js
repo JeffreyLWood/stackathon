@@ -25,6 +25,7 @@ export default function Artwork(props) {
       q(".artwork"),
       {
         opacity: 0,
+        y: 20,
       },
       {
         opacity: 1,
