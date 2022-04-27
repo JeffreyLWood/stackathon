@@ -4,31 +4,74 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import ArtworkModal from "./ArtworkModal";
 import Dimensions from "./Dimensions";
+import useQ from "./useQ";
+import { gsap } from "gsap";
+
 export default function Description(props) {
+  let [show, setShow] = useState(true);
+
   let user = useSelector((state) => state.user);
-
-  let [show, setShow] = useState(false);
-
-  //Disable scrolling when menu is open
   let [body, setBody] = useState("");
-  let [scrollPos, setScrollPos] = useState("");
-  useEffect(() => {
-    //Set Timeout to avoid jumping when scrollbar is hidden. Modal is up after it is changed
-    show
-      ? setTimeout(() => {
-          setBody("fixed");
-        }, 1000)
-      : setBody("");
-    setScrollPos(`-${window.scrollY}px`);
-  }, [show]);
-  document.body.style.position = body;
-  document.body.style.top = scrollPos;
-  //Not functional, scrolling to top each time
-  const closeHandler = (e) => {
-    e.preventDefault();
+  let [scrollPos, setScrollPos] = useState(null);
+  let [q, ref] = useQ();
 
-    window.scrollTo(0, parseInt(scrollPos || "0") * -1);
-    setShow(false);
+  const fadeIn = () => {
+    gsap.to(q(".workModal"), {
+      opacity: 1,
+      zIndex: 50,
+      duration: 1,
+      ease: "expo",
+    });
+    gsap.fromTo(
+      q(".artwork"),
+      {
+        opacity: 0,
+      },
+      {
+        opacity: 1,
+        y: -20,
+        duration: 2,
+        delay: 0.5,
+        ease: "expo",
+      }
+    );
+    gsap.fromTo(
+      q(".description"),
+      {
+        opacity: 0,
+        x: 20,
+      },
+      {
+        opacity: 1,
+        x: -20,
+        stagger: 0.1,
+        duration: 2,
+        ease: "expo",
+        delay: 1,
+      }
+    );
+  };
+
+  const fadeOut = () => {
+    document.body.style.position = "";
+    window.scrollTo({ top: scrollPos, behavior: "auto" });
+    gsap.to(q(".workModal"), {
+      opacity: 0,
+      zIndex: -1,
+      duration: 2,
+      ease: "expo",
+    });
+  };
+
+  const showModal = () => {
+    if (window.outerWidth <= 638) {
+      return;
+    }
+    fadeIn();
+    setScrollPos(window.scrollY);
+    setTimeout(() => {
+      document.body.style.position = "fixed";
+    }, 500);
   };
 
   const text = props.description.split("\n").map((str, idx) => (
@@ -50,7 +93,7 @@ export default function Description(props) {
             cloudName={process.env.CLOUDINARY_NAME}
             publicId={props.data.imgId}
             className="stagger max-h-96 cursor-pointer"
-            onClick={() => (window.outerWidth > 638 ? setShow(true) : null)}
+            onClick={showModal}
           />
         </span>
         <span className="stagger pt-5 text-right sm:text-left mx-4 tracking-widest">
@@ -66,15 +109,16 @@ export default function Description(props) {
           </ul>
         </span>
       </div>
-      <ArtworkModal
-        closeHandler={closeHandler}
-        show={show}
-        setShow={setShow}
-        user={user}
-        cloudName={process.env.CLOUDINARY_NAME}
-        publicId={props.data.imgId}
-        data={props.data}
-      />
+      <div ref={ref}>
+        <ArtworkModal
+          fadeOut={fadeOut}
+          show={show}
+          user={user}
+          cloudName={process.env.CLOUDINARY_NAME}
+          publicId={props.data.imgId}
+          data={props.data}
+        />
+      </div>
     </section>
   );
 }

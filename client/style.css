@@ -6,7 +6,7 @@
 body,
 html {
   overflow-x: hidden;
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
 }
 
 :root {
@@ -424,10 +424,11 @@ textarea {
   position: fixed;
   overflow: hidden;
   background-color: #fff;
-  z-index: 50;
+  z-index: -1;
   display: flex;
   flex-direction: column;
   height: 100vh;
+  opacity:0;
 }
 .workModalHeader {
   width: 100vw;
@@ -466,6 +467,9 @@ textarea {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.description {
+opacity:0;
 }
 
 .footer {
