@@ -8,6 +8,9 @@ import Description from "./Description";
 import { gsap } from "gsap";
 import { useRef } from "react";
 import useQ from "./useQ";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 export const Work = (props) => {
   let user = useSelector((state) => state.user);
 
@@ -53,23 +56,28 @@ export const Work = (props) => {
     });
   };
   const fadeIn = () => {
-    gsap.to(ref.current, { opacity: 1, duration: 1, ease: "expo" });
+    gsap.to(ref.current, {
+      opacity: 1,
+      duration: 1,
+      ease: "expo",
+    });
     gsap.set(q(".stagger"), { y: 20 });
   };
+  const images = gsap.utils.toArray(".stagger");
 
   useLayoutEffect(() => {
     fadeIn();
-    tl.to(
-      q(".stagger"),
-      {
-        opacity: 1,
-        stagger: 0.1,
-        duration: 3,
-        ease: "expo",
-        y: -20,
-      },
-      2
-    );
+  });
+
+  images.forEach((image) => {
+    gsap.to(image, {
+      scrollTrigger: image,
+      opacity: 1,
+      stagger: 0.1,
+      duration: 3,
+      ease: "expo",
+      y: -20,
+    });
   });
 
   return (

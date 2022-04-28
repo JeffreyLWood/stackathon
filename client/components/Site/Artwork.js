@@ -5,6 +5,7 @@ import ArtworkModal from "./ArtworkModal";
 import Dimensions from "./Dimensions";
 import useQ from "./useQ";
 import { gsap } from "gsap";
+
 export default function Artwork(props) {
   let [show, setShow] = useState(true);
 

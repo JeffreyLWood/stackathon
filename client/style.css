@@ -561,7 +561,6 @@ opacity:0;
     background-size: auto;
     padding: 2rem;
   }
-  /* !!!!!!!!!!!!!!!!!! ? */
   .mobileNav {
     display: flex;
     z-index: 50;
@@ -570,7 +569,7 @@ opacity:0;
     top: 2rem;
     width: 100vw;
     height: 100vh;
-    right: -375px;
+    right: -500px;
     background-color: #fff;
   }
 

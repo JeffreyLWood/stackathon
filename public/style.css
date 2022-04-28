@@ -740,6 +740,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: block;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .inline {
   display: inline;
 }
@@ -2007,8 +2011,6 @@ textarea {
     padding: 2rem;
   }
 
-  /* !!!!!!!!!!!!!!!!!! ? */
-
   .mobileNav {
     display: flex;
     z-index: 50;
@@ -2017,7 +2019,7 @@ textarea {
     top: 2rem;
     width: 100vw;
     height: 100vh;
-    right: -375px;
+    right: -500px;
     background-color: #fff;
   }
 
