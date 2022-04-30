@@ -4,7 +4,6 @@ export default function CollectionsMobile(props) {
   const mobileCollectionClickHandler = (e, collection) => {
     e.preventDefault();
     props.link(e, `${props.url}/work/${collection.title}`);
-    props.toggle();
   };
   return (
     <ul>

@@ -45,7 +45,6 @@ export const Work = (props) => {
     });
 
   let [q, ref] = useQ();
-  let tl = new gsap.timeline();
 
   const fadeOut = () => {
     gsap.to(q(".stagger"), {
@@ -83,7 +82,6 @@ export const Work = (props) => {
   return (
     <div>
       <Navbar
-        tl={tl}
         fadeOut={fadeOut}
         user={user}
         collection={collection}

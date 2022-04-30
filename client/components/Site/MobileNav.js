@@ -6,57 +6,54 @@ import { Link } from "react-router-dom";
 import { Image } from "cloudinary-react";
 import history from "../../history";
 import { gsap } from "gsap";
-import { useRef } from "react";
 import Collections from "./Collections";
 import CollectionsMobile from "./CollectionsMobile";
+import useQ from "./useQ";
 export default function MobileNav(props) {
   let user = useSelector((state) => state.user);
 
   let [collectionsMobile, setCollectionsMobile] = useState("hidden");
 
-  //Disable scrolling when menu is open
-  let [body, setBody] = useState("");
+  let [q, ref] = useQ();
+  const tl = new gsap.timeline({ paused: true });
 
-  document.body.style.position = body;
+  tl.to(q(".mobileNav"), {
+    xPercent: -100,
+    duration: 2,
+    ease: "expo",
+  });
 
-  let nav = useRef();
-  const el = gsap.utils.selector(nav);
   let [show, setShow] = useState(false);
 
-  const toggle = () => {
-    show ? setShow(false) : setShow(true);
-    show
-      ? gsap.to(el(".mobileNav"), {
-          xPercent: 100,
-          duration: 2,
-          ease: "expo",
-        })
-      : gsap.to(el(".mobileNav"), {
-          xPercent: -100,
-          duration: 1,
-          ease: "expo",
-        });
+  const toggleMenu = () => {
+    if (!show) {
+      tl.play();
+      setShow(true);
+    } else {
+      gsap.to(q(".mobileNav"), {
+        xPercent: 100,
+        duration: 2,
+        ease: "expo",
+      });
+      setShow(false);
+    }
   };
-
-  useEffect(() => {
-    show ? setBody("fixed") : setBody("");
-  }, [show]);
 
   const clickHandler = (e, destination) => {
     e.preventDefault();
-    toggle();
+    toggleMenu();
     props.link(e, destination);
   };
 
   return (
-    <div ref={nav}>
+    <div ref={ref}>
       <nav className="mobile fixed top-0 w-screen bg-white z-20 h-18 flex flex-row justify-between p-2 tracking-widest">
         <div className="text-xl">
           <Link to={`${props.url}`}>
             {user.siteTitle || `${user.firstName} ${user.lastName}`}
           </Link>
         </div>
-        <div className="toggle" onClick={() => toggle()}></div>
+        <div className="toggle" onClick={toggleMenu}></div>
       </nav>
       {/* Mobile Nav */}
       <nav className="mobileNav">
@@ -76,14 +73,12 @@ export default function MobileNav(props) {
           <span className={collectionsMobile}>
             <CollectionsMobile
               url={props.url}
-              toggle={toggle}
               id={"Primary"}
               link={props.link}
               collections={props.collections}
             />
             <CollectionsMobile
               url={props.url}
-              toggle={toggle}
               id={"Secondary"}
               link={props.link}
               collections={props.collections}
