@@ -67,7 +67,7 @@ export const Work = (props) => {
   useLayoutEffect(() => {
     fadeIn();
   });
-  let delay = 0.05;
+  let delay = 0;
   images.forEach((image) => {
     gsap.to(image, {
       scrollTrigger: image,
