@@ -67,16 +67,15 @@ export const Work = (props) => {
   useLayoutEffect(() => {
     fadeIn();
   });
-
+  let delay = 0.05;
   images.forEach((image) => {
     gsap.to(image, {
       scrollTrigger: image,
       opacity: 1,
-      stagger: 0.1,
       duration: 3,
       ease: "expo",
       y: -20,
-      delay: 0.5,
+      delay: (delay += 0.05),
     });
   });
 
