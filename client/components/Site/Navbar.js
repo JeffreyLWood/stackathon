@@ -71,7 +71,12 @@ export const Navbar = (props) => {
   return (
     <div ref={ref}>
       {/* Mobile Nav Hamburger*/}
-      <MobileNav url={url} collections={visible} link={link} />
+      <MobileNav
+        url={url}
+        collections={visible}
+        link={link}
+        fadeOut={props.fadeOut}
+      />
       <nav className="nav navbar fixed flex flex-row justify-between items-end sm:px-14 tracking-widest">
         <div
           className="text-xl cursor-pointer"

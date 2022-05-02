@@ -76,6 +76,7 @@ export const Work = (props) => {
       duration: 3,
       ease: "expo",
       y: -20,
+      delay: 0.5,
     });
   });
 

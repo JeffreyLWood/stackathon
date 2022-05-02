@@ -72,6 +72,8 @@ export default function MobileNav(props) {
           {/* Collections Mobile */}
           <span className={collectionsMobile}>
             <CollectionsMobile
+              toggleMenu={toggleMenu}
+              fadeOut={props.fadeOut}
               url={props.url}
               id={"Primary"}
               link={props.link}

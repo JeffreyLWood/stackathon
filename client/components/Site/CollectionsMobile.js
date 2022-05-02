@@ -1,9 +1,16 @@
 import React from "react";
-
+import history from "../../history";
 export default function CollectionsMobile(props) {
   const mobileCollectionClickHandler = (e, collection) => {
     e.preventDefault();
-    props.link(e, `${props.url}/work/${collection.title}`);
+
+    let destination = `${props.url}/work/${collection.title}`;
+    props.toggleMenu();
+    props.fadeOut();
+
+    setTimeout(() => {
+      history.push(destination);
+    }, 1000);
   };
   return (
     <ul>
