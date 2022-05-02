@@ -3,7 +3,7 @@ import { Image } from "cloudinary-react";
 import { useState, useEffect } from "react";
 import ArtworkModal from "./ArtworkModal";
 import Dimensions from "./Dimensions";
-import useQ from "./useQ";
+import useQ from "../../useQ";
 import { gsap } from "gsap";
 
 export default function Artwork(props) {

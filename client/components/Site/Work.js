@@ -7,7 +7,7 @@ import Footer from "./Footer";
 import Description from "./Description";
 import { gsap } from "gsap";
 import { useRef } from "react";
-import useQ from "./useQ";
+import useQ from "../../useQ";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -68,6 +68,7 @@ export const Work = (props) => {
     fadeIn();
   });
   let delay = 0;
+
   images.forEach((image) => {
     gsap.to(image, {
       scrollTrigger: image,

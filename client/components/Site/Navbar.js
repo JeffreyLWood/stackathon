@@ -7,7 +7,7 @@ import { gsap } from "gsap";
 import { useRef } from "react";
 import MobileNav from "./MobileNav";
 import Dropdown from "./Dropdown";
-import useQ from "./useQ";
+import useQ from "../../useQ";
 export const Navbar = (props) => {
   let user = useSelector((state) => state.user);
 
