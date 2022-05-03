@@ -45,28 +45,31 @@ export const oauth = () => async (dispatch) => {
   }
 };
 export const me = () => async (dispatch) => {
-  const token = window.localStorage.getItem("TOKEN");
-
+  const token = window.localStorage.getItem("token");
+  console.log(token);
   if (token) {
     const res = await axios.get("/auth/me", {
       headers: {
         authorization: token,
       },
     });
-    // history.push("/");
+    history.push("/");
     return dispatch(setAuth(res.data));
   }
 };
 
 export const authenticate = (userInfo, method) => async (dispatch) => {
   try {
+    let { username, password, email, firstName, lastName } = userInfo;
     const res = await axios.post(`/auth/${method}`, {
-      userInfo,
+      username,
+      password,
+      email,
+      firstName,
+      lastName,
     });
     window.localStorage.setItem(TOKEN, res.data.token);
-    // history.push(`/create/in/${userInfo.username}`);
-    // history.push(`/`);
-    dispatch(oauth());
+    dispatch(me());
   } catch (authError) {
     return dispatch(setAuth({ error: authError }));
   }

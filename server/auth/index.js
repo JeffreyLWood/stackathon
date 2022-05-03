@@ -55,7 +55,8 @@ router.get("/oauth", async (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
   try {
-    res.send({ token: await User.authenticate(req.body) });
+    let { email, password } = req.body;
+    res.send({ token: await User.authenticate({ email, password }) });
   } catch (err) {
     next(err);
   }
@@ -83,6 +84,7 @@ router.post("/signup", async (req, res, next) => {
 
 router.get("/me", async (req, res, next) => {
   try {
+    console.log(req.headers.authorization);
     res.send(await User.findByToken(req.headers.authorization));
   } catch (ex) {
     next(ex);
