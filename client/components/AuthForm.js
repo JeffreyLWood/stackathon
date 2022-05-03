@@ -18,7 +18,6 @@ export default function AuthForm(props) {
 
   let [invalid, setInvalid] = useState(false);
   let [unique, setUnique] = useState(true);
-  let formName = displayName === "Sign Up" ? "signup" : "login";
 
   let [state, setState] = useState({
     username: "",
@@ -36,13 +35,8 @@ export default function AuthForm(props) {
 
   const submitHandler = (evt) => {
     evt.preventDefault();
-
-    // if (/[^a-zA-Z]/.test(state.username)) {
-    //   setInvalid(true);
-    //   return;
-    // }
     try {
-      dispatch(authenticate(state, formName));
+      dispatch(authenticate(state, "login"));
     } catch (error) {
       setUnique(false);
     }
@@ -62,7 +56,7 @@ export default function AuthForm(props) {
 
     const data = await res.json();
 
-    window.localStorage.setItem("TOKEN", data.token);
+    window.localStorage.setItem("token", data.token);
     dispatch(oauth());
   };
 
@@ -77,14 +71,14 @@ export default function AuthForm(props) {
         </span>
       </div>
 
-      <div className="w-screen h-4/6 space-y-4 flex sm:bg-neutral-50  sm:w-4/6 sm:h-screen   sm:items-center ">
-        <div className="z-0 p-5 w-5/6 sm:w-3/6 mx-auto h-3/6 bg-white  border-t-1 flex items-center flex-col justify-center rounded-md drop-shadow-lg border-l-2 border-r-2">
+      <div className="w-screen h-4/6 space-y-4 flex flex-col sm:bg-neutral-50 sm:w-4/6 sm:h-screen justify-center">
+        <div className="p-5 w-5/6 sm:w-3/6 mx-auto h-2/6 border-4 border-stone-800 flex items-center flex-col justify-center">
           <span className="text-lg text-stone-900">
             Create a beautiful website for your work
           </span>
           <span>
             <GoogleLogin
-              className="mx-auto my-4 "
+              className="mx-auto my-4 border-2 border-stone-900 "
               clientId={process.env.CLIENT_ID}
               buttonText="Continue with Google"
               onSuccess={handleLogin}
@@ -93,130 +87,37 @@ export default function AuthForm(props) {
             />
           </span>
         </div>
+        <div className="p-5 space-y-4 w-5/6 sm:w-3/6 mx-auto h-2/6 border-4 border-stone-800 flex flex-col justify-center">
+          <span className="text-lg w-full text-center text-stone-900">
+            Continue with Email Instead
+          </span>
+          <form className="flex flex-col space-y-6" onSubmit={submitHandler}>
+            <span className="flex flex-row space-between space-x-4">
+              <label htmlFor="email" />
+              Email
+              <input
+                className="border-b-2 w-full border-stone-800 bg-neutral-50 mx-2"
+                name="email"
+                type="text"
+                onChange={changeHandler}
+              />
+            </span>
+            <span className="flex flex-row space-between space-x-4">
+              <label htmlFor="password" />
+              Password
+              <input
+                className="border-b-2 w-full border-stone-800 bg-neutral-50 mx-2"
+                name="password"
+                type="password"
+                onChange={changeHandler}
+              />
+            </span>
+            <button type="submit" className="pill">
+              Submit
+            </button>
+          </form>
+        </div>
       </div>
     </section>
   );
-}
-
-{
-  /*  <div className="h-5/6 space-y-2 flex flex-col justify-center sm:w-3/6 sm:space-y-4">
-         <span>
-          <label htmlFor={displayName} className="text-sm sm:text-lg">
-            {displayName === "Sign Up"
-              ? "Sign up to create a beautiful website for your work."
-              : "Login to your Selected-Work account"}
-          </label>
-        </span>
-        <form
-          className="flex flex-col space-y-4 bg-white p-2"
-          onSubmit={submitHandler}
-          name={displayName}
-        >
-          {displayName === "Sign Up" ? (
-            <>
-              <div className="flex justify-between flex-row">
-                <label htmlFor="firstName">
-                  <small>First Name</small>
-                </label>
-                <input
-                  onChange={changeHandler}
-                  name="firstName"
-                  type="text"
-                  className="border-b-2 mx-4 w-4/6"
-                />
-              </div>
-              <div className="flex justify-between flex-row">
-                <label htmlFor="lastName">
-                  <small>Last Name</small>
-                </label>
-                <input
-                  onChange={changeHandler}
-                  name="lastName"
-                  type="text"
-                  className="border-b-2 mx-4 w-4/6"
-                />
-              </div>
-              <div className="flex justify-between flex-row">
-                <label htmlFor="email">
-                  <small>Email</small>
-                </label>
-
-                <input
-                  onChange={changeHandler}
-                  name="email"
-                  type="text"
-                  className="border-b-2 mx-4 w-4/6"
-                />
-              </div>
-            </>
-          ) : null}
-          <div className="flex justify-between flex-row">
-            <label htmlFor="username">
-              <small>Username / Site Url</small>
-            </label>
-            <input
-              onChange={changeHandler}
-              name="username"
-              placeholder=""
-              type="text"
-              value={
-                state.username
-                  ? state.username
-                  : state.firstName.toLowerCase() + state.lastName.toLowerCase()
-              }
-              className="border-b-2 mx-4 w-4/6"
-            />
-          </div>
-          <label htmlFor="username" className="italic text-neutral-400">
-            {displayName === "Sign Up" ? (
-              <small>{`Your site url will be www.selected-work.com/${
-                state.username
-                  ? state.username
-                  : state.firstName.toLowerCase() + state.lastName.toLowerCase()
-              }`}</small>
-            ) : null}
-          </label>
-          <div className="flex justify-between flex-row">
-            <label htmlFor="password">
-              <small>Password</small>
-            </label>
-            <input
-              onChange={changeHandler}
-              name="password"
-              type="password"
-              className="border-b-2 mx-4 w-4/6"
-            />
-          </div>
-
-          <div className="py-10 flex flex-col sm:flex-row justify-between">
-            <button className="pill" type="submit">
-              {displayName}
-            </button>{" "}
-            {invalid
-              ? "Invalid username. Only a-z letters are allowed, no spaces or special characters"
-              : null}
-            {!unique ? "Username is taken already. Please try another." : null}
-            {displayName === "Sign Up" ? (
-              <button
-                type="button"
-                className="font-xs text-neutral-400 italic"
-                onClick={() => {
-                  setDisplayName("Login");
-                }}
-              >
-                Have an account already? Login instead.
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={() => {
-                  setDisplayName("Sign Up");
-                }}
-              >
-                Don't have an account? Sign Up instead.
-              </button>
-            )}
-          </div>
-          {mapSignup && <div> {mapSignup.error.response.data} </div>}
-        </form> */
 }

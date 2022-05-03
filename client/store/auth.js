@@ -32,7 +32,7 @@ const deleteDomain = (data) => {
  * THUNK CREATORS
  */
 export const oauth = () => async (dispatch) => {
-  const token = window.localStorage.getItem("TOKEN");
+  const token = window.localStorage.getItem("token");
 
   if (token) {
     const res = await axios.get("/auth/me", {
@@ -45,7 +45,7 @@ export const oauth = () => async (dispatch) => {
   }
 };
 export const me = () => async (dispatch) => {
-  const token = window.localStorage.getItem("TOKEN");
+  const token = window.localStorage.getItem("token");
 
   if (token) {
     const res = await axios.get("/auth/me", {
@@ -60,20 +60,23 @@ export const me = () => async (dispatch) => {
 
 export const authenticate = (userInfo, method) => async (dispatch) => {
   try {
+    let { username, password, email, firstName, lastName } = userInfo;
     const res = await axios.post(`/auth/${method}`, {
-      userInfo,
+      username,
+      password,
+      email,
+      firstName,
+      lastName,
     });
-    window.localStorage.setItem(TOKEN, res.data.token);
-    // history.push(`/create/in/${userInfo.username}`);
-    // history.push(`/`);
-    dispatch(oauth());
+    window.localStorage.setItem("token", res.data.token);
+    dispatch(me());
   } catch (authError) {
     return dispatch(setAuth({ error: authError }));
   }
 };
 
 export const logout = () => {
-  window.localStorage.removeItem("TOKEN");
+  window.localStorage.removeItem("token");
   history.push("/");
   return {
     type: SET_AUTH,
@@ -84,7 +87,7 @@ export const useCustomDomain = (user, domain) =>
   async function (dispatch) {
     try {
       let { data } = await axios.post(`/heroku`, { user, domain });
-      console.log("store", data);
+
       dispatch(customDomain(data));
     } catch (err) {
       return err;
@@ -95,7 +98,7 @@ export const deleteCustomDomain = (user) =>
   async function (dispatch) {
     try {
       let { data } = await axios.put(`/heroku`, user);
-      console.log("store", data);
+
       dispatch(deleteDomain(data));
     } catch (err) {
       return err;
@@ -104,7 +107,7 @@ export const deleteCustomDomain = (user) =>
 export const destroyAccount = (userId) =>
   async function (dispatch) {
     try {
-      let token = window.localStorage("TOKEN");
+      let token = window.localStorage("token");
       await axios
         .delete(`/api/users/${userId}/delete`, { token })
         .then(dispatch(logout()));

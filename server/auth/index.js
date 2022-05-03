@@ -55,7 +55,8 @@ router.get("/oauth", async (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
   try {
-    res.send({ token: await User.authenticate(req.body) });
+    let { email, password } = req.body;
+    res.send({ token: await User.authenticate({ email, password }) });
   } catch (err) {
     next(err);
   }

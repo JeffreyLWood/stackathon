@@ -269,14 +269,13 @@ router.delete("/:userId/:collection/:imgId", async (req, res, next) => {
 
 router.delete("/:userId/delete", async (req, res, next) => {
   try {
-    let token = window.localStorage.getItem("TOKEN");
+    let token = window.localStorage.getItem("token");
     let user = await User.findByToken(token);
     if (user) {
       await User.destroy({
         where: { id: req.params.userId },
         include: { all: true, nested: true },
       });
-
       res.status(200);
     }
   } catch (err) {
