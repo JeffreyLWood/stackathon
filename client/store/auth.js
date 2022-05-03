@@ -32,7 +32,7 @@ const deleteDomain = (data) => {
  * THUNK CREATORS
  */
 export const oauth = () => async (dispatch) => {
-  const token = window.localStorage.getItem("TOKEN");
+  const token = window.localStorage.getItem("token");
 
   if (token) {
     const res = await axios.get("/auth/me", {
@@ -107,7 +107,7 @@ export const deleteCustomDomain = (user) =>
 export const destroyAccount = (userId) =>
   async function (dispatch) {
     try {
-      let token = window.localStorage("TOKEN");
+      let token = window.localStorage("token");
       await axios
         .delete(`/api/users/${userId}/delete`, { token })
         .then(dispatch(logout()));
