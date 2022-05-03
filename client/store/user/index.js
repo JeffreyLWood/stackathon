@@ -57,16 +57,16 @@ export const fetchCollection = (userId, title) =>
     }
   };
 
-// export const destroyAccount = (userId) =>
-//   async function (dispatch) {
-//     try {
-//       let { data } = await axios.delete(`/api/users/${userId}/delete`);
-//       dispatch(deleteUser(data));
-//       window.localStorage.removeItem("TOKEN");
-//     } catch (err) {
-//       return err;
-//     }
-//   };
+export const destroyAccount = (userId) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.delete(`/api/users/${userId}/delete`);
+      dispatch(deleteUser(data));
+      window.localStorage.removeItem("token");
+    } catch (err) {
+      return err;
+    }
+  };
 
 //reducer
 export default function (state = {}, action) {
