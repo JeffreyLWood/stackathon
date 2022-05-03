@@ -68,7 +68,7 @@ export const authenticate = (userInfo, method) => async (dispatch) => {
       firstName,
       lastName,
     });
-    window.localStorage.setItem(TOKEN, res.data.token);
+    window.localStorage.setItem("token", res.data.token);
     dispatch(me());
   } catch (authError) {
     return dispatch(setAuth({ error: authError }));
