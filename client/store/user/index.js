@@ -4,7 +4,7 @@ import axios from "axios";
 const GET_USER_DATA = "GET_USER_DATA";
 // const GET_SINGLE_WORK = "GET_SINGLE_WORK";
 const GET_COLLECTION = "GET_COLLECTION";
-// const DELETE_ACCOUNT = "DELETE_ACCOUNT";
+const DELETE_ACCOUNT = "DELETE_ACCOUNT";
 
 const USERNAME = "USERNAME";
 //action creators
@@ -25,9 +25,9 @@ const updateUsername = (data) => {
   return { type: USERNAME, data };
 };
 
-// const deleteUser = (data) => {
-//   return { type: DELETE_ACCOUNT, data };
-// };
+const deleteUser = (data) => {
+  return { type: DELETE_ACCOUNT, data };
+};
 export const fetchUserData = (username) =>
   async function (dispatch) {
     try {
