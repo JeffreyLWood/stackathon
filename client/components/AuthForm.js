@@ -56,7 +56,7 @@ export default function AuthForm(props) {
 
     const data = await res.json();
 
-    window.localStorage.setItem("TOKEN", data.token);
+    window.localStorage.setItem("token", data.token);
     dispatch(oauth());
   };
 
