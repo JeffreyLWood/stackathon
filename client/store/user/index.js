@@ -63,6 +63,7 @@ export const destroyAccount = (userId) =>
       let { data } = await axios.delete(`/api/users/${userId}/delete`);
       dispatch(deleteUser(data));
       window.localStorage.removeItem("token");
+      history.push("/");
     } catch (err) {
       return err;
     }
@@ -73,7 +74,6 @@ export default function (state = {}, action) {
   switch (action.type) {
     case GET_USER_DATA: {
       let newState = action.userData;
-
       return newState;
     }
     case GET_COLLECTION: {
@@ -81,15 +81,14 @@ export default function (state = {}, action) {
       return newState;
     }
     case USERNAME: {
-      console.log(action.data);
       let newState = state;
       newState.user = { ...state.user, userName: action.data };
       return newState;
     }
-    // case DELETE_ACCOUNT: {
-    //   let newState = [];
-    //   return newState;
-    // }
+    case DELETE_ACCOUNT: {
+      let newState = [];
+      return newState;
+    }
     default:
       return state;
   }
