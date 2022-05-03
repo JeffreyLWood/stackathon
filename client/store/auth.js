@@ -46,7 +46,7 @@ export const oauth = () => async (dispatch) => {
 };
 export const me = () => async (dispatch) => {
   const token = window.localStorage.getItem("token");
-  console.log(token);
+
   if (token) {
     const res = await axios.get("/auth/me", {
       headers: {
@@ -76,7 +76,7 @@ export const authenticate = (userInfo, method) => async (dispatch) => {
 };
 
 export const logout = () => {
-  window.localStorage.removeItem("TOKEN");
+  window.localStorage.removeItem("token");
   history.push("/");
   return {
     type: SET_AUTH,
@@ -87,7 +87,7 @@ export const useCustomDomain = (user, domain) =>
   async function (dispatch) {
     try {
       let { data } = await axios.post(`/heroku`, { user, domain });
-      console.log("store", data);
+
       dispatch(customDomain(data));
     } catch (err) {
       return err;
@@ -98,7 +98,7 @@ export const deleteCustomDomain = (user) =>
   async function (dispatch) {
     try {
       let { data } = await axios.put(`/heroku`, user);
-      console.log("store", data);
+
       dispatch(deleteDomain(data));
     } catch (err) {
       return err;
