@@ -53,11 +53,7 @@ export const Navbar = (props) => {
               </Link>
             ) : (
               <a href={url} target="_blank">
-                <button
-                  type="button"
-                  className="pillDark"
-                  onClick={console.log(url)}
-                >
+                <button type="button" className="pillDark">
                   View Site
                 </button>
               </a>
