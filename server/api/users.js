@@ -128,12 +128,11 @@ router.get("/custom/:customDomain", async (req, res) => {
       where: {
         domain: req.params.customDomain,
       },
-      include: { all: true, nested: true },
     });
     if (!user) {
       res.status(404).send();
     }
-    res.status(200).send(user);
+    res.json(user).status(200);
   } catch (err) {
     res.status(500).send(err);
   }
@@ -151,7 +150,7 @@ router.get("/:username", async (req, res, next) => {
     } else if (allData) {
       let userData = {
         id: allData.dataValues.id,
-        userName: allData.dataValues.username,
+        username: allData.dataValues.username,
         siteTitle: allData.dataValues.siteTitle,
         email: allData.dataValues.email,
         firstName: allData.dataValues.firstName,

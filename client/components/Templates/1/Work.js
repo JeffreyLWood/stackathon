@@ -1,20 +1,21 @@
 import React from "react";
 import { Navbar } from "./Navbar";
 import { useState, useEffect, useLayoutEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import Artwork from "./Artwork";
 import Footer from "./Footer";
 import Description from "./Description";
 import { gsap } from "gsap";
-import { useRef } from "react";
-import useQ from "../../useQ";
+import useQ from "../../../useQ";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
-export const Work = (props) => {
+export default function Work({ props }) {
   let user = useSelector((state) => state.user);
 
   let [collection, setCollection] = useState({});
+
+  console.log("work user", user);
 
   useEffect(() => {
     let paramsCollectionTitle =
@@ -82,7 +83,8 @@ export const Work = (props) => {
 
   return (
     <div>
-      <Navbar
+      test
+      {/* <Navbar
         fadeOut={fadeOut}
         user={user}
         collection={collection}
@@ -112,7 +114,7 @@ export const Work = (props) => {
         </div>
       </div>
 
-      <Footer user={user} userName={props.match.params.username} />
+      <Footer user={user} username={props.match.params.username} /> */}
     </div>
   );
-};
+}

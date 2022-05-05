@@ -58,7 +58,7 @@ const About = (props) => {
         caption: caption,
       })
     );
-    dispatch(fetchUserData(user.userName));
+    dispatch(fetchUserData(user.username));
   };
 
   const [fileInputState, setFileInputState] = useState("");

@@ -82,7 +82,7 @@ export default function (state = {}, action) {
     }
     case USERNAME: {
       let newState = state;
-      newState.user = { ...state.user, userName: action.data };
+      newState.user = { ...state.user, username: action.data };
       return newState;
     }
     case DELETE_ACCOUNT: {

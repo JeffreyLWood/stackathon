@@ -1,0 +1,35 @@
+import React from "react";
+import { useSelector } from "react-redux";
+import Work1 from "./1/Work";
+export default function Work(props) {
+  let user = useSelector((state) => state.user);
+  let templateId = user.template || 1;
+
+  const template = (id) => {
+    switch (id) {
+      case 1:
+        return <Work1 props={props} />;
+      //   case 2 :
+      //     return <Work2 />
+      default:
+        return <Work1 props={props} />;
+    }
+  };
+  return template(templateId);
+}
+
+// class App extends Component {
+//     render() {
+//       const functionWithSwitch = (parameter) => {
+//         switch(parameter){
+//           case "positive":
+//             return "+"
+//           case "negative":
+//             return "-"
+//           default:
+//             return "neutral"
+//         }
+//       }
+//       return <h1>{functionWithSwitch("positive")}</h1>;
+//     }
+//   }

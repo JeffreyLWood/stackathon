@@ -1,22 +1,13 @@
 import React from "react";
 import { Navbar } from "./Navbar";
-import { fetchUserData } from "../../store/user";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import Footer from "./Footer";
 import { Image } from "cloudinary-react";
 import { gsap } from "gsap";
 import { useRef } from "react";
-export const About = (props) => {
+export default function About(props) {
   let user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    async function loadUserData() {
-      let data = await dispatch(fetchUserData(props.match.params.username));
-      return data;
-    }
-    loadUserData();
-  }, []);
 
   let text = user.about && user.about.text;
   let json = JSON.stringify(text);
@@ -96,7 +87,7 @@ export const About = (props) => {
           <div className="stagger"> {newText}</div>
         </div>
       </div>
-      <Footer user={user} userName={props.match.params.username} />
+      <Footer user={user} username={props.match.params.username} />
     </>
   );
-};
+}

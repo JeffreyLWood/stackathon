@@ -4,7 +4,7 @@ import { updateCVText } from "../../store/create";
 import { useEffect, useState } from "react";
 import { Navbar } from "../Navbar";
 import { fetchUserData } from "../../store/user";
-import CVGroup from "../Site/CVGroup";
+import CVGroup from "../Templates/1/CVGroup";
 const CV = (props) => {
   let user = useSelector((state) => state.user);
 

@@ -1,14 +1,12 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import history from "../../history";
+import history from "../../../history";
 import { gsap } from "gsap";
-import { useRef } from "react";
 import MobileNav from "./MobileNav";
 import Dropdown from "./Dropdown";
-import useQ from "../../useQ";
-export const Navbar = (props) => {
+import useQ from "../../../useQ";
+export default function Navbar(props) {
   let user = useSelector((state) => state.user);
 
   let siteTitle = user?.siteTitle
@@ -26,10 +24,10 @@ export const Navbar = (props) => {
 
   let url =
     window.location.host === "www.selected-work.com"
-      ? `/${user.userName}`
+      ? `/${user.username}`
       : user.domain
       ? ""
-      : `/${user.userName}`;
+      : `/${user.username}`;
 
   // GSAP
   const link = (e, destination) => {
@@ -129,4 +127,4 @@ export const Navbar = (props) => {
       </nav>
     </div>
   );
-};
+}

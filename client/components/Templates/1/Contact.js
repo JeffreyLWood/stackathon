@@ -1,15 +1,13 @@
 import React from "react";
 import { Navbar } from "./Navbar";
-import { fetchUserData } from "../../store/user";
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import Footer from "./Footer";
 import emailjs from "emailjs-com";
 import { gsap } from "gsap";
 import { useRef } from "react";
-export const Contact = (props) => {
+export default function Contact(props) {
   let user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
 
   let defaultEmail = user.email;
 
@@ -208,7 +206,7 @@ export const Contact = (props) => {
         </div>
       </div>
 
-      <Footer user={user} userName={props.match.params.username} />
+      <Footer user={user} username={props.match.params.username} />
     </>
   );
-};
+}
