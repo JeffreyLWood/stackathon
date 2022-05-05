@@ -47,7 +47,7 @@ const User = db.define("user", {
     type: Sequelize.STRING,
   },
   template: {
-    type: Sequelize.STRING,
+    type: Sequelize.REAL,
   },
 });
 

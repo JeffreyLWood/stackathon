@@ -143,7 +143,12 @@ router.get("/:username", async (req, res, next) => {
   try {
     let allData = await User.findOne({
       where: { username: req.params.username },
-      include: { all: true, nested: true },
+      include: {
+        separate: true,
+        model: Collection,
+        order: [["order", "ASC"]],
+        include: { model: Work, separate: true, order: [["order", "ASC"]] },
+      },
     });
 
     if (!allData) {
@@ -175,7 +180,12 @@ router.get("/domain/:domain", async (req, res, next) => {
   try {
     let allData = await User.findOne({
       where: { domain: req.params.domain },
-      include: { all: true, nested: true },
+      include: {
+        separate: true,
+        model: Collection,
+        order: [["order", "ASC"]],
+        include: { model: Work, separate: true, order: [["order", "ASC"]] },
+      },
     });
 
     if (!allData) {

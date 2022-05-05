@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar } from "./Navbar";
+import Navbar from "./Navbar";
 import { useState, useEffect, useLayoutEffect } from "react";
 import { useSelector } from "react-redux";
 import Artwork from "./Artwork";
@@ -15,8 +15,6 @@ export default function Work({ props }) {
 
   let [collection, setCollection] = useState({});
 
-  console.log("work user", user);
-
   useEffect(() => {
     let paramsCollectionTitle =
       props.match.params?.collection && props.match.params.collection;
@@ -30,20 +28,13 @@ export default function Work({ props }) {
     } else {
       let visible =
         user.collections &&
-        user.collections
-          .filter((collection) => !collection.hidden)
-          .sort(function (a, b) {
-            return a.order - b.order;
-          });
+        user.collections.filter((collection) => !collection.hidden);
+
       user.collections && !paramsCollectionTitle && setCollection(visible[0]);
     }
   });
 
-  let works =
-    collection?.works &&
-    collection?.works.sort(function (a, b) {
-      return a.order - b.order;
-    });
+  let works = collection?.works;
 
   let [q, ref] = useQ();
 
@@ -68,8 +59,8 @@ export default function Work({ props }) {
   useLayoutEffect(() => {
     fadeIn();
   });
-  let delay = 0;
 
+  let delay = 0;
   images.forEach((image) => {
     gsap.to(image, {
       scrollTrigger: image,
@@ -83,13 +74,7 @@ export default function Work({ props }) {
 
   return (
     <div>
-      test
-      {/* <Navbar
-        fadeOut={fadeOut}
-        user={user}
-        collection={collection}
-        setCollection={setCollection}
-      />
+      <Navbar />
       <div
         ref={ref}
         className="min-h-screen items-start pt-28 flex flex-col sm:mx-5"
@@ -114,7 +99,7 @@ export default function Work({ props }) {
         </div>
       </div>
 
-      <Footer user={user} username={props.match.params.username} /> */}
+      <Footer user={user} username={props.match.params.username} />
     </div>
   );
 }

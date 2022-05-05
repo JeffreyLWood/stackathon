@@ -30,13 +30,22 @@ export default function Navbar(props) {
       : `/${user.username}`;
 
   // GSAP
+  const fadeOut = () => {
+    gsap.to(q(".stagger"), {
+      opacity: 0,
+      stagger: 0.1,
+      duration: 2,
+      ease: "expo",
+    });
+  };
+
   const link = (e, destination) => {
     e.preventDefault();
     dropDownUp();
     if (destination === window.location.pathname) {
       return null;
     }
-    props.fadeOut();
+    fadeOut();
     setTimeout(() => {
       history.push(destination);
     }, 2000);
