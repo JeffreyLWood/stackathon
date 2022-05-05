@@ -37,13 +37,13 @@ export default function Work({ props }) {
   let [q, ref] = useQ();
 
   const fadeOut = () => {
-    gsap.to(q(".stagger"), {
+    gsap.to(ref.current, {
       opacity: 0,
-      stagger: 0.1,
       duration: 2,
       ease: "expo",
     });
   };
+
   const fadeIn = () => {
     gsap.to(ref.current, {
       opacity: 1,
@@ -52,9 +52,10 @@ export default function Work({ props }) {
     });
     gsap.set(q(".stagger"), { y: 20 });
   };
+
   const images = gsap.utils.toArray(".stagger");
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     fadeIn();
   });
 

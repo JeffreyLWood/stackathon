@@ -8,20 +8,10 @@ import Dropdown from "./Dropdown";
 import useQ from "../../../useQ";
 export default function Navbar(props) {
   let user = useSelector((state) => state.user);
-
-  let siteTitle = user?.siteTitle
-    ? `${user?.siteTitle}`
-    : `${user.firstName} ${user.lastName}`;
-  document.title = siteTitle;
-
-  let collections = user.collections;
-
+  document.title = user?.siteTitle;
+  let collections = user?.collections;
   let visible =
-    collections &&
-    collections
-      .filter((collection) => !collection.hidden)
-      .sort((a, b) => a.order - b.order);
-
+    collections && collections.filter((collection) => !collection.hidden);
   let url =
     window.location.hostname === "selected-work.com"
       ? `/${user.username}`
@@ -45,7 +35,7 @@ export default function Navbar(props) {
     if (destination === window.location.pathname) {
       return null;
     }
-    fadeOut();
+
     setTimeout(() => {
       history.push(destination);
     }, 2000);
@@ -60,6 +50,7 @@ export default function Navbar(props) {
   useEffect(() => {
     fade();
   });
+
   const dropDown = () =>
     gsap.to(q(".dropdown"), {
       display: "flex",
@@ -90,7 +81,7 @@ export default function Navbar(props) {
           className="text-xl cursor-pointer"
           onClick={(e) => link(e, `${url}/`)}
         >
-          {siteTitle}
+          {user?.siteTitle}
         </div>
 
         <span className="flex flex-row space-x-3 text-xs sm:text-sm pe-5">
