@@ -1,9 +1,7 @@
 import React from "react";
-import Navbar from "./Navbar";
 import { useState, useEffect, useLayoutEffect } from "react";
 import { useSelector } from "react-redux";
 import Artwork from "./Artwork";
-import Footer from "./Footer";
 import Description from "./Description";
 import { gsap } from "gsap";
 import useQ from "../../../useQ";
@@ -73,33 +71,28 @@ export default function Work({ props }) {
   });
 
   return (
-    <div>
-      <Navbar />
-      <div
-        ref={ref}
-        className="min-h-screen items-start pt-28 flex flex-col sm:mx-5"
-      >
-        {collection?.description ? (
-          <Description
-            title={collection?.title}
-            description={collection?.description}
-            data={works[0]}
-          />
-        ) : null}
-        <div className="flex w-full h-full overflow-visible flex-wrap">
-          {collection?.works
-            ? works
-                .filter((work) =>
-                  collection?.description ? work.imgId !== works[0].imgId : work
-                )
-                .map((work, index) => {
-                  return <Artwork key={index} data={work} user={user} />;
-                })
-            : null}
-        </div>
+    <div
+      ref={ref}
+      className="min-h-screen items-start pt-28 flex flex-col sm:mx-5"
+    >
+      {collection?.description ? (
+        <Description
+          title={collection?.title}
+          description={collection?.description}
+          data={works[0]}
+        />
+      ) : null}
+      <div className="flex w-full h-full overflow-visible flex-wrap">
+        {collection?.works
+          ? works
+              .filter((work) =>
+                collection?.description ? work.imgId !== works[0].imgId : work
+              )
+              .map((work, index) => {
+                return <Artwork key={index} data={work} user={user} />;
+              })
+          : null}
       </div>
-
-      <Footer user={user} username={props.match.params.username} />
     </div>
   );
 }

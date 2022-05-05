@@ -143,12 +143,17 @@ router.get("/:username", async (req, res, next) => {
   try {
     let allData = await User.findOne({
       where: { username: req.params.username },
-      include: {
-        separate: true,
-        model: Collection,
-        order: [["order", "ASC"]],
-        include: { model: Work, separate: true, order: [["order", "ASC"]] },
-      },
+      include: [
+        {
+          separate: true,
+          model: Collection,
+          order: [["order", "ASC"]],
+          include: { model: Work, separate: true, order: [["order", "ASC"]] },
+        },
+        { model: Contact },
+        { model: About },
+        { model: CV },
+      ],
     });
 
     if (!allData) {

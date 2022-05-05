@@ -10,9 +10,11 @@ import CreateCV from "./components/Create/CreateCV";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Work from "./components/Templates/Work";
-import { About } from "./components/Templates/1/About";
-import { Contact } from "./components/Templates/1/Contact";
-import { CV } from "./components/Templates/1/CV";
+import Navbar from "./components/Templates/Navbar";
+import Footer from "./components/Templates/Footer";
+import About from "./components/Templates/About";
+import Contact from "./components/Templates/Contact";
+import CV from "./components/Templates/CV";
 import { fetchUserData, fetchUserDataDomain } from "./store/user";
 import CreateSettings from "./components/Create/CreateSettings";
 
@@ -53,14 +55,18 @@ const Routes = () => {
     <div>
       {custom ? (
         // Using custom domain, logged in or not
-        <Switch>
-          <Route exact path="/" component={Work} />
-          <Route exact path="/work" component={Work} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/cv" component={CV} />
-          <Route exact path="/contact" component={Contact} />
-          <Route exact path="/work/:collection" component={Work} />
-        </Switch>
+        <>
+          <Navbar />
+          <Switch>
+            <Route exact path="/" component={Work} />
+            <Route exact path="/work" component={Work} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/cv" component={CV} />
+            <Route exact path="/contact" component={Contact} />
+            <Route exact path="/work/:collection" component={Work} />
+          </Switch>
+          <Footer />
+        </>
       ) : user.username ? (
         // Logged in, not using custom domain
         <Switch>
@@ -96,14 +102,18 @@ const Routes = () => {
         </Switch>
       ) : (
         //Not logged in, not using custom domain
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/:username" component={Work} />
-          <Route exact path="/:username/about" component={About} />
-          <Route exact path="/:username/cv" component={CV} />
-          <Route exact path="/:username/contact" component={Contact} />
-          <Route exact path="/:username/work/:collection" component={Work} />
-        </Switch>
+        <>
+          <Navbar />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/:username" component={Work} />
+            <Route exact path="/:username/about" component={About} />
+            <Route exact path="/:username/cv" component={CV} />
+            <Route exact path="/:username/contact" component={Contact} />
+            <Route exact path="/:username/work/:collection" component={Work} />
+          </Switch>
+          <Footer />
+        </>
       )}
     </div>
   );

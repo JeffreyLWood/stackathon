@@ -23,7 +23,7 @@ export default function Navbar(props) {
       .sort((a, b) => a.order - b.order);
 
   let url =
-    window.location.host === "www.selected-work.com"
+    window.location.hostname === "selected-work.com"
       ? `/${user.username}`
       : user.domain
       ? ""
@@ -56,6 +56,7 @@ export default function Navbar(props) {
   const fade = () => {
     gsap.to(q(".nav"), { opacity: 1, duration: 1, ease: "expo" }, 0.5);
   };
+
   useEffect(() => {
     fade();
   });

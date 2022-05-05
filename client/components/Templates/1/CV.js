@@ -1,8 +1,8 @@
 import React from "react";
-import { Navbar } from "./Navbar";
+
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import Footer from "./Footer";
+
 import CVGroup from "./CVGroup";
 import { gsap } from "gsap";
 import { useRef } from "react";
@@ -42,45 +42,33 @@ export default function CV(props) {
   });
 
   return (
-    <>
-      <Navbar fadeOut={fadeOut} user={user} />
-      {/* Container */}
-      <div
-        ref={content}
-        className="h-90vh w-screen px-2 pt-16 sm:mx-0 w-full flex flex-col md:pt-32 pb-20"
-      >
-        {education ? <CVGroup title={"Education"} data={education} /> : null}
-        {soloExhibition ? (
-          <CVGroup title={"Solo Exhibitions"} data={soloExhibition} />
-        ) : null}
-        {groupExhibition ? (
-          <CVGroup
-            title={"Selected Group Exhibitions"}
-            data={groupExhibition}
-          />
-        ) : null}
-        {press ? <CVGroup title={"Press"} data={press} /> : null}
-        {publications ? (
-          <CVGroup title={"Publications"} data={publications} />
-        ) : null}
-        {awards ? <CVGroup title={"Awards"} data={awards} /> : null}
-        {residencies ? (
-          <CVGroup title={"Residencies"} data={residencies} />
-        ) : null}
-        {teaching ? <CVGroup title={"Teaching"} data={teaching} /> : null}
-        {experience ? (
-          <CVGroup title={"Related Experience"} data={experience} />
-        ) : null}
-        {advocacy ? <CVGroup title={"Advocacy"} data={advocacy} /> : null}
-        {communityInvolvement ? (
-          <CVGroup
-            title={"Community Involvement"}
-            data={communityInvolvement}
-          />
-        ) : null}
-      </div>
-
-      <Footer user={user} username={props.match.params.username} />
-    </>
+    <div
+      ref={content}
+      className="h-90vh w-screen px-2 pt-16 sm:mx-0 w-full flex flex-col md:pt-32 pb-20"
+    >
+      {education ? <CVGroup title={"Education"} data={education} /> : null}
+      {soloExhibition ? (
+        <CVGroup title={"Solo Exhibitions"} data={soloExhibition} />
+      ) : null}
+      {groupExhibition ? (
+        <CVGroup title={"Selected Group Exhibitions"} data={groupExhibition} />
+      ) : null}
+      {press ? <CVGroup title={"Press"} data={press} /> : null}
+      {publications ? (
+        <CVGroup title={"Publications"} data={publications} />
+      ) : null}
+      {awards ? <CVGroup title={"Awards"} data={awards} /> : null}
+      {residencies ? (
+        <CVGroup title={"Residencies"} data={residencies} />
+      ) : null}
+      {teaching ? <CVGroup title={"Teaching"} data={teaching} /> : null}
+      {experience ? (
+        <CVGroup title={"Related Experience"} data={experience} />
+      ) : null}
+      {advocacy ? <CVGroup title={"Advocacy"} data={advocacy} /> : null}
+      {communityInvolvement ? (
+        <CVGroup title={"Community Involvement"} data={communityInvolvement} />
+      ) : null}
+    </div>
   );
 }
