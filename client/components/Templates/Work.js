@@ -17,19 +17,3 @@ export default function Work(props) {
   };
   return template(templateId);
 }
-
-// class App extends Component {
-//     render() {
-//       const functionWithSwitch = (parameter) => {
-//         switch(parameter){
-//           case "positive":
-//             return "+"
-//           case "negative":
-//             return "-"
-//           default:
-//             return "neutral"
-//         }
-//       }
-//       return <h1>{functionWithSwitch("positive")}</h1>;
-//     }
-//   }

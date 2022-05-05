@@ -138,35 +138,68 @@ router.get("/custom/:customDomain", async (req, res) => {
   }
 });
 
-// Get User Data
+// Get User Data from username
 router.get("/:username", async (req, res, next) => {
   try {
     let allData = await User.findOne({
       where: { username: req.params.username },
       include: { all: true, nested: true },
     });
+
     if (!allData) {
       res.status(404).send("User not found");
-    } else if (allData) {
-      let userData = {
-        id: allData.dataValues.id,
-        username: allData.dataValues.username,
-        siteTitle: allData.dataValues.siteTitle,
-        email: allData.dataValues.email,
-        firstName: allData.dataValues.firstName,
-        lastName: allData.dataValues.lastName,
-        about: allData.dataValues.about,
-        contact: allData.dataValues.contact,
-        cv: allData.dataValues.cv,
-        collections: allData.dataValues.collections,
-        domain: allData.dataValues.domain,
-        cname: allData.dataValues.cname,
-        template: allData.dataValues.template,
-      };
-      res.status(200).send(userData);
     }
+
+    const userData = {
+      id: allData.dataValues.id,
+      username: allData.dataValues.username,
+      siteTitle: allData.dataValues.siteTitle,
+      email: allData.dataValues.email,
+      firstName: allData.dataValues.firstName,
+      lastName: allData.dataValues.lastName,
+      about: allData.dataValues.about,
+      contact: allData.dataValues.contact,
+      cv: allData.dataValues.cv,
+      collections: allData.dataValues.collections,
+      domain: allData.dataValues.domain,
+      cname: allData.dataValues.cname,
+      template: allData.dataValues.template,
+    };
+    res.status(200).send(userData);
   } catch (err) {
-    console.log("==>", err);
+    console.log("error", err);
+  }
+});
+
+router.get("/domain/:domain", async (req, res, next) => {
+  try {
+    let allData = await User.findOne({
+      where: { domain: req.params.domain },
+      include: { all: true, nested: true },
+    });
+
+    if (!allData) {
+      res.status(404).send("User not found");
+    }
+
+    const userData = {
+      id: allData.dataValues.id,
+      username: allData.dataValues.username,
+      siteTitle: allData.dataValues.siteTitle,
+      email: allData.dataValues.email,
+      firstName: allData.dataValues.firstName,
+      lastName: allData.dataValues.lastName,
+      about: allData.dataValues.about,
+      contact: allData.dataValues.contact,
+      cv: allData.dataValues.cv,
+      collections: allData.dataValues.collections,
+      domain: allData.dataValues.domain,
+      cname: allData.dataValues.cname,
+      template: allData.dataValues.template,
+    };
+    res.status(200).send(userData);
+  } catch (err) {
+    console.log("error", err);
   }
 });
 

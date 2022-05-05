@@ -13,12 +13,9 @@ import Work from "./components/Templates/Work";
 import { About } from "./components/Templates/1/About";
 import { Contact } from "./components/Templates/1/Contact";
 import { CV } from "./components/Templates/1/CV";
-import { fetchUserData } from "./store/user";
+import { fetchUserData, fetchUserDataDomain } from "./store/user";
 import CreateSettings from "./components/Create/CreateSettings";
 
-/**
- * COMPONENT
- */
 const Routes = () => {
   let user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -44,13 +41,9 @@ const Routes = () => {
           return;
         }
       } else {
-        setCustom(true);
         //Find user profile from custom domain
-        let customUser = await fetch(`/api/users/custom/${domain}`, {
-          method: "GET",
-        });
-        customUser = await customUser.json();
-        dispatch(fetchUserData(customUser.username));
+        setCustom(true);
+        dispatch(fetchUserDataDomain(domain));
       }
     }
     load();
@@ -59,6 +52,7 @@ const Routes = () => {
   return (
     <div>
       {custom ? (
+        // Using custom domain, logged in or not
         <Switch>
           <Route exact path="/" component={Work} />
           <Route exact path="/work" component={Work} />
@@ -68,6 +62,7 @@ const Routes = () => {
           <Route exact path="/work/:collection" component={Work} />
         </Switch>
       ) : user.username ? (
+        // Logged in, not using custom domain
         <Switch>
           <Route exact path="/create/in/:username" component={CreateWork} />
           <Route exact path="/" component={CreateWork} />
@@ -100,6 +95,7 @@ const Routes = () => {
           />
         </Switch>
       ) : (
+        //Not logged in, not using custom domain
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/:username" component={Work} />
@@ -112,25 +108,6 @@ const Routes = () => {
     </div>
   );
 };
-
-/**
- * CONTAINER
- */
-// const mapState = (state) => {
-//   return {
-//     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
-//     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
-//     isLoggedIn: !!state.auth.id,
-//   };
-// };
-
-// const mapDispatch = (dispatch) => {
-//   return {
-//     loadInitialData() {
-//       dispatch(me());
-//     },
-//   };
-// };
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes

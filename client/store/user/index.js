@@ -32,7 +32,15 @@ export const fetchUserData = (username) =>
   async function (dispatch) {
     try {
       let { data } = await axios.get(`/api/users/${username}`);
-
+      dispatch(loadUserData(data));
+    } catch (err) {
+      return err;
+    }
+  };
+export const fetchUserDataDomain = (domain) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.get(`/api/users/domain/${domain}`);
       dispatch(loadUserData(data));
     } catch (err) {
       return err;
