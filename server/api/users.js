@@ -128,6 +128,17 @@ router.get("/custom/:customDomain", async (req, res) => {
       where: {
         domain: req.params.customDomain,
       },
+      include: [
+        {
+          separate: true,
+          model: Collection,
+          order: [["order", "ASC"]],
+          include: { model: Work, separate: true, order: [["order", "ASC"]] },
+        },
+        { model: Contact },
+        { model: About },
+        { model: CV },
+      ],
     });
     if (!user) {
       res.status(404).send();
@@ -185,12 +196,17 @@ router.get("/domain/:domain", async (req, res, next) => {
   try {
     let allData = await User.findOne({
       where: { domain: req.params.domain },
-      include: {
-        separate: true,
-        model: Collection,
-        order: [["order", "ASC"]],
-        include: { model: Work, separate: true, order: [["order", "ASC"]] },
-      },
+      include: [
+        {
+          separate: true,
+          model: Collection,
+          order: [["order", "ASC"]],
+          include: { model: Work, separate: true, order: [["order", "ASC"]] },
+        },
+        { model: Contact },
+        { model: About },
+        { model: CV },
+      ],
     });
 
     if (!allData) {

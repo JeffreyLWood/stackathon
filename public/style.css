@@ -1442,6 +1442,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-duration: 150ms;
 }
 
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .\[CIRCULAR\:\"\+f\+\"\] {
   -c-i-r-c-u-l-a-r: "+f+";
 }
