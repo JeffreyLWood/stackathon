@@ -1,17 +1,14 @@
 import React from "react";
-
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-
 import CVGroup from "./CVGroup";
 import { gsap } from "gsap";
-import { useRef } from "react";
 
+import useQ from "../../../useQ";
 export default function CV(props) {
   let user = useSelector((state) => state.user);
 
   let cv = user && user.cv;
-
   let education = cv && cv.education ? cv.education.split("\n") : null;
   let soloExhibition =
     cv && cv.soloExhibition ? cv.soloExhibition.split("\n") : null;
@@ -27,23 +24,20 @@ export default function CV(props) {
   let communityInvolvement =
     cv && cv.communityInvolvement ? cv.communityInvolvement.split("\n") : null;
 
-  let content = useRef();
-  const q = gsap.utils.selector(content);
-  let tl = new gsap.timeline();
-  const fadeOut = () => {
-    gsap.to(content.current, { opacity: 0, duration: 1, ease: "expo" });
-  };
-  useEffect(() => {
-    tl.to(
-      q(".stagger"),
-      { opacity: 1, stagger: 0.1, duration: 2, ease: "expo", y: -10 },
-      1
-    );
-  });
+  let [q, ref] = useQ();
 
+  useEffect(() => {
+    gsap.to(q(".stagger"), {
+      opacity: 1,
+      stagger: 0.1,
+      duration: 2,
+      ease: "expo",
+      y: -10,
+    });
+  });
   return (
     <div
-      ref={content}
+      ref={ref}
       className="h-90vh w-screen px-2 pt-16 sm:mx-0 w-full flex flex-col md:pt-32 pb-20"
     >
       {education ? <CVGroup title={"Education"} data={education} /> : null}

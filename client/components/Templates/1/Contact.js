@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import emailjs from "emailjs-com";
 import { gsap } from "gsap";
 import { useRef } from "react";
+import useQ from "../../../useQ";
 export default function Contact() {
   let user = useSelector((state) => state.user);
 
@@ -49,15 +50,10 @@ export default function Contact() {
     e.target.reset();
   };
 
-  let content = useRef();
-  const q = gsap.utils.selector(content);
-  let tl = new gsap.timeline();
-  const fadeOut = () => {
-    gsap.to(content.current, { opacity: 0, duration: 1, ease: "expo" });
-  };
+  let [q, ref] = useQ();
 
   useEffect(() => {
-    tl.to(q(".stagger"), {
+    gsap.to(q(".stagger"), {
       opacity: 1,
       stagger: 0.1,
       duration: 2,
@@ -68,7 +64,7 @@ export default function Contact() {
 
   return (
     <div
-      ref={content}
+      ref={ref}
       className="font-light text-sm leading-8 h-full my-14 mx-2 md:m-20 md:mb-0 flex flex-col items-start justify-center sm:px-10 sm:py-5 sm:flex-row md:h-screen md:py-24 md:px-10 md:justify-start"
     >
       <div className="stagger w-full flex flex-col mb-5 pr-4 sm:w-2/6">

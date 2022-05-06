@@ -5,13 +5,12 @@ import { useSelector } from "react-redux";
 
 import { Image } from "cloudinary-react";
 import { gsap } from "gsap";
-import { useRef } from "react";
-export default function About(props) {
+import useQ from "../../../useQ";
+export default function About() {
   let user = useSelector((state) => state.user);
-  let { match, history } = props;
-  console.log("template 1 about props", props);
+
   let text = user.about && user.about.text;
-  let json = JSON.stringify(text);
+
   const newText =
     text &&
     text.split("\n").map((str, idx) => (
@@ -22,7 +21,7 @@ export default function About(props) {
     ));
 
   let header = user.about && user.about.header;
-  let jsonHeader = JSON.stringify(header);
+
   const newHeader =
     header &&
     header.split("--").map((str, idx) =>
@@ -41,25 +40,21 @@ export default function About(props) {
   let imgId = user.about && user.about.imgId;
 
   // GSAP
-  let content = useRef();
-  const fadeOut = () => {
-    gsap.to(content.current, { opacity: 0, duration: 1, ease: "expo" });
-  };
+  let [q, ref] = useQ();
 
-  const q = gsap.utils.selector(content);
-  let tl = new gsap.timeline();
   useEffect(() => {
-    tl.to(
-      q(".stagger"),
-
-      { opacity: 1, stagger: 0.1, duration: 2, ease: "expo", y: -10 },
-      1
-    );
+    gsap.to(q(".stagger"), {
+      opacity: 1,
+      stagger: 0.1,
+      duration: 2,
+      ease: "expo",
+      y: -10,
+    });
   });
 
   return (
     <div
-      ref={content}
+      ref={ref}
       className="font-light h-80vh flex flex-col items-start pt-24 sm:mx-10 sm:my-20 md:flex-row md:justify-center"
     >
       <div className="w-full flex justify-center flex-col pb-4 sm:pb-0 sm:w-3/6 sm:h-full">

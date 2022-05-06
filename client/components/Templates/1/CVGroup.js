@@ -1,6 +1,4 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
 export default function CVGroup(props) {
   let margins = "md:mx-auto md:w-4/6 mb-6";
   if (props.title === null) {

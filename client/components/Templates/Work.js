@@ -5,7 +5,6 @@ import Work2 from "./2/Work";
 export default function Work(props) {
   let user = useSelector((state) => state.user);
   let templateId = user.template || 1;
-  console.log(user);
   const template = (id) => {
     switch (id) {
       case 1:

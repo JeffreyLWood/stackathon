@@ -4,7 +4,7 @@ import About1 from "./1/About";
 export default function About(props) {
   let user = useSelector((state) => state.user);
   let templateId = user.template;
-  console.log("about props", props);
+
   const template = (id) => {
     switch (id) {
       case 1:

@@ -36,29 +36,7 @@ export default function Work({ props }) {
 
   let [q, ref] = useQ();
 
-  const fadeOut = () => {
-    gsap.to(ref.current, {
-      opacity: 0,
-      duration: 2,
-      ease: "expo",
-    });
-  };
-
-  const fadeIn = () => {
-    gsap.to(ref.current, {
-      opacity: 1,
-      duration: 1,
-      ease: "expo",
-    });
-    gsap.set(q(".stagger"), { y: 20 });
-  };
-
   const images = gsap.utils.toArray(".stagger");
-
-  useEffect(() => {
-    fadeIn();
-  });
-
   let delay = 0;
   images.forEach((image) => {
     gsap.to(image, {
@@ -70,6 +48,20 @@ export default function Work({ props }) {
       delay: (delay += 0.05),
     });
   });
+
+  const fadeOut = () => {
+    gsap.to(ref.current, {
+      opacity: 0,
+      duration: 1,
+      ease: "expo",
+    });
+  };
+
+  useEffect(() => {
+    return () => {
+      fadeOut();
+    };
+  }, []);
 
   return (
     <div
