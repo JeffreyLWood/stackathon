@@ -36,32 +36,18 @@ export default function Work({ props }) {
 
   let [q, ref] = useQ();
 
-  const images = gsap.utils.toArray(".stagger");
-  let delay = 0;
-  images.forEach((image) => {
-    gsap.to(image, {
-      scrollTrigger: image,
-      opacity: 1,
-      duration: 3,
-      ease: "expo",
-      y: -20,
-      delay: (delay += 0.05),
-    });
-  });
-
-  const fadeOut = () => {
-    gsap.to(ref.current, {
-      opacity: 0,
-      duration: 1,
-      ease: "expo",
-    });
-  };
-
-  useEffect(() => {
-    return () => {
-      fadeOut();
-    };
-  }, []);
+  // const images = gsap.utils.toArray(".stagger");
+  // let delay = 0;
+  // images.forEach((image) => {
+  //   gsap.to(image, {
+  //     scrollTrigger: image,
+  //     opacity: 1,
+  //     duration: 3,
+  //     ease: "expo",
+  //     y: -20,
+  //     delay: (delay += 0.05),
+  //   });
+  // });
 
   return (
     <div

@@ -42,20 +42,21 @@ export default function About() {
   // GSAP
   let [q, ref] = useQ();
 
-  useEffect(() => {
-    gsap.to(q(".stagger"), {
-      opacity: 1,
-      stagger: 0.1,
-      duration: 2,
-      ease: "expo",
-      y: -10,
-    });
-  });
+  // useEffect(() => {
+  //   gsap.to(q(".stagger"), {
+  //     opacity: 1,
+  //     stagger: 0.1,
+  //     // duration: 2,
+  //     // delay: 1,
+  //     ease: "expo",
+  //     // y: -10,
+  //   });
+  // });
 
   return (
     <div
       ref={ref}
-      className="font-light h-80vh flex flex-col items-start pt-24 sm:mx-10 sm:my-20 md:flex-row md:justify-center"
+      className="absolute font-light h-80vh flex flex-col items-start pt-24 sm:mx-10 sm:my-20 md:flex-row md:justify-center"
     >
       <div className="w-full flex justify-center flex-col pb-4 sm:pb-0 sm:w-3/6 sm:h-full">
         <span className="w-full sm:h-96 flex justify-center">

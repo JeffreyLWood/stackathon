@@ -17,7 +17,8 @@ import Contact from "./components/Templates/Contact";
 import CV from "./components/Templates/CV";
 import { fetchUserData, fetchUserDataDomain } from "./store/user";
 import CreateSettings from "./components/Create/CreateSettings";
-
+import { TransitionGroup, Transition } from "react-transition-group";
+import { gsap } from "gsap";
 const Routes = () => {
   let user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -50,21 +51,48 @@ const Routes = () => {
     }
     load();
   }, []);
+  const play = (node) => {
+    const timeline = new gsap.timeline({ paused: true });
+    const els = node.querySelectorAll(".stagger");
 
+    timeline.to(els, {
+      opacity: 1,
+      duration: 1,
+      stagger: 0.1,
+      ease: "expo",
+      y: -20,
+    });
+
+    timeline.play();
+  };
   return (
     <div>
       {custom ? (
         // Using custom domain, logged in or not
         <>
           <Navbar />
-          <Switch>
-            <Route exact path="/" component={Work} />
-            <Route exact path="/work" component={Work} />
-            <Route exact path="/about" component={About} />
-            <Route exact path="/cv" component={CV} />
-            <Route exact path="/contact" component={Contact} />
-            <Route exact path="/work/:collection" component={Work} />
-          </Switch>
+          <Route
+            render={({ location }) => (
+              <TransitionGroup component={null}>
+                <Transition
+                  key={location.key}
+                  appear={true}
+                  onEnter={(node) => play(node)}
+                  timeout={{ enter: 1000, exit: 500 }}
+                >
+                  <Switch location={location}>
+                    <Route exact path="/" component={Work} />
+                    <Route exact path="/work" component={Work} />
+                    <Route exact path="/about" component={About} />
+                    <Route exact path="/cv" component={CV} />
+                    <Route exact path="/contact" component={Contact} />
+                    <Route exact path="/work/:collection" component={Work} />
+                  </Switch>
+                </Transition>
+              </TransitionGroup>
+            )}
+          />
+
           <Footer />
         </>
       ) : user.username ? (

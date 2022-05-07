@@ -55,17 +55,18 @@ export default function Contact() {
   useEffect(() => {
     gsap.to(q(".stagger"), {
       opacity: 1,
-      stagger: 0.1,
-      duration: 2,
+      // stagger: 0.1,
+      // duration: 2,
+      // delay: 1,
       ease: "expo",
-      y: -10,
+      // y: -10,
     });
   });
 
   return (
     <div
       ref={ref}
-      className="font-light text-sm leading-8 h-full my-14 mx-2 md:m-20 md:mb-0 flex flex-col items-start justify-center sm:px-10 sm:py-5 sm:flex-row md:h-screen md:py-24 md:px-10 md:justify-start"
+      className="absolute w-screen font-light text-sm leading-8 h-full my-14 mx-2 md:m-20 md:mb-0 flex flex-col items-start justify-center sm:px-10 sm:py-5 sm:flex-row md:h-screen md:py-24 md:px-10 md:justify-start"
     >
       <div className="stagger w-full flex flex-col mb-5 pr-4 sm:w-2/6">
         <span className="pageTitle mb-5">Contact</span>
@@ -172,7 +173,7 @@ export default function Contact() {
             style={{ resize: "none" }}
             name="message"
             type="text"
-            className="w-full"
+            className="sm:w-4/6"
           />
 
           {/* <label htmlFor="emailList">Subscribe to Email List:</label>

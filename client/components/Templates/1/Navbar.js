@@ -26,9 +26,8 @@ export default function Navbar(props) {
     if (destination === window.location.pathname) {
       return null;
     }
-    setTimeout(() => {
-      history.push(destination);
-    }, 1000);
+
+    history.push(destination);
   };
 
   let [q, ref] = useQ();

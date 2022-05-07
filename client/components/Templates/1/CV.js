@@ -26,19 +26,20 @@ export default function CV(props) {
 
   let [q, ref] = useQ();
 
-  useEffect(() => {
-    gsap.to(q(".stagger"), {
-      opacity: 1,
-      stagger: 0.1,
-      duration: 2,
-      ease: "expo",
-      y: -10,
-    });
-  });
+  // useEffect(() => {
+  //   gsap.to(q(".stagger"), {
+  //     opacity: 1,
+  //     // stagger: 0.1,
+  //     // duration: 2,
+  //     ease: "expo",
+  //     // y: -10,
+  //   });
+  // });
+
   return (
     <div
       ref={ref}
-      className="h-90vh w-screen px-2 pt-16 sm:mx-0 w-full flex flex-col md:pt-32 pb-20"
+      className="absolute h-90vh w-screen px-2 pt-16 sm:mx-0 w-full flex flex-col md:pt-32 pb-20"
     >
       {education ? <CVGroup title={"Education"} data={education} /> : null}
       {soloExhibition ? (
