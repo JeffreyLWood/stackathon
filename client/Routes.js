@@ -19,6 +19,8 @@ import { fetchUserData, fetchUserDataDomain } from "./store/user";
 import CreateSettings from "./components/Create/CreateSettings";
 import { TransitionGroup, Transition } from "react-transition-group";
 import { gsap } from "gsap";
+import { play, exit } from "./PageTransitions";
+
 const Routes = () => {
   let user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -51,20 +53,7 @@ const Routes = () => {
     }
     load();
   }, []);
-  const play = (node) => {
-    const timeline = new gsap.timeline({ paused: true });
-    const els = node.querySelectorAll(".stagger");
 
-    timeline.to(els, {
-      opacity: 1,
-      duration: 1,
-      stagger: 0.1,
-      ease: "expo",
-      y: -20,
-    });
-
-    timeline.play();
-  };
   return (
     <div>
       {custom ? (
@@ -77,8 +66,9 @@ const Routes = () => {
                 <Transition
                   key={location.key}
                   appear={true}
-                  onEnter={(node) => play(node)}
-                  timeout={{ enter: 1000, exit: 500 }}
+                  onEnter={(node) => play(node, location.pathname)}
+                  onExit={(node) => exit(node, location.pathname)}
+                  timeout={{ enter: 3000, exit: 2000 }}
                 >
                   <Switch location={location}>
                     <Route exact path="/" component={Work} />

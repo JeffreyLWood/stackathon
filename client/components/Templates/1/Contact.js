@@ -52,17 +52,6 @@ export default function Contact() {
 
   let [q, ref] = useQ();
 
-  useEffect(() => {
-    gsap.to(q(".stagger"), {
-      opacity: 1,
-      // stagger: 0.1,
-      // duration: 2,
-      // delay: 1,
-      ease: "expo",
-      // y: -10,
-    });
-  });
-
   return (
     <div
       ref={ref}
