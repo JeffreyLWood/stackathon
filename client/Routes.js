@@ -60,7 +60,6 @@ const Routes = () => {
         // Using custom domain, logged in or not
         <>
           <Navbar />
-
           <Route
             render={({ location }) => (
               <TransitionGroup component={null}>
@@ -122,7 +121,6 @@ const Routes = () => {
       ) : (
         //Not logged in, not using custom domain
         <>
-          <Navbar />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/:username" component={Work} />
@@ -131,7 +129,7 @@ const Routes = () => {
             <Route exact path="/:username/contact" component={Contact} />
             <Route exact path="/:username/work/:collection" component={Work} />
           </Switch>
-          <Footer />
+          {/* <Footer /> */}
         </>
       )}
     </div>

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import CV1 from "./1/CV";
 export default function CV(props) {
   let user = useSelector((state) => state.user);
-  let templateId = user.template;
+  let templateId = user.template || 1;
   const template = (id) => {
     switch (id) {
       case 1:
