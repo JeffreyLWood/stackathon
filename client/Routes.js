@@ -60,6 +60,7 @@ const Routes = () => {
         // Using custom domain, logged in or not
         <>
           <Navbar />
+
           <Route
             render={({ location }) => (
               <TransitionGroup component={null}>
@@ -68,7 +69,7 @@ const Routes = () => {
                   appear={true}
                   onEnter={(node) => play(node, location.pathname)}
                   onExit={(node) => exit(node, location.pathname)}
-                  timeout={{ enter: 3000, exit: 2000 }}
+                  timeout={{ enter: 2000, exit: 1000 }}
                 >
                   <Switch location={location}>
                     <Route exact path="/" component={Work} />
@@ -83,7 +84,7 @@ const Routes = () => {
             )}
           />
 
-          <Footer />
+          {/* <Footer /> */}
         </>
       ) : user.username ? (
         // Logged in, not using custom domain

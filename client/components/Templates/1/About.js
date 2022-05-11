@@ -1,8 +1,6 @@
 import React from "react";
-
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-
 import { Image } from "cloudinary-react";
 import { gsap } from "gsap";
 import useQ from "../../../useQ";
@@ -45,13 +43,13 @@ export default function About() {
   return (
     <div
       ref={ref}
-      className="absolute font-light h-80vh flex flex-col items-start pt-24 sm:mx-10 sm:my-20 md:flex-row md:justify-center"
+      className="font-light h-80vh flex flex-col items-start pt-24 sm:mx-10 sm:my-20 md:flex-row md:justify-center"
     >
       <div className="w-full flex justify-center flex-col pb-4 sm:pb-0 sm:w-3/6 sm:h-full">
         <span className="w-full sm:h-96 flex justify-center">
           <figure>
             <Image
-              cloudName="jeffreywood"
+              cloudName={process.env.CLOUDINARY_NAME}
               publicId={imgId}
               className="stagger flex object-contain sm:max-w-lg aboutImage px-2 sm:px-0 sm:mx-auto"
             />

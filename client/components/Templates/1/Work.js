@@ -37,27 +37,29 @@ export default function Work({ props }) {
   let [q, ref] = useQ();
 
   return (
-    <div
-      ref={ref}
-      className="min-h-screen items-start pt-28 flex flex-col sm:mx-5"
-    >
-      {collection?.description ? (
-        <Description
-          title={collection?.title}
-          description={collection?.description}
-          data={works[0]}
-        />
-      ) : null}
-      <div className="flex w-full h-full overflow-visible flex-wrap">
-        {collection?.works
-          ? works
-              .filter((work) =>
-                collection?.description ? work.imgId !== works[0].imgId : work
-              )
-              .map((work, index) => {
-                return <Artwork key={index} data={work} user={user} />;
-              })
-          : null}
+    <div className="min-h-screen">
+      <div
+        ref={ref}
+        className="h-80vh items-start pt-28 flex flex-col sm:mx-5 mb-10"
+      >
+        {collection?.description ? (
+          <Description
+            title={collection?.title}
+            description={collection?.description}
+            data={works[0]}
+          />
+        ) : null}
+        <div className="flex w-full h-full overflow-visible flex-wrap">
+          {collection?.works
+            ? works
+                .filter((work) =>
+                  collection?.description ? work.imgId !== works[0].imgId : work
+                )
+                .map((work, index) => {
+                  return <Artwork key={index} data={work} user={user} />;
+                })
+            : null}
+        </div>
       </div>
     </div>
   );

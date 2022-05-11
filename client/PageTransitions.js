@@ -18,13 +18,15 @@ export const exit = (node, pathname) => {
   const timeline = new gsap.timeline({ paused: true });
   const els = node.querySelectorAll(".stagger");
 
-  timeline.to(els, {
-    opacity: 0,
-    // y: -40,
-    // stagger: 0.1,
-    duration: 1,
-    ease: "expo",
-  });
+  timeline.fromTo(
+    els,
+    { opacity: 1 },
+    {
+      opacity: 0,
+      duration: 1,
+      ease: "expo",
+    }
+  );
 
   timeline.play();
 };

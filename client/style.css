@@ -158,15 +158,21 @@ a:hover {
 }
 
 .h-70vh {
+  position: absolute;
   min-height: 70vh;
 }
 
 .h-80vh {
+  position: absolute;
   min-height: 80vh;
 }
 
 .h-90vh {
   min-height: 90vh;
+}
+
+.h-95vh {
+  min-height: 95vh;
 }
 
 .subHeader {
@@ -385,10 +391,8 @@ opacity:0;
 .footer {
   min-height: 50vh;
   display: flex;
-  position: absolute;
-  top: 100vh;
   width:100vw;
-  padding: 4rem;
+  padding: 3rem;
 }
 
 .homeFooter {
@@ -437,9 +441,17 @@ opacity:0;
   top: 0;
   left: 0;
   right: 0;
-  height: 4rem;
+  height: 6rem;
   opacity: 0;
   padding: 1rem;
+}
+
+.nav a {
+  color:#333;
+}
+
+.nav a:hover {
+  color: var(--primary);
 }
 
 .mobileNav {

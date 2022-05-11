@@ -65,53 +65,58 @@ export default function Navbar(props) {
         link={link}
         fadeOut={props.fadeOut}
       />
-      <nav className="nav navbar fixed flex flex-row justify-between items-end sm:px-14 tracking-widest">
-        <div
-          className="text-xl cursor-pointer"
+      <nav className="nav fixed flex flex-row w-screen justify-between tracking-widest items-end sm:px-14 tracking-widest">
+        <span
+          className="text-2xl uppercase items-end cursor-pointer w-3/6"
           onClick={(e) => link(e, `${url}/`)}
         >
           {user?.siteTitle}
-        </div>
+        </span>
 
-        <span className="flex flex-row space-x-3 text-xs sm:text-sm pe-5">
-          <span
-            className="subHeader cursor-pointer"
-            onMouseEnter={dropDown}
-            onMouseLeave={dropDownUp}
-          >
-            <span onClick={(e) => link(e, `${url}/`)}>Selected Work</span>
-            {/* Drop Down Nav For Collections */}
-            <Dropdown
-              url={url}
-              preview={
-                props.collection?.works && props.collection?.works[0].imgId
-              }
-              collection={props.collection}
-              visible={visible}
-              collections={collections}
-              link={link}
-            />
+        <span className="flex flex-row items-end justify-between w-2/6 text-xs sm:text-xs">
+          <span className="space-between flex flex-row space-x-8">
+            <span
+              className="subHeader mx-4 cursor-pointer"
+              onMouseEnter={dropDown}
+              onMouseLeave={dropDownUp}
+            >
+              <span onClick={(e) => link(e, `${url}/`)}>Selected Work</span>
+              {/* Drop Down Nav For Collections */}
+              <Dropdown
+                url={url}
+                preview={
+                  props.collection?.works && props.collection?.works[0].imgId
+                }
+                collection={props.collection}
+                visible={visible}
+                collections={collections}
+                link={link}
+              />
+            </span>
+
+            <span
+              className="subHeader mx-4 cursor-pointer"
+              onClick={(e) => link(e, `${url}/about`)}
+            >
+              About
+            </span>
+
+            <span
+              className="subHeader mx-4 cursor-pointer"
+              onClick={(e) => link(e, `${url}/cv`)}
+            >
+              CV
+            </span>
+
+            <span
+              onClick={(e) => link(e, `${url}/contact`)}
+              className="subHeader mx-4 cursor-pointer"
+            >
+              Contact
+            </span>
           </span>
-
-          <span
-            className="subHeader cursor-pointer"
-            onClick={(e) => link(e, `${url}/about`)}
-          >
-            About
-          </span>
-
-          <span
-            className="subHeader cursor-pointer"
-            onClick={(e) => link(e, `${url}/cv`)}
-          >
-            CV
-          </span>
-
-          <span
-            onClick={(e) => link(e, `${url}/contact`)}
-            className="subHeader cursor-pointer"
-          >
-            Contact
+          <span className="pl-12">
+            <img src="../social/instagram.png" className="w-6" />
           </span>
         </span>
       </nav>

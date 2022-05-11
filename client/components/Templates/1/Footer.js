@@ -16,7 +16,7 @@ export default function Footer() {
   let etsy = user.contact && user.contact.etsy;
   let tiktok = user.contact && user.contact.tiktok;
   return (
-    <div className="footer flex-col md:flex-row bg-stone-100 text-zinc-800 font-light tracking-wider text-sm">
+    <div className="bg-stone-100 footer flex-col md:flex-row font-light tracking-wider text-sm">
       <div className="mr-10">
         <ul>
           <li className="uppercase tracking-wider text-lg">{user.siteTitle}</li>
