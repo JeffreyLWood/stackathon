@@ -1,10 +1,8 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
 import { Image } from "cloudinary-react";
 import { gsap } from "gsap";
-import { useRef } from "react";
-import useQ from "./useQ";
+import useQ from "../../../useQ";
 import Collections from "./Collections";
 export default function Dropdown(props) {
   let [preview, setPreview] = useState(props.preview);

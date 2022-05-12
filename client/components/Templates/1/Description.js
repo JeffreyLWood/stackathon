@@ -1,18 +1,18 @@
 import React from "react";
 import { Image } from "cloudinary-react";
+import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import ArtworkModal from "./ArtworkModal";
 import Dimensions from "./Dimensions";
-import useQ from "./useQ";
+import useQ from "../../../useQ";
 import { gsap } from "gsap";
 
-export default function Artwork(props) {
+export default function Description(props) {
   let [show, setShow] = useState(true);
 
-  //Disable scrolling when menu is open
+  let user = useSelector((state) => state.user);
   let [body, setBody] = useState("");
-  let [scrollPos, setScrollPos] = useState("");
-
+  let [scrollPos, setScrollPos] = useState(null);
   let [q, ref] = useQ();
 
   const fadeIn = () => {
@@ -56,11 +56,23 @@ export default function Artwork(props) {
   const fadeOut = () => {
     document.body.style.position = "";
     window.scrollTo({ top: scrollPos, behavior: "auto" });
+    gsap.to(q(".artwork"), {
+      opacity: 0,
+      duration: 2,
+      ease: "expo",
+    });
+    gsap.to(q(".description"), {
+      opacity: 0,
+      zIndex: -1,
+      duration: 2,
+      ease: "expo",
+    });
     gsap.to(q(".workModal"), {
       opacity: 0,
       zIndex: -1,
-      duration: 1,
+      duration: 2,
       ease: "expo",
+      delay: 1,
     });
   };
 
@@ -68,62 +80,58 @@ export default function Artwork(props) {
     if (window.outerWidth <= 638) {
       return;
     }
-    setScrollPos(window.scrollY);
     fadeIn();
+    setScrollPos(window.scrollY);
     setTimeout(() => {
       document.body.style.position = "fixed";
     }, 500);
   };
 
-  const closeHandler = (e) => {
-    e.preventDefault();
-
-    window.scrollTo(0, parseInt(scrollPos || "0") * -1);
-    setShow(false);
-  };
+  const text = props.description.split("\n").map((str, idx) => (
+    <p key={idx} className="pb-6 sm:pb-0 text-sm leading-6">
+      {str}
+      <br />
+    </p>
+  ));
 
   return (
-    <>
-      <div className="stagger z-10 flex flex-col flex-wrap w-full mx-2 my-8 md:my-0 sm:w-2/4 lg:w-1/4 md:h-96 sm:px-8 md:mt-4 md:mx-0">
+    <section className="w-screen min-h-content sm:mt-20 sm:mb-28 sm:h-96 flex flex-col-reverse items-start sm:flex-row">
+      <div className="stagger w-full h-4/6 sm:h-full sm:w-5/12  flex flex-col px-2 sm:px-10 space-y-4">
+        <span className="text-3xl tracking-widest ">{props.title}</span>
+        {text}
+      </div>
+      <div className="w-full h-auto sm:h-full sm:w-7/12 flex flex-col md:flex-row sm:items-baseline md:items-end sm:justify-center">
         <span>
           <Image
             cloudName={process.env.CLOUDINARY_NAME}
             publicId={props.data.imgId}
+            className="stagger max-h-96 cursor-pointer"
             onClick={showModal}
-            className="min-h-70 object-contain mx-auto  md:h-64 cursor-pointer"
           />
         </span>
-        <div className="pt-4 sm:pt-8 text-xs flex flex-col space-y-2 sm:space-y-0 justify-end font-light tracking-widest uppercase text-right cursor-pointer text-neutral-500">
-          <span onClick={showModal}>
-            {props.data.title},{" "}
-            <span className="text-neutral-400">{props.data.year}</span>
-          </span>
-          <span className="mobileArtDescription text-neutral-500">
-            {props.data.medium}
-          </span>
-          <span className="mobileArtDescription text-neutral-500">
-            <Dimensions data={props.data} />
-          </span>
-          <span className="mobileArtDescription text-neutral-500">
-            {props.data.status}
-          </span>
-          <span className="mobileArtDescription text-neutral-500">
-            {props.data.price}
-          </span>
-        </div>
+        <span className="stagger pt-5 text-right sm:text-left mx-4 tracking-widest">
+          <ul className="text-xs space-y-2  uppercase text-neutral-400">
+            <li className="text-neutral-400">{user.siteTitle}</li>
+            <li>{props.data.title} </li>
+            <li>
+              <span className="text-neutral-400">{props.data.year}</span>
+            </li>
+            <li>
+              <Dimensions data={props.data} />
+            </li>
+          </ul>
+        </span>
       </div>
       <div ref={ref}>
         <ArtworkModal
-          closeHandler={closeHandler}
+          fadeOut={fadeOut}
           show={show}
-          setShow={setShow}
-          user={props.user}
+          user={user}
           cloudName={process.env.CLOUDINARY_NAME}
           publicId={props.data.imgId}
           data={props.data}
-          fadeOut={fadeOut}
         />
       </div>
-    </>
+    </section>
   );
 }

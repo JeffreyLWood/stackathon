@@ -1,0 +1,42 @@
+import { gsap } from "gsap";
+export const play = (node, location) => {
+  window.loadPromise.then(() => {
+    const timeline = new gsap.timeline({ paused: true });
+    const els = node.querySelectorAll(".stagger");
+
+    if (els.length < 1) {
+      return;
+    }
+    timeline.fromTo(
+      els,
+      {
+        opacity: 0,
+      },
+      {
+        opacity: 1,
+        duration: 2,
+        stagger: 0.1,
+        ease: "expo",
+        y: -20,
+        delay: 1,
+      }
+    );
+    timeline.play();
+  });
+};
+export const exit = (node, location) => {
+  const timeline = new gsap.timeline({ paused: true });
+  const els = node.querySelectorAll(".stagger");
+
+  timeline.fromTo(
+    els,
+    { opacity: 1 },
+    {
+      opacity: 0,
+      duration: 1,
+      ease: "expo",
+    }
+  );
+
+  timeline.play();
+};

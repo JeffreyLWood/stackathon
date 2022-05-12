@@ -1,17 +1,14 @@
 import React from "react";
-import { Navbar } from "./Navbar";
 import { useState, useEffect, useLayoutEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import Artwork from "./Artwork";
-import Footer from "./Footer";
 import Description from "./Description";
 import { gsap } from "gsap";
-import { useRef } from "react";
-import useQ from "./useQ";
+import useQ from "../../../useQ";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
-export const Work = (props) => {
+export default function Work({ props }) {
   let user = useSelector((state) => state.user);
 
   let [collection, setCollection] = useState({});
@@ -29,67 +26,21 @@ export const Work = (props) => {
     } else {
       let visible =
         user.collections &&
-        user.collections
-          .filter((collection) => !collection.hidden)
-          .sort(function (a, b) {
-            return a.order - b.order;
-          });
+        user.collections.filter((collection) => !collection.hidden);
+
       user.collections && !paramsCollectionTitle && setCollection(visible[0]);
     }
   });
 
-  let works =
-    collection?.works &&
-    collection?.works.sort(function (a, b) {
-      return a.order - b.order;
-    });
+  let works = collection?.works;
 
   let [q, ref] = useQ();
 
-  const fadeOut = () => {
-    gsap.to(q(".stagger"), {
-      opacity: 0,
-      stagger: 0.1,
-      duration: 2,
-      ease: "expo",
-    });
-  };
-  const fadeIn = () => {
-    gsap.to(ref.current, {
-      opacity: 1,
-      duration: 1,
-      ease: "expo",
-    });
-    gsap.set(q(".stagger"), { y: 20 });
-  };
-  const images = gsap.utils.toArray(".stagger");
-
-  useLayoutEffect(() => {
-    fadeIn();
-  });
-  let delay = 0;
-  images.forEach((image) => {
-    gsap.to(image, {
-      scrollTrigger: image,
-      opacity: 1,
-      duration: 3,
-      ease: "expo",
-      y: -20,
-      delay: (delay += 0.05),
-    });
-  });
-
   return (
-    <div>
-      <Navbar
-        fadeOut={fadeOut}
-        user={user}
-        collection={collection}
-        setCollection={setCollection}
-      />
+    <div className="min-h-screen">
       <div
         ref={ref}
-        className="min-h-screen items-start pt-28 flex flex-col sm:mx-5"
+        className="h-80vh items-start pt-28 flex flex-col sm:mx-5 mb-10"
       >
         {collection?.description ? (
           <Description
@@ -110,8 +61,6 @@ export const Work = (props) => {
             : null}
         </div>
       </div>
-
-      <Footer user={user} userName={props.match.params.username} />
     </div>
   );
-};
+}

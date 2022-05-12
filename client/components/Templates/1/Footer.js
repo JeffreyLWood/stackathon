@@ -1,19 +1,8 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { fetchUserData } from "../../store/user";
-export default function Footer(props) {
+export default function Footer() {
   let user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
-  // let [userData, setUser] = useState(user);
-
-  useEffect(() => {
-    async function loadUserData() {
-      await dispatch(fetchUserData(props.userName));
-    }
-    loadUserData();
-  }, []);
 
   let email = user.contact && user.contact.email;
   let instagram = user.contact && user.contact.instagram;
@@ -27,33 +16,30 @@ export default function Footer(props) {
   let etsy = user.contact && user.contact.etsy;
   let tiktok = user.contact && user.contact.tiktok;
   return (
-    <div className="footer flex-col md:flex-row bg-stone-100 text-zinc-800 font-light tracking-wider text-sm">
+    <div className="bg-stone-100 footer flex-col md:flex-row font-light tracking-wider text-sm">
       <div className="mr-10">
         <ul>
           <li className="uppercase tracking-wider text-lg">{user.siteTitle}</li>
           <li>
-            <a href={`/${props.userName}`} className="hover:text-zinc-800">
+            <a href={`/${user.username}`} className="hover:text-zinc-800">
               Work
             </a>
           </li>
           <li>
-            <a
-              href={`/${props.userName}/about`}
-              className="hover:text-zinc-800"
-            >
+            <a href={`/${user.username}/about`} className="hover:text-zinc-800">
               About
             </a>
           </li>
           <li>
             <a
-              href={`/${props.userName}/contact`}
+              href={`/${user.username}/contact`}
               className="hover:text-zinc-800"
             >
               Contact
             </a>
           </li>
           <li>
-            <a href={`/${props.userName}/cv`} className="hover:text-zinc-800">
+            <a href={`/${user.username}/cv`} className="hover:text-zinc-800">
               CV
             </a>
           </li>

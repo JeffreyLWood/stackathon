@@ -1,5 +1,5 @@
 import React from "react";
-import history from "../../history";
+import history from "../../../history";
 export default function CollectionsMobile(props) {
   const mobileCollectionClickHandler = (e, collection) => {
     e.preventDefault();

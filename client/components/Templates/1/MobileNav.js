@@ -1,14 +1,11 @@
 import React from "react";
-import { fetchUserData } from "../../store/user";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Image } from "cloudinary-react";
-import history from "../../history";
 import { gsap } from "gsap";
-import Collections from "./Collections";
 import CollectionsMobile from "./CollectionsMobile";
-import useQ from "./useQ";
+import useQ from "../../../useQ";
+
 export default function MobileNav(props) {
   let user = useSelector((state) => state.user);
 

@@ -128,46 +128,131 @@ router.get("/custom/:customDomain", async (req, res) => {
       where: {
         domain: req.params.customDomain,
       },
-      include: { all: true, nested: true },
+      include: [
+        {
+          separate: true,
+          model: Collection,
+          order: [["order", "ASC"]],
+          include: { model: Work, separate: true, order: [["order", "ASC"]] },
+        },
+        { model: Contact },
+        { model: About },
+        { model: CV },
+      ],
     });
     if (!user) {
       res.status(404).send();
     }
-    res.status(200).send(user);
+    res.json(user).status(200);
   } catch (err) {
     res.status(500).send(err);
   }
 });
 
-// Get User Data
+// Get User Data from username
 router.get("/:username", async (req, res, next) => {
   try {
     let allData = await User.findOne({
       where: { username: req.params.username },
-      include: { all: true, nested: true },
+      include: [
+        {
+          separate: true,
+          model: Collection,
+          order: [["order", "ASC"]],
+          include: { model: Work, separate: true, order: [["order", "ASC"]] },
+        },
+        { model: Contact },
+        { model: About },
+        { model: CV },
+      ],
     });
+
     if (!allData) {
       res.status(404).send("User not found");
-    } else if (allData) {
-      let userData = {
-        id: allData.dataValues.id,
-        userName: allData.dataValues.username,
-        siteTitle: allData.dataValues.siteTitle,
-        email: allData.dataValues.email,
-        firstName: allData.dataValues.firstName,
-        lastName: allData.dataValues.lastName,
-        about: allData.dataValues.about,
-        contact: allData.dataValues.contact,
-        cv: allData.dataValues.cv,
-        collections: allData.dataValues.collections,
-        domain: allData.dataValues.domain,
-        cname: allData.dataValues.cname,
-        template: allData.dataValues.template,
-      };
-      res.status(200).send(userData);
     }
+
+    const userData = {
+      id: allData.dataValues.id,
+      username: allData.dataValues.username,
+      siteTitle: allData.dataValues.siteTitle,
+      email: allData.dataValues.email,
+      firstName: allData.dataValues.firstName,
+      lastName: allData.dataValues.lastName,
+      about: allData.dataValues.about,
+      contact: allData.dataValues.contact,
+      cv: allData.dataValues.cv,
+      collections: allData.dataValues.collections,
+      domain: allData.dataValues.domain,
+      cname: allData.dataValues.cname,
+      template: allData.dataValues.template,
+    };
+    res.status(200).send(userData);
   } catch (err) {
-    console.log("==>", err);
+    console.log("error", err);
+  }
+});
+
+router.get("/domain/:domain", async (req, res, next) => {
+  try {
+    let allData = await User.findOne({
+      where: { domain: req.params.domain },
+      include: [
+        {
+          separate: true,
+          model: Collection,
+          order: [["order", "ASC"]],
+          include: { model: Work, separate: true, order: [["order", "ASC"]] },
+        },
+        { model: Contact },
+        { model: About },
+        { model: CV },
+      ],
+    });
+
+    if (!allData) {
+      res.status(404).send("User not found");
+    }
+
+    let cv = [];
+    let cvData = JSON.stringify(allData.dataValues.cv, 2, 0);
+    let cvObj = JSON.parse(cvData);
+    let headings = {
+      education: "Education",
+      groupExhibition: "Selected Group Exhibition",
+      soloExhibition: "Solo Exhibition",
+      teaching: "Teaching",
+      experience: "Related Experience",
+      communityInvolvement: "Community Involvment",
+      advocacy: "Advocacy",
+      press: "Press",
+      publications: "Publications",
+      awards: "Awards",
+      residencies: "Residencies",
+    };
+    for (let key in cvObj) {
+      if (key in headings && cvObj[key]) {
+        let heading = headings[key];
+        cv.push({ title: [heading], data: cvObj[key].split("\n") });
+      }
+    }
+    const userData = {
+      id: allData.dataValues.id,
+      username: allData.dataValues.username,
+      siteTitle: allData.dataValues.siteTitle,
+      email: allData.dataValues.email,
+      firstName: allData.dataValues.firstName,
+      lastName: allData.dataValues.lastName,
+      about: allData.dataValues.about,
+      contact: allData.dataValues.contact,
+      cv: cv,
+      collections: allData.dataValues.collections,
+      domain: allData.dataValues.domain,
+      cname: allData.dataValues.cname,
+      template: allData.dataValues.template,
+    };
+    res.status(200).send(userData);
+  } catch (err) {
+    console.log("error", err);
   }
 });
 

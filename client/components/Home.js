@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Navbar } from "./Navbar";
 import AuthForm from "./AuthForm";
 import Onboard from "./Onboard";
-import Footer from "./Site/Footer";
 import Welcome from "./Welcome";
 import Features from "./Features";
 import { useState, useEffect } from "react";
