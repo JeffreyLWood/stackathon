@@ -1,9 +1,10 @@
 import { gsap } from "gsap";
-export const play = (node, pathname) => {
+export const play = (node, location) => {
   window.loadPromise.then(() => {
     const timeline = new gsap.timeline({ paused: true });
     const els = node.querySelectorAll(".stagger");
-    if (!els) {
+
+    if (els.length < 1) {
       return;
     }
     timeline.fromTo(
@@ -11,17 +12,22 @@ export const play = (node, pathname) => {
       {
         opacity: 0,
       },
-      { opacity: 1, duration: 2, stagger: 0.1, ease: "expo", y: -20, delay: 1 }
+      {
+        opacity: 1,
+        duration: 2,
+        stagger: 0.1,
+        ease: "expo",
+        y: -20,
+        delay: 1,
+      }
     );
     timeline.play();
   });
 };
-export const exit = (node, pathname) => {
+export const exit = (node, location) => {
   const timeline = new gsap.timeline({ paused: true });
   const els = node.querySelectorAll(".stagger");
-  if (!els) {
-    return;
-  }
+
   timeline.fromTo(
     els,
     { opacity: 1 },

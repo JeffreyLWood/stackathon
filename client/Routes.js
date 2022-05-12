@@ -66,7 +66,7 @@ const Routes = () => {
                 <Transition
                   key={location.key}
                   appear={true}
-                  onEnter={(node) => play(node, location.pathname)}
+                  onEnter={(node, location) => play(node, location)}
                   onExit={(node) => exit(node, location.pathname)}
                   timeout={{ enter: 2000, exit: 1000 }}
                 >
@@ -82,8 +82,6 @@ const Routes = () => {
               </TransitionGroup>
             )}
           />
-
-          {/* <Footer /> */}
         </>
       ) : user.username ? (
         // Logged in, not using custom domain
@@ -121,15 +119,38 @@ const Routes = () => {
       ) : (
         //Not logged in, not using custom domain
         <>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/:username" component={Work} />
-            <Route exact path="/:username/about" component={About} />
-            <Route exact path="/:username/cv" component={CV} />
-            <Route exact path="/:username/contact" component={Contact} />
-            <Route exact path="/:username/work/:collection" component={Work} />
-          </Switch>
-          {/* <Footer /> */}
+          {console.log(custom)}
+          <Navbar />
+          <Route
+            render={({ location }) => (
+              <TransitionGroup component={null}>
+                <Transition
+                  key={location.key}
+                  appear={true}
+                  onEnter={(node, location) => play(node, location)}
+                  onExit={(node) => exit(node, location)}
+                  timeout={{ enter: 2000, exit: 1000 }}
+                >
+                  <Switch location={location}>
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/:username" component={Work} />
+                    <Route exact path="/:username/about" component={About} />
+                    <Route exact path="/:username/cv" component={CV} />
+                    <Route
+                      exact
+                      path="/:username/contact"
+                      component={Contact}
+                    />
+                    <Route
+                      exact
+                      path="/:username/work/:collection"
+                      component={Work}
+                    />
+                  </Switch>
+                </Transition>
+              </TransitionGroup>
+            )}
+          />
         </>
       )}
     </div>
