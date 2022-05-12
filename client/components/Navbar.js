@@ -25,7 +25,7 @@ export const Navbar = (props) => {
     : `https://www.selected-work.com/${user.username}`;
 
   return (
-    <div className="navbar flex justify-between py-4 px-2 font-light bg-white z-30">
+    <div className="navbar stagger flex justify-between py-4 px-2 font-light bg-white z-30">
       {user.username ? (
         <>
           <div className="text-xs md:text-sm sm:text-md flex flex-wrap sm:flex-row space-x-2 sm:space-x-4 items-center">

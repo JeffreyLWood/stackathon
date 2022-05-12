@@ -1,12 +1,9 @@
 import { gsap } from "gsap";
-export const play = (node, location) => {
+export const play = (node, pathname) => {
   window.loadPromise.then(() => {
     const timeline = new gsap.timeline({ paused: true });
     const els = node.querySelectorAll(".stagger");
 
-    if (els.length < 1) {
-      return;
-    }
     timeline.fromTo(
       els,
       {

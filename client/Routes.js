@@ -18,7 +18,6 @@ import CV from "./components/Templates/CV";
 import { fetchUserData, fetchUserDataDomain } from "./store/user";
 import CreateSettings from "./components/Create/CreateSettings";
 import { TransitionGroup, Transition } from "react-transition-group";
-import { gsap } from "gsap";
 import { play, exit } from "./PageTransitions";
 
 const Routes = () => {
@@ -65,8 +64,7 @@ const Routes = () => {
               <TransitionGroup component={null}>
                 <Transition
                   key={location.key}
-                  appear={true}
-                  onEnter={(node, location) => play(node, location)}
+                  onEnter={(node) => play(node, location.pathname)}
                   onExit={(node) => exit(node, location.pathname)}
                   timeout={{ enter: 2000, exit: 1000 }}
                 >
@@ -119,7 +117,6 @@ const Routes = () => {
       ) : (
         //Not logged in, not using custom domain
         <>
-          {console.log(custom)}
           <Navbar />
           <Route
             render={({ location }) => (
@@ -127,8 +124,8 @@ const Routes = () => {
                 <Transition
                   key={location.key}
                   appear={true}
-                  onEnter={(node, location) => play(node, location)}
-                  onExit={(node) => exit(node, location)}
+                  onEnter={(node, location) => play(node, location.pathname)}
+                  onExit={(node) => exit(node, location.pathname)}
                   timeout={{ enter: 2000, exit: 1000 }}
                 >
                   <Switch location={location}>
