@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import MobileNav from "./MobileNav";
 import Dropdown from "./Dropdown";
 import useQ from "../../../useQ";
+import "./styles.css";
 export default function Navbar(props) {
   let user = useSelector((state) => state.user);
   document.title = user?.siteTitle;
@@ -65,7 +66,7 @@ export default function Navbar(props) {
         link={link}
         fadeOut={props.fadeOut}
       />
-      <nav className="nav fixed flex flex-row w-screen justify-between tracking-widest items-end sm:px-14 tracking-widest">
+      <nav className="nav fixed flex flex-row w-screen justify-between items-end sm:px-14 tracking-widest">
         <span
           className="text-2xl uppercase items-end cursor-pointer w-3/6"
           onClick={(e) => link(e, `${url}/`)}
