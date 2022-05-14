@@ -4,7 +4,6 @@ export const play = (node, pathname) => {
     const timeline = new gsap.timeline({ paused: true });
     const els = node.querySelectorAll(".stagger");
 
-    console.log(node);
     timeline.fromTo(
       els,
       {
