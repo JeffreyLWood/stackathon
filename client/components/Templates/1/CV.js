@@ -6,9 +6,9 @@ import { gsap } from "gsap";
 import useQ from "../../../useQ";
 export default function CV(props) {
   let user = useSelector((state) => state.user);
-  let cv = [user?.cv] || [];
+  let cv = user?.cv;
   let [q, ref] = useQ();
-  console.log(cv);
+  console.log(user);
   return (
     <div
       ref={ref}

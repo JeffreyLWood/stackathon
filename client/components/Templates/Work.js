@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Work1 from "./1/Work";
 import Work2 from "./2/Work";
-import Navbar from "./Navbar";
+
 export default function Work(props) {
   let user = useSelector((state) => state.user);
   let templateId = user.template || 1;
@@ -11,7 +11,7 @@ export default function Work(props) {
       case 1:
         return (
           <>
-            <Navbar props={props} /> <Work1 props={props} />
+            <Work1 props={props} />
           </>
         );
       case 2:

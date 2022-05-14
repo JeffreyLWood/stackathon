@@ -3,6 +3,8 @@ export const play = (node, pathname) => {
   window.loadPromise.then(() => {
     const timeline = new gsap.timeline({ paused: true });
     const els = node.querySelectorAll(".stagger");
+
+    console.log(node);
     timeline.fromTo(
       els,
       {
