@@ -9,11 +9,7 @@ export default function Work(props) {
   const template = (id) => {
     switch (id) {
       case 1:
-        return (
-          <>
-            <Work1 props={props} />
-          </>
-        );
+        return <Work1 props={props} />;
       case 2:
         return <Work2 />;
       default:

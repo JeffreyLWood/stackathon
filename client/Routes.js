@@ -124,8 +124,12 @@ const Routes = () => {
                 <Transition
                   key={location.key}
                   appear={true}
-                  onEnter={(node, location) => play(node, location.pathname)}
-                  onExit={(node) => exit(node, location.pathname)}
+                  onEnter={(node, location) =>
+                    play(node, location.pathname, user.template)
+                  }
+                  onExit={(node) =>
+                    exit(node, location.pathname, user.template)
+                  }
                   timeout={{ enter: 2000, exit: 1000 }}
                 >
                   <Switch location={location}>
