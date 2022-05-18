@@ -6,7 +6,7 @@ import { gsap } from "gsap";
 import MobileNav from "./MobileNav";
 import Dropdown from "./Dropdown";
 import useQ from "../../../useQ";
-import "./styles.css";
+import styles from "./styles.module.css";
 export default function Navbar(props) {
   let user = useSelector((state) => state.user);
   document.title = user?.siteTitle;
@@ -34,7 +34,11 @@ export default function Navbar(props) {
   let [q, ref] = useQ();
 
   const fade = () => {
-    gsap.to(q(".nav"), { opacity: 1, duration: 1, ease: "expo" }, 0.5);
+    gsap.to(
+      q(`.${styles.nav}`),
+      { opacity: 1, duration: 1, ease: "expo" },
+      0.5
+    );
   };
 
   useEffect(() => {
@@ -56,68 +60,60 @@ export default function Navbar(props) {
       duration: 0.5,
       opacity: 0,
     });
-
+  console.log(styles);
   return (
     <div ref={ref}>
       {/* Mobile Nav Hamburger*/}
-      <MobileNav
+      {/* <MobileNav
         url={url}
         collections={visible}
         link={link}
         fadeOut={props.fadeOut}
-      />
-      <nav className="nav fixed flex flex-row w-screen justify-between items-end sm:px-14 tracking-widest">
-        <span
-          className="text-2xl uppercase items-end cursor-pointer w-3/6"
-          onClick={(e) => link(e, `${url}/`)}
-        >
+      /> */}
+      <nav className={styles.nav}>
+        <span className={styles.siteTitle} onClick={(e) => link(e, `${url}/`)}>
           {user?.siteTitle}
         </span>
 
-        <span className="flex flex-row items-end justify-between w-2/6 text-xs sm:text-xs">
-          <span className="space-between flex flex-row space-x-8">
-            <span
-              className="subHeader mx-4 cursor-pointer"
-              onMouseEnter={dropDown}
-              onMouseLeave={dropDownUp}
-            >
-              <span onClick={(e) => link(e, `${url}/`)}>Selected Work</span>
-              {/* Drop Down Nav For Collections */}
-              <Dropdown
-                url={url}
-                preview={
-                  props.collection?.works && props.collection?.works[0].imgId
-                }
-                collection={props.collection}
-                visible={visible}
-                collections={collections}
-                link={link}
-              />
-            </span>
-
-            <span
-              className="subHeader mx-4 cursor-pointer"
-              onClick={(e) => link(e, `${url}/about`)}
-            >
-              About
-            </span>
-
-            <span
-              className="subHeader mx-4 cursor-pointer"
-              onClick={(e) => link(e, `${url}/cv`)}
-            >
-              CV
-            </span>
-
-            <span
-              onClick={(e) => link(e, `${url}/contact`)}
-              className="subHeader mx-4 cursor-pointer"
-            >
-              Contact
-            </span>
+        <span className={styles.linkContainer}>
+          <span
+            onMouseEnter={dropDown}
+            onMouseLeave={dropDownUp}
+            className={styles.link}
+            onClick={(e) => link(e, `${url}/`)}
+          >
+            Selected Work
+            <Dropdown
+              url={url}
+              preview={
+                props.collection?.works && props.collection?.works[0].imgId
+              }
+              collection={props.collection}
+              visible={visible}
+              collections={collections}
+              link={link}
+            />
           </span>
-          <span className="pl-12">
-            <img src="../social/instagram.png" className="w-6" />
+
+          <span
+            className={styles.link}
+            onClick={(e) => link(e, `${url}/about`)}
+          >
+            About
+          </span>
+
+          <span className={styles.link} onClick={(e) => link(e, `${url}/cv`)}>
+            CV
+          </span>
+
+          <span
+            onClick={(e) => link(e, `${url}/contact`)}
+            className={styles.link}
+          >
+            Contact
+          </span>
+          <span className={styles.social}>
+            <img src="../social/instagram.png" />
           </span>
         </span>
       </nav>

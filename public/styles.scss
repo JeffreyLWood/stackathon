@@ -433,7 +433,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-scale-y: 1;
   --tw-transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   --tw-border-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-border-opacity));
+  border-color: RGB(229 231 235 / var(--tw-border-opacity));
   --tw-ring-offset-shadow: 0 0 #0000;
   --tw-ring-shadow: 0 0 #0000;
   --tw-shadow: 0 0 #0000;
@@ -768,10 +768,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: grid;
 }
 
-.contents {
-  display: contents;
-}
-
 .hidden {
   display: none;
 }
@@ -880,24 +876,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 2rem;
 }
 
-.flex-shrink {
-  flex-shrink: 1;
+.w-2\/6 {
+  width: 33.333333%;
 }
 
 .shrink {
   flex-shrink: 1;
 }
 
-.flex-grow {
-  flex-grow: 1;
-}
-
 .grow {
   flex-grow: 1;
-}
-
-.border-collapse {
-  border-collapse: collapse;
 }
 
 .transform {
@@ -1070,52 +1058,52 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .border-stone-800 {
   --tw-border-opacity: 1;
-  border-color: rgb(41 37 36 / var(--tw-border-opacity));
+  border-color: RGB(41 37 36 / var(--tw-border-opacity));
 }
 
 .border-stone-900 {
   --tw-border-opacity: 1;
-  border-color: rgb(28 25 23 / var(--tw-border-opacity));
+  border-color: RGB(28 25 23 / var(--tw-border-opacity));
 }
 
 .border-neutral-100 {
   --tw-border-opacity: 1;
-  border-color: rgb(245 245 245 / var(--tw-border-opacity));
+  border-color: RGB(245 245 245 / var(--tw-border-opacity));
 }
 
 .border-gray-200 {
   --tw-border-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-border-opacity));
+  border-color: RGB(229 231 235 / var(--tw-border-opacity));
 }
 
 .border-blue-300 {
   --tw-border-opacity: 1;
-  border-color: rgb(147 197 253 / var(--tw-border-opacity));
+  border-color: RGB(147 197 253 / var(--tw-border-opacity));
 }
 
 .bg-neutral-50 {
   --tw-bg-opacity: 1;
-  background-color: rgb(250 250 250 / var(--tw-bg-opacity));
+  background-color: RGB(250 250 250 / var(--tw-bg-opacity));
 }
 
 .bg-white {
   --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: RGB(255 255 255 / var(--tw-bg-opacity));
 }
 
 .bg-stone-100 {
   --tw-bg-opacity: 1;
-  background-color: rgb(245 245 244 / var(--tw-bg-opacity));
+  background-color: RGB(245 245 244 / var(--tw-bg-opacity));
 }
 
 .bg-cyan-900 {
   --tw-bg-opacity: 1;
-  background-color: rgb(22 78 99 / var(--tw-bg-opacity));
+  background-color: RGB(22 78 99 / var(--tw-bg-opacity));
 }
 
 .bg-black {
   --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+  background-color: RGB(0 0 0 / var(--tw-bg-opacity));
 }
 
 .object-contain {
@@ -1331,72 +1319,72 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .text-stone-900 {
   --tw-text-opacity: 1;
-  color: rgb(28 25 23 / var(--tw-text-opacity));
+  color: RGB(28 25 23 / var(--tw-text-opacity));
 }
 
 .text-gray-400 {
   --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity));
+  color: RGB(156 163 175 / var(--tw-text-opacity));
 }
 
 .text-indigo-600 {
   --tw-text-opacity: 1;
-  color: rgb(79 70 229 / var(--tw-text-opacity));
+  color: RGB(79 70 229 / var(--tw-text-opacity));
 }
 
 .text-neutral-300 {
   --tw-text-opacity: 1;
-  color: rgb(212 212 212 / var(--tw-text-opacity));
+  color: RGB(212 212 212 / var(--tw-text-opacity));
 }
 
 .text-gray-500 {
   --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity));
+  color: RGB(107 114 128 / var(--tw-text-opacity));
 }
 
 .text-black {
   --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
+  color: RGB(0 0 0 / var(--tw-text-opacity));
 }
 
 .text-neutral-400 {
   --tw-text-opacity: 1;
-  color: rgb(163 163 163 / var(--tw-text-opacity));
+  color: RGB(163 163 163 / var(--tw-text-opacity));
 }
 
 .text-neutral-500 {
   --tw-text-opacity: 1;
-  color: rgb(115 115 115 / var(--tw-text-opacity));
+  color: RGB(115 115 115 / var(--tw-text-opacity));
 }
 
 .text-neutral-600 {
   --tw-text-opacity: 1;
-  color: rgb(82 82 82 / var(--tw-text-opacity));
+  color: RGB(82 82 82 / var(--tw-text-opacity));
 }
 
 .text-gray-600 {
   --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
-}
-
-.text-cyan-900 {
-  --tw-text-opacity: 1;
-  color: rgb(22 78 99 / var(--tw-text-opacity));
-}
-
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-amber-400 {
-  --tw-text-opacity: 1;
-  color: rgb(251 191 36 / var(--tw-text-opacity));
+  color: RGB(75 85 99 / var(--tw-text-opacity));
 }
 
 .text-zinc-800 {
   --tw-text-opacity: 1;
-  color: rgb(39 39 42 / var(--tw-text-opacity));
+  color: RGB(39 39 42 / var(--tw-text-opacity));
+}
+
+.text-cyan-900 {
+  --tw-text-opacity: 1;
+  color: RGB(22 78 99 / var(--tw-text-opacity));
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: RGB(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-amber-400 {
+  --tw-text-opacity: 1;
+  color: RGB(251 191 36 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -1404,13 +1392,13 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .shadow-xl {
-  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --tw-shadow: 0 20px 25px -5px RGB(0 0 0 / 0.1), 0 8px 10px -6px RGB(0 0 0 / 0.1);
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .shadow-md {
-  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow: 0 4px 6px -1px RGB(0 0 0 / 0.1), 0 2px 4px -2px RGB(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
@@ -1429,7 +1417,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .drop-shadow {
-  --tw-drop-shadow: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06));
+  --tw-drop-shadow: drop-shadow(0 1px 2px RGB(0 0 0 / 0.1)) drop-shadow(0 1px 1px RGB(0 0 0 / 0.06));
   filter: var(--tw-filter);
 }
 
@@ -1467,10 +1455,10 @@ html {
 }
 
 :root {
-  --primary: rgb(63 63 70);
-  --stone: rgb(28 25 23);
-  --red: rgb(239 68 68);
-  --green: rgb(22 163 74);
+  --primary: RGB(63 63 70);
+  --stone: RGB(28 25 23);
+  --red: RGB(239 68 68);
+  --green: RGB(22 163 74);
 }
 
 * {
@@ -1480,7 +1468,7 @@ html {
 }
 
 a:hover {
-  color: rgb(24 24 27);
+  color: RGB(24 24 27);
 }
 
 .navbar {
@@ -1583,7 +1571,7 @@ a:hover {
   right: 0;
   background-color: #fff;
   width: 100vw;
-  /* border-bottom: rgb(39 39 42) 1px solid; */
+  /* border-bottom: RGB(39 39 42) 1px solid; */
   height: 24rem;
   opacity: 0;
   display: none;
@@ -1687,7 +1675,7 @@ a:hover {
   text-transform: uppercase;
   height: 3vh;
   color: white;
-  background-color: rgb(2, 17, 46);
+  background-color: RGB(2, 17, 46);
   transition: 0.3s;
   border: 2px solid transparent;
 }
@@ -1695,14 +1683,14 @@ a:hover {
 .modal-footer button:hover {
   cursor: pointer;
   background-color: white;
-  color: rgb(2, 17, 46);
+  color: RGB(2, 17, 46);
   transition: 0.3s;
-  border: 2px solid rgb(2, 17, 46);
+  border: 2px solid RGB(2, 17, 46);
 }
 
 .snapshot {
   overflow: auto;
-  border: 1px rgb(240, 238, 238) solid;
+  border: 1px RGB(240, 238, 238) solid;
   border-radius: 1%;
   background-color: #fff;
   height: 100%;
@@ -1868,7 +1856,7 @@ textarea {
   display: flex;
   padding: 5rem;
   color: white;
-  background-color: rgb(28 25 23);
+  background-color: RGB(28 25 23);
 }
 
 .homeFooter li {
@@ -1907,6 +1895,7 @@ textarea {
   display: none;
 }
 
+// >
 .nav {
   background-color: white;
   z-index: 40;
@@ -1936,27 +1925,7 @@ textarea {
   top: 0;
   background-color: #fff;
 }
-
-.fade-appear,
-.fade-enter {
-  opacity: 0;
-  z-index: 1;
-}
-
-.fade-appear-active,
-.fade-enter.fade-enter-active {
-  opacity: 1;
-  transition: opacity 300ms linear 150ms;
-}
-
-.fade-exit {
-  opacity: 1;
-}
-
-.fade-exit.fade-exit-active {
-  opacity: 0;
-  transition: opacity 150ms linear;
-}
+// <
 
 @media (max-width: 638px) {
   .mobileArtDescription {
@@ -2082,12 +2051,12 @@ textarea {
 
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+  color: RGB(255 255 255 / var(--tw-text-opacity));
 }
 
 .hover\:text-zinc-800:hover {
   --tw-text-opacity: 1;
-  color: rgb(39 39 42 / var(--tw-text-opacity));
+  color: RGB(39 39 42 / var(--tw-text-opacity));
 }
 
 @media (min-width: 640px) {
@@ -2271,7 +2240,7 @@ textarea {
 
   .sm\:bg-neutral-50 {
     --tw-bg-opacity: 1;
-    background-color: rgb(250 250 250 / var(--tw-bg-opacity));
+    background-color: RGB(250 250 250 / var(--tw-bg-opacity));
   }
 
   .sm\:p-4 {
@@ -2304,6 +2273,11 @@ textarea {
   .sm\:py-5 {
     padding-top: 1.25rem;
     padding-bottom: 1.25rem;
+  }
+
+  .sm\:px-14 {
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
   }
 
   .sm\:pt-0 {
@@ -2343,6 +2317,11 @@ textarea {
   .sm\:text-4xl {
     font-size: 2.25rem;
     line-height: 2.5rem;
+  }
+
+  .sm\:text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
   }
 }
 
@@ -2400,6 +2379,10 @@ textarea {
 
   .md\:h-64 {
     height: 16rem;
+  }
+
+  .md\:h-screen {
+    height: 100vh;
   }
 
   .md\:w-3\/12 {

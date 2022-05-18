@@ -1,11 +1,12 @@
 import React from "react";
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Artwork from "./Artwork";
 import Description from "./Description";
 import { gsap } from "gsap";
 import useQ from "../../../useQ";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import "/public/styles.css";
 
 gsap.registerPlugin(ScrollTrigger);
 export default function Work({ props }) {

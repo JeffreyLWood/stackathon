@@ -8,7 +8,7 @@ export default function CV(props) {
   let user = useSelector((state) => state.user);
   let cv = user?.cv;
   let [q, ref] = useQ();
-  console.log(user);
+
   return (
     <div
       ref={ref}

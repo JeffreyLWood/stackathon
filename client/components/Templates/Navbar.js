@@ -5,7 +5,7 @@ import Navbar2 from "./2/Navbar";
 
 export default function Navbar(props) {
   let user = useSelector((state) => state.user);
-  let templateId = user.template;
+  let templateId = user.template || 1;
 
   const template = (id) => {
     switch (id) {
