@@ -5,6 +5,7 @@ import ArtworkModal from "./ArtworkModal";
 import Dimensions from "./Dimensions";
 import useQ from "../../../useQ";
 import { gsap } from "gsap";
+import styles from "./styles.module.css";
 
 export default function Artwork(props) {
   let [show, setShow] = useState(true);
@@ -84,20 +85,17 @@ export default function Artwork(props) {
 
   return (
     <>
-      <div className="stagger z-10 flex flex-col flex-wrap w-full mx-2 my-8 md:my-0 sm:w-2/4 lg:w-1/4 md:h-96 sm:px-8 md:mt-4 md:mx-0">
-        <span>
-          <Image
-            cloudName={process.env.CLOUDINARY_NAME}
-            publicId={props.data.imgId}
-            onClick={showModal}
-            className="min-h-70 object-contain mx-auto  md:h-64 cursor-pointer"
-          />
+      <div className={styles.artBox}>
+        <Image
+          cloudName={process.env.CLOUDINARY_NAME}
+          publicId={props.data.imgId}
+          onClick={showModal}
+          className={styles.thumbnail}
+        />
+        <span className={styles.thumbnailTitle} onClick={showModal}>
+          {props.data.title}
         </span>
-        <div className="pt-4 sm:pt-8 text-xs flex flex-col space-y-2 sm:space-y-0 justify-end font-light tracking-widest uppercase text-right cursor-pointer text-neutral-500">
-          <span onClick={showModal}>
-            {props.data.title},{" "}
-            <span className="text-neutral-400">{props.data.year}</span>
-          </span>
+        {/*
           <span className="mobileArtDescription text-neutral-500">
             {props.data.medium}
           </span>
@@ -110,7 +108,7 @@ export default function Artwork(props) {
           <span className="mobileArtDescription text-neutral-500">
             {props.data.price}
           </span>
-        </div>
+          */}
       </div>
       <div ref={ref}>
         <ArtworkModal

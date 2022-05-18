@@ -7,6 +7,7 @@ import MobileNav from "./MobileNav";
 import Dropdown from "./Dropdown";
 import useQ from "../../../useQ";
 import styles from "./styles.module.css";
+import "/public/styles.css";
 export default function Navbar(props) {
   let user = useSelector((state) => state.user);
   document.title = user?.siteTitle;

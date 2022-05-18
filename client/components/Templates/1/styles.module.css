@@ -17,7 +17,7 @@
     position: fixed;
     display: flex;
     flex-direction: row;
-    justify-content:space-between;
+    justify-content: space-between;
     align-items: flex-end;
     padding: 0rem 4rem .5rem 3rem;
     text-transform: uppercase;
@@ -50,6 +50,7 @@
 .siteTitle {
     cursor: pointer;
     font-size: 28px;
+    align-items: flex-end;
 }
   
   .mobileNav {
@@ -63,12 +64,54 @@
     background-color: #fff;
   }
 
-  @media (max-width: 820px) {
-  .nav {
-    display: none;
-  }
+.content {
+  min-height: 80vh;
+  width: 100vw;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 10rem 2rem 4rem 1rem;
+ 
 }
-.toggle {
+
+.workContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.artBox {
+padding: 0rem 2rem 0rem 2rem;
+height: 20rem;
+width: 25%;
+margin-bottom: 3rem;
+display: flex;
+flex-direction: column;
+justify-content: center;
+text-transform: uppercase;
+}
+
+.artBoxWide {
+  padding: 0rem 2rem 0rem 2rem;
+  height: 20rem;
+  width: 50%;
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  }
+
+  .thumbnail {
+    max-height: 15rem;
+    object-fit: contain;
+  }
+
+  .thumbnailTitle {
+    font-size: 12px;
+    color: var(--secondary);
+    text-align: end;
+    margin-top: 2rem;
+  }
+  .toggle {
     width: 2rem;
     height: 2rem;
     background: url("/public/menu.png");
@@ -171,4 +214,29 @@ textarea {
 .aboutImage {
     max-height: 495px;
   }
+
+  @media (max-width: 1100px){
+    .artBox {
+      width: 33%;
+    }
+  }
+
+  @media (max-width: 820px) {
+    .artBox {
+      width: 50%;
+    }
+  .nav {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .artBox {
+    width: 100%;
+  }
+.nav {
+  display: none;
+}
+}
+ 
   /*# sourceMappingURL=styles.css.map */

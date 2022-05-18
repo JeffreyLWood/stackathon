@@ -6,7 +6,7 @@ import Description from "./Description";
 import { gsap } from "gsap";
 import useQ from "../../../useQ";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import "/public/styles.css";
+import styles from "./styles.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
 export default function Work({ props }) {
@@ -51,10 +51,7 @@ export default function Work({ props }) {
   // });
 
   return (
-    <div
-      ref={ref}
-      className="h-80vh items-start pt-28 flex flex-col sm:mx-5 mb-10"
-    >
+    <div ref={ref} className={styles.content}>
       {collection?.description ? (
         <Description
           title={collection?.title}
@@ -62,7 +59,7 @@ export default function Work({ props }) {
           data={works[0]}
         />
       ) : null}
-      <div className="flex w-full h-full overflow-visible flex-wrap">
+      <div className={styles.workContainer}>
         {collection?.works
           ? works
               .filter((work) =>
