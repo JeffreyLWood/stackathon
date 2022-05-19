@@ -66,7 +66,7 @@ export default function Artwork(props) {
   };
 
   const showModal = () => {
-    if (window.outerWidth <= 638) {
+    if (window.outerWidth <= 820) {
       return;
     }
     setScrollPos(window.scrollY);
@@ -84,7 +84,7 @@ export default function Artwork(props) {
   };
 
   return (
-    <>
+    <div className={styles.cell}>
       <div className={styles.artBox}>
         <Image
           cloudName={process.env.CLOUDINARY_NAME}
@@ -92,24 +92,17 @@ export default function Artwork(props) {
           onClick={showModal}
           className={styles.thumbnail}
         />
-        <span className={styles.thumbnailTitle} onClick={showModal}>
-          {props.data.title}
-        </span>
-        {/*
-          <span className="mobileArtDescription text-neutral-500">
-            {props.data.medium}
-          </span>
-          <span className="mobileArtDescription text-neutral-500">
-            <Dimensions data={props.data} />
-          </span>
-          <span className="mobileArtDescription text-neutral-500">
-            {props.data.status}
-          </span>
-          <span className="mobileArtDescription text-neutral-500">
-            {props.data.price}
-          </span>
-          */}
       </div>
+      <span className={styles.thumbnailDescription} onClick={showModal}>
+        {props.data.title}
+        <span className={styles.mobileArtDescription}>{props.data.medium}</span>
+        <span className={styles.mobileArtDescription}>
+          <Dimensions data={props.data} />
+        </span>
+        <span className={styles.mobileArtDescription}>{props.data.status}</span>
+        <span className={styles.mobileArtDescription}>{props.data.price}</span>
+      </span>
+
       <div ref={ref}>
         <ArtworkModal
           closeHandler={closeHandler}
@@ -122,6 +115,6 @@ export default function Artwork(props) {
           fadeOut={fadeOut}
         />
       </div>
-    </>
+    </div>
   );
 }

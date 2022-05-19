@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import history from "../../../history";
 import { gsap } from "gsap";
@@ -34,6 +34,8 @@ export default function Navbar(props) {
 
   let [q, ref] = useQ();
 
+  const tl = new gsap.timeline({ paused: true });
+
   const fade = () => {
     gsap.to(
       q(`.${styles.nav}`),
@@ -42,6 +44,31 @@ export default function Navbar(props) {
     );
   };
 
+  let [show, setShow] = useState(false);
+
+  gsap.set(q(`.${styles.mobileNav}`), {
+    xPercent: 100,
+  });
+
+  tl.to(q(`.${styles.mobileNav}`), {
+    xPercent: -1,
+    duration: 2,
+    ease: "expo",
+  });
+
+  const toggleMenu = () => {
+    if (!show) {
+      tl.play();
+      setShow(true);
+    } else {
+      gsap.to(q(`.${styles.mobileNav}`), {
+        xPercent: 100,
+        duration: 2,
+        ease: "expo",
+      });
+      setShow(false);
+    }
+  };
   useEffect(() => {
     fade();
   });
@@ -61,16 +88,19 @@ export default function Navbar(props) {
       duration: 0.5,
       opacity: 0,
     });
-  console.log(styles);
+
   return (
     <div ref={ref}>
       {/* Mobile Nav Hamburger*/}
-      {/* <MobileNav
-        url={url}
-        collections={visible}
-        link={link}
-        fadeOut={props.fadeOut}
-      /> */}
+      <span className={styles.mobileNav}>
+        <MobileNav
+          url={url}
+          collections={visible}
+          link={link}
+          fadeOut={props.fadeOut}
+          toggleMenu={toggleMenu}
+        />
+      </span>
       <nav className={styles.nav}>
         <span className={styles.siteTitle} onClick={(e) => link(e, `${url}/`)}>
           {user?.siteTitle}
@@ -117,6 +147,9 @@ export default function Navbar(props) {
             <img src="../social/instagram.png" />
           </span>
         </span>
+        <div className={styles.toggle} onClick={toggleMenu}>
+          <img src="/menu.png" />
+        </div>
       </nav>
     </div>
   );

@@ -6,6 +6,7 @@ import ArtworkModal from "./ArtworkModal";
 import Dimensions from "./Dimensions";
 import useQ from "../../../useQ";
 import { gsap } from "gsap";
+import styles from "./styles.module.css";
 
 export default function Description(props) {
   let [show, setShow] = useState(true);
@@ -95,26 +96,27 @@ export default function Description(props) {
   ));
 
   return (
-    <section className="w-screen min-h-content sm:mt-20 sm:mb-28 sm:h-96 flex flex-col-reverse items-start sm:flex-row">
-      <div className="stagger w-full h-4/6 sm:h-full sm:w-5/12  flex flex-col px-2 sm:px-10 space-y-4">
-        <span className="text-3xl tracking-widest ">{props.title}</span>
+    <section className={styles.description}>
+      <div className={styles.descriptionText}>
+        <span className={styles.siteTitle}>{props.title}</span>
         {text}
       </div>
-      <div className="w-full h-auto sm:h-full sm:w-7/12 flex flex-col md:flex-row sm:items-baseline md:items-end sm:justify-center">
+      {/* <div className="w-full h-auto sm:h-full sm:w-7/12 flex flex-col md:flex-row sm:items-baseline md:items-end sm:justify-center"> */}
+      <div className={styles.descriptionImage}>
         <span>
           <Image
             cloudName={process.env.CLOUDINARY_NAME}
             publicId={props.data.imgId}
-            className="stagger max-h-96 cursor-pointer"
+            className="max-h-96 cursor-pointer"
             onClick={showModal}
           />
         </span>
-        <span className="stagger pt-5 text-right sm:text-left mx-4 tracking-widest">
-          <ul className="text-xs space-y-2  uppercase text-neutral-400">
-            <li className="text-neutral-400">{user.siteTitle}</li>
-            <li>{props.data.title} </li>
+        <span className={styles.descriptionImageDescription}>
+          <ul className="">
+            <li>{props.data.title}</li>
+            <li className="">{user.siteTitle}</li>
             <li>
-              <span className="text-neutral-400">{props.data.year}</span>
+              <span className="">{props.data.year}</span>
             </li>
             <li>
               <Dimensions data={props.data} />

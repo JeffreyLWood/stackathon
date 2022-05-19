@@ -26,9 +26,9 @@ async function seed() {
     ]);
     await About.update(
       {
-        text: "Jane Isidor is not a real person. She is not a real photographer based in Brooklyn, nor did she obtain degrees from Boston University or Columbia University. She is merely a figmant of the engineers' imagination at Selected-Work.com who may or may not be a figmant of someone else's imagination. Possibly yours? You may never really know with absolute certainty. \n \n Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         header:
-          "Jane Isidor's photographs transcend the obvious and reexamine the connection between time and place. --New York Times, 2022",
+          "Jane Isidor's photographs transcend the obvious and reexamine the connection between time and place. -- The New York Times, 2022",
         imgId: "stackathonImgs/janeisidor_rvlm1p",
         caption: null,
       },
@@ -160,6 +160,8 @@ async function seed() {
     let workCollection = await Collection.create({
       title: "Rose",
       hidden: false,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     });
     await Collection.create({
       title: "Hidden",
