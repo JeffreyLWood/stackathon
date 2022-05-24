@@ -97,33 +97,33 @@ export default function Description(props) {
 
   return (
     <section className={styles.description}>
-      <div className={styles.descriptionText}>
+      <div className={`${styles.descriptionText} stagger`}>
         <span className={styles.siteTitle}>{props.title}</span>
+        {props.subheading1 ? (
+          <span className={`${styles.h2}`}>{props.subheading1}</span>
+        ) : null}
+        {props.subheading2 ? (
+          <span className={`${styles.h2} ${styles.mb1}`}>
+            {props.subheading2}
+          </span>
+        ) : null}
         {text}
       </div>
-      {/* <div className="w-full h-auto sm:h-full sm:w-7/12 flex flex-col md:flex-row sm:items-baseline md:items-end sm:justify-center"> */}
-      <div className={styles.descriptionImage}>
-        <span>
-          <Image
-            cloudName={process.env.CLOUDINARY_NAME}
-            publicId={props.data.imgId}
-            className="max-h-96 cursor-pointer"
-            onClick={showModal}
-          />
-        </span>
+      <div className={`${styles.descriptionImageWrapper} stagger`}>
+        <Image
+          cloudName={process.env.CLOUDINARY_NAME}
+          publicId={props.data.imgId}
+          className={styles.descriptionImage}
+          onClick={showModal}
+        />
         <span className={styles.descriptionImageDescription}>
-          <ul className="">
-            <li>{props.data.title}</li>
-            <li className="">{user.siteTitle}</li>
-            <li>
-              <span className="">{props.data.year}</span>
-            </li>
-            <li>
-              <Dimensions data={props.data} />
-            </li>
-          </ul>
+          <span>{props.data.title}</span>
+          <span className={styles.textSecondary}>{props.data.year}</span>
+          <span className={styles.textSecondary}>{props.data.medium}</span>
+          <Dimensions data={props.data} />
         </span>
       </div>
+
       <div ref={ref}>
         <ArtworkModal
           fadeOut={fadeOut}

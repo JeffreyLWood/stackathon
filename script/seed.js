@@ -64,10 +64,10 @@ async function seed() {
 
     await cv.setUser(users[0]);
     let default0 = await Work.create({
-      title: "A Brewery in Brooklyn",
+      title: "Summit",
       year: 2021,
       medium: "photograph",
-      imgId: "stackathonImgs/IMG_7154_x8snqb",
+      imgId: "stackathonImgs/pexels-val-apollonio-5077838_owyive.jpg",
       height: 4,
       width: 5,
       status: null,
@@ -75,70 +75,79 @@ async function seed() {
     });
 
     let default1 = await Work.create({
-      title: "Capote's House",
+      title: "Rise",
       medium: "photograph",
       year: 2021,
-      imgId: "stackathonImgs/IMG_7112_gbspsm",
+      imgId: "stackathonImgs/pexels-eberhard-grossgasteiger-1292115_ekdosa.jpg",
       height: 4,
       width: 5,
       status: null,
       hidden: false,
     });
     let default2 = await Work.create({
-      title: "Ice Cream",
+      title: "Come Apart",
       medium: "photograph",
       year: 2021,
-      imgId: "stackathonImgs/IMG_7139_ge5z2c",
+      imgId: "stackathonImgs/pexels-philip-ackermann-1666015_eikhjs.jpg",
       height: 4,
       width: 5,
       status: null,
       hidden: false,
     });
     let default3 = await Work.create({
-      title: "Brooklyn Heights",
+      title: "Emerald",
       medium: "photograph",
       year: 2021,
-      imgId: "stackathonImgs/IMG_7144_zmq2mk",
+      imgId: "stackathonImgs/pexels-sergei-primo-5343282_e85p3c.jpg",
       height: 4,
       width: 5,
       status: null,
       hidden: false,
     });
     let default4 = await Work.create({
-      title: "Sidewalk",
+      title: "Cobalt",
       medium: "photograph",
       year: 2021,
-      imgId: "stackathonImgs/IMG_7153_mkpd70",
+      imgId: "stackathonImgs/pexels-lumn-167699_z0yzyt.jpg",
       height: 4,
       width: 5,
       status: null,
       hidden: false,
     });
     let default5 = await Work.create({
-      title: "Corner",
+      title: "Summit 2",
       medium: "photograph",
       year: 2021,
-      imgId: "stackathonImgs/IMG_7150_wrnlwf",
+      imgId: "stackathonImgs/pexels-abdulrhman-alkady-9432828_zys79n.jpg",
       height: 4,
       width: 5,
       status: null,
       hidden: false,
     });
-
     let default7 = await Work.create({
-      title: "Street 1",
+      title: "Winter Sea",
       medium: "photograph",
       year: 2021,
-      imgId: "stackathonImgs/IMG_7170_wkrsd8",
+      imgId: "stackathonImgs/pexels-arthouse-studio-4347808_pc03nl.jpg",
       height: 5,
       width: 4,
       status: null,
     });
     let default8 = await Work.create({
-      title: "Street 2",
+      title: "Caelis",
       medium: "photograph",
       year: 2021,
-      imgId: "stackathonImgs/IMG_7149_fci6ka",
+      imgId:
+        "stackathonImgs/pexels-eberhard-grossgasteiger-1699021_1_hpyb7n.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default9 = await Work.create({
+      title: "Alpine",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-valeriia-miller-2527562_bkmqlj.jpg",
       height: 5,
       width: 4,
       status: null,
@@ -154,12 +163,15 @@ async function seed() {
       default5,
       default7,
       default8,
+      default9,
     ];
     // Map over works array and setUser to the new user.
     // Sets default images in the user's database and displays them on their new site.
     let workCollection = await Collection.create({
-      title: "Rose",
+      title: "Summit",
       hidden: false,
+      subheading1: "JANUARY 1 - JANUARY 28, 2022",
+      subheading2: "HEINES GALLERY, 204 E 12TH STREET, NEW YORK, NY",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     });
@@ -167,58 +179,11 @@ async function seed() {
       title: "Hidden",
       hidden: true,
     });
-    let default9 = await Work.create({
-      title: "Court Street",
-      medium: "photograph",
-      year: 2021,
-      imgId: "stackathonImgs/IMG_8549_z45itv",
-      height: 4,
-      width: 5,
-      status: null,
-    });
-    let default10 = await Work.create({
-      title: "Brick",
-      medium: "photograph",
-      year: 2021,
-      imgId: "stackathonImgs/IMG_8622_otmj6a",
-      height: 4,
-      width: 5,
-      status: null,
-    });
-    let default11 = await Work.create({
-      title: "Grand Central",
-      medium: "photograph",
-      year: 2021,
-      imgId: "stackathonImgs/IMG_8757_b93blk",
-      height: 4,
-      width: 5,
-      status: null,
-    });
-    let default12 = await Work.create({
-      title: "Canal",
-      medium: "photograph",
-      year: 2021,
-      imgId: "stackathonImgs/IMG_8744_1_hnb1c5",
-      height: 4,
-      width: 5,
-      status: null,
-    });
-    let blueWork = [default9, default10, default11, default12];
-
-    let Blue = await Collection.create({
-      title: "Blue",
-      hidden: false,
-    });
 
     array.map(async (work) => {
       return await work.setCollection(workCollection);
     });
 
-    blueWork.map(async (work) => {
-      await work.setCollection(Blue);
-    });
-
-    await Blue.setUser(1);
     await workCollection.setUser(1);
 
     console.log(`seeded ${users.length} users`);

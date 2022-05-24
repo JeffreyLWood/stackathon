@@ -56,6 +56,8 @@ export default function Work({ props }) {
         <Description
           title={collection?.title}
           description={collection?.description}
+          subheading1={collection?.subheading1}
+          subheading2={collection?.subheading2}
           data={works[0]}
         />
       ) : null}

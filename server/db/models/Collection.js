@@ -5,6 +5,12 @@ const Collection = db.define("collection", {
   title: {
     type: Sequelize.STRING,
   },
+  subheading1: {
+    type: Sequelize.STRING(70),
+  },
+  subheading2: {
+    type: Sequelize.STRING(70),
+  },
   description: {
     type: Sequelize.STRING(1500),
   },

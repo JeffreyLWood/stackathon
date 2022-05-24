@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Work from "./components/Templates/Work";
 import Navbar from "./components/Templates/Navbar";
 import Footer from "./components/Templates/Footer";
+import Cover from "./components/Templates/Cover";
 import About from "./components/Templates/About";
 import Contact from "./components/Templates/Contact";
 import CV from "./components/Templates/CV";
