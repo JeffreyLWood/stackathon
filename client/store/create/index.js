@@ -5,6 +5,7 @@ const ABOUT = "ABOUT";
 const REMOVE_ABOUT_IMAGE = "REMOVE_ABOUT_IMAGE";
 const CV = "CV";
 const CONTACT = "CONTACT";
+const REMOVE_CONTACT_IMAGE = "REMOVE_CONTACT_IMAGE";
 const TITLE = "TITLE";
 const GET_SINGLE_WORK = "GET_SINGLE_WORK";
 const GET_ALL_WORK = "GET_ALL_WORK";
@@ -38,6 +39,10 @@ const updateCV = (cvData) => {
 };
 
 const updateContact = (contactData) => {
+  return { type: CONTACT, contactData };
+};
+
+const deleteContactImage = (contactData) => {
   return { type: CONTACT, contactData };
 };
 
@@ -155,6 +160,15 @@ export const updateContactData = (userId, contactData) =>
         contactData
       );
       dispatch(updateContact(data));
+    } catch (err) {
+      return err;
+    }
+  };
+export const destroyContactImage = (userId) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.delete(`/api/users/${userId}/contact`);
+      dispatch(deleteContactImage(data));
     } catch (err) {
       return err;
     }
@@ -362,7 +376,11 @@ export default function (state = {}, action) {
       newState.contact = action.contactData;
       return newState;
     }
-
+    case REMOVE_CONTACT_IMAGE: {
+      let newState = state;
+      newState.contact.imgId = null;
+      return newState;
+    }
     case GET_ALL_WORK: {
       let newState = { ...state, collections: action.data };
       return newState;

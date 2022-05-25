@@ -52,7 +52,7 @@ export default function Navbar(props) {
 
   tl.to(q(`.${styles.mobileNav}`), {
     xPercent: -1,
-    duration: 2,
+    duration: 1,
     ease: "expo",
   });
 

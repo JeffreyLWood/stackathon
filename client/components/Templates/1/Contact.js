@@ -5,6 +5,8 @@ import emailjs from "emailjs-com";
 import { gsap } from "gsap";
 import { useRef } from "react";
 import useQ from "../../../useQ";
+import styles from "./styles.module.css";
+import { Image } from "cloudinary-react";
 export default function Contact() {
   let user = useSelector((state) => state.user);
 
@@ -52,37 +54,44 @@ export default function Contact() {
 
   let [q, ref] = useQ();
 
+  let caption = user.contact && user.contact.caption;
+  let imgId = user.contact && user.contact.imgId;
+
   return (
-    <div
-      ref={ref}
-      className="w-screen font-light text-sm leading-8 h-80vh my-14 mx-2 md:m-20 md:mb-0 flex flex-col items-start justify-center sm:px-10 sm:py-5 sm:flex-row md:py-24 md:px-10 md:justify-start"
-    >
-      <div className="stagger w-full flex flex-col mb-5 pr-4 sm:w-2/6">
-        <span className="pageTitle mb-5">Contact</span>
-        {text ? <p>{text}</p> : null}
-        <ul className="mt-2 space-y-2">
-          <li>
-            <span className="font-medium mr-2">Email</span>
-            {email ? (
-              <a href={{ mailto: { email } }}>{email}</a>
-            ) : (
-              <a href={{ mailto: { defaultEmail } }}>{defaultEmail}</a>
-            )}
-          </li>
-          {phone ? (
-            <li>
-              <span className="font-medium mr-2">Tel</span> {phone}
-            </li>
-          ) : null}
-          {address ? (
-            <li>
-              <p>
-                <span className="font-medium mr-2">Location</span> {address}{" "}
-              </p>
-            </li>
-          ) : null}
-        </ul>
-        <div className="pt-4 social flex flex-wrap">
+    // <div
+    //   ref={ref}
+    //   className="w-screen font-light text-sm leading-8 h-80vh my-14 mx-2 md:m-20 md:mb-0 flex flex-col items-start justify-center sm:px-10 sm:py-5 sm:flex-row md:py-24 md:px-10 md:justify-start"
+    // >
+    <div ref={ref} className={styles.contactContainer}>
+      <section className={styles.contactImage}>
+        <Image
+          cloudName={process.env.CLOUDINARY_NAME}
+          publicId={imgId}
+          className="h-full object-cover"
+        />
+
+        {caption}
+      </section>
+      <section className={styles.contactInfo}>
+        <span className={styles.h2}>Contact</span>
+        {text ? <span>{text}</span> : null}
+
+        <span className={styles.contactInfoHeading}>
+          Email{" "}
+          {email ? (
+            <a href={{ mailto: { email } }}>{email}</a>
+          ) : (
+            <a href={{ mailto: { defaultEmail } }}>{defaultEmail}</a>
+          )}
+        </span>
+        {phone ? (
+          <span className={styles.contactInfoHeading}>Tel {phone}</span>
+        ) : null}
+        {address ? (
+          <span className={styles.contactInfoHeading}>{address}</span>
+        ) : null}
+
+        <div className={styles.socialIcons}>
           {instagram ? (
             <a href={instagram} target="_blank">
               <img
@@ -145,39 +154,41 @@ export default function Contact() {
             </a>
           ) : null}
         </div>
-      </div>
-      <div className="stagger w-full flex flex-col space-y-4 sm:w-4/6 sm:pr-12 sm:pl-12">
-        <form className="contact block" onSubmit={sendEmail}>
-          <label htmlFor="name">Name: *</label>
-          <input required className="w-3/6" name="from_name" type="text" />
-          <label htmlFor="email">Email: *</label>
-          <input required className="w-3/6" name="reply_to" type="email" />
+        <section className={styles.contactForm}>
+          <form onSubmit={sendEmail}>
+            <div>
+              <span>
+                <label htmlFor="name">Name: *</label>
+                <input required name="from_name" type="text" />
+              </span>
+              <span>
+                <label htmlFor="email">Email: *</label>
+                <input required name="reply_to" type="email" />
+              </span>
+            </div>
 
-          <label htmlFor="message" name="message">
-            Message: *
-          </label>
+            <label htmlFor="message" name="message">
+              Message: *
+            </label>
+            <textarea
+              rows="5"
+              style={{ resize: "none" }}
+              name="message"
+              type="text"
+            />
 
-          <textarea
-            rows="5"
-            style={{ resize: "none" }}
-            name="message"
-            type="text"
-            className="sm:w-4/6"
-          />
-
-          {/* <label htmlFor="emailList">Subscribe to Email List:</label>
+            {/* <label htmlFor="emailList">Subscribe to Email List:</label>
             <input name="emailList" type="checkbox" /> */}
-          {/* <input className="w-3/6" name="to_email" type="text"></input> */}
-          <span>
-            <button type="submit" className="pill" value="Submit">
-              Submit
-            </button>
-            {confirmed ? (
-              <span className="italic mx-4">Your message has been sent.</span>
-            ) : null}
-          </span>
-        </form>
-      </div>
+            {/* <input className="w-3/6" name="to_email" type="text"></input> */}
+            <span>
+              <button type="submit" className={styles.button} value="Submit">
+                Submit
+              </button>
+              {confirmed ? <span>Your message has been sent.</span> : null}
+            </span>
+          </form>
+        </section>
+      </section>
     </div>
   );
 }

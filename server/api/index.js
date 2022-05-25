@@ -3,6 +3,7 @@ module.exports = router;
 const Work = require("../db/models/Work");
 const About = require("../db/models/About");
 const Collection = require("../db/models/Collection");
+const Contact = require("../db/models/Contact");
 const { cloudinary } = require("../utils/cloudinary");
 
 router.use("/users", require("./users"));
@@ -28,6 +29,22 @@ router.post("/upload", async (req, res) => {
       );
       let about = await About.findOne({ where: { userId: req.body.userId } });
       res.status(204).send(about);
+    }
+    //if req.body.type === contact, send it to about table instead of work
+    if (req.body.type === "contact") {
+      await Contact.update(
+        {
+          imgId: uploadedResponse.public_id,
+          caption: req.body.caption,
+        },
+        {
+          where: { userId: req.body.userId },
+        }
+      );
+      let contact = await Contact.findOne({
+        where: { userId: req.body.userId },
+      });
+      res.status(204).send(contact);
     } else {
       // let user = await user.findByPk(req.body.userId);
       let collection = await Collection.findOne({

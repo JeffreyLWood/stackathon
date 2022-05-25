@@ -1123,6 +1123,11 @@ Ensure the default browser behavior of the `hidden` attribute.
      object-fit: contain;
 }
 
+.object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .p-5 {
   padding: 1.25rem;
 }
@@ -1213,16 +1218,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-right: 0.25rem;
 }
 
-.pr-4 {
-  padding-right: 1rem;
+.pb-6 {
+  padding-bottom: 1.5rem;
 }
 
 .pt-4 {
   padding-top: 1rem;
 }
 
-.pb-6 {
-  padding-bottom: 1.5rem;
+.pr-4 {
+  padding-right: 1rem;
 }
 
 .pt-28 {
@@ -2272,14 +2277,6 @@ textarea {
 
   .sm\:pb-0 {
     padding-bottom: 0px;
-  }
-
-  .sm\:pr-12 {
-    padding-right: 3rem;
-  }
-
-  .sm\:pl-12 {
-    padding-left: 3rem;
   }
 
   .sm\:text-lg {
