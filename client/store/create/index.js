@@ -4,6 +4,7 @@ import axios from "axios";
 const ABOUT = "ABOUT";
 const REMOVE_ABOUT_IMAGE = "REMOVE_ABOUT_IMAGE";
 const CV = "CV";
+const REMOVE_CV_IMAGE = "REMOVE_CV_IMAGE";
 const CONTACT = "CONTACT";
 const REMOVE_CONTACT_IMAGE = "REMOVE_CONTACT_IMAGE";
 const TITLE = "TITLE";
@@ -36,6 +37,10 @@ const deleteAboutImage = (aboutData) => {
 
 const updateCV = (cvData) => {
   return { type: CV, cvData };
+};
+
+const deleteCvtImage = (cvData) => {
+  return { type: CONTACT, cvData };
 };
 
 const updateContact = (contactData) => {
@@ -148,6 +153,15 @@ export const updateCVText = (userId, header, text) =>
     try {
       let { data } = await axios.put(`/api/users/${userId}/cv`, putBody);
       dispatch(updateCV(data));
+    } catch (err) {
+      return err;
+    }
+  };
+export const destroyCVImage = (userId) =>
+  async function (dispatch) {
+    try {
+      let { data } = await axios.delete(`/api/users/${userId}/cv`);
+      dispatch(deleteCvImage(data));
     } catch (err) {
       return err;
     }
@@ -369,6 +383,11 @@ export default function (state = {}, action) {
     case CV: {
       let newState = state;
       newState.cv = action.cvData;
+      return newState;
+    }
+    case REMOVE_CV_IMAGE: {
+      let newState = state;
+      newState.cv.imgId = null;
       return newState;
     }
     case CONTACT: {

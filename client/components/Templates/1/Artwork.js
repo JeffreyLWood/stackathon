@@ -84,7 +84,7 @@ export default function Artwork(props) {
   };
 
   return (
-    <div className={`${styles.cell} stagger`}>
+    <div className={`${styles.cell}`}>
       <div className={styles.artBox}>
         <Image
           cloudName={process.env.CLOUDINARY_NAME}

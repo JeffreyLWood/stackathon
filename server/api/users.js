@@ -95,6 +95,21 @@ router.put("/:userId/cv", async (req, res, next) => {
   }
 });
 
+router.delete("/:userId/cv", async (req, res, next) => {
+  try {
+    await CV.update(
+      {
+        imgId: null,
+      },
+      { where: { userId: req.params.userId } }
+    );
+    let cv = await CV.findOne({ where: { userId: req.params.userId } });
+    res.status(200).send(cv);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.post("/:userId/contact", async (req, res, next) => {
   try {
     await Contact.update(
@@ -203,6 +218,7 @@ router.get("/:username", async (req, res, next) => {
       about: allData.dataValues.about,
       contact: allData.dataValues.contact,
       cv: cv,
+      cvImg: allData.dataValues.cv.imgId,
       collections: allData.dataValues.collections,
       domain: allData.dataValues.domain,
       cname: allData.dataValues.cname,

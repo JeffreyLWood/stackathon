@@ -147,7 +147,7 @@ const About = (props) => {
                 />
               ) : image ? (
                 <Image
-                  cloudName={"jeffreywood"}
+                  cloudName={process.env.CLOUDINARY_NAME}
                   publicId={image}
                   className="mx-auto h-72"
                 />

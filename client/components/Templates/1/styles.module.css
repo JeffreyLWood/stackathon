@@ -118,6 +118,9 @@
   justify-content: center;
   align-items: center;
 }
+.aboutImage {
+  max-height: 40rem;
+}
 .aboutTextWrapper {
   width: 45%;
   display: flex;
@@ -139,6 +142,52 @@
   color: var(--secondary);
   margin-bottom: 1rem;
   font-size: 18px;
+}
+.cvContainer {
+  min-height: 80vh;
+  width: 100vw;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  padding: 14rem 6rem 4rem 2rem;
+  position:absolute;
+}
+.cvImgWrapper {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 4rem 0 4rem;
+  height: 100%;
+}
+.cvImg {
+  position:fixed;
+  top: 14rem;
+  max-height: 40rem;
+}
+.cvMobileHeading {
+  display: none;
+  position: fixed;
+  z-index: 0;
+  color: white;
+  font-size: 36px;
+  padding-left: .5rem;
+  text-transform: uppercase;
+}
+.cvText {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.cvGroup {
+  width: 100%;
+  margin-bottom: 3rem;
+}
+.cvGroup header {
+  margin-bottom: 1rem;
+  color: var(--secondary);
 }
 .contactContainer {
   position:absolute;
@@ -295,7 +344,6 @@ justify-content: center;
     align-items: center;
     justify-content: center;
   }
-
 .contact input,
 textarea {
   outline-width: 1px;
@@ -307,11 +355,9 @@ textarea {
   padding: 0.1rem;
   font-weight: 300;
 }
-
 .contact label {
   font-weight: 500;
 }
-
 .workModal {
   top: 0;
   bottom: 0;
@@ -357,8 +403,7 @@ textarea {
 }
 
 .workModalImgContainer img {
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   max-height: 100%;
 }
 
@@ -453,6 +498,13 @@ cursor: pointer;
     .cell {
       width: 33%;
     }
+    .cvImgWrapper {
+      max-height: none;
+      padding: 2rem;
+    }
+    .cvImg {
+      height: 30rem;
+    }
   }
 
   @media (max-width: 820px) {
@@ -534,6 +586,38 @@ cursor: pointer;
   }
   .hideOnMobile {
     display: none;
+  }
+  .cvContainer {
+    width: 100%;
+    flex-direction: column;
+    padding: 6rem 0rem 0 0rem;
+    height: auto;
+  }
+  .cvImgWrapper {
+    width: 100vw;
+    height: 40vh;
+    justify-content: flex-start;
+    padding: 0;
+    overflow: hidden;
+  }
+  .cvImg {
+    width:100vw;
+    max-height: none;
+    object-position: center;
+    position: fixed;
+    z-index: 0;
+    top:auto;
+  }
+  .cvMobileHeading {
+    display: flex;
+    align-self: flex-end;
+  }
+  .cvText {
+    z-index: 10;
+    height: auto;
+    width: 100%;
+    background-color: #FFF;
+    padding: 2rem .5rem 1rem .5rem;
   }
   .contactContainer {
     padding: 6rem 2rem 0 2rem;

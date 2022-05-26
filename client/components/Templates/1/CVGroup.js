@@ -1,16 +1,12 @@
 import React from "react";
+import styles from "./styles.module.css";
 export default function CVGroup(props) {
-  let margins = "md:mx-auto md:w-4/6 mb-6";
-  if (props.title === null) {
-    margins = "";
-  }
-
   return (
-    <span className="stagger">
-      <div className={`pageTitle text-gray-500  ${margins}`}>{props.title}</div>
+    <div className={`${styles.cvGroup} stagger`}>
+      <header className={`${styles.h2}`}>{props.title}</header>
 
       <ul
-        className={`font-light text-xs tracking-wider flex flex-col w-full sm:text-sm  ${margins}`}
+        className={`font-light text-xs tracking-wider flex flex-col w-full sm:text-sm`}
       >
         {props.data &&
           props.data.map((line, index) => {
@@ -84,6 +80,6 @@ export default function CVGroup(props) {
             );
           })}
       </ul>
-    </span>
+    </div>
   );
 }

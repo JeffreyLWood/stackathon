@@ -36,6 +36,14 @@ const CV = db.define("cv", {
   communityInvolvement: {
     type: Sequelize.TEXT(10000),
   },
+  imgId: {
+    type: Sequelize.STRING(2000),
+    allowNull: true,
+  },
+  caption: {
+    type: Sequelize.STRING(100),
+    allowNull: true,
+  },
 });
 
 module.exports = CV;

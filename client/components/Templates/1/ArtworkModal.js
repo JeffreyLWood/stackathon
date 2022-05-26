@@ -1,13 +1,14 @@
 import React from "react";
 import { Image } from "cloudinary-react";
 import Dimensions from "./Dimensions";
+import styles from "./styles.module.css";
 export default function ArtworkModal(props) {
   if (!props.show) {
     return null;
   }
 
   return (
-    <div className="workModal">
+    <div className={styles.workModal}>
       <div className="workModalHeader"></div>
       <span className="workModalClose cursor-pointer" onClick={props.fadeOut}>
         <img src="/icons8-close-16.png" className="w-6" />
@@ -16,7 +17,7 @@ export default function ArtworkModal(props) {
         <div className="workModalImgContainer mb-2 sm:my-5">
           <Image
             className="artwork"
-            cloudName="jeffreywood"
+            cloudName={process.env.CLOUDINARY_NAME}
             publicId={props.data.imgId}
           />
         </div>
@@ -25,7 +26,7 @@ export default function ArtworkModal(props) {
             <li className="text-xl text-neutral-600 mb-2">
               {props.data.title}
             </li>
-            <li className="uppercase tracking-widest text-neutral-500 text-sm sm:mb-10">
+            <li className="uppercase tracking-widest text-neutral-500 sm:mb-10">
               {props.user.siteTitle ||
                 props.user.firstName + " " + props.user.lastName}
             </li>

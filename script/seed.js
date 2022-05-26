@@ -26,10 +26,10 @@ async function seed() {
     ]);
     await About.update(
       {
-        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
         header:
           "Jane Isidor's photographs transcend the obvious and reexamine the connection between time and place. -- The New York Times, 2022",
-        imgId: "stackathonImgs/janeisidor_rvlm1p",
+        imgId: "stackathonImgs/ql16osoyk2uapohzgpzt.jpg",
         caption: null,
       },
       { where: { userId: 1 } }
@@ -38,6 +38,7 @@ async function seed() {
       {
         phone: 1234567890,
         address: "Brooklyn, NY",
+        imgId: "stackathonImgs/pljdts0qzmhdq9itqnv9.jpg",
         instagram: "https://instagram.com/",
         facebook: "https://facebook.com",
         linkedin: "https://linkedin.com",
@@ -60,6 +61,7 @@ async function seed() {
         "2022, New York Times, Jane Isidor's Views of Brooklyn Heights Find a Sense of Calm Among Chaos by Wayne Schuman, , https://nytimes.com/notarealarticle\n2021, Harvard Business Review, 30 Photographers Under 30 by Lester C Wiley, , https://harvardbusinessreview.com/notarealarticle",
       publications:
         "2020, Jason Ortega, Photography Today, Yale University Press, https://yalebooks.yale.edu/notarealbook, Pages 20-24",
+      imgId: "stackathonImgs/otuplyrqyh8ghvhpcks9.jpg",
     });
 
     await cv.setUser(users[0]);

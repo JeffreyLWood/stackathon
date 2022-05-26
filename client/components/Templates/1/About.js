@@ -42,7 +42,7 @@ export default function About() {
           <Image
             cloudName={process.env.CLOUDINARY_NAME}
             publicId={imgId}
-            // className="stagger flex object-contain sm:max-w-lg aboutImage px-2 sm:px-0 sm:mx-auto"
+            className={styles.aboutImage}
           />
           <figcaption className="text-sm mt-2 italic text-neutral-400 text-center">
             {caption}
