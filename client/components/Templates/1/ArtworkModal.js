@@ -8,44 +8,35 @@ export default function ArtworkModal(props) {
   }
 
   return (
-    <div className={styles.workModal}>
-      <div className="workModalHeader"></div>
-      <span className="workModalClose cursor-pointer" onClick={props.fadeOut}>
+    <div className={`${styles.workModal} gsap`}>
+      <div className={styles.workModalHeader}></div>
+      <span className={styles.workModalClose} onClick={props.fadeOut}>
         <img src="/icons8-close-16.png" className="w-6" />
       </span>
-      <div className="workModalBody ">
-        <div className="workModalImgContainer mb-2 sm:my-5">
+      <div className={styles.workModalBody}>
+        <div className={`${styles.workModalImgContainer} artwork`}>
           <Image
-            className="artwork"
+            className={styles.artwork}
             cloudName={process.env.CLOUDINARY_NAME}
             publicId={props.data.imgId}
           />
         </div>
-        <div className="workModalTextContainer description">
-          <ul className="tracking-wider">
-            <li className="text-xl text-neutral-600 mb-2">
-              {props.data.title}
-            </li>
-            <li className="uppercase tracking-widest text-neutral-500 sm:mb-10">
-              {props.user.siteTitle ||
-                props.user.firstName + " " + props.user.lastName}
-            </li>
-            <li className="text-sm text-neutral-500 mb-2">{props.data.year}</li>
-            <li className="text-xs uppercase text-neutral-500 mb-2">
-              {props.data.medium}
-            </li>
-            <li className="text-sm text-neutral-500">
+        <div className={`${styles.workModalTextContainer} description`}>
+          <ul>
+            <li className={styles.workModalTitle}>{props.data.title}</li>
+            <li className={styles.workModalArtist}>{props.user.siteTitle}</li>
+            <li className={styles.workModalYear}>{props.data.year}</li>
+            <li className={styles.workModalMedium}>{props.data.medium}</li>
+            <li>
               <Dimensions data={props.data} />
             </li>
-            <li className="text-sm text-neutral-500 my-2">
-              {props.data.status}
-            </li>
-            <li className="text-sm text-neutral-500">{props.data.price}</li>
-            <li className="md:py-10">
-              {/* <button type="button" className="border-2 p-2 ">
+            <li className={styles.workModalStatus}>{props.data.status}</li>
+            <li className={styles.workModalPrice}>{props.data.price}</li>
+            {/* <li>
+              <button type="button" className="border-2 p-2 ">
                 Enquire
-              </button> */}
-            </li>
+              </button> 
+            </li>*/}
           </ul>
         </div>
       </div>

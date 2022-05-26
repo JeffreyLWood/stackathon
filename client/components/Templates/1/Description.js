@@ -17,7 +17,7 @@ export default function Description(props) {
   let [q, ref] = useQ();
 
   const fadeIn = () => {
-    gsap.to(q(".workModal"), {
+    gsap.to(q(".gsap"), {
       opacity: 1,
       zIndex: 50,
       duration: 1,
@@ -68,7 +68,7 @@ export default function Description(props) {
       duration: 2,
       ease: "expo",
     });
-    gsap.to(q(".workModal"), {
+    gsap.to(q(".gsap"), {
       opacity: 0,
       zIndex: -1,
       duration: 2,

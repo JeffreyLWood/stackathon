@@ -17,7 +17,7 @@ export default function Artwork(props) {
   let [q, ref] = useQ();
 
   const fadeIn = () => {
-    gsap.to(q(".workModal"), {
+    gsap.to(q(".gsap"), {
       opacity: 1,
       zIndex: 50,
       duration: 1,
@@ -57,7 +57,7 @@ export default function Artwork(props) {
   const fadeOut = () => {
     document.body.style.position = "";
     window.scrollTo({ top: scrollPos, behavior: "auto" });
-    gsap.to(q(".workModal"), {
+    gsap.to(q(".gsap"), {
       opacity: 0,
       zIndex: -1,
       duration: 1,

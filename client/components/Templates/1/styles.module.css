@@ -392,8 +392,30 @@ textarea {
   padding-left: 3rem;
   padding-right: 3rem;
   height: 100%;
+  text-transform: uppercase;
 }
+.workModalTitle {
+  font-size: 20px;
+  color: var(--primary);
+}
+.workModalArtist {
+  font-size: 14px;
+  color: var(--secondary);
+  margin-bottom: 3rem;
+}
+.workModalYear {
+  color: var(--primary);
+}
+.workModalMedium {
+  color: var(--primary);
+}
+.workModalStatus {
+  color: var(--primary);
+}
+.workModalPrice {
+  color: var(--primary);
 
+}
 .workModalImgContainer {
   width: 50%;
   height: 70%;
@@ -401,7 +423,6 @@ textarea {
   justify-content: center;
   align-items: center;
 }
-
 .workModalImgContainer img {
   object-fit: contain;
   max-height: 100%;
