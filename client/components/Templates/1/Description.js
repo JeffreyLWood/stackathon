@@ -97,26 +97,24 @@ export default function Description(props) {
 
   return (
     <section className={styles.description}>
-      <div className={`${styles.descriptionText} stagger`}>
-        <span className={styles.siteTitle}>{props.title}</span>
+      <div className={`${styles.descriptionText}`}>
+        <span className={`${styles.siteTitle} stagger`}>{props.title}</span>
         {props.subheading1 ? (
-          <span className={`${styles.h2}`}>{props.subheading1}</span>
+          <span className={`${styles.h2} stagger`}>{props.subheading1}</span>
         ) : null}
         {props.subheading2 ? (
-          <span className={`${styles.h2} ${styles.mb1}`}>
-            {props.subheading2}
-          </span>
+          <span className={`${styles.h2} stagger`}>{props.subheading2}</span>
         ) : null}
-        {text}
+        <span className="stagger">{text}</span>
       </div>
-      <div className={`${styles.descriptionImageWrapper} stagger`}>
+      <div className={`${styles.descriptionImageWrapper}`}>
         <Image
           cloudName={process.env.CLOUDINARY_NAME}
           publicId={props.data.imgId}
-          className={styles.descriptionImage}
+          className={`${styles.descriptionImage} stagger`}
           onClick={showModal}
         />
-        <span className={styles.descriptionImageDescription}>
+        <span className={`${styles.descriptionImageDescription} stagger`}>
           <span>{props.data.title}</span>
           <span className={styles.textSecondary}>{props.data.year}</span>
           <span className={styles.textSecondary}>{props.data.medium}</span>

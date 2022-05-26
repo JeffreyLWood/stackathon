@@ -26,7 +26,7 @@ export default function Dropdown(props) {
       }
     );
   };
-  console.log(props);
+
   return (
     <div ref={ref} className="flex flex-row justify-between dropdown shadow-md">
       <div className="hidden sm:block w-full flex text-center h-content">

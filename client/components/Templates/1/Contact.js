@@ -63,7 +63,7 @@ export default function Contact() {
     //   className="w-screen font-light text-sm leading-8 h-80vh my-14 mx-2 md:m-20 md:mb-0 flex flex-col items-start justify-center sm:px-10 sm:py-5 sm:flex-row md:py-24 md:px-10 md:justify-start"
     // >
     <div ref={ref} className={styles.contactContainer}>
-      <section className={styles.contactImage}>
+      <section className={`${styles.contactImage} stagger`}>
         <Image
           cloudName={process.env.CLOUDINARY_NAME}
           publicId={imgId}
@@ -72,7 +72,7 @@ export default function Contact() {
 
         {caption}
       </section>
-      <section className={styles.contactInfo}>
+      <section className={`${styles.contactInfo} stagger`}>
         <span className={styles.h2}>Contact</span>
         {text ? <span>{text}</span> : null}
 
@@ -136,7 +136,7 @@ export default function Contact() {
           ) : null}
           {etsy ? (
             <a href={etsy} target="_blank">
-              <img src="../social/etsy.png" alt="etsy" alt="etsy" />
+              <img src="../social/etsy.png" alt="etsy" />
             </a>
           ) : null}
           {pinterest ? (
@@ -154,7 +154,7 @@ export default function Contact() {
             </a>
           ) : null}
         </div>
-        <section className={styles.contactForm}>
+        <section className={`${styles.contactForm} stagger`}>
           <form onSubmit={sendEmail}>
             <div>
               <span>
