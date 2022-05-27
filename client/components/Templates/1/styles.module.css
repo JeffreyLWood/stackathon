@@ -99,6 +99,8 @@
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  overflow: hidden;
+  position:absolute;
   padding: 10rem 2rem 4rem 1rem;
 }
 .aboutContent {
@@ -364,7 +366,7 @@ textarea {
   left: 0;
   right: 0;
   width: 100vw;
-  position: fixed;
+  position: absolute;
   overflow: hidden;
   background-color: #fff;
   z-index: -1;
@@ -389,7 +391,7 @@ textarea {
 .workModalBody {
   display: flex;
   align-items: center;
-  padding-left: 3rem;
+  padding-left: 4rem;
   padding-right: 3rem;
   height: 100%;
   text-transform: uppercase;
@@ -417,8 +419,8 @@ textarea {
 
 }
 .workModalImgContainer {
-  width: 50%;
-  height: 70%;
+  width: 60%;
+  height: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -641,13 +643,13 @@ cursor: pointer;
     padding: 2rem .5rem 1rem .5rem;
   }
   .contactContainer {
-    padding: 6rem 2rem 0 2rem;
+    padding: 6rem 2rem 0 1rem;
     flex-direction: column;
   }
   .contactContainer section {
     width: 100%;
     height: 50%;
-    padding: 1rem 0 1rem 0;
+    padding: 1rem 0 0rem 0;
   }
   .aboutContent {
     height: 100%;

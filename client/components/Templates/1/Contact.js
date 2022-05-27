@@ -64,11 +64,7 @@ export default function Contact() {
     // >
     <div ref={ref} className={styles.contactContainer}>
       <section className={`${styles.contactImage} stagger`}>
-        <Image
-          cloudName={process.env.CLOUDINARY_NAME}
-          publicId={imgId}
-          className="h-full object-cover"
-        />
+        <Image cloudName={process.env.CLOUDINARY_NAME} publicId={imgId} />
 
         {caption}
       </section>

@@ -14,7 +14,7 @@ const play1Timeline = (node, pathname) => {
       stagger: 0.1,
       ease: "expo",
       y: -20,
-      delay: 1,
+      delay: 2,
     }
   );
   timeline.play();

@@ -50,6 +50,18 @@ export default function Work({ props }) {
   //   });
   // });
 
+  // gsap.to(q(".stagger"), {
+  //   scrollTrigger: {
+  //     trigger: q(".stagger"),
+  //     toggleActions: "none none none none",
+  //   },
+
+  //   opacity: 0,
+  //   duration: 1,
+  //   ease: "expo",
+  //   x: 20,
+  // });
+
   return (
     <div ref={ref} className={styles.content}>
       {collection?.description ? (
