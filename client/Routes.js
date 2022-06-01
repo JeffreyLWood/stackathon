@@ -84,37 +84,40 @@ const Routes = () => {
         </>
       ) : user.username ? (
         // Logged in, not using custom domain
-        <Switch>
-          <Route exact path="/create/in/:username" component={CreateWork} />
-          <Route exact path="/" component={CreateWork} />
-          <Route exact path="/:username" component={Work} />
-          <Route exact path="/:username/work" component={Work} />
-          <Route exact path="/:username/about" component={About} />
-          <Route exact path="/:username/cv" component={CV} />
-          <Route exact path="/:username/contact" component={Contact} />
-          <Route exact path="/:username/work/:collection" component={Work} />
-          <Route
-            exact
-            path="/create/in/:username/work"
-            component={CreateWork}
-          />
-          <Route
-            exact
-            path="/create/in/:username/about"
-            component={CreateAbout}
-          />
-          <Route exact path="/create/in/:username/cv" component={CreateCV} />
-          <Route
-            exact
-            path="/create/in/:username/contact"
-            component={CreateContact}
-          />
-          <Route
-            exact
-            path="/create/in/:username/settings"
-            component={CreateSettings}
-          />
-        </Switch>
+        <>
+          <Navbar />
+          <Switch>
+            <Route exact path="/create/in/:username" component={CreateWork} />
+            <Route exact path="/" component={CreateWork} />
+            <Route exact path="/:username" component={Work} />
+            <Route exact path="/:username/work" component={Work} />
+            <Route exact path="/:username/about" component={About} />
+            <Route exact path="/:username/cv" component={CV} />
+            <Route exact path="/:username/contact" component={Contact} />
+            <Route exact path="/:username/work/:collection" component={Work} />
+            <Route
+              exact
+              path="/create/in/:username/work"
+              component={CreateWork}
+            />
+            <Route
+              exact
+              path="/create/in/:username/about"
+              component={CreateAbout}
+            />
+            <Route exact path="/create/in/:username/cv" component={CreateCV} />
+            <Route
+              exact
+              path="/create/in/:username/contact"
+              component={CreateContact}
+            />
+            <Route
+              exact
+              path="/create/in/:username/settings"
+              component={CreateSettings}
+            />
+          </Switch>
+        </>
       ) : (
         //Not logged in, not using custom domain
         <>

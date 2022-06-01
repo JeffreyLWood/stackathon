@@ -76,7 +76,45 @@
   text-transform: uppercase;
   font-size: 16px;
 }
-  
+.dropdown {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 20;
+  left: 0;
+  right: 0;
+  top: 5rem;
+  background-color: #fff;
+  width: 100vw;
+  min-height: min-content;
+  padding: 4rem;
+}
+.previewWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+}
+.preview {
+  cursor: pointer;
+  height: 22rem;
+}
+.collectionsWrapper {
+display: flex;
+justify-content: flex-start;
+align-items: flex-start;
+flex-direction: row;
+width: 20%;
+}
+.collectionsList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  color: var(--secondary);
+  font-size: 14px;
+}
   .mobileNav {
     text-transform: uppercase;
     display: none;
@@ -99,7 +137,6 @@
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  overflow: hidden;
   position:absolute;
   padding: 10rem 2rem 4rem 1rem;
 }
@@ -366,9 +403,9 @@ textarea {
   left: 0;
   right: 0;
   width: 100vw;
-  position: absolute;
+  position: fixed;
   overflow: hidden;
-  background-color: #fff;
+  background-color: #FFF;
   z-index: -1;
   display: flex;
   flex-direction: column;
@@ -386,6 +423,7 @@ textarea {
   top: 1rem;
   right: 2rem;
   position: absolute;
+  cursor: pointer;
 }
 
 .workModalBody {
@@ -543,7 +581,7 @@ cursor: pointer;
     .social {display:none;}
     .toggle {display:block;}
     .content {
-      padding: 8rem 1rem 0rem 1rem;
+      padding: 8rem 2rem 0rem 1rem;
     }
     .cell {
       width: 50%;

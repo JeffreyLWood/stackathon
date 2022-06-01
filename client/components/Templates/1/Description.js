@@ -98,7 +98,7 @@ export default function Description(props) {
   return (
     <section className={styles.description}>
       <div className={`${styles.descriptionText}`}>
-        <span className={`${styles.siteTitle} stagger`}>{props.title}</span>
+        <span className={`${styles.h1} stagger`}>{props.title}</span>
         {props.subheading1 ? (
           <span className={`${styles.h2} stagger`}>{props.subheading1}</span>
         ) : null}

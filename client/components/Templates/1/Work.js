@@ -50,17 +50,17 @@ export default function Work({ props }) {
   //   });
   // });
 
-  // gsap.to(q(".stagger"), {
-  //   scrollTrigger: {
-  //     trigger: q(".stagger"),
-  //     toggleActions: "none none none none",
-  //   },
+  gsap.to(q(".stagger"), {
+    scrollTrigger: {
+      trigger: q(".stagger"),
+      toggleActions: "repeat none none none",
+    },
 
-  //   opacity: 0,
-  //   duration: 1,
-  //   ease: "expo",
-  //   x: 20,
-  // });
+    opacity: 1,
+    duration: 2,
+    ease: "expo",
+    y: -20,
+  });
 
   return (
     <div ref={ref} className={styles.content}>

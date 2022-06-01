@@ -2,7 +2,7 @@ import React from "react";
 import { updateContactData } from "../../store/create";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Navbar } from "../Navbar";
+
 import { fetchUserData } from "../../store/user";
 export default function CreateContact(props) {
   let user = useSelector((state) => state.user);
@@ -89,8 +89,6 @@ export default function CreateContact(props) {
 
   return (
     <>
-      <Navbar user={user} />
-
       <form
         className="contact h-full mt-24 sm:mt-20 w-full bg-neutral-50 flex flex-col mx-2 md:flex-row md:p-10 md:space-x-5 font-light text-gray-500"
         onSubmit={submitHandler}

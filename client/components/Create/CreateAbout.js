@@ -3,17 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateAboutText, destroyAboutImage } from "../../store/create";
 import { useEffect, useState } from "react";
 import { fetchUserData } from "../../store/user";
-import { Navbar } from "../Navbar";
 import { Image } from "cloudinary-react";
 
 const About = (props) => {
   let user = useSelector((state) => state.user);
-
-  let dispatch = useDispatch();
-
-  useEffect(() => {
-    user = dispatch(fetchUserData(props.match.params.username));
-  }, []);
 
   let [text, setText] = useState("");
   let [header, setHeader] = useState("");
@@ -125,7 +118,6 @@ const About = (props) => {
 
   return (
     <>
-      <Navbar user={user} />
       <div className="w-screen p-10 mt-20 flex flex-col justify-center sm:space-x-4 bg-neutral-50 md:flex-row">
         <div className="h-2/6 w-full md:w-2/6 h-full  flex items-center">
           <form className="" onSubmit={imgSubmitHandler}>

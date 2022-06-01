@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCVText } from "../../store/create";
 import { useEffect, useState } from "react";
-import { Navbar } from "../Navbar";
 import { fetchUserData } from "../../store/user";
 import CVGroup from "../Templates/1/CVGroup";
 import { destroyCVImage } from "../../store/create";
@@ -11,10 +10,6 @@ const CV = (props) => {
   let user = useSelector((state) => state.user);
 
   let dispatch = useDispatch();
-
-  useEffect(() => {
-    user = dispatch(fetchUserData(props.match.params.username));
-  }, []);
 
   let [text, setText] = useState("");
 
@@ -112,7 +107,6 @@ const CV = (props) => {
 
   return (
     <>
-      <Navbar user={user} />
       <div className="w-full min-h-screen justify-center px-2 pt-12 bg-neutral-50 mt-20 sm:mt-10 sm:p-10 flex">
         <form
           className="w-full min-h-screen space-y-5"

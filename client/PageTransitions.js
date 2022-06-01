@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 const play1Timeline = (node, pathname) => {
   const timeline = new gsap.timeline({ paused: true });
   const els = node.querySelectorAll(".stagger");
+
   timeline.fromTo(
     els,
     {

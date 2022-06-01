@@ -73,21 +73,28 @@ export default function Navbar(props) {
     fade();
   });
 
-  const dropDown = () =>
-    gsap.to(q(".dropdown"), {
+  const dropDown = () => {
+    if (visible.length < 2) {
+      return;
+    }
+    gsap.to(q(".gsap"), {
       display: "flex",
       opacity: 1,
       duration: 1,
       ease: "expo",
+      zIndex: 10,
     });
+  };
 
-  const dropDownUp = () =>
-    gsap.to(q(".dropdown"), {
+  const dropDownUp = () => {
+    gsap.to(q(".gsap"), {
+      duration: 0.2,
       display: "none",
-      ease: "expo",
-      duration: 0.5,
       opacity: 0,
     });
+  };
+
+  let [showDropdown, setShowDropdown] = useState(false);
 
   return (
     <div ref={ref}>
@@ -108,13 +115,14 @@ export default function Navbar(props) {
 
         <span className={styles.linkContainer}>
           <span
-            onMouseEnter={dropDown}
-            onMouseLeave={dropDownUp}
+            onMouseEnter={() => setShowDropdown(true)}
+            onMouseLeave={() => setShowDropdown(false)}
             className={styles.link}
             onClick={(e) => link(e, `${url}/`)}
           >
             Selected Work
             <Dropdown
+              showDropdown={showDropdown}
               url={url}
               preview={
                 props.collection?.works && props.collection?.works[0].imgId

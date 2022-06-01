@@ -9,7 +9,6 @@ import {
   useCustomDomain,
   deleteCustomDomain,
 } from "../../store/auth";
-import { Navbar } from "../Navbar";
 import { logout } from "../../store";
 export default function CreateSettings(props) {
   let user = useSelector((state) => state.auth);
@@ -95,7 +94,6 @@ export default function CreateSettings(props) {
   let submitDomainButtonText = user.domain ? "Delete Record" : "Add Domain";
   return (
     <>
-      <Navbar user={user} />
       <div className="h-full mt-20">
         <section className="w-full bg-neutral-50 space-y-4 flex flex-col p-10">
           <span>
