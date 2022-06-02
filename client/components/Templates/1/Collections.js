@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./styles.module.css";
-
+import { Link } from "react-router-dom";
 export default function Collections(props) {
   let collections =
     props.collections &&
@@ -10,18 +10,19 @@ export default function Collections(props) {
     <div className={styles.collectionsList}>
       {collections &&
         collections.map((collection) => (
-          <span
+          <Link
             key={collection.id}
-            //    className="cursor-pointer text-xl sm:text-sm z-50"
-            id={collection.works[0]?.imgId}
-            onMouseOver={(e) => props.previewHandler(e)}
-            onMouseEnter={props.enterPreview}
-            onClick={(e) =>
-              props.link(e, `${props.url}/work/${collection.title}`)
-            }
+            to={`${props.url}/work/${collection.title}`}
           >
-            {collection.title}
-          </span>
+            <span
+              className={styles.link}
+              id={collection.works[0]?.imgId}
+              onMouseOver={(e) => props.previewHandler(e)}
+              onMouseEnter={props.enterPreview}
+            >
+              {collection.title}
+            </span>
+          </Link>
         ))}
     </div>
   );

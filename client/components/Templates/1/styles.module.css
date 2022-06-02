@@ -98,7 +98,7 @@
 }
 .preview {
   cursor: pointer;
-  height: 22rem;
+  height: 24rem;
 }
 .collectionsWrapper {
 display: flex;
@@ -113,7 +113,7 @@ width: 20%;
   width: 100%;
   height: 100%;
   color: var(--secondary);
-  font-size: 14px;
+  font-size: 18px;
 }
   .mobileNav {
     text-transform: uppercase;

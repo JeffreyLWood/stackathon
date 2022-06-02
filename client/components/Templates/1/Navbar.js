@@ -8,12 +8,14 @@ import Dropdown from "./Dropdown";
 import useQ from "../../../useQ";
 import styles from "./styles.module.css";
 import "/public/styles.css";
+import { Link } from "react-router-dom";
 export default function Navbar(props) {
   let user = useSelector((state) => state.user);
   document.title = user?.siteTitle;
   let collections = user?.collections;
   let visible =
     collections && collections.filter((collection) => !collection.hidden);
+
   let url =
     window.location.hostname === "selected-work.com"
       ? `/${user.username}`
@@ -22,15 +24,6 @@ export default function Navbar(props) {
       : `/${user.username}`;
 
   // GSAP
-  const link = (e, destination) => {
-    e.preventDefault();
-    dropDownUp();
-    if (destination === window.location.pathname) {
-      return null;
-    }
-
-    history.push(destination);
-  };
 
   let [q, ref] = useQ();
 
@@ -73,27 +66,6 @@ export default function Navbar(props) {
     fade();
   });
 
-  const dropDown = () => {
-    if (visible.length < 2) {
-      return;
-    }
-    gsap.to(q(".gsap"), {
-      display: "flex",
-      opacity: 1,
-      duration: 1,
-      ease: "expo",
-      zIndex: 10,
-    });
-  };
-
-  const dropDownUp = () => {
-    gsap.to(q(".gsap"), {
-      duration: 0.2,
-      display: "none",
-      opacity: 0,
-    });
-  };
-
   let [showDropdown, setShowDropdown] = useState(false);
 
   return (
@@ -103,24 +75,24 @@ export default function Navbar(props) {
         <MobileNav
           url={url}
           collections={visible}
-          link={link}
           fadeOut={props.fadeOut}
           toggleMenu={toggleMenu}
         />
       </span>
       <nav className={styles.nav}>
-        <span className={styles.siteTitle} onClick={(e) => link(e, `${url}/`)}>
-          {user?.siteTitle}
-        </span>
+        <Link to={`${url}/`}>
+          <span className={styles.siteTitle}>{user?.siteTitle}</span>
+        </Link>
 
         <span className={styles.linkContainer}>
           <span
             onMouseEnter={() => setShowDropdown(true)}
             onMouseLeave={() => setShowDropdown(false)}
-            className={styles.link}
-            onClick={(e) => link(e, `${url}/`)}
+            onClick={() => setShowDropdown(false)}
           >
-            Selected Work
+            <Link to={`${url}/work`} className={styles.link}>
+              Selected Work
+            </Link>
             <Dropdown
               showDropdown={showDropdown}
               url={url}
@@ -130,27 +102,17 @@ export default function Navbar(props) {
               collection={props.collection}
               visible={visible}
               collections={collections}
-              link={link}
             />
           </span>
-
-          <span
-            className={styles.link}
-            onClick={(e) => link(e, `${url}/about`)}
-          >
-            About
-          </span>
-
-          <span className={styles.link} onClick={(e) => link(e, `${url}/cv`)}>
-            CV
-          </span>
-
-          <span
-            onClick={(e) => link(e, `${url}/contact`)}
-            className={styles.link}
-          >
-            Contact
-          </span>
+          <Link to={`${url}/about`}>
+            <span className={styles.link}>About</span>
+          </Link>
+          <Link to={`${url}/cv`}>
+            <span className={styles.link}>CV</span>
+          </Link>
+          <Link to={`${url}/contact`}>
+            <span className={styles.link}>Contact</span>
+          </Link>
           <span className={styles.social}>
             <img src="../social/instagram.png" />
           </span>

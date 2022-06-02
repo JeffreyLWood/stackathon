@@ -18,7 +18,7 @@ async function seed() {
     const users = await Promise.all([
       User.create({
         username: "janeisidor",
-        email: "jeffreywood.dev@gmail.com",
+        email: "selectedworkteam@gmail.com",
         password: "123",
         firstName: "Jane",
         lastName: "Isidor",
@@ -154,9 +154,125 @@ async function seed() {
       width: 4,
       status: null,
     });
+    let default10 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-magda-ehlers-3575282_mqgdwt.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default11 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-drone-trotter-7974790_ylsxtk.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default12 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-pok-rie-3941243_bv4z1y.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default13 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-drone-trotter-7974790_ylsxtk.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default14 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-nicolas-3936957_amssqz.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default15 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-pok-rie-3301325_sncqbe.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default16 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-pok-rie-1792202_ohsfod.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default17 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-pok-rie-3116030_npdrnh.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default18 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-pok-rie-1709993_q8xhmq.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default19 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-pok-rie-3819185_rwodft.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default20 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-pok-rie-3819189_nln6c3.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default21 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-pok-rie-3819191_waqgov.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default22 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-pok-rie-3941244_xko8lj.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
 
-    // Put defaults into array for mapping
-    let array = [
+    let summitWorks = [
       default0,
       default1,
       default2,
@@ -167,9 +283,24 @@ async function seed() {
       default8,
       default9,
     ];
-    // Map over works array and setUser to the new user.
-    // Sets default images in the user's database and displays them on their new site.
-    let workCollection = await Collection.create({
+
+    let undercurrentWorks = [
+      default10,
+      default11,
+      default12,
+      default13,
+      default14,
+      default15,
+      default16,
+      default17,
+      default18,
+      default19,
+      default20,
+      default21,
+      default22,
+    ];
+
+    let collection1 = await Collection.create({
       title: "Summit",
       hidden: false,
       subheading1: "JANUARY 1 - JANUARY 28, 2022",
@@ -177,16 +308,31 @@ async function seed() {
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     });
+
+    let collection2 = await Collection.create({
+      title: "Under Current",
+      hidden: false,
+      subheading1: "March 18 - April 30, 2021",
+      subheading2: "ArtBox, 191 W23 St, NEW YORK, NY",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    });
+
     await Collection.create({
       title: "Hidden",
       hidden: true,
     });
 
-    array.map(async (work) => {
-      return await work.setCollection(workCollection);
+    summitWorks.map(async (work) => {
+      return await work.setCollection(collection1);
     });
 
-    await workCollection.setUser(1);
+    undercurrentWorks.map(async (work) => {
+      return await work.setCollection(collection2);
+    });
+
+    await collection2.setUser(1);
+    await collection1.setUser(1);
 
     console.log(`seeded ${users.length} users`);
     console.log(`seeded successfully`);
