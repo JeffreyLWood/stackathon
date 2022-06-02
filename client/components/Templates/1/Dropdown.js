@@ -32,34 +32,36 @@ export default function Dropdown(props) {
     return null;
   }
   return (
-    <div ref={ref} className={`${styles.dropdown}`}>
-      <div className={styles.previewWrapper}>
-        <Image
-          cloudName={process.env.CLOUDINARY_NAME}
-          publicId={preview}
-          className={`${styles.preview} gsap`}
-        />
+    <>
+      <div ref={ref} className={`${styles.dropdown}`}>
+        <div className={styles.previewWrapper}>
+          <Image
+            cloudName={process.env.CLOUDINARY_NAME}
+            publicId={preview}
+            className={`${styles.preview} gsap`}
+          />
+        </div>
+        <div className={styles.collectionsWrapper}>
+          <Collections
+            id={"Primary"}
+            collections={visible}
+            link={props.link}
+            previewHandler={previewHandler}
+            enterPreview={enterPreview}
+            url={props.url}
+          />
+        </div>
+        <div className={styles.collectionsWrapper}>
+          <Collections
+            id={"Secondary"}
+            collections={visible}
+            link={props.link}
+            previewHandler={previewHandler}
+            enterPreview={enterPreview}
+            url={props.url}
+          />
+        </div>
       </div>
-      <div className={styles.collectionsWrapper}>
-        <Collections
-          id={"Primary"}
-          collections={visible}
-          link={props.link}
-          previewHandler={previewHandler}
-          enterPreview={enterPreview}
-          url={props.url}
-        />
-      </div>
-      <div className={styles.collectionsWrapper}>
-        <Collections
-          id={"Secondary"}
-          collections={visible}
-          link={props.link}
-          previewHandler={previewHandler}
-          enterPreview={enterPreview}
-          url={props.url}
-        />
-      </div>
-    </div>
+    </>
   );
 }

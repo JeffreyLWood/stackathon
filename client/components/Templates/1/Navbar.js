@@ -90,7 +90,7 @@ export default function Navbar(props) {
             onMouseLeave={() => setShowDropdown(false)}
             onClick={() => setShowDropdown(false)}
           >
-            <Link to={`${url}/work`} className={styles.link}>
+            <Link to={`${url}`} className={styles.link}>
               Selected Work
             </Link>
             <Dropdown
