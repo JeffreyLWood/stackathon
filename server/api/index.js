@@ -3,6 +3,8 @@ module.exports = router;
 const Work = require("../db/models/Work");
 const About = require("../db/models/About");
 const Collection = require("../db/models/Collection");
+const Contact = require("../db/models/Contact");
+const CV = require("../db/models/CV");
 const { cloudinary } = require("../utils/cloudinary");
 
 router.use("/users", require("./users"));
@@ -28,6 +30,37 @@ router.post("/upload", async (req, res) => {
       );
       let about = await About.findOne({ where: { userId: req.body.userId } });
       res.status(204).send(about);
+    }
+    //if req.body.type === contact, send it to about table instead of work
+    if (req.body.type === "contact") {
+      await Contact.update(
+        {
+          imgId: uploadedResponse.public_id,
+          caption: req.body.caption,
+        },
+        {
+          where: { userId: req.body.userId },
+        }
+      );
+      let contact = await Contact.findOne({
+        where: { userId: req.body.userId },
+      });
+      res.status(204).send(contact);
+    }
+    if (req.body.type === "cv") {
+      await CV.update(
+        {
+          imgId: uploadedResponse.public_id,
+          caption: req.body.caption,
+        },
+        {
+          where: { userId: req.body.userId },
+        }
+      );
+      let cv = await CV.findOne({
+        where: { userId: req.body.userId },
+      });
+      res.status(204).send(cv);
     } else {
       // let user = await user.findByPk(req.body.userId);
       let collection = await Collection.findOne({
@@ -162,7 +195,6 @@ router.post("/update", async (req, res) => {
       });
       origin = JSON.stringify(origin, null, 2);
       destination = JSON.stringify(destination, null, 2);
-      console.log(work);
 
       if (req.body.newImage) {
         res.status(200).send({ work, newWork, origin, destination });
@@ -178,24 +210,6 @@ router.post("/update", async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-  }
-});
-
-// Not sure this is still needed
-router.get("/images", async (req, res) => {
-  try {
-    const { resources } = await cloudinary.search
-      .expression("folder:stackathonImgs")
-      .delivery(format(auto()))
-      .delivery(quality(auto()))
-      .sort_by("public_id", "desc")
-      .max_results(30)
-      .execute();
-
-    const publicIds = resources.map((file) => file.public_id);
-    res.send(publicIds);
-  } catch (error) {
-    console.log("/api/index.js line 100", error);
   }
 });
 

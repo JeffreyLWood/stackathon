@@ -6,7 +6,6 @@ import CV from "./CreateCV";
 import Contact from "./CreateContact";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Navbar } from "../Navbar";
 import Snapshot from "./CreateSnapshot";
 import { Image } from "cloudinary-react";
 import { fetchUserData } from "../../store/user";
@@ -37,7 +36,6 @@ export const Create = (props) => {
 
   return (
     <>
-      <Navbar user={user} />
       <div className="flex flex-col w-full">
         {/* <div className="flex my-10 flex-col md:flex-row w-full">
           <section className="m-5 w-1/6 subHeader">Site Title</section>

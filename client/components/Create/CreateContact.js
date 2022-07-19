@@ -2,7 +2,7 @@ import React from "react";
 import { updateContactData } from "../../store/create";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Navbar } from "../Navbar";
+
 import { fetchUserData } from "../../store/user";
 export default function CreateContact(props) {
   let user = useSelector((state) => state.user);
@@ -10,6 +10,9 @@ export default function CreateContact(props) {
   let dispatch = useDispatch();
   let [state, setState] = useState({});
 
+  let [image, setImage] = useState("");
+  let [caption, setCaption] = useState("");
+  let [unsavedChanges, setUnsavedChanges] = useState(false);
   useEffect(() => {
     user = dispatch(fetchUserData(props.match.params.username));
   }, []);
@@ -25,14 +28,67 @@ export default function CreateContact(props) {
 
   let submitHandler = (evt) => {
     evt.preventDefault();
-
     dispatch(updateContactData(user.id, state));
+  };
+
+  const [fileInputState, setFileInputState] = useState("");
+  const [selectedFile, setSelectedFile] = useState("");
+  const [previewSource, setPreviewSource] = useState("");
+
+  let imgChangeHandler = (evt) => {
+    evt.preventDefault();
+    setUnsavedChanges(true);
+    if (evt.target.name === "caption") {
+      setCaption(evt.target.value);
+    } else {
+      const file = evt.target.files[0];
+      previewFile(file);
+    }
+  };
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
+  };
+
+  let imgSubmitHandler = (evt) => {
+    evt.preventDefault();
+    if (!previewSource) {
+      dispatch(updateContactData(user.id, state));
+    } else {
+      uploadImage(previewSource);
+    }
+  };
+
+  const uploadImage = async (base64EncodedImage) => {
+    try {
+      await fetch("/api/upload", {
+        method: "POST",
+        body: JSON.stringify({
+          data: base64EncodedImage,
+          userId: user.id,
+          type: "contact",
+          caption: caption,
+        }),
+        headers: { "Content-type": "application/json" },
+      });
+    } catch (error) {
+      console.log("Contact image", error);
+    }
+  };
+
+  const removeContactImage = (e) => {
+    e.preventDefault();
+    setImage("");
+    setPreviewSource("");
+    dispatch(destroyContactImage(user.id));
   };
 
   return (
     <>
-      <Navbar user={user} />
-
       <form
         className="contact h-full mt-24 sm:mt-20 w-full bg-neutral-50 flex flex-col mx-2 md:flex-row md:p-10 md:space-x-5 font-light text-gray-500"
         onSubmit={submitHandler}
@@ -163,6 +219,52 @@ export default function CreateContact(props) {
             </button>
           </div>
         </div>
+      </form>
+      <form className="" onSubmit={imgSubmitHandler}>
+        <input
+          id="image"
+          name="image"
+          type="file"
+          onChange={imgChangeHandler}
+          value={fileInputState}
+          className="mx-auto"
+          style={{ display: "none" }}
+        />
+        <label htmlFor="image">
+          {previewSource ? (
+            <img src={previewSource} alt="chosen" className="h-72 mx-auto" />
+          ) : image ? (
+            <Image
+              cloudName={process.env.CLOUDINARY_NAME}
+              publicId={image}
+              className="mx-auto h-72"
+            />
+          ) : (
+            <img
+              src="../../../placeholderadd.png"
+              className="h-72 mx-auto"
+            ></img>
+          )}
+        </label>
+        <input
+          id="caption"
+          type="text"
+          name="caption"
+          className="m-4 w-full text-xs p-2"
+          placeholder="Optional - Image Caption"
+          value={caption}
+          onChange={imgChangeHandler}
+        />
+        <button type="submit" className="pill m-4">
+          Submit
+        </button>
+        <button
+          type="button"
+          className="pillRed m-4"
+          onClick={(e) => removeContactImage(e)}
+        >
+          Clear Image
+        </button>
       </form>
     </>
   );

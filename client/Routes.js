@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Work from "./components/Templates/Work";
 import Navbar from "./components/Templates/Navbar";
 import Footer from "./components/Templates/Footer";
+import Cover from "./components/Templates/Cover";
 import About from "./components/Templates/About";
 import Contact from "./components/Templates/Contact";
 import CV from "./components/Templates/CV";
@@ -83,37 +84,40 @@ const Routes = () => {
         </>
       ) : user.username ? (
         // Logged in, not using custom domain
-        <Switch>
-          <Route exact path="/create/in/:username" component={CreateWork} />
-          <Route exact path="/" component={CreateWork} />
-          <Route exact path="/:username" component={Work} />
-          <Route exact path="/:username/work" component={Work} />
-          <Route exact path="/:username/about" component={About} />
-          <Route exact path="/:username/cv" component={CV} />
-          <Route exact path="/:username/contact" component={Contact} />
-          <Route exact path="/:username/work/:collection" component={Work} />
-          <Route
-            exact
-            path="/create/in/:username/work"
-            component={CreateWork}
-          />
-          <Route
-            exact
-            path="/create/in/:username/about"
-            component={CreateAbout}
-          />
-          <Route exact path="/create/in/:username/cv" component={CreateCV} />
-          <Route
-            exact
-            path="/create/in/:username/contact"
-            component={CreateContact}
-          />
-          <Route
-            exact
-            path="/create/in/:username/settings"
-            component={CreateSettings}
-          />
-        </Switch>
+        <>
+          <Navbar />
+          <Switch>
+            <Route exact path="/create/in/:username" component={CreateWork} />
+            <Route exact path="/" component={CreateWork} />
+            <Route exact path="/:username" component={Work} />
+            <Route exact path="/:username/work" component={Work} />
+            <Route exact path="/:username/about" component={About} />
+            <Route exact path="/:username/cv" component={CV} />
+            <Route exact path="/:username/contact" component={Contact} />
+            <Route exact path="/:username/work/:collection" component={Work} />
+            <Route
+              exact
+              path="/create/in/:username/work"
+              component={CreateWork}
+            />
+            <Route
+              exact
+              path="/create/in/:username/about"
+              component={CreateAbout}
+            />
+            <Route exact path="/create/in/:username/cv" component={CreateCV} />
+            <Route
+              exact
+              path="/create/in/:username/contact"
+              component={CreateContact}
+            />
+            <Route
+              exact
+              path="/create/in/:username/settings"
+              component={CreateSettings}
+            />
+          </Switch>
+        </>
       ) : (
         //Not logged in, not using custom domain
         <>
@@ -124,8 +128,12 @@ const Routes = () => {
                 <Transition
                   key={location.key}
                   appear={true}
-                  onEnter={(node, location) => play(node, location.pathname)}
-                  onExit={(node) => exit(node, location.pathname)}
+                  onEnter={(node, location) =>
+                    play(node, location.pathname, user.template)
+                  }
+                  onExit={(node) =>
+                    exit(node, location.pathname, user.template)
+                  }
                   timeout={{ enter: 2000, exit: 1000 }}
                 >
                   <Switch location={location}>

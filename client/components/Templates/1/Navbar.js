@@ -1,17 +1,21 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import history from "../../../history";
 import { gsap } from "gsap";
 import MobileNav from "./MobileNav";
 import Dropdown from "./Dropdown";
 import useQ from "../../../useQ";
+import styles from "./styles.module.css";
+import "/public/styles.css";
+import { Link } from "react-router-dom";
 export default function Navbar(props) {
   let user = useSelector((state) => state.user);
   document.title = user?.siteTitle;
   let collections = user?.collections;
   let visible =
     collections && collections.filter((collection) => !collection.hidden);
+
   let url =
     window.location.hostname === "selected-work.com"
       ? `/${user.username}`
@@ -20,105 +24,102 @@ export default function Navbar(props) {
       : `/${user.username}`;
 
   // GSAP
-  const link = (e, destination) => {
-    e.preventDefault();
-    dropDownUp();
-    if (destination === window.location.pathname) {
-      return null;
-    }
-
-    history.push(destination);
-  };
 
   let [q, ref] = useQ();
 
+  const tl = new gsap.timeline({ paused: true });
+
   const fade = () => {
-    gsap.to(q(".nav"), { opacity: 1, duration: 1, ease: "expo" }, 0.5);
+    gsap.to(
+      q(`.${styles.nav}`),
+      { opacity: 1, duration: 1, ease: "expo" },
+      0.5
+    );
   };
 
+  let [show, setShow] = useState(false);
+
+  gsap.set(q(`.${styles.mobileNav}`), {
+    xPercent: 100,
+  });
+
+  tl.to(q(`.${styles.mobileNav}`), {
+    xPercent: -1,
+    duration: 1,
+    ease: "expo",
+  });
+
+  const toggleMenu = () => {
+    if (!show) {
+      tl.play();
+      setShow(true);
+    } else {
+      gsap.to(q(`.${styles.mobileNav}`), {
+        xPercent: 100,
+        duration: 2,
+        ease: "expo",
+      });
+      setShow(false);
+    }
+  };
   useEffect(() => {
     fade();
   });
 
-  const dropDown = () =>
-    gsap.to(q(".dropdown"), {
-      display: "flex",
-      opacity: 1,
-      duration: 1,
-      ease: "expo",
-    });
-
-  const dropDownUp = () =>
-    gsap.to(q(".dropdown"), {
-      display: "none",
-      ease: "expo",
-      duration: 0.5,
-      opacity: 0,
-    });
+  let [showDropdown, setShowDropdown] = useState(false);
 
   return (
     <div ref={ref}>
       {/* Mobile Nav Hamburger*/}
-      <MobileNav
-        url={url}
-        collections={visible}
-        link={link}
-        fadeOut={props.fadeOut}
-      />
-      <nav className="nav fixed flex flex-row w-screen justify-between tracking-widest items-end sm:px-14 tracking-widest">
-        <span
-          className="text-2xl uppercase items-end cursor-pointer w-3/6"
-          onClick={(e) => link(e, `${url}/`)}
-        >
-          {user?.siteTitle}
-        </span>
+      <span className={styles.mobileNav}>
+        <MobileNav
+          url={url}
+          collections={visible}
+          fadeOut={props.fadeOut}
+          toggleMenu={toggleMenu}
+        />
+      </span>
+      <nav className={styles.nav}>
+        <Link to={`${url}/`}>
+          <span className={styles.siteTitle}>{user?.siteTitle}</span>
+        </Link>
 
-        <span className="flex flex-row items-end justify-between w-2/6 text-xs sm:text-xs">
-          <span className="space-between flex flex-row space-x-8">
-            <span
-              className="subHeader mx-4 cursor-pointer"
-              onMouseEnter={dropDown}
-              onMouseLeave={dropDownUp}
-            >
-              <span onClick={(e) => link(e, `${url}/`)}>Selected Work</span>
-              {/* Drop Down Nav For Collections */}
-              <Dropdown
-                url={url}
-                preview={
-                  props.collection?.works && props.collection?.works[0].imgId
-                }
-                collection={props.collection}
-                visible={visible}
-                collections={collections}
-                link={link}
-              />
-            </span>
-
-            <span
-              className="subHeader mx-4 cursor-pointer"
-              onClick={(e) => link(e, `${url}/about`)}
-            >
-              About
-            </span>
-
-            <span
-              className="subHeader mx-4 cursor-pointer"
-              onClick={(e) => link(e, `${url}/cv`)}
-            >
-              CV
-            </span>
-
-            <span
-              onClick={(e) => link(e, `${url}/contact`)}
-              className="subHeader mx-4 cursor-pointer"
-            >
-              Contact
-            </span>
+        <span className={styles.linkContainer}>
+          <span
+            onMouseEnter={() => setShowDropdown(true)}
+            onMouseLeave={() => setShowDropdown(false)}
+            onClick={() => setShowDropdown(false)}
+          >
+            <Link to={`${url}`} className={styles.link}>
+              Selected Work
+            </Link>
+            <Dropdown
+              showDropdown={showDropdown}
+              url={url}
+              preview={
+                props.collection?.works && props.collection?.works[0].imgId
+              }
+              collection={props.collection}
+              visible={visible}
+              collections={collections}
+            />
           </span>
-          <span className="pl-12">
-            <img src="../social/instagram.png" className="w-6" />
+          <Link to={`${url}/about`}>
+            <span className={styles.link}>About</span>
+          </Link>
+          <Link to={`${url}/cv`}>
+            <span className={styles.link}>CV</span>
+          </Link>
+          <Link to={`${url}/contact`}>
+            <span className={styles.link}>Contact</span>
+          </Link>
+          <span className={styles.social}>
+            <img src="../social/instagram.png" />
           </span>
         </span>
+        <div className={styles.toggle} onClick={toggleMenu}>
+          <img src="/menu.png" />
+        </div>
       </nav>
     </div>
   );

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import CreateSnapshot from "./CreateSnapshot";
 import { DragDropContext } from "react-beautiful-dnd";
-import { Navbar } from "../Navbar";
 import { fetchUserData } from "../../store/user";
 import CreateUploader from "./CreateUploader";
 import { useRef } from "react";
@@ -137,7 +136,6 @@ export default function CreateWork(props) {
 
   return (
     <section className="flex flex-col sm:items-center overflow-hidden h-screen w-screen bg-neutral-50 p-2 md:flex-row">
-      <Navbar user={user} />
       {/* Container */}
 
       {/* Primary Snapshot. Shows Work collection thumbnails by default. Allows for editing collection data such

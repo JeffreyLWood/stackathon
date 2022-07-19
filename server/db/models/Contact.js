@@ -6,6 +6,14 @@ const Contact = db.define("contact", {
   text: {
     type: Sequelize.STRING(200),
   },
+  imgId: {
+    type: Sequelize.STRING(2000),
+    allowNull: true,
+  },
+  caption: {
+    type: Sequelize.STRING(100),
+    allowNull: true,
+  },
   email: {
     type: Sequelize.STRING,
     validate: {

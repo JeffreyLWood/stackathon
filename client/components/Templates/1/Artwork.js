@@ -5,6 +5,7 @@ import ArtworkModal from "./ArtworkModal";
 import Dimensions from "./Dimensions";
 import useQ from "../../../useQ";
 import { gsap } from "gsap";
+import styles from "./styles.module.css";
 
 export default function Artwork(props) {
   let [show, setShow] = useState(true);
@@ -16,7 +17,7 @@ export default function Artwork(props) {
   let [q, ref] = useQ();
 
   const fadeIn = () => {
-    gsap.to(q(".workModal"), {
+    gsap.to(q(".gsap"), {
       opacity: 1,
       zIndex: 50,
       duration: 1,
@@ -56,7 +57,7 @@ export default function Artwork(props) {
   const fadeOut = () => {
     document.body.style.position = "";
     window.scrollTo({ top: scrollPos, behavior: "auto" });
-    gsap.to(q(".workModal"), {
+    gsap.to(q(".gsap"), {
       opacity: 0,
       zIndex: -1,
       duration: 1,
@@ -65,7 +66,7 @@ export default function Artwork(props) {
   };
 
   const showModal = () => {
-    if (window.outerWidth <= 638) {
+    if (window.outerWidth <= 820) {
       return;
     }
     setScrollPos(window.scrollY);
@@ -83,35 +84,25 @@ export default function Artwork(props) {
   };
 
   return (
-    <>
-      <div className="stagger z-10 flex flex-col flex-wrap w-full mx-2 my-8 md:my-0 sm:w-2/4 lg:w-1/4 md:h-96 sm:px-8 md:mt-4 md:mx-0">
-        <span>
-          <Image
-            cloudName={process.env.CLOUDINARY_NAME}
-            publicId={props.data.imgId}
-            onClick={showModal}
-            className="min-h-70 object-contain mx-auto  md:h-64 cursor-pointer"
-          />
-        </span>
-        <div className="pt-4 sm:pt-8 text-xs flex flex-col space-y-2 sm:space-y-0 justify-end font-light tracking-widest uppercase text-right cursor-pointer text-neutral-500">
-          <span onClick={showModal}>
-            {props.data.title},{" "}
-            <span className="text-neutral-400">{props.data.year}</span>
-          </span>
-          <span className="mobileArtDescription text-neutral-500">
-            {props.data.medium}
-          </span>
-          <span className="mobileArtDescription text-neutral-500">
-            <Dimensions data={props.data} />
-          </span>
-          <span className="mobileArtDescription text-neutral-500">
-            {props.data.status}
-          </span>
-          <span className="mobileArtDescription text-neutral-500">
-            {props.data.price}
-          </span>
-        </div>
+    <div className={styles.cell}>
+      <div className={`${styles.artBox} stagger`}>
+        <Image
+          cloudName={process.env.CLOUDINARY_NAME}
+          publicId={props.data.imgId}
+          onClick={showModal}
+          className={styles.thumbnail}
+        />
       </div>
+      <span className={styles.thumbnailDescription} onClick={showModal}>
+        {props.data.title}
+        <span className={styles.mobileArtDescription}>{props.data.medium}</span>
+        <span className={styles.mobileArtDescription}>
+          <Dimensions data={props.data} />
+        </span>
+        <span className={styles.mobileArtDescription}>{props.data.status}</span>
+        <span className={styles.mobileArtDescription}>{props.data.price}</span>
+      </span>
+
       <div ref={ref}>
         <ArtworkModal
           closeHandler={closeHandler}
@@ -124,6 +115,6 @@ export default function Artwork(props) {
           fadeOut={fadeOut}
         />
       </div>
-    </>
+    </div>
   );
 }

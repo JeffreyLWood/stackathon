@@ -2,24 +2,27 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCVText } from "../../store/create";
 import { useEffect, useState } from "react";
-import { Navbar } from "../Navbar";
 import { fetchUserData } from "../../store/user";
 import CVGroup from "../Templates/1/CVGroup";
+import { destroyCVImage } from "../../store/create";
+
 const CV = (props) => {
   let user = useSelector((state) => state.user);
 
   let dispatch = useDispatch();
-
-  useEffect(() => {
-    user = dispatch(fetchUserData(props.match.params.username));
-  }, []);
 
   let [text, setText] = useState("");
 
   let [header, setHeader] = useState("education");
   let [data, setData] = useState("");
   let [unsaved, setUnsaved] = useState(false);
-
+  let [image, setImage] = useState("");
+  let [caption, setCaption] = useState("");
+  let [previous, setPrevious] = useState("");
+  const [fileInputState, setFileInputState] = useState("");
+  const [selectedFile, setSelectedFile] = useState("");
+  const [previewSource, setPreviewSource] = useState("");
+  let [unsavedChanges, setUnsavedChanges] = useState(false);
   useEffect(() => {
     setText(user && user.cv ? user.cv.education : {});
     setData(
@@ -54,9 +57,56 @@ const CV = (props) => {
     setUnsaved(false);
   };
 
+  let imgChangeHandler = (evt) => {
+    evt.preventDefault();
+    setUnsavedChanges(true);
+    if (evt.target.name === "caption") {
+      setCaption(evt.target.value);
+    } else {
+      const file = evt.target.files[0];
+      previewFile(file);
+    }
+  };
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
+  };
+
+  let imgSubmitHandler = (evt) => {
+    evt.preventDefault();
+    uploadImage(previewSource);
+  };
+
+  const uploadImage = async (base64EncodedImage) => {
+    try {
+      await fetch("/api/upload", {
+        method: "POST",
+        body: JSON.stringify({
+          data: base64EncodedImage,
+          userId: user.id,
+          type: "cv",
+          caption: caption,
+        }),
+        headers: { "Content-type": "application/json" },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const removeCvImage = (e) => {
+    e.preventDefault();
+    setImage("");
+    setPreviewSource("");
+    dispatch(destroyAboutImage(user.id));
+  };
+
   return (
     <>
-      <Navbar user={user} />
       <div className="w-full min-h-screen justify-center px-2 pt-12 bg-neutral-50 mt-20 sm:mt-10 sm:p-10 flex">
         <form
           className="w-full min-h-screen space-y-5"
@@ -149,6 +199,52 @@ const CV = (props) => {
               or exiting the window.
             </span>
           ) : null}
+        </form>
+        <form onSubmit={imgSubmitHandler}>
+          <input
+            id="image"
+            name="image"
+            type="file"
+            onChange={imgChangeHandler}
+            value={fileInputState}
+            className="mx-auto"
+            style={{ display: "none" }}
+          />
+          <label htmlFor="image">
+            {previewSource ? (
+              <img src={previewSource} alt="chosen" className="h-72 mx-auto" />
+            ) : image ? (
+              <Image
+                cloudName={process.env.CLOUDINARY_NAME}
+                publicId={image}
+                className="mx-auto h-72"
+              />
+            ) : (
+              <img
+                src="../../../placeholderadd.png"
+                className="h-72 mx-auto"
+              ></img>
+            )}
+          </label>
+          <input
+            id="caption"
+            type="text"
+            name="caption"
+            className="m-4 w-full text-xs p-2"
+            placeholder="Optional - Image Caption"
+            value={caption}
+            onChange={imgChangeHandler}
+          />
+          <button type="submit" className="pill m-4">
+            Submit
+          </button>
+          <button
+            type="button"
+            className="pillRed m-4"
+            onClick={(e) => destroyCVImage(e)}
+          >
+            Clear Image
+          </button>
         </form>
       </div>
     </>

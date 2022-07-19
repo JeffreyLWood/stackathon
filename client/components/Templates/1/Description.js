@@ -6,6 +6,7 @@ import ArtworkModal from "./ArtworkModal";
 import Dimensions from "./Dimensions";
 import useQ from "../../../useQ";
 import { gsap } from "gsap";
+import styles from "./styles.module.css";
 
 export default function Description(props) {
   let [show, setShow] = useState(true);
@@ -16,7 +17,7 @@ export default function Description(props) {
   let [q, ref] = useQ();
 
   const fadeIn = () => {
-    gsap.to(q(".workModal"), {
+    gsap.to(q(".gsap"), {
       opacity: 1,
       zIndex: 50,
       duration: 1,
@@ -67,7 +68,7 @@ export default function Description(props) {
       duration: 2,
       ease: "expo",
     });
-    gsap.to(q(".workModal"), {
+    gsap.to(q(".gsap"), {
       opacity: 0,
       zIndex: -1,
       duration: 2,
@@ -95,33 +96,32 @@ export default function Description(props) {
   ));
 
   return (
-    <section className="w-screen min-h-content sm:mt-20 sm:mb-28 sm:h-96 flex flex-col-reverse items-start sm:flex-row">
-      <div className="stagger w-full h-4/6 sm:h-full sm:w-5/12  flex flex-col px-2 sm:px-10 space-y-4">
-        <span className="text-3xl tracking-widest ">{props.title}</span>
-        {text}
+    <section className={styles.description}>
+      <div className={`${styles.descriptionText}`}>
+        <span className={`${styles.h1} stagger`}>{props.title}</span>
+        {props.subheading1 ? (
+          <span className={`${styles.h2} stagger`}>{props.subheading1}</span>
+        ) : null}
+        {props.subheading2 ? (
+          <span className={`${styles.h2} stagger`}>{props.subheading2}</span>
+        ) : null}
+        <span className="stagger">{text}</span>
       </div>
-      <div className="w-full h-auto sm:h-full sm:w-7/12 flex flex-col md:flex-row sm:items-baseline md:items-end sm:justify-center">
-        <span>
-          <Image
-            cloudName={process.env.CLOUDINARY_NAME}
-            publicId={props.data.imgId}
-            className="stagger max-h-96 cursor-pointer"
-            onClick={showModal}
-          />
-        </span>
-        <span className="stagger pt-5 text-right sm:text-left mx-4 tracking-widest">
-          <ul className="text-xs space-y-2  uppercase text-neutral-400">
-            <li className="text-neutral-400">{user.siteTitle}</li>
-            <li>{props.data.title} </li>
-            <li>
-              <span className="text-neutral-400">{props.data.year}</span>
-            </li>
-            <li>
-              <Dimensions data={props.data} />
-            </li>
-          </ul>
+      <div className={`${styles.descriptionImageWrapper}`}>
+        <Image
+          cloudName={process.env.CLOUDINARY_NAME}
+          publicId={props.data.imgId}
+          className={`${styles.descriptionImage} stagger`}
+          onClick={showModal}
+        />
+        <span className={`${styles.descriptionImageDescription} stagger`}>
+          <span>{props.data.title}</span>
+          <span className={styles.textSecondary}>{props.data.year}</span>
+          <span className={styles.textSecondary}>{props.data.medium}</span>
+          <Dimensions data={props.data} />
         </span>
       </div>
+
       <div ref={ref}>
         <ArtworkModal
           fadeOut={fadeOut}

@@ -95,6 +95,21 @@ router.put("/:userId/cv", async (req, res, next) => {
   }
 });
 
+router.delete("/:userId/cv", async (req, res, next) => {
+  try {
+    await CV.update(
+      {
+        imgId: null,
+      },
+      { where: { userId: req.params.userId } }
+    );
+    let cv = await CV.findOne({ where: { userId: req.params.userId } });
+    res.status(200).send(cv);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.post("/:userId/contact", async (req, res, next) => {
   try {
     await Contact.update(
@@ -171,6 +186,28 @@ router.get("/:username", async (req, res, next) => {
       res.status(404).send("User not found");
     }
 
+    let cv = [];
+    let cvData = JSON.stringify(allData.dataValues.cv, 2, 0);
+    let cvObj = JSON.parse(cvData);
+    let headings = {
+      education: "Education",
+      groupExhibition: "Selected Group Exhibition",
+      soloExhibition: "Solo Exhibition",
+      teaching: "Teaching",
+      experience: "Related Experience",
+      communityInvolvement: "Community Involvment",
+      advocacy: "Advocacy",
+      press: "Press",
+      publications: "Publications",
+      awards: "Awards",
+      residencies: "Residencies",
+    };
+    for (let key in cvObj) {
+      if (key in headings && cvObj[key]) {
+        let heading = headings[key];
+        cv.push({ title: [heading], data: cvObj[key].split("\n") });
+      }
+    }
     const userData = {
       id: allData.dataValues.id,
       username: allData.dataValues.username,
@@ -180,7 +217,8 @@ router.get("/:username", async (req, res, next) => {
       lastName: allData.dataValues.lastName,
       about: allData.dataValues.about,
       contact: allData.dataValues.contact,
-      cv: allData.dataValues.cv,
+      cv: cv,
+      cvImg: allData.dataValues.cv.imgId,
       collections: allData.dataValues.collections,
       domain: allData.dataValues.domain,
       cname: allData.dataValues.cname,

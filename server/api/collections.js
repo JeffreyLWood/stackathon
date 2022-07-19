@@ -60,6 +60,8 @@ router.put("/:userId/:collection", async (req, res) => {
     await Collection.update(
       {
         title: req.body.title,
+        subheading1: req.body.subheading1,
+        subheading2: req.body.subheading2,
         description: req.body.description,
       },
       { where: { userId: req.params.userId, title: req.params.collection } }

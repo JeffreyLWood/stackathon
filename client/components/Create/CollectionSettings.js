@@ -76,9 +76,28 @@ export default function CollectionSettings(props) {
         onChange={changeHandler}
         required
       ></input>
-      {/* <label htmlFor="description" className="text-gray-400">
-        Description:
-      </label> */}
+      <label htmlFor="subheading 1" className="text-gray-400">
+        Subheading 1:
+      </label>
+      <input
+        name="subheading 1"
+        type="text"
+        style={{ outline: "none" }}
+        className="border-b-2 border-gray-200 mb-5 w-3/6 font-light"
+        value={state?.subheading1 || ""}
+        onChange={changeHandler}
+      ></input>
+      <label htmlFor="subheading 2" className="text-gray-400">
+        Subheading 2:
+      </label>
+      <input
+        name="subheading 2"
+        type="text"
+        style={{ outline: "none" }}
+        className="border-b-2 border-gray-200 mb-5 w-3/6 font-light"
+        value={state?.subheading2 || ""}
+        onChange={changeHandler}
+      ></input>
       <textarea
         rows="10"
         cols="40"

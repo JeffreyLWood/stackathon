@@ -18,7 +18,7 @@ async function seed() {
     const users = await Promise.all([
       User.create({
         username: "janeisidor",
-        email: "jeffreywood.dev@gmail.com",
+        email: "selectedworkteam@gmail.com",
         password: "123",
         firstName: "Jane",
         lastName: "Isidor",
@@ -26,10 +26,10 @@ async function seed() {
     ]);
     await About.update(
       {
-        text: "Jane Isidor is not a real person. She is not a real photographer based in Brooklyn, nor did she obtain degrees from Boston University or Columbia University. She is merely a figmant of the engineers' imagination at Selected-Work.com who may or may not be a figmant of someone else's imagination. Possibly yours? You may never really know with absolute certainty. \n \n Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
         header:
-          "Jane Isidor's photographs transcend the obvious and reexamine the connection between time and place. --New York Times, 2022",
-        imgId: "stackathonImgs/janeisidor_rvlm1p",
+          "Jane Isidor's photographs transcend the obvious and reexamine the connection between time and place. -- The New York Times, 2022",
+        imgId: "stackathonImgs/ql16osoyk2uapohzgpzt.jpg",
         caption: null,
       },
       { where: { userId: 1 } }
@@ -38,6 +38,7 @@ async function seed() {
       {
         phone: 1234567890,
         address: "Brooklyn, NY",
+        imgId: "stackathonImgs/pljdts0qzmhdq9itqnv9.jpg",
         instagram: "https://instagram.com/",
         facebook: "https://facebook.com",
         linkedin: "https://linkedin.com",
@@ -60,14 +61,15 @@ async function seed() {
         "2022, New York Times, Jane Isidor's Views of Brooklyn Heights Find a Sense of Calm Among Chaos by Wayne Schuman, , https://nytimes.com/notarealarticle\n2021, Harvard Business Review, 30 Photographers Under 30 by Lester C Wiley, , https://harvardbusinessreview.com/notarealarticle",
       publications:
         "2020, Jason Ortega, Photography Today, Yale University Press, https://yalebooks.yale.edu/notarealbook, Pages 20-24",
+      imgId: "stackathonImgs/otuplyrqyh8ghvhpcks9.jpg",
     });
 
     await cv.setUser(users[0]);
     let default0 = await Work.create({
-      title: "A Brewery in Brooklyn",
+      title: "Summit",
       year: 2021,
       medium: "photograph",
-      imgId: "stackathonImgs/IMG_7154_x8snqb",
+      imgId: "stackathonImgs/pexels-val-apollonio-5077838_owyive.jpg",
       height: 4,
       width: 5,
       status: null,
@@ -75,77 +77,202 @@ async function seed() {
     });
 
     let default1 = await Work.create({
-      title: "Capote's House",
+      title: "Rise",
       medium: "photograph",
       year: 2021,
-      imgId: "stackathonImgs/IMG_7112_gbspsm",
+      imgId: "stackathonImgs/pexels-eberhard-grossgasteiger-1292115_ekdosa.jpg",
       height: 4,
       width: 5,
       status: null,
       hidden: false,
     });
     let default2 = await Work.create({
-      title: "Ice Cream",
+      title: "Come Apart",
       medium: "photograph",
       year: 2021,
-      imgId: "stackathonImgs/IMG_7139_ge5z2c",
+      imgId: "stackathonImgs/pexels-philip-ackermann-1666015_eikhjs.jpg",
       height: 4,
       width: 5,
       status: null,
       hidden: false,
     });
     let default3 = await Work.create({
-      title: "Brooklyn Heights",
+      title: "Emerald",
       medium: "photograph",
       year: 2021,
-      imgId: "stackathonImgs/IMG_7144_zmq2mk",
+      imgId: "stackathonImgs/pexels-sergei-primo-5343282_e85p3c.jpg",
       height: 4,
       width: 5,
       status: null,
       hidden: false,
     });
     let default4 = await Work.create({
-      title: "Sidewalk",
+      title: "Cobalt",
       medium: "photograph",
       year: 2021,
-      imgId: "stackathonImgs/IMG_7153_mkpd70",
+      imgId: "stackathonImgs/pexels-lumn-167699_z0yzyt.jpg",
       height: 4,
       width: 5,
       status: null,
       hidden: false,
     });
     let default5 = await Work.create({
-      title: "Corner",
+      title: "Summit 2",
       medium: "photograph",
       year: 2021,
-      imgId: "stackathonImgs/IMG_7150_wrnlwf",
+      imgId: "stackathonImgs/pexels-abdulrhman-alkady-9432828_zys79n.jpg",
       height: 4,
       width: 5,
       status: null,
       hidden: false,
     });
-
     let default7 = await Work.create({
-      title: "Street 1",
+      title: "Winter Sea",
       medium: "photograph",
       year: 2021,
-      imgId: "stackathonImgs/IMG_7170_wkrsd8",
+      imgId: "stackathonImgs/pexels-arthouse-studio-4347808_pc03nl.jpg",
       height: 5,
       width: 4,
       status: null,
     });
     let default8 = await Work.create({
-      title: "Street 2",
+      title: "Caelis",
       medium: "photograph",
       year: 2021,
-      imgId: "stackathonImgs/IMG_7149_fci6ka",
+      imgId:
+        "stackathonImgs/pexels-eberhard-grossgasteiger-1699021_1_hpyb7n.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default9 = await Work.create({
+      title: "Alpine",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-valeriia-miller-2527562_bkmqlj.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default10 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-magda-ehlers-3575282_mqgdwt.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default11 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-drone-trotter-7974790_ylsxtk.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default12 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-pok-rie-3941243_bv4z1y.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default13 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-drone-trotter-7974790_ylsxtk.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default14 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-nicolas-3936957_amssqz.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default15 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-pok-rie-3301325_sncqbe.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default16 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-pok-rie-1792202_ohsfod.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default17 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-pok-rie-3116030_npdrnh.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default18 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-pok-rie-1709993_q8xhmq.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default19 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-pok-rie-3819185_rwodft.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default20 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-pok-rie-3819189_nln6c3.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default21 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-pok-rie-3819191_waqgov.jpg",
+      height: 5,
+      width: 4,
+      status: null,
+    });
+    let default22 = await Work.create({
+      title: "Under Current",
+      medium: "photograph",
+      year: 2021,
+      imgId: "stackathonImgs/pexels-pok-rie-3941244_xko8lj.jpg",
       height: 5,
       width: 4,
       status: null,
     });
 
-    // Put defaults into array for mapping
-    let array = [
+    let summitWorks = [
       default0,
       default1,
       default2,
@@ -154,70 +281,58 @@ async function seed() {
       default5,
       default7,
       default8,
+      default9,
     ];
-    // Map over works array and setUser to the new user.
-    // Sets default images in the user's database and displays them on their new site.
-    let workCollection = await Collection.create({
-      title: "Rose",
+
+    let undercurrentWorks = [
+      default10,
+      default11,
+      default12,
+      default13,
+      default14,
+      default15,
+      default16,
+      default17,
+      default18,
+      default19,
+      default20,
+      default21,
+      default22,
+    ];
+
+    let collection1 = await Collection.create({
+      title: "Summit",
       hidden: false,
+      subheading1: "JANUARY 1 - JANUARY 28, 2022",
+      subheading2: "HEINES GALLERY, 204 E 12TH STREET, NEW YORK, NY",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     });
+
+    let collection2 = await Collection.create({
+      title: "Under Current",
+      hidden: false,
+      subheading1: "March 18 - April 30, 2021",
+      subheading2: "ArtBox, 191 W23 St, NEW YORK, NY",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    });
+
     await Collection.create({
       title: "Hidden",
       hidden: true,
     });
-    let default9 = await Work.create({
-      title: "Court Street",
-      medium: "photograph",
-      year: 2021,
-      imgId: "stackathonImgs/IMG_8549_z45itv",
-      height: 4,
-      width: 5,
-      status: null,
-    });
-    let default10 = await Work.create({
-      title: "Brick",
-      medium: "photograph",
-      year: 2021,
-      imgId: "stackathonImgs/IMG_8622_otmj6a",
-      height: 4,
-      width: 5,
-      status: null,
-    });
-    let default11 = await Work.create({
-      title: "Grand Central",
-      medium: "photograph",
-      year: 2021,
-      imgId: "stackathonImgs/IMG_8757_b93blk",
-      height: 4,
-      width: 5,
-      status: null,
-    });
-    let default12 = await Work.create({
-      title: "Canal",
-      medium: "photograph",
-      year: 2021,
-      imgId: "stackathonImgs/IMG_8744_1_hnb1c5",
-      height: 4,
-      width: 5,
-      status: null,
-    });
-    let blueWork = [default9, default10, default11, default12];
 
-    let Blue = await Collection.create({
-      title: "Blue",
-      hidden: false,
+    summitWorks.map(async (work) => {
+      return await work.setCollection(collection1);
     });
 
-    array.map(async (work) => {
-      return await work.setCollection(workCollection);
+    undercurrentWorks.map(async (work) => {
+      return await work.setCollection(collection2);
     });
 
-    blueWork.map(async (work) => {
-      await work.setCollection(Blue);
-    });
-
-    await Blue.setUser(1);
-    await workCollection.setUser(1);
+    await collection2.setUser(1);
+    await collection1.setUser(1);
 
     console.log(`seeded ${users.length} users`);
     console.log(`seeded successfully`);
